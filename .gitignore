@@ -1,0 +1,38 @@
+# Windows / macOS
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# Logs locais
+*.log
+php/logs/
+php/paid/
+
+# Credenciais — NUNCA commitar (PIX, magmadatahub, etc.)
+# O arquivo real fica só no servidor; versione apenas o .example
+config.php
+config.local.php
+**/config.php
+.env
+.env.*
+!.env.example
+
+# Sobras do espelhamento com HTTrack — cache e log da cópia, sem uso no site
+hts-cache/
+hts-log.txt
+
+# Notas internas — ficam só na máquina, não descrevem nada publicamente
+/CORRECOES_API.md
+/INTEGRACAO_CHECKOUT.md
+/SETUP_PIX.md
+
+# Página de diagnóstico — não deve ir para um servidor público
+php/test-api.php
+
+# Modo dev — ferramentas de teste local, nunca vão pro git/produção
+/ativar-modo-dev.html
+/abrir-fluxo.html
+/navegacao.html
+/MODO_DESENVOLVIMENTO.md
+verificadoagora.site/dev-fluxo.html
+verificadoagora.site/upsell/devnav.js

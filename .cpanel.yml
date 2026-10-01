@@ -1,0 +1,23 @@
+---
+# Deploy via cPanel Git Version Control ("Deploy HEAD Commit").
+#
+# O destino e o Document Root do dominio principal da conta, que no cPanel
+# fica sempre em public_html/ dentro do diretorio do usuario. Usamos $HOME
+# em vez do caminho literal para nao fixar o nome da conta neste arquivo.
+#
+# O repo tem uma pasta "verificadoagora.site/" so por organizacao local
+# (nome herdado de um mirror antigo, nao e o dominio real); o conteudo
+# dela precisa ir para a RAIZ do dominio (nao numa subpasta), junto com
+# php/, fluxo.js e getCpf.php, porque o codigo referencia caminhos como
+# /php/api.php e ../../fluxo.js relativos a raiz do site.
+#
+# config.php (as credenciais reais) NAO esta no git e este script nunca
+# mexe nele - crie manualmente uma unica vez direto no DEPLOYPATH, via
+# File Manager, copiando de config.example.php.
+deployment:
+  tasks:
+    - export DEPLOYPATH="$HOME/public_html/"
+    - /bin/cp -r verificadoagora.site/. "$DEPLOYPATH"
+    - /bin/cp -r php "$DEPLOYPATH"
+    - /bin/cp fluxo.js "$DEPLOYPATH"
+    - /bin/cp getCpf.php "$DEPLOYPATH"
