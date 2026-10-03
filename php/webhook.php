@@ -16,7 +16,6 @@
 header('Content-Type: application/json; charset=utf-8');
 
 require_once __DIR__ . '/../config.php';
-require_once __DIR__ . '/utmify.php';
 
 // ============= LOG WEBHOOK =============
 function logWebhook($status, $data = []) {
@@ -88,13 +87,6 @@ try {
                 'end2EndId'      => $input['end2EndId'] ?? null
             ]);
 
-            // Reenvia o pedido para a UTMify como "paid". E este envio que faz
-            // ela disparar a conversao para o Google Ads (server-side).
-            utmifyOrderUpdated($transactionId, 'paid', [
-                'amount_cents'     => $input['transaction']['amount'] ?? 0,
-                'net_amount_cents' => $input['transaction']['net_amount'] ?? 0,
-            ]);
-
             http_response_code(200);
             echo json_encode(['success' => true, 'message' => 'Pagamento registrado']);
             break;
@@ -104,7 +96,6 @@ try {
                 'transaction_id' => $transactionId,
                 'offer'          => $offer
             ]);
-            utmifyOrderUpdated($transactionId, 'refused');
             http_response_code(200);
             echo json_encode(['success' => true, 'message' => 'Recusa registrada']);
             break;
@@ -133,7 +124,6 @@ try {
                 'transaction_id' => $transactionId,
                 'offer'          => $offer
             ]);
-            utmifyOrderUpdated($transactionId, 'refunded');
             http_response_code(200);
             echo json_encode(['success' => true, 'message' => 'Reembolso registrado']);
             break;
