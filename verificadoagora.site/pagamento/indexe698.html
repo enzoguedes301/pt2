@@ -432,19 +432,18 @@
       'up11': 'https://bancoporto.com.br/'
     };
     var UPSELL_URL = NEXT_MAP[OFFER] || '../upsell/1/';
+    // Precisa bater EXATAMENTE com preco_base do config.php, que e o unico
+    // valor que o servidor cobra de fato. Esta tabela so existe para exibicao:
+    // divergir dela significa mostrar um preco e cobrar outro no PIX.
+    // So as ofertas que existem no config.php entram aqui.
     var PRICE_MAP = {
       'main': 'R$ 36,84',
-      'up1':  'R$ 69,82',
-      'up2':  'R$ 26,81',
+      'up1':  'R$ 26,81',
+      'up2':  'R$ 26,41',
       'up3':  'R$ 23,44',
       'up4':  'R$ 19,90',
-      'up5':  'R$ 26,41',
-      'up6':  'R$ 16,92',
-      'up7':  'R$ 28,79',
-      'up8':  'R$ 26,81',
-      'up9':  'R$ 26,41',
-      'up10': 'R$ 17,00',
-      'up11': 'R$ 17,00'
+      'up5':  'R$ 17,00',
+      'up6':  'R$ 28,79'
     };
     var totalEl = document.getElementById('totalAmount');
     var pixTotalFromUrl = new URLSearchParams(window.location.search).get('pix_total') || localStorage.getItem('pixTotalAmount') || '';
