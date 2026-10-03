@@ -1,13 +1,13 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
-    <meta http-equiv="refresh" content="0; url=./inicio/">
+    <meta charset="utf-8">
+    <script>
+        // Leva a query string junto: e aqui que chegam utm_*, gclid, fbclid etc.
+        // Sem isso a atribuicao do anuncio se perde logo na porta de entrada.
+        window.location.replace('./inicio/' + window.location.search);
+    </script>
+    <noscript><meta http-equiv="refresh" content="0; url=./inicio/"></noscript>
 </head>
 <body>Redirecionando...</body>
 </html>
-
-
-
-
-
-
