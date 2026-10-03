@@ -54,6 +54,23 @@ register_shutdown_function(function () {
 // ============= CARREGAR CONFIGURAÇÕES =============
 require_once __DIR__ . '/../config.php';
 
+// ============= COMPATIBILIDADE DE NOMES DO GATEWAY =============
+// O config.php vive SO no servidor e nao e versionado, entao ele envelhece
+// separado do codigo. Em 2026-10-03 um config antigo (que so definia
+// SKALE_PAYMENTS_*) encontrou um api.php novo (que usa GATEWAY_*) e o checkout
+// caiu inteiro com "Undefined constant GATEWAY_ENDPOINT".
+// Aceitar os dois nomes faz essa divergencia deixar de ser fatal.
+if (!defined('GATEWAY_API_KEY') && defined('SKALE_PAYMENTS_API_KEY')) {
+    define('GATEWAY_API_KEY', SKALE_PAYMENTS_API_KEY);
+}
+if (!defined('GATEWAY_ENDPOINT') && defined('SKALE_PAYMENTS_ENDPOINT')) {
+    define('GATEWAY_ENDPOINT', SKALE_PAYMENTS_ENDPOINT);
+}
+if (!defined('GATEWAY_API_KEY') || !defined('GATEWAY_ENDPOINT')) {
+    logTransaction('CONFIG_INCOMPLETO', ['faltando' => 'GATEWAY_API_KEY/GATEWAY_ENDPOINT']);
+    response(false, ['error' => 'Configuracao do gateway ausente no servidor (config.php).'], 503);
+}
+
 // ============= FUNÇÕES AUXILIARES =============
 function logTransaction($msg, $data = []) {
     $log_file = __DIR__ . '/logs/transactions.log';
