@@ -21,6 +21,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     exit;
 }
 
+// ============= ERRO FATAL NAO PODE FICAR INVISIVEL =============
+// Com display_errors=0, um erro fatal (parse error num require, Error/TypeError,
+// estouro de max_execution_time) NAO e pego por catch(Exception): a requisicao
+// morre e o navegador recebe 500 com CORPO VAZIO. O front so consegue dizer
+// "Erro no servidor (500)" e nao ha como descobrir a causa sem o error_log.
+//
+// Registrado ANTES dos require de proposito: assim cobre tambem um erro dentro
+// do proprio config.php, que e executado logo abaixo.
+register_shutdown_function(function () {
+    $e = error_get_last();
+    if (!$e || !in_array($e['type'], [E_ERROR, E_PARSE, E_CORE_ERROR, E_COMPILE_ERROR], true)) {
+        return;
+    }
+
+    // basename() de proposito: nunca expor o caminho absoluto do servidor.
+    $detalhe = $e['message'] . ' @ ' . basename($e['file']) . ':' . $e['line'];
+
+    if (function_exists('logTransaction')) {
+        logTransaction('FATAL', ['error' => $detalhe]);
+    }
+
+    if (headers_sent()) return;
+    http_response_code(500);
+    header('Content-Type: application/json; charset=utf-8');
+    echo json_encode([
+        'success' => false,
+        'error'   => 'Erro interno ao gerar o pagamento: ' . $detalhe,
+    ]);
+});
+
 // ============= CARREGAR CONFIGURAÇÕES =============
 require_once __DIR__ . '/../config.php';
 
