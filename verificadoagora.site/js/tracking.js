@@ -17,8 +17,10 @@
  * ┌──────────────────────────────────────────────────────────────────────────┐
  * │ 1) UTMIFY_GOOGLE_PIXEL_ID   ← o que esta em uso                          │
  * │    Painel UTMify > Pixel > (pixel do Google) > "Configurar"              │
- * │    O snippet vem ofuscado; dentro dele o valor e:                        │
- * │      window.googlePixelId = "6ac1012f1d066a8530474cd4"                   │
+ * │    O snippet vem ofuscado; dentro dele esta o valor de:                  │
+ * │      window.googlePixelId = "..."                                        │
+ * │    Confira sempre em QUAL dashboard o pixel esta: a conta tem varios     │
+ * │    (GADS OP, GADS OP2, GOOGLE MAIS NOVO) e os IDs nao se misturam.       │
  * │                                                                          │
  * │ 2) UTMIFY_META_PIXEL_ID  (so se um dia rodar Meta Ads)                   │
  * │    Mesmo caminho, escolhendo o pixel do Meta. La o global e outro:       │
@@ -45,7 +47,10 @@
 
   // ===================== PREENCHA AQUI =====================
   var CONFIG = {
-    UTMIFY_GOOGLE_PIXEL_ID: "6ac1012f1d066a8530474cd4",
+    // Pixel "MAIS NOVO PIXELaa" — dashboard "GOOGLE MAIS NOVO".
+    // Tem que ser o pixel do MESMO dashboard da credencial de API usada no
+    // backend ("skale TOP"), senao a visita cai num painel e a venda em outro.
+    UTMIFY_GOOGLE_PIXEL_ID: "6aad4682cf7017728f18793c",
     UTMIFY_META_PIXEL_ID:   "",   // ex.: "67f0a1b2c3d4e5f6a7b8c9d0"
     GA4_ID:                 "",   // ex.: "G-XXXXXXXXXX"
     ADS_ID:                 "",   // vazio de proposito — ver nota no topo
