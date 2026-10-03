@@ -15,6 +15,14 @@ define('GATEWAY_ENDPOINT', 'preencher');
 // Token do servico usado por getCpf.php.
 define('MAGMA_DATAHUB_TOKEN', 'preencher');
 
+// ============= UTMIFY =============
+// Credencial de API: painel > Integracoes > Webhooks > Credenciais de API >
+// Adicionar Credencial. O token so aparece no momento da criacao.
+// Tem que ser do MESMO dashboard do pixel configurado em js/tracking.js —
+// se forem diferentes, a visita cai num painel e a venda em outro.
+// Em branco = envio desligado (o funil segue funcionando normalmente).
+define('UTMIFY_API_TOKEN', '');
+
 // ============= AMBIENTE =============
 // 'sandbox' para testes, 'producao' para operacao real.
 define('AMBIENTE', 'producao');

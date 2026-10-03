@@ -8,6 +8,10 @@ desktop.ini
 php/logs/
 php/paid/
 
+# Pedidos pendentes aguardando o webhook confirmar na UTMify.
+# Contem dados do lead (nome, e-mail, CPF) — estado de runtime, nunca versionar.
+php/utmify/
+
 # Credenciais — NUNCA commitar (PIX, magmadatahub, etc.)
 # O arquivo real fica só no servidor; versione apenas o .example
 config.php

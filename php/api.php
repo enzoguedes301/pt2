@@ -23,6 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 
 // ============= CARREGAR CONFIGURAÇÕES =============
 require_once __DIR__ . '/../config.php';
+require_once __DIR__ . '/utmify.php';
 
 // ============= FUNÇÕES AUXILIARES =============
 function logTransaction($msg, $data = []) {
@@ -187,6 +188,22 @@ function generatePIX($offer, $name, $document, $email, $phone, $utms = [], $pixT
             'offer'          => $offer,
             'amount'         => $amountReais,
             'cpf'            => preg_replace('/(\d{3})(\d{3})(\d{3})(\d{2})/', '$1.***.***-**', $document)
+        ]);
+
+        // Avisa a UTMify do pedido em aberto. E aqui — e so aqui — que os UTMs
+        // existem: o webhook do gateway nao os recebe. A funcao grava o pedido
+        // em disco para o webhook poder reenviar como "paid" depois.
+        // Falha nela nunca impede o lead de ver o QR code.
+        utmifyOrderCreated([
+            'transaction_id' => $transaction['id'],
+            'offer'          => $offer,
+            'product_name'   => $config['nome'],
+            'amount_cents'   => $amountCentavos,
+            'name'           => $name,
+            'email'          => $email,
+            'phone'          => preg_replace('/\D/', '', $phone),
+            'document'       => preg_replace('/\D/', '', $document),
+            'utms'           => $utms,
         ]);
 
         return [
