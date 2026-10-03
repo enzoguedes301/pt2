@@ -47,10 +47,14 @@
 
   // ===================== PREENCHA AQUI =====================
   var CONFIG = {
-    // Pixel "MAIS NOVO PIXELaa" — dashboard "GOOGLE MAIS NOVO".
-    // Tem que ser o pixel do MESMO dashboard da credencial de API usada no
-    // backend ("skale TOP"), senao a visita cai num painel e a venda em outro.
-    UTMIFY_GOOGLE_PIXEL_ID: "6aad4682cf7017728f18793c",
+    // Pixel "PX" — o do dashboard onde caem as vendas da Skale Pay.
+    //
+    // A conta tem varios dashboards (GOOGLE MAIS NOVO, Mais Novo NP, GADS OPP Z1,
+    // JG, JG-2) e cada um tem pixel proprio. Um pixel do dashboard errado nao da
+    // erro nenhum: carrega, dispara, responde 200 — e os eventos simplesmente
+    // aparecem num painel que nao e o das vendas, sem conversao nunca fechar.
+    // Para conferir: mandar um evento de teste e ver em qual painel ele cai.
+    UTMIFY_GOOGLE_PIXEL_ID: "6ac1012f1d066a8530474cd4",
     UTMIFY_META_PIXEL_ID:   "",   // ex.: "67f0a1b2c3d4e5f6a7b8c9d0"
     GA4_ID:                 "",   // ex.: "G-XXXXXXXXXX"
     ADS_ID:                 "",   // vazio de proposito — ver nota no topo
