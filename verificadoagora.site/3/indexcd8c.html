@@ -16,9 +16,9 @@
       --primary-deep: #333333;
       --primary-light: #F0F0F0;
       --primary-subtle: #F8F8F8;
-      --accent: #0099FF;
-      --accent-yellow: #0A0047;
-      --accent-gold: #33B0FF;
+      --accent: #020031;
+      --accent-yellow: #020031;
+      --accent-gold: #020031;
       --bg: #F5F5F5;
       --card: #FFFFFF;
       --text: #2A2B35;
@@ -100,7 +100,7 @@
       letter-spacing: -0.5px; line-height: 1;
     }
     .logo-diamond{
-      width: 7px; height: 7px; background: #0099FF;
+      width: 7px; height: 7px; background: #020031;
       transform: rotate(45deg); margin: 0 8px;
       border-radius: 1.5px; flex-shrink: 0;
     }
@@ -144,9 +144,9 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      border: 2px solid #0099FF;
+      border: 2px solid #020031;
       flex-shrink: 0;
-      color: #0099FF;
+      color: #020031;
     }
     .user-icon-wrapper svg{
       width: 20px;
@@ -269,7 +269,7 @@
     .form-select:focus{
       outline: none;
       border-color: var(--accent-yellow);
-      box-shadow: 0 0 0 3px rgba(0,153,255,.15);
+      box-shadow: 0 0 0 3px rgba(2,0,49,.15);
     }
     .form-select:hover{ border-color: var(--accent-yellow); }
     .form-select option{ padding: 12px; font-size: 15px; }
@@ -297,7 +297,7 @@
     .btn-submit{
       width: 100%;
       padding: 16px;
-      background: #0099FF;
+      background: #020031;
       color: #fff;
       border: none;
       border-radius: 50px;
@@ -309,12 +309,12 @@
       position: relative;
       overflow: hidden;
       font-family: 'Hind Siliguri', sans-serif;
-      box-shadow: 0 4px 15px rgba(0,153,255,.3);
+      box-shadow: 0 4px 15px rgba(2,0,49,.3);
     }
     .btn-submit:hover{
       transform: translateY(-2px);
-      box-shadow: 0 6px 24px rgba(0,153,255,.35);
-      background: #0066CC;
+      box-shadow: 0 6px 24px rgba(2,0,49,.35);
+      background: #0B0A52;
     }
     .btn-submit:active{ transform: scale(0.98); }
     .btn-submit::after{
@@ -426,9 +426,9 @@
     .choice-card:hover{ border-color: var(--accent-yellow); transform: translateY(-2px); }
     .choice-card.selected{
       border-color: var(--accent-yellow); background: var(--primary-subtle);
-      box-shadow: 0 4px 16px rgba(10,0,71,.15);
+      box-shadow: 0 4px 16px rgba(2,0,49,.15);
     }
-    .choice-card.selected svg{ color: #0099FF; }
+    .choice-card.selected svg{ color: #020031; }
 
     /* ---- choice list (steps 2 & 4) ---- */
     .choice-list{ display: flex; flex-direction: column; gap: 10px; }
@@ -442,7 +442,7 @@
     .choice-row:hover{ border-color: var(--accent-yellow); }
     .choice-row.selected{
       border-color: var(--accent-yellow); background: var(--primary-subtle);
-      box-shadow: 0 4px 14px rgba(10,0,71,.12);
+      box-shadow: 0 4px 14px rgba(2,0,49,.12);
     }
 
     /* ---- radio list (renda - step 3) ---- */
@@ -455,8 +455,8 @@
     }
     .radio-row:hover{ border-color: var(--accent-yellow); }
     .radio-row.selected{
-      border-color: var(--accent-yellow); background: var(--primary-subtle); color: #0099FF;
-      box-shadow: 0 4px 14px rgba(10,0,71,.12);
+      border-color: var(--accent-yellow); background: var(--primary-subtle); color: #020031;
+      box-shadow: 0 4px 14px rgba(2,0,49,.12);
     }
     .radio-circle{
       width: 24px; height: 24px; border-radius: 50%; border: 2px solid var(--border);
@@ -484,7 +484,7 @@
     }
     .form-input:focus{
       outline: none; border-color: var(--accent);
-      box-shadow: 0 0 0 3px rgba(0,153,255,.15);
+      box-shadow: 0 0 0 3px rgba(2,0,49,.15);
     }
 
     /* ---- CPF status cards (step 5) ---- */
@@ -496,7 +496,7 @@
     .status-card:hover{ border-color: var(--accent-yellow); }
     .status-card.selected{
       border-color: var(--accent-yellow); background: var(--primary-subtle);
-      box-shadow: 0 4px 16px rgba(10,0,71,.15);
+      box-shadow: 0 4px 16px rgba(2,0,49,.15);
     }
     .status-icon{
       width: 42px; height: 42px; border-radius: 50%; flex-shrink: 0;
@@ -529,7 +529,7 @@
       display: flex; align-items: center; gap: 6px; transition: all .2s ease;
     }
     .btn-back svg{ width: 16px; height: 16px; stroke-width: 2.5; }
-    .btn-back:hover{ border-color: var(--accent-yellow); color: #0099FF; }
+    .btn-back:hover{ border-color: var(--accent-yellow); color: #020031; }
     .btn-next{ flex: 1; margin-top: 0; }
 
     /* =================== FOOTER =================== */
@@ -556,7 +556,7 @@
     .footer-logo .logo-diamond{ width: 5px; height: 5px; margin: 0 6px; background: #6B7280; }
     .footer-logo .logo-on{ font-size: 15px; color: #444444; }
     footer small{ font-size: 11px; opacity: 0.75; line-height: 1.5; }
-    footer small strong{ color: #0099FF; font-weight: 400;text-transform: uppercase;letter-spacing: 1px; }
+    footer small strong{ color: #020031; font-weight: 400;text-transform: uppercase;letter-spacing: 1px; }
     .footer-badges{
       display: flex; align-items: center; gap: 16px; margin-top: 4px;
     }
@@ -583,11 +583,11 @@
 .ss-footer-addr{font-size:12px;color:#9CA3AF;margin-bottom:16px}
 .ss-footer-links{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-bottom:12px;padding-top:12px;border-top:1px solid #E5E7EB}
 .ss-footer-links a{color:#374151;text-decoration:none;font-size:12px;font-weight:500;cursor:pointer}
-.ss-footer-links a:hover{color:#0099FF}
+.ss-footer-links a:hover{color:#020031}
 .ss-footer-links span{opacity:.3;font-size:11px}
 .ss-footer-badges{display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap}
 .ss-footer-badges span{display:flex;align-items:center;gap:4px;font-size:11px;color:#6B7280;font-weight:500}
-.ss-footer-badges svg{width:14px;height:14px;color:#0099FF}
+.ss-footer-badges svg{width:14px;height:14px;color:#020031}
 .ss-dialog{border:0;padding:0;border-radius:20px;color:#111827;max-width:600px;width:calc(100% - 32px);box-shadow:0 20px 60px rgba(0,0,0,.2)}
 .ss-dialog::backdrop{background:rgba(0,0,0,.5);backdrop-filter:blur(4px)}
 .ss-dialog-head{display:flex;justify-content:space-between;align-items:center;padding:24px 24px 20px;border-bottom:1px solid #E5E7EB}
@@ -601,14 +601,14 @@
 .ss-dialog-body ul{margin:12px 0 16px 20px;padding:0}
 .ss-dialog-body li{font-size:14px;line-height:1.7;color:#6B7280;margin-bottom:8px}
 .ss-contact-item{display:flex;gap:16px;align-items:flex-start;padding:20px;background:#FAFBFC;border:1px solid #E5E7EB;border-radius:16px;margin-bottom:12px}
-.ss-contact-icon{width:48px;height:48px;background:#0A0047;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.ss-contact-icon{width:48px;height:48px;background:#020031;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .ss-contact-icon svg{color:#fff;width:24px;height:24px}
 .ss-contact-item h4{font-size:15px;font-weight:700;color:#111827;margin:0 0 4px}
 .ss-contact-item p{font-size:14px;color:#6B7280;margin:0}
 .ss-contact-note{margin-top:16px;padding:20px;background:#FAFBFC;border:1px solid #E5E7EB;border-radius:50px}
 .ss-contact-note p{font-size:13px;line-height:1.6;color:#374151;margin-bottom:8px}
 .ss-contact-note p:last-child{margin-bottom:0}
-.ss-contact-note strong{color:#0099FF}
+.ss-contact-note strong{color:#020031}
 
 </style>
 </head>

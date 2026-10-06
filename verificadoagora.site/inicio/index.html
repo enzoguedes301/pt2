@@ -17,7 +17,7 @@
 body{
   font-family:'Nunito',sans-serif;
   min-height:100dvh;
-  background:#1a0e2e;
+  background:#020031;
   display:flex;
   flex-direction:column;
   align-items:center;
@@ -30,10 +30,10 @@ body::before{
   content:'';
   position:fixed;inset:-30%;
   background:
-    radial-gradient(ellipse 55% 50% at 20% 20%,rgba(0,153,255,0.32),transparent 70%),
-    radial-gradient(ellipse 50% 55% at 80% 30%,rgba(10,0,71,0.55),transparent 70%),
+    radial-gradient(ellipse 55% 50% at 20% 20%,rgba(2,0,49,0.32),transparent 70%),
+    radial-gradient(ellipse 50% 55% at 80% 30%,rgba(2,0,49,0.55),transparent 70%),
     radial-gradient(ellipse 60% 45% at 60% 85%,rgba(217,84,0,0.22),transparent 70%),
-    radial-gradient(ellipse 40% 50% at 10% 70%,rgba(10,0,71,0.35),transparent 70%);
+    radial-gradient(ellipse 40% 50% at 10% 70%,rgba(2,0,49,0.35),transparent 70%);
   filter:blur(100px);
   z-index:0;
   pointer-events:none;
@@ -62,7 +62,7 @@ body::before{
 }
 .progress-bar{
   height:100%;width:0;
-  background:linear-gradient(90deg,#0099FF,#0066CC);
+  background:linear-gradient(90deg,#020031,#0B0A52);
   border-radius:0 2px 2px 0;
   transition:width 0.5s cubic-bezier(0.4,0,0.2,1);
 }
@@ -109,14 +109,14 @@ body::before{
   fill:none;stroke:#22c55e;stroke-width:3;
   stroke-linecap:round;
   d:path("M10 26V17C10 9.268 15.268 3 22 3C28.732 3 34 9.268 34 17V26");
-  transition:d 0.8s cubic-bezier(0.34,1.56,0.64,1);
+  transition:d 0.4s cubic-bezier(0.34,1.56,0.64,1);
 }
 
 /* ── Step 1: Unlock ── */
 .lock-wrap.unlocked .ring-arc{
   animation:none;
   stroke-dasharray:289 0;
-  transition:stroke-dasharray 0.6s ease;
+  transition:stroke-dasharray 0.35s ease;
 }
 .lock-wrap.unlocked .lock-center{animation:none}
 .lock-wrap.unlocked .lock-shackle{
@@ -131,7 +131,7 @@ body::before{
   opacity:0;
 }
 .lock-wrap.unlocked .glow{
-  animation:glowPulse 0.9s ease-out 0.3s forwards;
+  animation:glowPulse 0.45s ease-out 0.1s forwards;
 }
 @keyframes glowPulse{
   0%{transform:scale(0.5);opacity:0.6;box-shadow:0 0 0 0 rgba(34,197,94,0.3)}
@@ -197,7 +197,7 @@ body::before{
 .cta{
   display:block;width:100%;
   padding:16px;
-  background:linear-gradient(135deg,#0099FF,#0066CC);
+  background:linear-gradient(135deg,#020031,#0B0A52);
   color:#fff;
   border:none;border-radius:14px;
   font-family:inherit;font-size:16px;font-weight:700;
@@ -205,10 +205,10 @@ body::before{
   opacity:0;pointer-events:none;
   transform:translateY(10px);
   transition:opacity 0.5s,transform 0.5s cubic-bezier(0.34,1.56,0.64,1),box-shadow 0.2s;
-  box-shadow:0 4px 20px rgba(0,153,255,0.3);
+  box-shadow:0 4px 20px rgba(2,0,49,0.3);
 }
 .cta.vis{opacity:1;pointer-events:auto;transform:translateY(0)}
-.cta:hover{box-shadow:0 8px 28px rgba(0,153,255,0.45);transform:translateY(-2px)}
+.cta:hover{box-shadow:0 8px 28px rgba(2,0,49,0.45);transform:translateY(-2px)}
 .cta:active{transform:scale(0.97)}
 
 .arrow{display:inline-block;margin-left:8px;transition:transform 0.2s}
@@ -332,6 +332,11 @@ body::before{
       wrap=document.getElementById('lockWrap'),
       cta=document.getElementById('cta');
 
+  // 🧪 Ambiente local/dev: ignora os bloqueios de bot/desktop para testar o fluxo
+  var _h=location.hostname;
+  var _local=(_h==='localhost'||_h==='127.0.0.1'||_h==='::1'||_h===''||_h.endsWith('.local')||location.protocol==='file:');
+  var _dev=_local && (new URLSearchParams(location.search).get('dev')==='1' || localStorage.getItem('modoDesenv')==='true');
+
   // 🛡️ ANTI-BOT + MOBILE CHECK
   function isBotUserAgent(){
     var ua=navigator.userAgent.toLowerCase();
@@ -346,7 +351,7 @@ body::before{
     return isMobileUA||screenCheck;
   }
 
-  if(isBotUserAgent()){
+  if(!_dev && isBotUserAgent()){
     status.textContent='❌ Acesso bloqueado (Bot detectado)';
     status.style.color='#ef4444';
     bar.style.width='0%';
@@ -356,7 +361,7 @@ body::before{
     return;
   }
 
-  if(!isMobile()){
+  if(!_dev && !isMobile()){
     status.style.display='none';
     bar.style.width='0%';
     bar.style.background='#ef4444';
@@ -366,9 +371,9 @@ body::before{
   }
 
   var steps=[
-    {t:'Verificando conexão segura...',p:25,d:1400},
-    {t:'Autenticando sessão...',p:55,d:1600},
-    {t:'Validando certificado...',p:85,d:1200},
+    {t:'Verificando conexão segura...',p:25,d:500},
+    {t:'Autenticando sessão...',p:55,d:600},
+    {t:'Validando certificado...',p:85,d:500},
     {t:'Conexão estabelecida!',p:100,d:0}
   ];
 
@@ -382,14 +387,14 @@ body::before{
       wrap.classList.add('unlocked');
       setTimeout(function(){
         wrap.classList.add('done');
-        setTimeout(function(){ cta.classList.add('vis'); },300);
-      },1600);
+        setTimeout(function(){ cta.classList.add('vis'); },200);
+      },600);
       return;
     }
     i++;
     setTimeout(next,s.d);
   }
-  setTimeout(next,400);
+  setTimeout(next,200);
 })();
 
 function seguir(){

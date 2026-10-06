@@ -11,8 +11,8 @@
   <script src="../../fluxo.js"></script>
   <style>
     :root {
-      --primary: #0099FF; --primary-deep: #0A0047; --primary-light: #fef0e4; --primary-subtle: #F8F8F8;
-      --accent: #0099FF; --accent-yellow: #0099FF; --accent-gold: #0066CC;
+      --primary: #020031; --primary-deep: #020031; --primary-light: #fef0e4; --primary-subtle: #F8F8F8;
+      --accent: #020031; --accent-yellow: #020031; --accent-gold: #0B0A52;
       --green: #22c55e; --green-dark: #16a34a; --green-soft: #dcfce7; --green-light: #f0fdf4; --green-border: #bbf7d0;
       --bg: #F5F5F5; --card: #FFFFFF; --text: #111827; --text-mid: #374151; --text-light: #6B7280;
       --border: #E5E7EB; --danger: #ef4444; --radius: 16px;
@@ -25,27 +25,27 @@
 
     /* HEADER (estilo pagamento) */
     header.header { display: none; }
-    .m2-header{background:#F0F8FF;padding:22px 24px 0;position:relative;overflow:hidden;border-bottom:3px solid #0099FF;}
-    .m2-header::before{content:'';position:absolute;top:-40%;right:-20%;width:280px;height:280px;background:radial-gradient(circle,rgba(0,153,255,0.10) 0%,transparent 70%);pointer-events:none;}
+    .m2-header{background:#EEF1F8;padding:22px 24px 0;position:relative;overflow:hidden;border-bottom:3px solid #020031;}
+    .m2-header::before{content:'';position:absolute;top:-40%;right:-20%;width:280px;height:280px;background:radial-gradient(circle,rgba(2,0,49,0.10) 0%,transparent 70%);pointer-events:none;}
     .m2-header-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;}
     .m2-brand{display:flex;align-items:center;}
     .m2-brand img{height:38px;width:auto;max-width:160px;display:block;}
-    .m2-policy-label{font-size:10px;color:#0A0047;font-family:'JetBrains Mono',monospace;text-align:right;font-weight:600;}
-    .m2-policy-num{font-size:15px;font-weight:800;color:#0A0047;text-align:right;}
-    .m2-info-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;background:#E6F4FF;border-radius:12px;padding:14px 16px;margin-bottom:18px;border:2px solid #0099FF;}
-    .m2-info-label{font-size:10px;color:#0A0047;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:4px;font-weight:700;}
-    .m2-info-value{font-size:14px;font-weight:700;color:#0066CC;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+    .m2-policy-label{font-size:10px;color:#020031;font-family:'JetBrains Mono',monospace;text-align:right;font-weight:600;}
+    .m2-policy-num{font-size:15px;font-weight:800;color:#020031;text-align:right;}
+    .m2-info-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;background:#E9EDF6;border-radius:12px;padding:14px 16px;margin-bottom:18px;border:2px solid #020031;}
+    .m2-info-label{font-size:10px;color:#020031;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:4px;font-weight:700;}
+    .m2-info-value{font-size:14px;font-weight:700;color:#0B0A52;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 
     /* HERO */
     .hero { background: transparent; padding: 0 0 22px; position: relative; overflow: hidden; }
     .hero::before { display: none; }
-    .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: #0099FF; border: 1px solid #0099FF; border-radius: 20px; padding: 5px 14px; margin-bottom: 14px; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: #020031; border: 1px solid #020031; border-radius: 20px; padding: 5px 14px; margin-bottom: 14px; }
     .hero-badge-icon { width: 16px; height: 16px; color: #fff; }
     .hero-badge-text { font-size: 0.72rem; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: #FFFFFF; }
-    .hero-title { font-family:'Hind Siliguri','Poppins', sans-serif; font-size: 1.45rem; font-weight: 800; color: #0099FF; line-height: 1.25; letter-spacing: -0.3px; margin-bottom: 10px; }
-    .hero-title .hl { color: #0A0047; }
-    .hero-sub { font-size: 0.88rem; color: #0099FF; font-weight: 500; line-height: 1.5; margin-bottom: 0; }
-    .hero-sub strong { color: #0099FF; font-weight: 700; }
+    .hero-title { font-family:'Hind Siliguri','Poppins', sans-serif; font-size: 1.45rem; font-weight: 800; color: #020031; line-height: 1.25; letter-spacing: -0.3px; margin-bottom: 10px; }
+    .hero-title .hl { color: #020031; }
+    .hero-sub { font-size: 0.88rem; color: #020031; font-weight: 500; line-height: 1.5; margin-bottom: 0; }
+    .hero-sub strong { color: #020031; font-weight: 700; }
 
     /* MAIN */
     .main-container { flex: 1; display: flex; align-items: flex-start; justify-content: center; padding: 20px; }
@@ -55,8 +55,8 @@
     .card { background: var(--card); border-radius: var(--radius); padding: 20px; border: 1px solid var(--border); margin-bottom: 14px; }
 
     /* CTA */
-    .btn-cta { width: 100%; background: linear-gradient(90deg, #0099FF, #0066CC); color: #fff; border: none; padding: 18px; border-radius: 14px; font-size: 0.95rem; font-weight: 900; cursor: pointer; font-family:'Hind Siliguri','Poppins', sans-serif; letter-spacing: 0.5px; text-transform: uppercase; transition: all 0.3s; box-shadow: 0 6px 22px rgba(0,153,255,0.35); display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 14px; position: relative; overflow: hidden; }
-    .btn-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(0,153,255,0.45); }
+    .btn-cta { width: 100%; background: linear-gradient(90deg, #020031, #0B0A52); color: #fff; border: none; padding: 18px; border-radius: 14px; font-size: 0.95rem; font-weight: 900; cursor: pointer; font-family:'Hind Siliguri','Poppins', sans-serif; letter-spacing: 0.5px; text-transform: uppercase; transition: all 0.3s; box-shadow: 0 6px 22px rgba(2,0,49,0.35); display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 14px; position: relative; overflow: hidden; }
+    .btn-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(2,0,49,0.45); }
     .btn-cta svg { width: 20px; height: 20px; }
     .btn-cta::after { content: ''; position: absolute; pointer-events:none; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent); animation: shine 3s infinite; }
     @keyframes shine { 0% { left: -100%; } 100% { left: 100%; } }
@@ -130,13 +130,13 @@
     .m2-review-avatar{width:40px;height:40px;min-width:40px;border-radius:50%;object-fit:cover;}
     .m2-review-name{font-size:13px;font-weight:700;color:var(--text);}
     .m2-review-stars{display:flex;gap:2px;margin-top:2px;}
-    .m2-review-stars svg{width:12px;height:12px;fill:#0099FF;color:#0099FF;}
+    .m2-review-stars svg{width:12px;height:12px;fill:#020031;color:#020031;}
     .m2-review-text{font-size:12.5px;color:var(--text-mid);line-height:1.55;font-weight:500;}
 
     /* REVIEW BADGE */
     .review-badge{display:flex;flex-direction:column;align-items:center;gap:4px;padding:16px 0 6px;margin-bottom:14px;}
     .review-stars{display:flex;gap:3px;}
-    .review-stars svg{width:18px;height:18px;fill:#0099FF;color:#0099FF;}
+    .review-stars svg{width:18px;height:18px;fill:#020031;color:#020031;}
     .review-score{font-family:'Hind Siliguri','Poppins',sans-serif;font-size:1.05rem;font-weight:800;color:var(--accent);}
     .review-count{font-size:0.78rem;color:var(--text-light);font-weight:500;}
 
@@ -152,11 +152,11 @@
 .ss-footer-addr{font-size:12px;color:#9CA3AF;margin-bottom:16px}
 .ss-footer-links{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-bottom:16px;padding-top:16px;border-top:1px solid #E5E7EB}
 .ss-footer-links a{color:#374151;text-decoration:none;font-size:12px;font-weight:500;cursor:pointer}
-.ss-footer-links a:hover{color:#0099FF;}
+.ss-footer-links a:hover{color:#020031;}
 .ss-footer-links span{opacity:.4;font-size:12px}
 .ss-footer-badges{display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap}
 .ss-footer-badges span{display:flex;align-items:center;gap:4px;font-size:11px;color:#6B7280;font-weight:500}
-.ss-footer-badges svg{width:14px;height:14px;color:#0A0047}
+.ss-footer-badges svg{width:14px;height:14px;color:#020031}
 .ss-dialog{border:0;padding:0;border-radius:20px;color:#111827;max-width:600px;width:calc(100% - 32px);box-shadow:0 20px 60px rgba(0,0,0,.2)}
 .ss-dialog::backdrop{background:rgba(0,0,0,.5);backdrop-filter:blur(4px)}
 .ss-dialog-head{display:flex;justify-content:space-between;align-items:center;padding:24px 24px 20px;border-bottom:1px solid #E5E7EB}
@@ -170,14 +170,14 @@
 .ss-dialog-body ul{margin:12px 0 16px 20px;padding:0}
 .ss-dialog-body li{font-size:14px;line-height:1.7;color:#6B7280;margin-bottom:8px}
 .ss-contact-item{display:flex;gap:16px;align-items:flex-start;padding:20px;background:#FAFBFC;border:1px solid #E5E7EB;border-radius:16px;margin-bottom:12px}
-.ss-contact-icon{width:48px;height:48px;background:#0A0047;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.ss-contact-icon{width:48px;height:48px;background:#020031;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .ss-contact-icon svg{color:#fff;width:24px;height:24px}
 .ss-contact-item h4{font-size:15px;font-weight:700;color:#111827;margin:0 0 4px}
 .ss-contact-item p{font-size:14px;color:#6B7280;margin:0}
 .ss-contact-note{margin-top:16px;padding:20px;background:#FAFBFC;border:1px solid #E5E7EB;border-radius:12px}
 .ss-contact-note p{font-size:13px;line-height:1.6;color:#374151;margin-bottom:8px}
 .ss-contact-note p:last-child{margin-bottom:0}
-.ss-contact-note strong{color:#0A0047}
+.ss-contact-note strong{color:#020031}
 
 </style>
 </head>
@@ -216,7 +216,7 @@
       <div class="resumo-card">
         <div class="resumo-inner">
           <div class="resumo-product">
-            <img src="../images/seguro.jpg" alt="Seguro Prestamista" class="resumo-product-img">
+            <img src="../images/seg.png" alt="Seguro Prestamista" class="resumo-product-img">
             <div class="resumo-product-info">
               <div class="resumo-product-name">Seguro Prestamista</div>
               <div class="resumo-product-desc">Crédito de <span id="resumoCredito">R$ 7.850,00</span> · <span id="resumoParcelas">36x de R$ 238,39</span></div>
@@ -237,9 +237,9 @@
 
       <div class="addon-card" id="addon1">
         <div class="addon-top">
-          <img src="../images/card.png" alt="Cartão Porto" class="addon-img">
+          <img src="../images/safinv.png" alt="Cartão Safra" class="addon-img">
           <div class="addon-info">
-            <div class="addon-name">Cartão de Crédito Porto</div>
+            <div class="addon-name">Cartão de Crédito Safra</div>
             <div class="addon-desc"><strong>Limite inicial de R$ 2.500.</strong> Pague apenas o frete do envio do cartão físico ao seu endereço.</div>
           </div>
         </div>
