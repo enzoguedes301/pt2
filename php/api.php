@@ -203,8 +203,22 @@ function generatePIX($offer, $name, $document, $email, $phone, $utms = [], $pixT
         'metadata'      => [
             'offer'        => $offer,
             'funnel_id'    => isset($utms['funnel_session_id']) ? $utms['funnel_session_id'] : '',
-            'utm_source'   => $utms['utm_source'] ?? '',
-            'utm_campaign' => $utms['utm_campaign'] ?? ''
+            // Conjunto completo de atribuicao — a Skale repassa pra UTMify.
+            'utm_source'   => $utms['utm_source']   ?? '',
+            'utm_medium'   => $utms['utm_medium']   ?? '',
+            'utm_campaign' => $utms['utm_campaign'] ?? '',
+            'utm_content'  => $utms['utm_content']  ?? '',
+            'utm_term'     => $utms['utm_term']     ?? '',
+            // Parametros de origem usados por alguns trackers
+            'src'          => $utms['src']          ?? '',
+            'sck'          => $utms['sck']          ?? '',
+            // Click IDs (Google / Meta / TikTok / Microsoft) p/ Enhanced Conversions
+            'gclid'        => $utms['gclid']        ?? '',
+            'gbraid'       => $utms['gbraid']       ?? '',
+            'wbraid'       => $utms['wbraid']       ?? '',
+            'fbclid'       => $utms['fbclid']       ?? '',
+            'ttclid'       => $utms['ttclid']       ?? '',
+            'msclkid'      => $utms['msclkid']      ?? ''
         ],
         'postbackUrl'   => WEBHOOK_URL
     ];
