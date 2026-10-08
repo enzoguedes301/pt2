@@ -124,6 +124,11 @@ const FLUXO = {
 
   // Injetar componente de navegação
   injetarNavegador() {
+    // A barra de navegação DEV foi unificada em js/devnav.js
+    // (cobre o funil inteiro: inicio → home → passos → pagamento → upsells).
+    // Esta injeção antiga fica desativada para não duplicar a barra.
+    return;
+
     const nav = document.querySelector('.fluxo-navigator');
     if(nav) return; // Já existe
 

