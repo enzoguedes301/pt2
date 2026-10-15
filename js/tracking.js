@@ -11,8 +11,16 @@
  *   CONVERSION_LABEL abaixo, o gtag dispara a MESMA venda pelo navegador e o
  *   Google conta duas vezes — ROAS inflado e campanha aprendendo errado.
  *
- *   Portanto: usando o pixel da UTMify, ADS_ID e CONVERSION_LABEL ficam VAZIOS.
- *   So preencha se um dia desligar o pixel dela e voltar a marcar direto.
+ *   SETUP ATUAL (2026-10-14):
+ *     - ADS_ID preenchido -> carrega a Google tag em todas as paginas para
+ *       RASTREIO DE LEAD, remarketing e captura do gclid (conversion_linker).
+ *     - CONVERSION_LABEL VAZIO de proposito -> o site NAO dispara a conversao.
+ *       Quem reporta a VENDA para o Google Ads e a UTMify (conversao
+ *       configurada no painel dela, com AW-760104773/tC4BCIvM6JsdEMWOueoC).
+ *   Assim nao ha contagem dupla: UMA so fonte (a UTMify) avisa o Google da venda,
+ *   e o site continua com a tag para lead/remarketing. Para inverter (site marca a
+ *   conversao em vez da UTMify), preencha CONVERSION_LABEL e desligue a conversao
+ *   no painel da UTMify.
  *
  * ┌──────────────────────────────────────────────────────────────────────────┐
  * │ 1) UTMIFY_GOOGLE_PIXEL_ID   ← o que esta em uso                          │
@@ -54,11 +62,13 @@
     // erro nenhum: carrega, dispara, responde 200 — e os eventos simplesmente
     // aparecem num painel que nao e o das vendas, sem conversao nunca fechar.
     // Para conferir: mandar um evento de teste e ver em qual painel ele cai.
-    UTMIFY_GOOGLE_PIXEL_ID: "6ac1012f1d066a8530474cd4",
+    UTMIFY_GOOGLE_PIXEL_ID: "6ad01b6aff7d005934d17c76",
     UTMIFY_META_PIXEL_ID:   "",   // ex.: "67f0a1b2c3d4e5f6a7b8c9d0"
     GA4_ID:                 "",   // ex.: "G-XXXXXXXXXX"
-    ADS_ID:                 "",   // vazio de proposito — ver nota no topo
-    CONVERSION_LABEL:       ""    // vazio de proposito — ver nota no topo
+    ADS_ID:                 "AW-760104773",   // Google Ads — carrega a tag p/ LEAD + remarketing + gclid
+    CONVERSION_LABEL:       ""                // VAZIO de proposito: quem dispara a CONVERSAO e a UTMify
+                                              // (conversao configurada no painel da UTMify). Se um dia
+                                              // tirar a conversao da UTMify, ponha aqui: tC4BCIvM6JsdEMWOueoC
   };
   // =========================================================
 

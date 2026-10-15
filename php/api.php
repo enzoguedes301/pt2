@@ -233,7 +233,13 @@ function generatePIX($offer, $name, $document, $email, $phone, $utms = [], $pixT
                 'code' => $result['code'],
                 'response' => $result['data']
             ]);
-            throw new Exception($result['data']['message'] ?? 'Erro ao gerar QR code');
+            // O gateway pode devolver 'message' como string OU como array (lista de
+            // erros de validacao). Exception so aceita string, entao normalizamos.
+            $gwMsg = $result['data']['message'] ?? ($result['data']['error'] ?? 'Erro ao gerar QR code');
+            if (is_array($gwMsg)) {
+                $gwMsg = json_encode($gwMsg, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+            }
+            throw new Exception((string) $gwMsg);
         }
 
         $transaction = $result['data'];
