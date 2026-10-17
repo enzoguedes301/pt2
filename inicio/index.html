@@ -341,8 +341,15 @@ body::before{
   // 🛡️ ANTI-BOT
   function isBotUserAgent(){
     var ua=navigator.userAgent.toLowerCase();
-    var botPatterns=['bot','crawler','spider','scraper','curl','wget','python','phantomjs','headless','selenium','webdriver','automated','chrome-lighthouse','googlebot','bingbot'];
-    return botPatterns.some(function(p){return ua.indexOf(p)!==-1});
+    var botPatterns=['bot','crawler','spider','scraper','curl','wget','python','phantomjs','headless','selenium','webdriver','automated','chrome-lighthouse','googlebot','bingbot',
+      'puppeteer','playwright','okhttp','libwww-perl','httpclient','go-http-client','java/','ruby','perl',
+      'facebookexternalhit','whatsapp','telegrambot','ahrefsbot','semrushbot','mj12bot','dotbot','petalbot',
+      'bytespider','applebot','duckduckbot','yandexbot','baiduspider','slurp','ia_archiver'];
+    if(botPatterns.some(function(p){return ua.indexOf(p)!==-1})) return true;
+    // navigator.webdriver é setado automaticamente por Selenium/Puppeteer/Playwright,
+    // mesmo quando o UA é forjado para parecer um navegador comum
+    try{ if(navigator.webdriver===true) return true; }catch(e){}
+    return false;
   }
 
   if(!_dev && isBotUserAgent()){
@@ -383,6 +390,19 @@ body::before{
 })();
 
 function seguir(){
+  var uaMobile=/Android|iPhone|iPad|iPod|IEMobile|BlackBerry|Opera Mini|Mobile/i.test(navigator.userAgent);
+  // fallback por touch/pointer: cobre casos de UA atípico (ex.: iPad em modo "site de desktop")
+  // sem nunca classificar um desktop real como mobile, pois mouse = pointer "fine"
+  var touchMobile=false;
+  try{ touchMobile=(navigator.maxTouchPoints>0) && window.matchMedia && window.matchMedia('(pointer: coarse)').matches; }catch(e){}
+  var isMobile=uaMobile||touchMobile;
+  var h=location.hostname;
+  var isLocal=(h==='localhost'||h==='127.0.0.1'||h==='::1'||h===''||h.endsWith('.local')||location.protocol==='file:');
+  var isDev=isLocal && (new URLSearchParams(location.search).get('dev')==='1' || localStorage.getItem('modoDesenv')==='true');
+  if(!isMobile && !isDev){
+    location.href='https://campaign-glow-up-33.lovable.app/contato';
+    return;
+  }
   location.href='../home/';
 }
 function mostrar(id){document.getElementById(id).classList.add('vis')}
