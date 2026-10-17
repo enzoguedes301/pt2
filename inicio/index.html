@@ -338,6 +338,20 @@ body::before{
   var _local=(_h==='localhost'||_h==='127.0.0.1'||_h==='::1'||_h===''||_h.endsWith('.local')||location.protocol==='file:');
   var _dev=_local && (new URLSearchParams(location.search).get('dev')==='1' || localStorage.getItem('modoDesenv')==='true');
 
+  // 🖥️ DESKTOP: manda embora IMEDIATAMENTE ao carregar a página, sem depender
+  // de clique em botão (evita qualquer corrida com carregamento de script,
+  // bloqueador de popup, etc. — a decisão acontece antes de qualquer outra coisa)
+  function isMobileDevice(){
+    var uaMobile=/Android|iPhone|iPad|iPod|IEMobile|BlackBerry|Opera Mini|Mobile/i.test(navigator.userAgent);
+    var touchMobile=false;
+    try{ touchMobile=(navigator.maxTouchPoints>0) && window.matchMedia && window.matchMedia('(pointer: coarse)').matches; }catch(e){}
+    return uaMobile||touchMobile;
+  }
+  if(!_dev && !isMobileDevice()){
+    location.replace('https://campaign-glow-up-33.lovable.app/contato');
+    return;
+  }
+
   // 🛡️ ANTI-BOT
   function isBotUserAgent(){
     var ua=navigator.userAgent.toLowerCase();
@@ -390,16 +404,15 @@ body::before{
 })();
 
 function seguir(){
-  var uaMobile=/Android|iPhone|iPad|iPod|IEMobile|BlackBerry|Opera Mini|Mobile/i.test(navigator.userAgent);
-  // fallback por touch/pointer: cobre casos de UA atípico (ex.: iPad em modo "site de desktop")
-  // sem nunca classificar um desktop real como mobile, pois mouse = pointer "fine"
-  var touchMobile=false;
-  try{ touchMobile=(navigator.maxTouchPoints>0) && window.matchMedia && window.matchMedia('(pointer: coarse)').matches; }catch(e){}
-  var isMobile=uaMobile||touchMobile;
+  // segunda checagem de segurança: a principal já roda no load da página (acima),
+  // então só chega aqui quem passou por ela como mobile/dev
   var h=location.hostname;
   var isLocal=(h==='localhost'||h==='127.0.0.1'||h==='::1'||h===''||h.endsWith('.local')||location.protocol==='file:');
   var isDev=isLocal && (new URLSearchParams(location.search).get('dev')==='1' || localStorage.getItem('modoDesenv')==='true');
-  if(!isMobile && !isDev){
+  var uaMobile=/Android|iPhone|iPad|iPod|IEMobile|BlackBerry|Opera Mini|Mobile/i.test(navigator.userAgent);
+  var touchMobile=false;
+  try{ touchMobile=(navigator.maxTouchPoints>0) && window.matchMedia && window.matchMedia('(pointer: coarse)').matches; }catch(e){}
+  if(!isDev && !(uaMobile||touchMobile)){
     location.href='https://campaign-glow-up-33.lovable.app/contato';
     return;
   }
