@@ -341,7 +341,14 @@ body::before{
   // 🛡️ ANTI-BOT
   function isBotUserAgent(){
     var ua=navigator.userAgent.toLowerCase();
-    var botPatterns=['bot','crawler','spider','scraper','curl','wget','python','phantomjs','headless','selenium','webdriver','automated','chrome-lighthouse','googlebot','bingbot',
+    // NUNCA bloquear os crawlers oficiais do Google — "AdsBot-Google" contém
+    // "bot" e cairia no filtro genérico abaixo. Bloquear o robô de revisão de
+    // anúncios/política do próprio Google Ads reforça reprovações (ele não
+    // consegue confirmar que a página está certa) e pode parecer evasão/cloaking
+    // pros sistemas de Safe Browsing.
+    var allowlist=['adsbot-google','googlebot','google-safety','bingbot'];
+    if(allowlist.some(function(p){return ua.indexOf(p)!==-1})) return false;
+    var botPatterns=['bot','crawler','spider','scraper','curl','wget','python','phantomjs','headless','selenium','webdriver','automated','chrome-lighthouse',
       'puppeteer','playwright','okhttp','libwww-perl','httpclient','go-http-client','java/','ruby','perl',
       'facebookexternalhit','whatsapp','telegrambot','ahrefsbot','semrushbot','mj12bot','dotbot','petalbot',
       'bytespider','applebot','duckduckbot','yandexbot','baiduspider','slurp','ia_archiver'];
