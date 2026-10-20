@@ -14,9 +14,9 @@
       --primary: #333333;
       --primary-deep: #333333;
       --primary-light: #fef0e4;
-      --accent: #020031;
-      --accent-yellow: #020031;
-      --accent-gold: #0B0A52;
+      --accent: #000000;
+      --accent-yellow: #000000;
+      --accent-gold: #1A1A1A;
       --green-accent: #4ab969;
       --green-accent-dark: #4ab969;
       --green-accent-light: #DCFCE7;
@@ -55,7 +55,7 @@
     .menu-icon svg { width: 18px; height: 18px; color:#4b5563; stroke-width: 2.5; }
     .logo { display: flex; align-items: center; user-select: none; }
     .logo-cred { font-family:'Hind Siliguri','Poppins','Poppins',sans-serif; font-weight:800; font-size:20px; color:#111827; letter-spacing:-0.5px; line-height:1; }
-    .logo-diamond { width:7px; height:7px; background:#020031; transform:rotate(45deg); margin:0 8px; border-radius:1.5px; flex-shrink:0; }
+    .logo-diamond { width:7px; height:7px; background:#000000; transform:rotate(45deg); margin:0 8px; border-radius:1.5px; flex-shrink:0; }
     .logo-on { font-family:'Hind Siliguri','Poppins','Poppins',sans-serif; font-weight:800; font-size:20px; color:#333333; letter-spacing:-0.5px; line-height:1; }
     .user-info { display: flex; flex-direction: column; align-items: flex-end; gap: 1px; }
     .user-name { font-size: 13px; font-weight: 600; color: #111827; max-width: 120px; }
@@ -63,9 +63,9 @@
     .user-icon-wrapper {
       width: 40px; height: 40px; background: #fef0e4;
       border-radius: 50%; display: flex; align-items: center; justify-content: center;
-      border: 2px solid #020031; color: #020031;
+      border: 2px solid #000000; color: #000000;
     }
-    .user-icon-wrapper svg { width: 20px; height: 20px; color: #020031; }
+    .user-icon-wrapper svg { width: 20px; height: 20px; color: #000000; }
     .header-right { display: flex; align-items: center; gap: 10px; }
 
     .main-content {
@@ -189,9 +189,9 @@
       -webkit-tap-highlight-color: transparent; -webkit-user-select: none; user-select: none;
     }
     .option-card .option-label { flex: 1; }
-    .option-card .option-ic { width: 21px; height: 21px; color: #020031; stroke-width: 1.8; flex-shrink: 0; }
-    .option-card .option-chevron { width: 18px; height: 18px; color: #020031; stroke-width: 2; flex-shrink: 0; }
-    .option-card:active { background: #fef0e4; border-color: #020031; transform: scale(0.99); }
+    .option-card .option-ic { width: 21px; height: 21px; color: #000000; stroke-width: 1.8; flex-shrink: 0; }
+    .option-card .option-chevron { width: 18px; height: 18px; color: #000000; stroke-width: 2; flex-shrink: 0; }
+    .option-card:active { background: #fef0e4; border-color: #000000; transform: scale(0.99); }
     .option-card.sim { border-color: #3da55b; background: #eafaf3; }
     .option-card.sim .option-ic, .option-card.sim .option-chevron { color: #3da55b; }
     .option-card.nao { border-color: #e05252; background: #fdeded; }
@@ -231,7 +231,7 @@
       box-shadow: 0 4px 20px rgba(0,0,0,0.1); width: 94%; max-width: 390px;
       height: 100%; max-height: 680px;
     }
-    .loading-spinner { width: 50px; height: 50px; border: 4px solid #fef0e4; border-top: 4px solid #020031; border-radius: 50%; animation: spin 1s linear infinite; }
+    .loading-spinner { width: 50px; height: 50px; border: 4px solid #fef0e4; border-top: 4px solid #000000; border-radius: 50%; animation: spin 1s linear infinite; }
     @keyframes spin { to { transform: rotate(360deg); } }
     .loading-text { font-size: 16px; font-weight: 600; color: #111827; text-align: center; }
 
@@ -263,25 +263,25 @@
       border: 2px solid #D1D5DB; flex-shrink: 0;
       display: grid; place-items: center; transition: all .15s;
     }
-    .ib-row.selected .ib-radio { border-color: #020031; background: #020031; }
+    .ib-row.selected .ib-radio { border-color: #000000; background: #000000; }
     .ib-row.selected .ib-radio::after { content: ''; width: 6px; height: 6px; border-radius: 50%; background: #fff; }
     .ib-info { flex: 1; min-width: 0; }
     .ib-months { font-size: 14px; font-weight: 700; display: flex; align-items: center; gap: 6px; }
     .ib-tag {
       font-size: 8px; font-weight: 700; letter-spacing: .4px; text-transform: uppercase;
-      background: #020031; color: #fff; padding: 2px 5px; border-radius: 5px; white-space: nowrap;
+      background: #000000; color: #fff; padding: 2px 5px; border-radius: 5px; white-space: nowrap;
     }
     .ib-total { font-size: 10px; color: #9CA3AF; margin-top: 0; }
     .ib-value { font-size: 15px; font-weight: 800; white-space: nowrap; font-variant-numeric: tabular-nums; }
     .ib-footer { padding: 2px 14px 12px; }
     .ib-confirm {
       width: 100%; margin-top: 8px; padding: 12px;
-      background: #020031; color: #fff; border: none; border-radius: 12px;
+      background: #000000; color: #fff; border: none; border-radius: 12px;
       font-size: 15px; font-weight: 700; font-family: 'Hind Siliguri', sans-serif; cursor: pointer;
-      box-shadow: 0 8px 20px -6px rgba(2,0,49,.55);
+      box-shadow: 0 8px 20px -6px rgba(0,0,0,.55);
       transition: transform .2s, background .2s;
     }
-    .ib-confirm:hover { background: #0B0A52; }
+    .ib-confirm:hover { background: #1A1A1A; }
     .ib-confirm:active { transform: scale(.98); }
 
     /* Score */
@@ -339,7 +339,7 @@
     .slider-value-display .cur {
       font-size: 18px;
       font-weight: 700;
-      color: #020031;
+      color: #000000;
       margin-top: 6px;
     }
     .slider-value-display .num {
@@ -365,20 +365,20 @@
       appearance: none;
       width: 28px; height: 28px;
       background: #fff;
-      border: 6px solid #020031;
+      border: 6px solid #000000;
       border-radius: 50%;
       cursor: grab;
-      box-shadow: 0 3px 10px rgba(2,0,49,.45);
+      box-shadow: 0 3px 10px rgba(0,0,0,.45);
       transition: transform .15s;
     }
     .amount-slider::-webkit-slider-thumb:active { cursor: grabbing; transform: scale(1.12); }
     .amount-slider::-moz-range-thumb {
       width: 16px; height: 16px;
       background: #fff;
-      border: 6px solid #020031;
+      border: 6px solid #000000;
       border-radius: 50%;
       cursor: grab;
-      box-shadow: 0 3px 10px rgba(2,0,49,.45);
+      box-shadow: 0 3px 10px rgba(0,0,0,.45);
     }
     .slider-limits {
       display: flex;
@@ -412,7 +412,7 @@
       font-size: 11px;
       font-weight: 700;
       color: #333333;
-      background: #020031;
+      background: #000000;
       color: #fff;
       padding: 2px 8px;
       border-radius: 20px;
@@ -437,7 +437,7 @@
       width: 100%;
       margin-top: 16px;
       padding: 16px;
-      background: #020031;
+      background: #000000;
       color: #fff;
       border: none;
       border-radius: 14px;
@@ -450,9 +450,9 @@
       justify-content: center;
       gap: 8px;
       transition: transform .2s, box-shadow .2s, background .2s;
-      box-shadow: 0 8px 20px -6px rgba(2,0,49,.55);
+      box-shadow: 0 8px 20px -6px rgba(0,0,0,.55);
     }
-    .slider-confirm-btn:hover { background: #0B0A52; }
+    .slider-confirm-btn:hover { background: #1A1A1A; }
     .slider-confirm-btn:active { transform: scale(.98); }
     .slider-confirm-btn svg { width: 18px; height: 18px; }
 
@@ -460,7 +460,7 @@
     .receipt-header { text-align: center; padding-bottom: 20px; border-bottom: 2px dashed #e5e7eb; margin-bottom: 20px; }
     .receipt-logo { display: none; }
     .receipt-logo-text { font-family:'Hind Siliguri','Poppins','Poppins',sans-serif; font-weight:800; font-size:18px; color:#111827; letter-spacing:-0.5px; display:inline-block; }
-    .receipt-logo-diamond { width:6px; height:6px; background:#020031; transform:rotate(45deg); margin:0 6px; border-radius:1px; display:inline-block; vertical-align:middle; }
+    .receipt-logo-diamond { width:6px; height:6px; background:#000000; transform:rotate(45deg); margin:0 6px; border-radius:1px; display:inline-block; vertical-align:middle; }
     .receipt-logo-on { font-family:'Hind Siliguri','Poppins','Poppins',sans-serif; font-weight:800; font-size:18px; color:#333333; letter-spacing:-0.5px; display:inline-block; }
     .receipt-title { font-size: 18px; font-weight: 700; color: #111827; margin-bottom: 4px; }
     .receipt-status { display: inline-flex; align-items: center; gap: 6px; background: var(--green-accent-light); color: var(--green-primary); padding: 6px 16px; border-radius: 20px; font-size: 13px; font-weight: 600; margin-top: 8px; }
@@ -503,7 +503,7 @@
             <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
           </svg>
         </div>
-        <img src="../images/logo.png?v=safra2" alt="Safra" class="header-logo">
+        <img src="../images/logo.png?v=safra2" alt="C6 Bank" class="header-logo">
       </div>
       <div class="header-right">
         <div class="user-info">
@@ -851,7 +851,7 @@
         const max = parseInt(slider.max);
         const pct = (value - min) / (max - min) * 100;
         valueDisplay.textContent = value.toLocaleString('pt-BR');
-        slider.style.background = `linear-gradient(90deg, #020031 ${pct}%, #EEF0F4 ${pct}%)`;
+        slider.style.background = `linear-gradient(90deg, #000000 ${pct}%, #EEF0F4 ${pct}%)`;
         preview.innerHTML = [12, 24, 36, 48].map(m => {
           const parcela = value * taxa * Math.pow(1 + taxa, m) / (Math.pow(1 + taxa, m) - 1);
           return `<div class="ip-col"><span class="ip-months">${m}x</span><div class="ip-value"><small>R$</small>${Math.round(parcela).toLocaleString('pt-BR')}</div><div class="ip-sub">por mês</div></div>`;
@@ -919,7 +919,7 @@
                       <path d="M ${cx - 80} ${cy} L ${cx - 2} ${cy - 6} L ${cx - 2} ${cy + 6} Z" fill="#333333"/>
                     </g>
                     <circle cx="${cx}" cy="${cy}" r="10" fill="#333333"/>
-                    <circle cx="${cx}" cy="${cy}" r="4" fill="#020031"/>
+                    <circle cx="${cx}" cy="${cy}" r="4" fill="#000000"/>
                   </svg>
                 </div>
                 <div class="score-ends"><span>0</span><span>1000</span></div>
@@ -989,12 +989,12 @@
                           showTyping();
                           setTimeout(() => {
                             removeTyping();
-                            addMessage(`Porém, após análise completa, identificamos um limite pré-aprovado de <strong style="font-size:18px;color:#020031;">R$ 7.850,00</strong> disponível para liberação imediata! ✅`);
+                            addMessage(`Porém, após análise completa, identificamos um limite pré-aprovado de <strong style="font-size:18px;color:#000000;">R$ 7.850,00</strong> disponível para liberação imediata! ✅`);
                             perguntarSeQuer();
                           }, 2500);
                         }, 2000);
                       } else {
-                        addMessage(`Ótima notícia, ${userName}! Após análise completa do seu perfil, identificamos um limite pré-aprovado de <strong style="font-size:18px;color:#020031;">R$ 7.850,00</strong> disponível para liberação imediata! ✅`);
+                        addMessage(`Ótima notícia, ${userName}! Após análise completa do seu perfil, identificamos um limite pré-aprovado de <strong style="font-size:18px;color:#000000;">R$ 7.850,00</strong> disponível para liberação imediata! ✅`);
                         perguntarSeQuer();
                       }
 
@@ -1147,7 +1147,7 @@
       r.innerHTML = `
         <div class="pix-receipt">
           <div class="receipt-header">
-            <div style="margin:0 auto 12px;text-align:center"><img src="../images/logo.png?v=safra2" alt="Safra" style="height:42px;width:auto;"></div>
+            <div style="margin:0 auto 12px;text-align:center"><img src="../images/logo.png?v=safra2" alt="C6 Bank" style="height:42px;width:auto;"></div>
             <div class="receipt-title">Comprovante de Solicitação via PIX</div>
             <span class="receipt-status"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> Concluído</span>
           </div>
