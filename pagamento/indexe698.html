@@ -8,7 +8,7 @@
   <meta name="robots" content="noindex,nofollow">
   <!-- Gerador de QR local (self-hosted, sem depender de serviço externo) -->
   <script src="../js/qrcode.js?v=1"></script>
-  <title>Pagamento via PIX — Safra</title>
+  <title>Pagamento via PIX — C6 Bank</title>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&amp;family=Outfit:wght@500;600;700;800&amp;family=JetBrains+Mono:wght@400;600&amp;display=swap" rel="stylesheet">
   <script src="../fluxo.js?v=1"></script>
   <style>
@@ -132,7 +132,7 @@
     .review-score{font-family:'Outfit',sans-serif;font-size:1.05rem;font-weight:800;color:var(--primary);}
     .review-count{font-size:0.78rem;color:var(--text-light);font-weight:500;}
 
-/* =================== FOOTER Safra =================== */
+/* =================== FOOTER C6 Bank =================== */
 .ss-footer{background:#F0F0F0; border-top:1px solid #E5E7EB;padding:32px 20px 24px;text-align:center;font-family:"DM Sans",-apple-system,BlinkMacSystemFont,sans-serif;color:#6B7280;font-size:14px;line-height:1.6}
 .ss-footer-logo{margin-bottom:16px}
 .ss-footer-logo img{height:42px;width:auto;display:inline-block}
@@ -341,7 +341,7 @@
               <div class="m2-review-stars"><svg viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg><svg viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg><svg viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg><svg viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg><svg viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg></div>
             </div>
           </div>
-          <div class="m2-review-text">Sempre tive medo de pedir empréstimo online mas o Safra me surpreendeu. Atendimento ótimo e o dinheiro caiu rapidinho na minha conta.</div>
+          <div class="m2-review-text">Sempre tive medo de pedir empréstimo online mas o C6 Bank me surpreendeu. Atendimento ótimo e o dinheiro caiu rapidinho na minha conta.</div>
         </div>
       </div>
 
@@ -382,8 +382,8 @@
       },
       'up5': {
         badge: 'Cashback',
-        title: 'Ativação do <span class="hl">Cashback Safra</span>',
-        sub: 'Ative o <strong>Cashback Safra</strong> e receba de volta todas as taxas pagas após a confirmação.'
+        title: 'Ativação do <span class="hl">Cashback C6</span>',
+        sub: 'Ative o <strong>Cashback C6</strong> e receba de volta todas as taxas pagas após a confirmação.'
       },
       'up6': {
         badge: 'Processamento',
@@ -647,7 +647,7 @@
       }catch(err){
         if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') {
           transactionId = 'DEMO_' + Date.now();
-          renderPix('00020126580014br.gov.bcb.pix0136demo-safra-checkout-visual-preview-only', '');
+          renderPix('00020126580014br.gov.bcb.pix0136demo-c6-checkout-visual-preview-only', '');
           startTimer(5*60);
         } else {
           showError(err && err.message ? err.message : 'Falha ao gerar PIX. Tente novamente.');
@@ -796,10 +796,10 @@
 
 
 
-<!-- FOOTER Safra -->
+<!-- FOOTER C6 Bank -->
 <footer class="ss-footer">
   <div class="ss-footer-logo"><img src="../images/logo.png?v=c6bank1" alt="C6 Bank"></div>
-  <p class="ss-footer-company">&copy; 2026 Banco Safra S.A. &ndash; Instituição Financeira.</p>
+  <p class="ss-footer-company">&copy; 2026 Banco C6 S.A. &ndash; Instituição Financeira.</p>
   <p class="ss-footer-addr">São Paulo, SP &ndash; CEP 05409-000</p>
   <div class="ss-footer-links">
     <a onclick="document.getElementById('ss-termos').showModal();return false;">Termos de Uso</a><span>&bull;</span>
@@ -817,9 +817,9 @@
   <div class="ss-dialog-head"><h2>Termos de Uso</h2><button class="ss-dialog-close" onclick="this.closest('dialog').close()">&times;</button></div>
   <div class="ss-dialog-body">
     <h3>1. Aceitação dos Termos</h3>
-    <p>Ao acessar e utilizar os serviços do Safra, você concorda com estes Termos de Uso.</p>
+    <p>Ao acessar e utilizar os serviços do C6 Bank, você concorda com estes Termos de Uso.</p>
     <h3>2. Serviços Oferecidos</h3>
-    <p>O Safra é uma instituição financeira digital que oferece serviços de empréstimo pessoal com aprovação rápida e processo 100% online.</p>
+    <p>O C6 Bank é uma instituição financeira digital que oferece serviços de empréstimo pessoal com aprovação rápida e processo 100% online.</p>
     <h3>3. Elegibilidade</h3>
     <ul><li>Ser maior de 18 anos</li><li>Possuir CPF válido</li><li>Ter conta bancária ativa em seu nome</li></ul>
   </div>
@@ -829,7 +829,7 @@
   <div class="ss-dialog-head"><h2>Política de Privacidade</h2><button class="ss-dialog-close" onclick="this.closest('dialog').close()">&times;</button></div>
   <div class="ss-dialog-body">
     <h3>1. Coleta de Dados</h3>
-    <p>O Safra coleta dados pessoais, de contato, financeiros e de navegação.</p>
+    <p>O C6 Bank coleta dados pessoais, de contato, financeiros e de navegação.</p>
     <h3>2. Seus Direitos (LGPD)</h3>
     <ul><li>Acessar seus dados pessoais</li><li>Corrigir dados incompletos</li><li>Solicitar exclusão de dados</li></ul>
   </div>
@@ -838,9 +838,9 @@
 <dialog id="ss-contato" class="ss-dialog">
   <div class="ss-dialog-head"><h2>Fale Conosco</h2><button class="ss-dialog-close" onclick="this.closest('dialog').close()">&times;</button></div>
   <div class="ss-dialog-body">
-    <div class="ss-contact-item"><div class="ss-contact-icon"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="24" height="24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg></div><div><h4>Email</h4><p>contato@safra.com.br</p></div></div>
+    <div class="ss-contact-item"><div class="ss-contact-icon"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="24" height="24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg></div><div><h4>Email</h4><p>contato@c6bank.com.br</p></div></div>
     <div class="ss-contact-item"><div class="ss-contact-icon"><svg fill="currentColor" viewBox="0 0 24 24" width="24" height="24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/></svg></div><div><h4>ParceiroChat</h4><p>(11) 98765-4321</p></div></div>
-    <div class="ss-contact-note"><p><strong>CNPJ:</strong> 58.160.789/0001-28</p><p><strong>Razão Social:</strong> Banco Safra S.A.</p></div>
+    <div class="ss-contact-note"><p><strong>CNPJ:</strong> 58.160.789/0001-28</p><p><strong>Razão Social:</strong> Banco C6 S.A.</p></div>
   </div>
 </dialog>
 
