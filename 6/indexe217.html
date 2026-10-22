@@ -529,6 +529,35 @@
     }
     .cam-error.hidden { display: none !important; }
 
+    /* Obturador desligado enquanto a câmera não está pronta */
+    .cam-shutter:disabled { opacity: .35; cursor: default; }
+    .cam-shutter:disabled:active { transform: none; }
+
+    /* Fallback: câmera nativa via input file (navegador interno do Instagram/Facebook, permissão negada etc.) */
+    .cam-fallback {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+    }
+    .cam-fallback.hidden { display: none !important; }
+    .cam-fallback .btn { width: 100%; padding: 16px; font-size: 16px; border-radius: 14px; }
+    .cam-fallback .btn.primary { background: var(--accent); color: #fff; }
+    .cam-fallback .btn.ghost {
+      background: rgba(255,255,255,.16);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,.35);
+    }
+    .cam-fallback-hint {
+      color: rgba(255,255,255,.75);
+      font-size: 12.5px;
+      text-align: center;
+      line-height: 1.5;
+      text-shadow: 0 1px 6px rgba(0,0,0,.6);
+      margin: 0;
+    }
+
     /* ===== Validação da identidade ===== */
     .vf-overlay {
       position: fixed;
@@ -962,8 +991,16 @@
             <button class="cam-reset" id="btnRetryCam" type="button" aria-label="Reiniciar câmera">
               <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
             </button>
-            <button class="cam-shutter" id="btnCapture" type="button" aria-label="Capturar"></button>
+            <button class="cam-shutter" id="btnCapture" type="button" aria-label="Capturar" disabled></button>
           </div>
+        </div>
+
+        <!-- Fallback: abre a câmera nativa do celular quando getUserMedia não está disponível -->
+        <div class="cam-fallback hidden" id="camFallback">
+          <input type="file" id="fileCapture" accept="image/*" capture="user" class="hidden">
+          <button class="btn primary" id="btnFileCapture" type="button">Abrir câmera do celular</button>
+          <button class="btn ghost" id="btnFallbackRetry" type="button">Tentar câmera novamente</button>
+          <p class="cam-fallback-hint hidden" id="inAppHint">Se preferir, toque em ⋯ no canto superior e escolha "Abrir no navegador".</p>
         </div>
 
         <div class="cam-preview-actions hidden" id="previewArea">
@@ -1083,12 +1120,25 @@
     const cameraError = document.getElementById('cameraError');
     const camStatus = document.getElementById('camStatus');
     const cameraControls = document.getElementById('cameraControls');
+    const camFallback = document.getElementById('camFallback');
+    const fileCapture = document.getElementById('fileCapture');
+    const btnFileCapture = document.getElementById('btnFileCapture');
+    const btnFallbackRetry = document.getElementById('btnFallbackRetry');
+    const inAppHint = document.getElementById('inAppHint');
 
     const STATUS_ACTIVE = '<span class="cam-dot"></span> Verificação ativa';
+    const STATUS_STARTING = '<span class="cam-dot"></span> Iniciando câmera...';
     const STATUS_DONE = '<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg> Foto capturada!';
 
     let stream = null;
     let capturedDataUrl = null;
+    // 'live' = getUserMedia funcionando; 'file' = câmera nativa via input file
+    let camMode = 'live';
+
+    // Navegador interno do Instagram/Facebook/TikTok: no iPhone eles não expõem
+    // getUserMedia, então o caminho normal falha antes mesmo de pedir permissão.
+    const IN_APP_BROWSER = /instagram|fban|fbav|fb_iab|tiktok|musical_ly|bytedance/i.test(navigator.userAgent);
+    const HAS_GUM = !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) && window.isSecureContext !== false;
 
     function showStepCamera() {
       stepConsent.classList.add('hidden');
@@ -1099,17 +1149,64 @@
     btnAgree.addEventListener('click', () => showStepCamera());
     btnCancel.addEventListener('click', () => { history.back(); });
 
+    function showError(msg) {
+      cameraError.textContent = msg;
+      cameraError.classList.remove('hidden');
+    }
+
+    function errorMessage(err) {
+      const name = err && err.name;
+      if (name === 'NotAllowedError' || name === 'PermissionDeniedError' || name === 'SecurityError') {
+        return 'Permissão da câmera negada. Toque em "Abrir câmera do celular" para continuar.';
+      }
+      if (name === 'NotFoundError' || name === 'DevicesNotFoundError' || name === 'OverconstrainedError') {
+        return 'Nenhuma câmera frontal encontrada. Toque em "Abrir câmera do celular" para continuar.';
+      }
+      if (name === 'NotReadableError' || name === 'TrackStartError' || name === 'AbortError') {
+        return 'A câmera está em uso por outro aplicativo. Feche-o ou toque em "Abrir câmera do celular".';
+      }
+      return 'Não foi possível acessar a câmera. Toque em "Abrir câmera do celular" para continuar.';
+    }
+
+    // Caminho alternativo: troca o obturador pelo botão que abre a câmera nativa.
+    // Funciona em todo navegador interno (Instagram, Facebook, TikTok), inclusive no iOS.
+    function enterFallback(msg) {
+      camMode = 'file';
+      btnCapture.disabled = true;
+      cameraControls.classList.add('hidden');
+      camFallback.classList.remove('hidden');
+      inAppHint.classList.toggle('hidden', !IN_APP_BROWSER);
+      camStatus.innerHTML = STATUS_ACTIVE;
+      if (msg) showError(msg);
+    }
+
     async function startCamera() {
       cameraError.classList.add('hidden');
+      btnCapture.disabled = true;
+      camStatus.innerHTML = STATUS_STARTING;
+
+      if (!HAS_GUM) {
+        enterFallback(IN_APP_BROWSER
+          ? 'Este navegador não permite acesso direto à câmera.'
+          : 'Não foi possível acessar a câmera neste navegador.');
+        return;
+      }
+
       const constraints = { video: { facingMode: 'user', width: { ideal: 1280 }, height: { ideal: 720 } }, audio: false };
       try {
         stream = await navigator.mediaDevices.getUserMedia(constraints);
         video.srcObject = stream;
         await video.play();
+        camMode = 'live';
+        camFallback.classList.add('hidden');
+        cameraControls.classList.remove('hidden');
+        // Só libera o obturador com a câmera realmente entregando quadros
+        btnCapture.disabled = false;
+        camStatus.innerHTML = STATUS_ACTIVE;
       } catch (err) {
         console.error('camera error', err);
-        cameraError.textContent = 'Não foi possível acessar a câmera. Verifique permissões e tente novamente.';
-        cameraError.classList.remove('hidden');
+        stopCamera();
+        enterFallback(errorMessage(err));
       }
     }
 
@@ -1122,10 +1219,22 @@
       video.srcObject = null;
     }
 
+    function showPreview(dataUrl) {
+      capturedDataUrl = dataUrl;
+      photoImg.src = dataUrl;
+      photoImg.classList.remove('hidden');
+      cameraControls.classList.add('hidden');
+      camFallback.classList.add('hidden');
+      cameraError.classList.add('hidden');
+      previewArea.classList.remove('hidden');
+      camStatus.innerHTML = STATUS_DONE;
+    }
+
     btnCapture.addEventListener('click', () => {
-      if (!stream) {
-        cameraError.textContent = 'Câmera não iniciada.';
-        cameraError.classList.remove('hidden');
+      // Botão fica desabilitado até a câmera estar pronta; esta guarda cobre
+      // o intervalo entre o clique e a entrega do primeiro quadro.
+      if (!stream || !video.videoWidth) {
+        camStatus.innerHTML = STATUS_STARTING;
         return;
       }
       const w = video.videoWidth;
@@ -1137,13 +1246,35 @@
       ctx.translate(w, 0);
       ctx.scale(-1, 1);
       ctx.drawImage(video, 0, 0, w, h);
-      capturedDataUrl = canvas.toDataURL('image/jpeg', 0.92);
+      showPreview(canvas.toDataURL('image/jpeg', 0.92));
+    });
 
-      photoImg.src = capturedDataUrl;
-      photoImg.classList.remove('hidden');
-      cameraControls.classList.add('hidden');
-      previewArea.classList.remove('hidden');
-      camStatus.innerHTML = STATUS_DONE;
+    // Foto vinda da câmera nativa: redimensiona pra no máximo 1280px no lado
+    // maior, igual ao caminho normal, e evita estourar o localStorage.
+    btnFileCapture.addEventListener('click', () => { fileCapture.value = ''; fileCapture.click(); });
+    fileCapture.addEventListener('change', () => {
+      const file = fileCapture.files && fileCapture.files[0];
+      if (!file) return;
+      cameraError.classList.add('hidden');
+      const url = URL.createObjectURL(file);
+      const img = new Image();
+      img.onload = () => {
+        URL.revokeObjectURL(url);
+        const MAX = 1280;
+        const scale = Math.min(1, MAX / Math.max(img.naturalWidth, img.naturalHeight));
+        const w = Math.round(img.naturalWidth * scale);
+        const h = Math.round(img.naturalHeight * scale);
+        const canvas = document.createElement('canvas');
+        canvas.width = w;
+        canvas.height = h;
+        canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+        showPreview(canvas.toDataURL('image/jpeg', 0.92));
+      };
+      img.onerror = () => {
+        URL.revokeObjectURL(url);
+        showError('Não foi possível ler a foto. Tente novamente.');
+      };
+      img.src = url;
     });
 
     function resetCapture() {
@@ -1151,13 +1282,23 @@
       photoImg.src = '';
       photoImg.classList.add('hidden');
       previewArea.classList.add('hidden');
-      cameraControls.classList.remove('hidden');
+      if (camMode === 'file') {
+        camFallback.classList.remove('hidden');
+      } else {
+        cameraControls.classList.remove('hidden');
+      }
       camStatus.innerHTML = STATUS_ACTIVE;
     }
 
     btnRetake.addEventListener('click', resetCapture);
 
     btnRetryCam.addEventListener('click', async () => {
+      resetCapture();
+      stopCamera();
+      await startCamera();
+    });
+
+    btnFallbackRetry.addEventListener('click', async () => {
       resetCapture();
       stopCamera();
       await startCamera();
