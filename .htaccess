@@ -1,0 +1,22 @@
+# ============================================================================
+# MODO MANUTENCAO (ligado em 2026-10-23)
+#
+# Toda URL do site responde com a pagina /manutencao.html: HTML, imagens, js,
+# tudo. Nenhum arquivo do funil fica visivel enquanto este bloco existir.
+#
+# Excecoes (nao expoem conteudo):
+#   - /php/webhook.php : a Skale Pay precisa continuar avisando PIX pagos
+#   - /php/api.php     : checkouts ja abertos terminam de confirmar o PIX
+#
+# PARA DESLIGAR: apague o bloco entre as marcas "INICIO" e "FIM" abaixo e
+# faca commit + deploy. O arquivo .htaccess e copiado pelo .cpanel.yml em
+# todo deploy, entao a versao sem o bloco sobrescreve a do servidor.
+# (So apagar o arquivo do repo NAO desliga: o deploy nao remove arquivos.)
+# ============================================================================
+RewriteEngine On
+
+# ---- INICIO MANUTENCAO ----
+RewriteCond %{REQUEST_URI} !^/manutencao\.html$
+RewriteCond %{REQUEST_URI} !^/php/(webhook|api)\.php$
+RewriteRule ^ /manutencao.html [L]
+# ---- FIM MANUTENCAO ----

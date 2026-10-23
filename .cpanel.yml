@@ -17,4 +17,4 @@ deployment:
   tasks:
     - export DEPLOYPATH="$HOME/public_html/"
     - /bin/cp -r inicio home 2 3 4 5 6 7 8 9 10 pagamento upsell js images php "$DEPLOYPATH"
-    - /bin/cp index.html fluxo.js getCpf.php "$DEPLOYPATH"
+    - /bin/cp index.html fluxo.js getCpf.php manutencao.html .htaccess "$DEPLOYPATH"
