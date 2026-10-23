@@ -27,8 +27,8 @@
       font-family:'DM Sans',sans-serif;
     }
     *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
-    body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;min-height:100vh;}
-    .container{width:100%;max-width:460px;margin:0 auto;background:#F0F0F0; min-height:100vh;box-shadow:0 0 40px rgba(0,0,0,.05);}
+    body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;min-height:100vh;min-height:100svh;}
+    .container{width:100%;max-width:460px;margin:0 auto;background:#F0F0F0; min-height:100vh;min-height:100svh;box-shadow:0 0 40px rgba(0,0,0,.05);}
     @keyframes spin{to{transform:rotate(360deg);}}
 
     /* HEADER */
@@ -176,7 +176,8 @@
 
 </style>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;family=Hind+Siliguri:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
-  <script src="../fluxo.js?v=1"></script>
+  <!-- fluxo.js ja e carregado no topo do <head>; carregar de novo estourava
+       "Identifier 'IS_LOCAL' has already been declared" em toda visita ao checkout -->
   <script src="../js/devnav.js?v=1"></script>
 </head>
 <body>
