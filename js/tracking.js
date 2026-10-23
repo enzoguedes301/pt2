@@ -19,14 +19,18 @@
  *       o PIX e confirmado, via window.trackPurchase: valor real da oferta,
  *       transaction_id e deduplicacao por transacao. Todos os upsells passam
  *       pelo mesmo checkout, entao um unico ponto cobre main + up1..up11.
- *     - A acao antiga, reportada pela UTMify (AW-760104773/tC4BCIvM6JsdEMWOueoC),
- *       deve ficar como conversao SECUNDARIA no Google Ads (ou desligada no
- *       painel da UTMify). Assim ela nao entra na coluna "Conversoes".
- *   Historico: ate 2026-10-21 era o inverso (CONVERSION_LABEL vazio, UTMify
- *   como unica fonte). Para voltar, esvazie CONVERSION_LABEL.
+ *     - UTMIFY_GOOGLE_PIXEL_ID VAZIO -> o Pixel da UTMify nao carrega mais.
+ *       Ele existia so pra reportar a venda ao Google Ads; com o site fazendo
+ *       isso, era duplicata. A acao antiga dele (AW-760104773/tC4BCIvM6JsdEMWOueoC)
+ *       pode ser apagada ou marcada como SECUNDARIA no Google Ads.
+ *     - A UTMify continua como painel de atribuicao: utms/latest.js captura os
+ *       UTMs e o backend manda o pedido pela API dela. Isso nao usa o Pixel.
+ *   Historico: ate 2026-10-21 era o inverso (CONVERSION_LABEL vazio, Pixel da
+ *   UTMify como unica fonte). Para voltar, esvazie CONVERSION_LABEL e
+ *   preencha UTMIFY_GOOGLE_PIXEL_ID.
  *
  * ┌──────────────────────────────────────────────────────────────────────────┐
- * │ 1) UTMIFY_GOOGLE_PIXEL_ID   ← o que esta em uso                          │
+ * │ 1) UTMIFY_GOOGLE_PIXEL_ID   (desligado desde 2026-10-22, ver acima)      │
  * │    Painel UTMify > Pixel > (pixel do Google) > "Configurar"              │
  * │    O snippet vem ofuscado; dentro dele esta o valor de:                  │
  * │      window.googlePixelId = "..."                                        │
@@ -58,14 +62,15 @@
 
   // ===================== PREENCHA AQUI =====================
   var CONFIG = {
-    // Pixel "PX" — o do dashboard onde caem as vendas da Skale Pay.
-    //
-    // A conta tem varios dashboards (GOOGLE MAIS NOVO, Mais Novo NP, GADS OPP Z1,
-    // JG, JG-2) e cada um tem pixel proprio. Um pixel do dashboard errado nao da
-    // erro nenhum: carrega, dispara, responde 200 — e os eventos simplesmente
-    // aparecem num painel que nao e o das vendas, sem conversao nunca fechar.
-    // Para conferir: mandar um evento de teste e ver em qual painel ele cai.
-    UTMIFY_GOOGLE_PIXEL_ID: "6ad01b6aff7d005934d17c76",
+    // DESLIGADO em 2026-10-22: o Pixel da UTMify so servia pra reportar a
+    // conversao de compra ao Google Ads pelo servidor. Agora quem faz isso e o
+    // site (CONVERSION_LABEL abaixo), entao o pixel virou duplicata.
+    // A atribuicao no painel da UTMify NAO depende dele: vem dos UTMs
+    // (utms/latest.js) + pedido enviado pela API (php/api.php, config.php).
+    // Pra religar, ponha aqui o id do pixel do dashboard onde caem as vendas
+    // (era "6ad01b6aff7d005934d17c76", dashboard GOOGLE MAIS NOVO) e esvazie
+    // CONVERSION_LABEL, senao a venda conta duas vezes.
+    UTMIFY_GOOGLE_PIXEL_ID: "",
     UTMIFY_META_PIXEL_ID:   "",   // ex.: "67f0a1b2c3d4e5f6a7b8c9d0"
     GA4_ID:                 "",   // ex.: "G-XXXXXXXXXX"
     ADS_ID:                 "AW-760104773",   // Google Ads — carrega a tag p/ LEAD + remarketing + gclid
