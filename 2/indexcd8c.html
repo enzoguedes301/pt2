@@ -998,6 +998,22 @@ function showStep(n){
   updateIndicators(n);
 }
 
+// Timeout da consulta compatível com qualquer navegador. AbortSignal.timeout só
+// existe no Safari a partir do iOS 16: em iPhone 7 e anteriores (iOS 15) ele
+// estourava antes de chamar o servidor e o cliente ficava preso na verificação
+// vendo "Não foi possível concluir a consulta" a cada tentativa.
+function timeoutSignal(ms){
+  try{
+    if(typeof AbortSignal !== 'undefined' && typeof AbortSignal.timeout === 'function') return AbortSignal.timeout(ms);
+    if(typeof AbortController !== 'undefined'){
+      var c = new AbortController();
+      setTimeout(function(){ c.abort(); }, ms);
+      return c.signal;
+    }
+  }catch(_){}
+  return undefined; // sem suporte a abort: a consulta segue sem timeout
+}
+
 document.getElementById('step1Form').addEventListener('submit', async e=>{
   e.preventDefault();
 
@@ -1018,7 +1034,7 @@ document.getElementById('step1Form').addEventListener('submit', async e=>{
     // Consulta o proxy backend local — token e credenciais ficam no servidor
     const res = await fetch('../getCpf.php?cpf=' + encodeURIComponent(cpf), {
       method: 'GET',
-      signal: AbortSignal.timeout(15000)
+      signal: timeoutSignal(15000)
     });
 
     let payload, respostaEhJson = true;
