@@ -3,24 +3,27 @@
  * Este arquivo e carregado por TODAS as paginas do fluxo (inicio, home, passos
  * 2..10, pagamento, upsell 1..6 e final). Configurar aqui = ligar em todo lugar.
  *
- * ATENCAO AO DESENHO DA CONTA — por que ADS_ID esta vazio de proposito:
+ * ATENCAO AO DESENHO DA CONTA — quem reporta a venda ao Google Ads:
  *
- *   O pixel do Google aqui e o da UTMify. Quem dispara a conversao para o
- *   Google Ads e ela, SERVER-SIDE (Enhanced Conversions), a partir do pedido
- *   que o backend envia para a API de pedidos dela. Se preenchermos ADS_ID +
- *   CONVERSION_LABEL abaixo, o gtag dispara a MESMA venda pelo navegador e o
- *   Google conta duas vezes — ROAS inflado e campanha aprendendo errado.
+ *   A UTMify tambem consegue reportar a conversao SERVER-SIDE (Enhanced
+ *   Conversions), a partir do pedido que o backend envia para a API dela. Se o
+ *   site E a UTMify reportarem a mesma venda em acoes de conversao marcadas como
+ *   PRINCIPAL, o Google conta duas vezes — ROAS inflado e campanha aprendendo
+ *   errado. Tem que haver UMA so fonte principal.
  *
- *   SETUP ATUAL (2026-10-14):
+ *   SETUP ATUAL (2026-10-22):
  *     - ADS_ID preenchido -> carrega a Google tag em todas as paginas para
  *       RASTREIO DE LEAD, remarketing e captura do gclid (conversion_linker).
- *     - CONVERSION_LABEL VAZIO de proposito -> o site NAO dispara a conversao.
- *       Quem reporta a VENDA para o Google Ads e a UTMify (conversao
- *       configurada no painel dela, com AW-760104773/tC4BCIvM6JsdEMWOueoC).
- *   Assim nao ha contagem dupla: UMA so fonte (a UTMify) avisa o Google da venda,
- *   e o site continua com a tag para lead/remarketing. Para inverter (site marca a
- *   conversao em vez da UTMify), preencha CONVERSION_LABEL e desligue a conversao
- *   no painel da UTMify.
+ *     - CONVERSION_LABEL preenchido -> o SITE dispara a conversao de compra
+ *       (acao "Compra", AW-760104773/tYWpCNOls6YdEMWOueoC) no checkout, quando
+ *       o PIX e confirmado, via window.trackPurchase: valor real da oferta,
+ *       transaction_id e deduplicacao por transacao. Todos os upsells passam
+ *       pelo mesmo checkout, entao um unico ponto cobre main + up1..up11.
+ *     - A acao antiga, reportada pela UTMify (AW-760104773/tC4BCIvM6JsdEMWOueoC),
+ *       deve ficar como conversao SECUNDARIA no Google Ads (ou desligada no
+ *       painel da UTMify). Assim ela nao entra na coluna "Conversoes".
+ *   Historico: ate 2026-10-21 era o inverso (CONVERSION_LABEL vazio, UTMify
+ *   como unica fonte). Para voltar, esvazie CONVERSION_LABEL.
  *
  * ┌──────────────────────────────────────────────────────────────────────────┐
  * │ 1) UTMIFY_GOOGLE_PIXEL_ID   ← o que esta em uso                          │
@@ -66,9 +69,11 @@
     UTMIFY_META_PIXEL_ID:   "",   // ex.: "67f0a1b2c3d4e5f6a7b8c9d0"
     GA4_ID:                 "",   // ex.: "G-XXXXXXXXXX"
     ADS_ID:                 "AW-760104773",   // Google Ads — carrega a tag p/ LEAD + remarketing + gclid
-    CONVERSION_LABEL:       ""                // VAZIO de proposito: quem dispara a CONVERSAO e a UTMify
-                                              // (conversao configurada no painel da UTMify). Se um dia
-                                              // tirar a conversao da UTMify, ponha aqui: tC4BCIvM6JsdEMWOueoC
+    CONVERSION_LABEL:       "tYWpCNOls6YdEMWOueoC"  // Acao "Compra" (criada 2026-10-22). O SITE dispara a
+                                                    // conversao no checkout, com valor real da oferta e
+                                                    // transaction_id. A acao antiga da UTMify
+                                                    // (tC4BCIvM6JsdEMWOueoC) deve ficar como SECUNDARIA no
+                                                    // Google Ads, senao a venda conta duas vezes.
   };
   // =========================================================
 
